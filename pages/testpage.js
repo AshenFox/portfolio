@@ -1,11 +1,11 @@
 import { useDir } from '../helpers/hooks';
 
-export default function Home() {
+export default function TestPage() {
   const { dir } = useDir();
 
   return (
-    <section className={`section home ${dir}`}>
-      <h1>Home</h1>
+    <section className={`section testpage ${dir}`}>
+      <h1>Test Page</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque reiciendis id
         maiores corrupti dolorem, optio sequi tenetur? Sequi velit commodi, dolorem unde
