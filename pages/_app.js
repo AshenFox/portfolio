@@ -11,16 +11,32 @@ function MyApp({ Component, pageProps }) {
   const { pathname } = router;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [componentsHistory, setComponentsHistory] = useState({
+    cur: Component,
+    prev: Component,
+  });
 
   useEffect(() => {
-    const loadingStart = () => setIsLoading(true);
-    const loadingComplete = () => setIsLoading(false);
+    const loadingStart = () => {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    };
+    // const loadingComplete = () => setIsLoading(false);
     // router.events.on
 
     router.events.on('routeChangeStart', loadingStart);
-    router.events.on('routeChangeComplete', loadingComplete);
+    // router.events.on('routeChangeComplete', loadingComplete);
     // router.events.on('routeChangeStart', loadingStart);
   }, []);
+
+  useEffect(() => {
+    setComponentsHistory({ cur: Component, prev: componentsHistory.cur });
+  }, [Component]);
+
+  console.log(componentsHistory);
+  console.log(componentsHistory.prev === componentsHistory.cur);
 
   return (
     <>
@@ -37,7 +53,7 @@ function MyApp({ Component, pageProps }) {
 
       <div className='section-slider'>
         <TransitionGroup component={null}>
-          <CSSTransition key={router.route} classNames='section' timeout={1000}>
+          <CSSTransition key={router.route} classNames='section' timeout={2000}>
             <Component {...pageProps} />
           </CSSTransition>
         </TransitionGroup>

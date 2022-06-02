@@ -27,11 +27,11 @@
     transform-origin: left center;
 
     &.section-enter-active {
-      animation: fade-in-right 1s forwards ease-in-out;
+      animation: fade-in-right 1s forwards ease-in-out 1s;
     }
 
     &.section-enter-active + section {
-      animation: fade-out-right 1s forwards ease-in-out;
+      animation: fade-out-right 1s forwards ease-in-out 1s;
     }
   }
 
@@ -39,11 +39,11 @@
     transform-origin: right center;
 
     &.section-enter-active {
-      animation: fade-in-left 1s forwards ease-in-out;
+      animation: fade-in-left 1s forwards ease-in-out 1s;
     }
 
     &.section-enter-active + section {
-      animation: fade-out-left 1s forwards ease-in-out;
+      animation: fade-out-left 1s forwards ease-in-out 1s;
     }
   }
 
@@ -128,7 +128,6 @@
   right: 100vw;
   background-color: grey;
   animation: page-loading 1s forwards ease-in-out;
-  animation-delay: 1s;
 }
 
 @keyframes page-loading {
