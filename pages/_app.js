@@ -4,39 +4,49 @@ import { useRouter } from 'next/router';
 import 'normalize.css';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import '../styles/index.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const { pathname } = router;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [componentsHistory, setComponentsHistory] = useState({
-    cur: Component,
-    prev: Component,
+  const isLoadingRef = useRef(isLoading);
+  isLoadingRef.current = isLoading;
+
+  const NewComponent = useRef(Component);
+
+  const [RenderedComponent, setRenderedComponent] = useState({
+    pathname,
+    Component,
   });
 
+  const pathsList = useRef(new Set());
+
+  const onLoaderAnimationEnd = () => {
+    setIsLoading(false);
+    setRenderedComponent({ ...NewComponent.current });
+  };
+
   useEffect(() => {
-    const loadingStart = () => {
-      setIsLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
+    const loadingStart = (url) => {
+      console.log('Fire!');
+      const path = url.match(/^[^?]*/g)[0]; // ????????? get some kind of url parser????
+      if (!pathsList.current.has(path)) setIsLoading(true);
     };
-    // const loadingComplete = () => setIsLoading(false);
-    // router.events.on
+
+    const loadingEnd = (url) => {
+      if (!isLoadingRef.current) setRenderedComponent({ ...NewComponent.current });
+    };
 
     router.events.on('routeChangeStart', loadingStart);
-    // router.events.on('routeChangeComplete', loadingComplete);
-    // router.events.on('routeChangeStart', loadingStart);
+    router.events.on('routeChangeComplete', loadingEnd);
   }, []);
 
   useEffect(() => {
-    setComponentsHistory({ cur: Component, prev: componentsHistory.cur });
+    pathsList.current.add(pathname);
+    NewComponent.current = { pathname, Component };
   }, [Component]);
-
-  console.log(componentsHistory);
-  console.log(componentsHistory.prev === componentsHistory.cur);
 
   return (
     <>
@@ -53,15 +63,25 @@ function MyApp({ Component, pageProps }) {
 
       <div className='section-slider'>
         <TransitionGroup component={null}>
-          <CSSTransition key={router.route} classNames='section' timeout={2000}>
-            <Component {...pageProps} />
+          <CSSTransition
+            key={RenderedComponent.pathname}
+            classNames='section'
+            timeout={1000}
+          >
+            <RenderedComponent.Component {...pageProps} />
           </CSSTransition>
         </TransitionGroup>
       </div>
 
-      {isLoading && <div className='page-loader' />}
+      {isLoading && <div onAnimationEnd={onLoaderAnimationEnd} className='page-loader' />}
     </>
   );
 }
 
 export default MyApp;
+
+// const loadingComplete = () => setIsLoading(false);
+// router.events.on
+
+// router.events.on('routeChangeComplete', loadingComplete);
+// router.events.on('routeChangeStart', loadingStart);
