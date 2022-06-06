@@ -1,8 +1,8 @@
 import { useDir } from '../helpers/hooks';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
-export default function About() {
-  const { dir } = useDir();
-
+export default function About({ dir }) {
   return (
     <section className={`section about ${dir}`}>
       <h1>About</h1>

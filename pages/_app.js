@@ -4,48 +4,106 @@ import { useRouter } from 'next/router';
 import 'normalize.css';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import '../styles/index.scss';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+
+const routes = [{ path: '/' }, { path: '/about' }, { path: '/testpage' }];
+
+const getDir = (pathname, from) => {
+  const pathname_i = routes.findIndex((el) => el.path === pathname);
+  const from_i = routes.findIndex((el) => el.path === from);
+
+  const diff = pathname_i - from_i;
+
+  let dir = null;
+  if (diff < 0) dir = 'left';
+  if (diff > 0) dir = 'right';
+
+  return dir;
+};
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const { pathname } = router;
 
+  const ComponentRef = useRef(Component);
+  ComponentRef.current = Component;
+
+  const pathnameRef = useRef(pathname);
+  pathnameRef.current = pathname;
+
   const [isLoading, setIsLoading] = useState(false);
   const isLoadingRef = useRef(isLoading);
   isLoadingRef.current = isLoading;
 
-  const NewComponent = useRef(Component);
+  const [dir, setDir] = useState(null);
+
+  const NewComponentRef = useRef(null);
 
   const [RenderedComponent, setRenderedComponent] = useState({
     pathname,
     Component,
   });
 
-  const pathsList = useRef(new Set());
+  // console.log(Component, Component.name);
+
+  const pathsList = useRef(new Set([pathname]));
 
   const onLoaderAnimationEnd = () => {
     setIsLoading(false);
-    setRenderedComponent({ ...NewComponent.current });
+
+    // console.log(NewComponentRef.current);
+
+    if (NewComponentRef.current) {
+      setRenderedComponent({ ...NewComponentRef.current });
+    }
+  };
+
+  const onSectionExited = () => {
+    setTimeout(() => {
+      // console.log('fire!');
+      // if (RenderedComponent.Component.name !== Component.name)
+      // console.log(Component.name, pathname, dir, ComponentRef.current.name);
+      setRenderedComponent({
+        Component: ComponentRef.current,
+        pathname: pathnameRef.current,
+      });
+      NewComponentRef.current = null;
+    }, 100);
   };
 
   useEffect(() => {
     const loadingStart = (url) => {
-      console.log('Fire!');
+      // console.log('routeChangeStart!', url);
       const path = url.match(/^[^?]*/g)[0]; // ????????? get some kind of url parser????
       if (!pathsList.current.has(path)) setIsLoading(true);
     };
 
     const loadingEnd = (url) => {
-      if (!isLoadingRef.current) setRenderedComponent({ ...NewComponent.current });
+      // console.log('routeChangeComplete!');
+      if (!isLoadingRef.current && NewComponentRef.current) {
+        setRenderedComponent({ ...NewComponentRef.current });
+      }
     };
 
     router.events.on('routeChangeStart', loadingStart);
     router.events.on('routeChangeComplete', loadingEnd);
+
+    return () => {
+      router.events.off('routeChangeStart', loadingStart);
+      router.events.off('routeChangeComplete', loadingEnd);
+    };
   }, []);
 
   useEffect(() => {
-    pathsList.current.add(pathname);
-    NewComponent.current = { pathname, Component };
+    console.log('Component changed', Component.name, pathname, dir);
+
+    if (!NewComponentRef.current && Component.name !== RenderedComponent.Component.name) {
+      NewComponentRef.current = { pathname, Component };
+      pathsList.current.add(pathname);
+
+      const dir = getDir(pathname, RenderedComponent.pathname);
+      setDir(dir);
+    }
   }, [Component]);
 
   return (
@@ -56,9 +114,9 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <header className='navbar'>
-        <Link href={`/?from=${pathname}`}>Home</Link>
-        <Link href={`/about?from=${pathname}`}>About</Link>
-        <Link href={`/testpage?from=${pathname}`}>TestPage</Link>
+        <Link href={'/'}>Home</Link>
+        <Link href={'/about'}>About</Link>
+        <Link href={'/testpage'}>TestPage</Link>
       </header>
 
       <div className='section-slider'>
@@ -67,8 +125,9 @@ function MyApp({ Component, pageProps }) {
             key={RenderedComponent.pathname}
             classNames='section'
             timeout={1000}
+            onExited={onSectionExited}
           >
-            <RenderedComponent.Component {...pageProps} />
+            <RenderedComponent.Component {...pageProps} dir={dir} />
           </CSSTransition>
         </TransitionGroup>
       </div>
