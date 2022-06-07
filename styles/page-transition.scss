@@ -27,11 +27,11 @@
     transform-origin: left center;
 
     &.section-enter-active {
-      animation: fade-in-right 1s forwards ease-in-out;
+      animation: fade-in-right 800ms forwards ease-in-out;
     }
 
     &.section-enter-active + section {
-      animation: fade-out-right 1s forwards ease-in-out;
+      animation: fade-out-right 800ms forwards ease-in-out;
     }
   }
 
@@ -39,11 +39,11 @@
     transform-origin: right center;
 
     &.section-enter-active {
-      animation: fade-in-left 1s forwards ease-in-out;
+      animation: fade-in-left 800ms forwards ease-in-out;
     }
 
     &.section-enter-active + section {
-      animation: fade-out-left 1s forwards ease-in-out;
+      animation: fade-out-left 800ms forwards ease-in-out;
     }
   }
 
@@ -131,7 +131,10 @@
   left: 0;
   right: 100vw;
   background-color: grey;
-  animation: page-loading 1s forwards ease-in-out;
+
+  &-enter-active {
+    animation: page-loading 1s forwards ease-in-out;
+  }
 }
 
 @keyframes page-loading {
@@ -148,5 +151,42 @@
   100% {
     right: 0;
     left: 100vw;
+  }
+}
+
+.arrow {
+  &__right,
+  &__left {
+    position: fixed;
+    height: 50px;
+    width: 100px;
+    top: 50%;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transform: translateY(-50%);
+
+    transition: all 0.5s ease-in-out;
+  }
+
+  &__right {
+    right: 0;
+
+    &-exit-active,
+    &-exit-done {
+      right: -100px;
+    }
+  }
+
+  &__left {
+    left: 0;
+
+    &-exit-active,
+    &-exit-done {
+      left: -100px;
+    }
   }
 }

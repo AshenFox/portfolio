@@ -9,6 +9,13 @@ import { useStateWithRef } from '../helpers/hooks';
 
 const routes = [{ path: '/' }, { path: '/about' }, { path: '/testpage' }];
 
+const getPath = (pathname, dir) => {
+  const pathname_i = routes.findIndex((el) => el.path === pathname);
+  let new_pathname_i = (pathname_i + dir) % routes.length;
+  if (new_pathname_i < 0) new_pathname_i = routes.length - 1;
+  return routes.find((el, i) => i === new_pathname_i).path;
+};
+
 const getDir = (pathname, from) => {
   const pathname_i = routes.findIndex((el) => el.path === pathname);
   const from_i = routes.findIndex((el) => el.path === from);
@@ -27,6 +34,9 @@ function MyApp({ Component, pageProps }) {
   const { pathname } = router;
 
   const [showLoader, setShowLoader] = useState(false);
+  const [showNavigation, setShowNavigation] = useState(true);
+
+  const [immediateTransition, setImmediateTransition] = useState(false);
 
   const [dir, setDir] = useState(null);
 
@@ -51,7 +61,19 @@ function MyApp({ Component, pageProps }) {
     }
   };
 
+  const onArrowExited = () => {
+    if (NewComponent && !showLoader) {
+      setRenderedComponent({ ...NewComponent });
+    }
+  };
+
   const onSectionExited = () => {
+    if (Component.name === NewComponent.Component.name) {
+      setShowNavigation(true);
+      setImmediateTransition(false);
+    } else {
+      setImmediateTransition(true);
+    }
     setNewComponent(null);
   };
 
@@ -59,8 +81,11 @@ function MyApp({ Component, pageProps }) {
     const loadingStart = (url) => {
       const path = url.match(/^[^?]*/g)[0];
 
-      if (RenderedComponentRef.current.pathname !== path && !pathsList.current.has(path))
-        setShowLoader(true);
+      if (RenderedComponentRef.current.pathname !== path) {
+        setShowNavigation(false); // ?????
+
+        if (!pathsList.current.has(path)) setShowLoader(true);
+      }
     };
 
     router.events.on('routeChangeStart', loadingStart);
@@ -72,6 +97,8 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     if (!NewComponent && Component.name !== RenderedComponent.Component.name) {
+      setShowNavigation(false);
+
       // Add the incoming path into pathlist history
       pathsList.current.add(pathname);
 
@@ -82,13 +109,21 @@ function MyApp({ Component, pageProps }) {
       // Add a new component
       setNewComponent({ pathname, Component });
     }
+
+    if (!NewComponent && Component.name === RenderedComponent.Component.name) {
+      setShowNavigation(true);
+    }
   }, [Component, NewComponent]);
 
   useEffect(() => {
-    if (NewComponent && !showLoader) {
+    if (NewComponent && !showLoader && (showNavigation || immediateTransition)) {
       setRenderedComponent({ ...NewComponent });
     }
   }, [NewComponent]);
+
+  const onClickNext = () => router.push(getPath(pathname, 1));
+
+  const onClickPrev = () => router.push(getPath(pathname, -1));
 
   return (
     <>
@@ -103,12 +138,28 @@ function MyApp({ Component, pageProps }) {
         <Link href={'/testpage'}>TestPage</Link>
       </header>
 
+      <CSSTransition
+        classNames={'arrow__right'}
+        in={showNavigation}
+        timeout={500}
+        onExited={onArrowExited}
+      >
+        <div className='arrow__right'>
+          <button onClick={onClickNext}>Next</button>
+        </div>
+      </CSSTransition>
+      <CSSTransition classNames={'arrow__left'} timeout={500} in={showNavigation}>
+        <div className='arrow__left'>
+          <button onClick={onClickPrev}>Prev</button>
+        </div>
+      </CSSTransition>
+
       <div className='section-slider'>
         <TransitionGroup component={null}>
           <CSSTransition
             key={RenderedComponent.pathname}
             classNames='section'
-            timeout={1000}
+            timeout={800}
             onExited={onSectionExited}
           >
             <RenderedComponent.Component {...pageProps} dir={dir} />
@@ -116,9 +167,15 @@ function MyApp({ Component, pageProps }) {
         </TransitionGroup>
       </div>
 
-      {showLoader && (
-        <div onAnimationEnd={onLoaderAnimationEnd} className='page-loader' />
-      )}
+      <CSSTransition
+        classNames={'page-loader'}
+        timeout={1000}
+        in={showLoader}
+        unmountOnExit
+        onEntered={onLoaderAnimationEnd}
+      >
+        <div className='page-loader' />
+      </CSSTransition>
     </>
   );
 }
