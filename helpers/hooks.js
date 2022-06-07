@@ -19,3 +19,11 @@ export const useDir = () => {
 
   return { dir, pathname };
 };
+
+export const useStateWithRef = (initValue) => {
+  const [value, setValue] = useState(initValue);
+  const valueRef = useRef(value);
+  valueRef.current = value;
+
+  return [value, setValue, valueRef];
+};

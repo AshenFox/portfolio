@@ -5,6 +5,7 @@ import 'normalize.css';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import '../styles/index.scss';
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useStateWithRef } from '../helpers/hooks';
 
 const routes = [{ path: '/' }, { path: '/about' }, { path: '/testpage' }];
 
@@ -25,86 +26,69 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const { pathname } = router;
 
-  const ComponentRef = useRef(Component);
-  ComponentRef.current = Component;
-
-  const pathnameRef = useRef(pathname);
-  pathnameRef.current = pathname;
-
-  const [isLoading, setIsLoading] = useState(false);
-  const isLoadingRef = useRef(isLoading);
-  isLoadingRef.current = isLoading;
+  const [showLoader, setShowLoader] = useState(false);
 
   const [dir, setDir] = useState(null);
 
-  const NewComponentRef = useRef(null);
-
-  const [RenderedComponent, setRenderedComponent] = useState({
-    pathname,
-    Component,
-  });
-
-  // console.log(Component, Component.name);
+  // New Component
+  const [NewComponent, setNewComponent] = useState(null);
+  // Rendered Component
+  const [RenderedComponent, setRenderedComponent, RenderedComponentRef] = useStateWithRef(
+    {
+      pathname,
+      Component,
+    }
+  );
+  // ==================
 
   const pathsList = useRef(new Set([pathname]));
 
   const onLoaderAnimationEnd = () => {
-    setIsLoading(false);
+    setShowLoader(false);
 
-    // console.log(NewComponentRef.current);
-
-    if (NewComponentRef.current) {
-      setRenderedComponent({ ...NewComponentRef.current });
+    if (NewComponent) {
+      setRenderedComponent({ ...NewComponent });
     }
   };
 
   const onSectionExited = () => {
-    setTimeout(() => {
-      // console.log('fire!');
-      // if (RenderedComponent.Component.name !== Component.name)
-      // console.log(Component.name, pathname, dir, ComponentRef.current.name);
-      setRenderedComponent({
-        Component: ComponentRef.current,
-        pathname: pathnameRef.current,
-      });
-      NewComponentRef.current = null;
-    }, 100);
+    setNewComponent(null);
   };
 
   useEffect(() => {
     const loadingStart = (url) => {
-      // console.log('routeChangeStart!', url);
-      const path = url.match(/^[^?]*/g)[0]; // ????????? get some kind of url parser????
-      if (!pathsList.current.has(path)) setIsLoading(true);
-    };
+      const path = url.match(/^[^?]*/g)[0];
 
-    const loadingEnd = (url) => {
-      // console.log('routeChangeComplete!');
-      if (!isLoadingRef.current && NewComponentRef.current) {
-        setRenderedComponent({ ...NewComponentRef.current });
-      }
+      if (RenderedComponentRef.current.pathname !== path && !pathsList.current.has(path))
+        setShowLoader(true);
     };
 
     router.events.on('routeChangeStart', loadingStart);
-    router.events.on('routeChangeComplete', loadingEnd);
 
     return () => {
       router.events.off('routeChangeStart', loadingStart);
-      router.events.off('routeChangeComplete', loadingEnd);
     };
   }, []);
 
   useEffect(() => {
-    console.log('Component changed', Component.name, pathname, dir);
-
-    if (!NewComponentRef.current && Component.name !== RenderedComponent.Component.name) {
-      NewComponentRef.current = { pathname, Component };
+    if (!NewComponent && Component.name !== RenderedComponent.Component.name) {
+      // Add the incoming path into pathlist history
       pathsList.current.add(pathname);
 
+      // Find new direction
       const dir = getDir(pathname, RenderedComponent.pathname);
       setDir(dir);
+
+      // Add a new component
+      setNewComponent({ pathname, Component });
     }
-  }, [Component]);
+  }, [Component, NewComponent]);
+
+  useEffect(() => {
+    if (NewComponent && !showLoader) {
+      setRenderedComponent({ ...NewComponent });
+    }
+  }, [NewComponent]);
 
   return (
     <>
@@ -132,15 +116,11 @@ function MyApp({ Component, pageProps }) {
         </TransitionGroup>
       </div>
 
-      {isLoading && <div onAnimationEnd={onLoaderAnimationEnd} className='page-loader' />}
+      {showLoader && (
+        <div onAnimationEnd={onLoaderAnimationEnd} className='page-loader' />
+      )}
     </>
   );
 }
 
 export default MyApp;
-
-// const loadingComplete = () => setIsLoading(false);
-// router.events.on
-
-// router.events.on('routeChangeComplete', loadingComplete);
-// router.events.on('routeChangeStart', loadingStart);
