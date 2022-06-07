@@ -4,10 +4,15 @@ import { useRouter } from 'next/router';
 import 'normalize.css';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import '../styles/index.scss';
-import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useStateWithRef } from '../helpers/hooks';
 
-const routes = [{ path: '/' }, { path: '/about' }, { path: '/testpage' }];
+const routes = [
+  { path: '/' },
+  { path: '/about' },
+  { path: '/testpage' },
+  { path: '/somerandompage' },
+];
 
 const getPath = (pathname, dir) => {
   const pathname_i = routes.findIndex((el) => el.path === pathname);
@@ -99,6 +104,7 @@ function MyApp({ Component, pageProps }) {
     if (!NewComponent && Component.name !== RenderedComponent.Component.name) {
       setShowNavigation(false);
 
+      if (immediateTransition && !pathsList.current.has(pathname)) setShowLoader(true);
       // Add the incoming path into pathlist history
       pathsList.current.add(pathname);
 
@@ -136,6 +142,7 @@ function MyApp({ Component, pageProps }) {
         <Link href={'/'}>Home</Link>
         <Link href={'/about'}>About</Link>
         <Link href={'/testpage'}>TestPage</Link>
+        <Link href={'/somerandompage'}>SomeRandomPage</Link>
       </header>
 
       <CSSTransition
@@ -169,7 +176,7 @@ function MyApp({ Component, pageProps }) {
 
       <CSSTransition
         classNames={'page-loader'}
-        timeout={1000}
+        timeout={800}
         in={showLoader}
         unmountOnExit
         onEntered={onLoaderAnimationEnd}
