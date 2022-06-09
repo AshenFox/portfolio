@@ -1,0 +1,60 @@
+@keyframes fade-in-left {
+  0% {
+    left: 100%;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes fade-out-left {
+  0% {
+    left: 0;
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    left: -100%;
+    transform: rotateY(-60deg);
+  }
+}
+
+@keyframes fade-in-right {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes fade-out-right {
+  0% {
+    left: 0;
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    left: 100%;
+    transform: rotateY(60deg);
+  }
+}
+
+@keyframes page-loading {
+  0% {
+    right: 100vw;
+    left: 0;
+  }
+
+  50% {
+    right: 0;
+    left: 0;
+  }
+
+  100% {
+    right: 0;
+    left: 100vw;
+  }
+}

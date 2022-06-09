@@ -1,0 +1,36 @@
+.arrow {
+  &__right,
+  &__left {
+    position: fixed;
+    height: 50px;
+    width: 100px;
+    top: 50%;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transform: translateY(-50%);
+
+    transition: all 0.5s ease-in-out;
+  }
+
+  &__right {
+    right: 0;
+
+    &-exit-active,
+    &-exit-done {
+      right: -100px;
+    }
+  }
+
+  &__left {
+    left: 0;
+
+    &-exit-active,
+    &-exit-done {
+      left: -100px;
+    }
+  }
+}

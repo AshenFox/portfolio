@@ -1,11 +1,9 @@
-import { useDir } from '../helpers/hooks';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import Section from '../components/Section';
 
 export default function About({ dir }) {
   return (
-    <section className={`section about ${dir}`}>
-      <div className='section__frame'>
+    <Section classNameStr={'about'} dir={dir}>
+      <div className='page__container'>
         <div className='about__block'>
           <h1>About</h1>
           <p>
@@ -22,6 +20,6 @@ export default function About({ dir }) {
           </p>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

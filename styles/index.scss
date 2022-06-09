@@ -14,11 +14,9 @@ html {
 body {
   margin: 0;
   font-size: 1.5rem;
-  color: black;
+  color: #cacaca;
 
   overflow-x: hidden !important;
-
-  // background-color: $grey-light;
 }
 
 h1,
@@ -58,5 +56,10 @@ input {
 // =================
 // =================
 
-@import './page-transition.scss';
-// @import './slider.scss';
+@import './animations.scss';
+
+@import './pages.scss';
+@import './section-slider.scss';
+@import './navbar.scss';
+@import './page-loader.scss';
+@import './arrow.scss';
