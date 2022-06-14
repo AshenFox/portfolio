@@ -1,0 +1,124 @@
+$button-red: #c60202;
+$button-red-dark: #b20202;
+$button-red-background: #800202;
+
+.button {
+  height: 47px;
+  width: 241px;
+  position: relative;
+
+  &__click {
+    .button__text {
+      transform: translateY(2px) !important;
+    }
+
+    .button__shadow {
+      transform: translateY(-3px) !important;
+    }
+  }
+
+  &__left,
+  &__middle,
+  &__right {
+    cursor: pointer;
+    position: absolute;
+
+    display: inline-block;
+    height: 100%;
+    width: 33.33333%;
+    z-index: 4;
+
+    /* &:hover {
+        background-color: blue;
+      } */
+
+    &:hover {
+      & ~ .button__text {
+        background-color: $button-red-dark;
+      }
+    }
+  }
+
+  &__left {
+    left: 0;
+
+    &:hover {
+      & ~ .button__text {
+        transform: skewY(-1deg) translate3d(0px, -0.5px, 0px);
+        background-color: $button-red-dark;
+      }
+
+      & ~ .button__shadow {
+        transform: skewY(1deg) translate3d(0px, -0.5px, 0px);
+      }
+    }
+  }
+
+  &__middle {
+    left: 33.3333%;
+
+    &:hover {
+      & ~ .button__text {
+        transform: translateY(0.75px);
+      }
+
+      & ~ .button__shadow {
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  &__right {
+    left: 66.6666%;
+
+    &:hover {
+      & ~ .button__text {
+        transform: skewY(1deg) translate3d(0px, -0.5px, 0px);
+      }
+
+      & ~ .button__shadow {
+        transform: skewY(-1deg) translate3d(0px, -0.5px, 0px);
+      }
+    }
+  }
+
+  &__text {
+    top: 0;
+    z-index: 3;
+
+    color: white;
+    background-color: $button-red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  &__background {
+    top: 3px;
+    z-index: 2;
+
+    background-color: $button-red-background;
+  }
+
+  &__shadow {
+    top: 7px;
+    z-index: 1;
+
+    background-color: black;
+    opacity: 0.25;
+  }
+
+  &__text,
+  &__background,
+  &__shadow {
+    position: absolute;
+    height: 40px;
+    width: 100%;
+    border-radius: 3px;
+
+    transition: transform 0.12s ease-out 0s, background-color 0.12s ease-out 0s;
+  }
+}

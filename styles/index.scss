@@ -1,3 +1,35 @@
+// =================
+// =================
+// =================
+// ==== IMPORTS ====
+// =================
+// =================
+// =================
+
+@import './miscellaneous/variables.scss';
+@import './miscellaneous/animations.scss';
+@import './miscellaneous/mixins.scss';
+
+@import './pages/home.scss';
+@import './pages/about.scss';
+@import './pages/testpage.scss';
+@import './pages/somerandompage.scss';
+
+@import './components/section-slider.scss';
+@import './components/navbar.scss';
+@import './components/page-loader.scss';
+@import './components/arrow.scss';
+@import './components/page.scss';
+@import './components/button.scss';
+@import './components/menu.scss';
+
+// =================
+// =================
+// =================
+// =================
+// =================
+// =================
+
 *,
 *:before,
 *:after {
@@ -14,7 +46,7 @@ html {
 body {
   margin: 0;
   font-size: 1.5rem;
-  color: #cacaca;
+  color: $text-color;
 
   overflow-x: hidden !important;
 }
@@ -40,26 +72,3 @@ input {
     outline: none;
   }
 }
-
-/* .container {
-  width: 100%;
-  max-width: 1010px;
-  margin: 0 auto;
-}
- */
-
-// =================
-// =================
-// =================
-// ==== IMPORTS ====
-// =================
-// =================
-// =================
-
-@import './animations.scss';
-
-@import './pages.scss';
-@import './section-slider.scss';
-@import './navbar.scss';
-@import './page-loader.scss';
-@import './arrow.scss';

@@ -1,24 +1,43 @@
+import Button from '../components/Button';
 import Section from '../components/Section';
 
 export default function Home({ dir }) {
   return (
     <Section classNameStr={'home'} dir={dir}>
-      <div className='page__container'>
-        <h1>Home</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque reiciendis id
-          maiores corrupti dolorem, optio sequi tenetur? Sequi velit commodi, dolorem unde
-          perspiciatis aut ipsam incidunt nulla tempore a quod praesentium eveniet
-          accusamus, nam ipsa facere? Dolorum, sint error laudantium quibusdam laboriosam
-          aliquid accusamus, deserunt nobis, natus eaque voluptatum tempore ipsa aliquam
-          dignissimos ratione beatae nesciunt ad culpa quos fuga assumenda labore? Est
-          deserunt, voluptatibus, temporibus dolores minus pariatur quaerat aspernatur
-          culpa, voluptate nobis quisquam ex animi beatae incidunt fugiat possimus. Enim
-          voluptates sunt officiis distinctio porro laborum! Animi nesciunt id
-          perspiciatis optio nulla eligendi molestiae, consectetur praesentium non
-          inventore.
-        </p>
-      </div>
+      <main className='home__container'>
+        <h1 className='home__greeting'>Hello, my name is Rafael Caferati.</h1>
+        <h4 className='home__description'>
+          I am an{' '}
+          <span className='home__link'>
+            <span className='home__link-text'>award-winning</span>
+          </span>{' '}
+          full-stack web developer and UI/UX javascript specialist.
+        </h4>
+        <h4 className='home__description'>
+          Check out my articles, React and React Native UI components at the{' '}
+          <span className='home__link'>
+            <span className='home__link-text'>code laboratory</span>
+          </span>
+          .
+        </h4>
+        <h4 className='home__description'>
+          Feel free to take a look at my latest projects on the{' '}
+          <span className='home__link'>
+            <span className='home__link-text'>web portfolio page</span>
+          </span>
+          .
+        </h4>
+        <h4 className='home__description'>
+          Remotely available UTC−1 to UTC+8.{' '}
+          <span className='home__link'>
+            <span className='home__link-text'>rafael@caferati.me</span>
+          </span>
+          <b className='home__cursor'>_</b>
+        </h4>
+      </main>
+      <footer className='home__footer'>
+        <Button isClicked={false} />
+      </footer>
     </Section>
   );
 }
