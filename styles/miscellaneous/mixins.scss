@@ -1,2 +1,10 @@
 @mixin btn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+@mixin link {
+  color: $text-color;
+  text-decoration: none;
 }
