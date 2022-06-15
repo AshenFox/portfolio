@@ -10,7 +10,8 @@ const Arrows = ({ onExited, active }) => {
 
   /* const [value, setValue] = useState(false); */
 
-  const timeout = 500;
+  const timeout = 950;
+
   return (
     <>
       <CSSTransition
@@ -21,7 +22,7 @@ const Arrows = ({ onExited, active }) => {
       >
         <div className='arrow__right'>
           <Link href={getPath(pathname, 1)}>
-            <a className='arrow__link' />
+            <a className='arrow__link' onClick={() => console.log('Click right!')} />
           </Link>
           <span className='arrow__text'>next</span>
           <div className='arrow__arrow' />
