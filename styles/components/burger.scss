@@ -1,0 +1,154 @@
+.burger {
+  position: fixed;
+  top: 5rem;
+  right: 8rem;
+  z-index: 1000;
+  padding: 5px 4px;
+  cursor: pointer;
+
+  &-exit-active,
+  &-exit-done,
+  &-enter-active,
+  &-enter-done {
+    div {
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3) {
+        transition: transform 0.35s cubic-bezier(0.69, 0.03, 0.03, 0.93);
+        transform: translateX(0px);
+      }
+
+      &:nth-child(1) {
+        transition-delay: 0.52s;
+      }
+
+      &:nth-child(2) {
+        transition-delay: 0.555s;
+      }
+
+      &:nth-child(3) {
+        transition-delay: 0.59s;
+      }
+    }
+  }
+
+  &-enter-active,
+  &-enter-done {
+    div {
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3) {
+        transform: translateX(0px);
+      }
+    }
+  }
+
+  &-exit-active,
+  &-exit-done {
+    div {
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3) {
+        transform: translateX(150px);
+      }
+    }
+  }
+
+  div {
+    height: 2px;
+    width: 42px;
+    background-color: #7a7a7a;
+    margin: 8px;
+    transition: transform 0.45s cubic-bezier(0.43, 0.77, 0.15, 1.5),
+      background-color 0.3s ease; // background-color?
+  }
+
+  &:hover {
+    div {
+      &:nth-child(1) {
+        transform: translateY(-4px);
+      }
+
+      &:nth-child(3) {
+        transform: translateY(4px);
+      }
+    }
+  }
+
+  &:hover {
+    &.burger__st1.burger__st2 {
+      div {
+        &:nth-child(1) {
+          transform: translateY(10px) rotate(50deg) scale(1.5) !important;
+        }
+
+        &:nth-child(3) {
+          transform: translateY(-10px) rotate(-50deg) scale(1.5) !important;
+        }
+      }
+    }
+  }
+
+  &__st1 {
+    animation: rotate-back-in 0.8s cubic-bezier(0.2, 0.86, 0.35, 1) forwards;
+
+    div {
+      &:nth-child(1) {
+        transform: translateY(9px) !important;
+      }
+
+      &:nth-child(3) {
+        transform: translateY(-9px) !important;
+      }
+    }
+  }
+
+  &__st2 {
+    animation: rotate-back-out 0.85s cubic-bezier(0.2, 0.86, 0.35, 1) forwards;
+
+    div {
+      &:nth-child(1) {
+        transform: translateY(10px) rotate(45deg) scale(1.5) !important;
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg) scale(1.5) !important;
+      }
+    }
+  }
+}
+
+// st-1 rotate-back-in .8s cubic-bezier(.2,.86,.35,1) forwards
+// st-2 rotate-back-out .85s cubic-bezier(.2,.86,.35,1) forwards
+
+@keyframes rotate-back-in {
+  0% {
+    transform: rotate(180deg);
+  }
+
+  45% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotate-back-out {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  45% {
+    transform: rotate(185deg);
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
+}

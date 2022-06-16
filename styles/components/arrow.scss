@@ -18,6 +18,10 @@
     align-items: center;
   }
 
+  // ==============================
+  // ===== Right Arrow Styles =====
+  // ==============================
+
   &__right {
     right: 0;
     padding-right: 8rem;
@@ -74,30 +78,43 @@
     &-exit-done {
       transform: translate(100%, -50%);
       opacity: 0;
+    }
 
-      .arrow__arrow {
-        transform: translateX(12rem);
+    .arrow__link {
+      &-exit-active,
+      &-exit-done {
+        & ~ .arrow__arrow {
+          transform: translateX(12rem);
 
-        &::after,
-        &::before {
-          height: 25px;
+          &::after,
+          &::before {
+            height: 25px;
+          }
+
+          &::after {
+            transform: translateY(-100%) rotate(-90deg);
+          }
+
+          &::before {
+            transform: rotate(90deg);
+          }
         }
 
-        &::after {
-          transform: translateY(-100%) rotate(-90deg);
+        & ~ .arrow__text {
+          transition: opacity 0.2s ease-out 0.5s;
+          transform: translateX(0px) !important;
         }
-
-        &::before {
-          transform: rotate(90deg);
-        }
-      }
-
-      .arrow__text {
-        opacity: 1 !important;
-        transform: translateX(0px) !important;
       }
     }
   }
+
+  // =============================
+  // =============================
+  // =============================
+
+  // =============================
+  // ===== Left Arrow Styles =====
+  // =============================
 
   &__left {
     left: 0;
@@ -155,30 +172,39 @@
     &-exit-done {
       transform: translate(-100%, -50%);
       opacity: 0;
+    }
 
-      .arrow__arrow {
-        transform: translateX(-12rem);
+    .arrow__link {
+      &-exit-active,
+      &-exit-done {
+        & ~ .arrow__arrow {
+          transform: translateX(-12rem);
 
-        &::after,
-        &::before {
-          height: 25px;
+          &::after,
+          &::before {
+            height: 25px;
+          }
+
+          &::after {
+            transform: translateY(-100%) rotate(90deg);
+          }
+
+          &::before {
+            transform: rotate(-90deg);
+          }
         }
 
-        &::after {
-          transform: translateY(-100%) rotate(90deg);
+        & ~ .arrow__text {
+          transition: opacity 0.2s ease-out 0.5s;
+          transform: translateX(0px) !important;
         }
-
-        &::before {
-          transform: rotate(-90deg);
-        }
-      }
-
-      .arrow__text {
-        opacity: 1 !important;
-        transform: translateX(0px) !important;
       }
     }
   }
+
+  // =============================
+  // =============================
+  // =============================
 
   &__link {
     @include link;
@@ -233,12 +259,18 @@
     line-height: 0;
 
     transition: opacity 0.1s ease 0.125s, transform 0.3s cubic-bezier(0, 0, 0, 1) 0.125s;
+
+    &.active {
+      color: red;
+    }
   }
 
-  /* &__button {
+  &__button {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 100px;
+    right: 100px;
     z-index: 1000;
-  } */
+    width: 100px;
+    height: 50px;
+  }
 }

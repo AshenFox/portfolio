@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getPath } from '../helpers/functions';
@@ -8,9 +8,34 @@ const Arrows = ({ onExited, active }) => {
   const router = useRouter();
   const { pathname } = router;
 
-  /* const [value, setValue] = useState(false); */
+  const [value, setValue] = useState(false);
 
   const timeout = 950;
+
+  const [isRightActive, setIsRightActive] = useState(true);
+  const [isLeftActive, setIsLeftActive] = useState(true);
+
+  useEffect(() => {
+    if (active) {
+      setIsRightActive(true);
+      setIsLeftActive(true);
+    }
+  }, [active]);
+
+  const nextPathname = getPath(pathname, 1);
+  const prevPathname = getPath(pathname, -1);
+
+  const onClickRightArrow = (e) => {
+    e.preventDefault();
+    setIsRightActive(false);
+    router.push(nextPathname);
+  };
+
+  const onClickLeftArrow = (e) => {
+    e.preventDefault();
+    setIsLeftActive(false);
+    router.push(prevPathname);
+  };
 
   return (
     <>
@@ -21,18 +46,18 @@ const Arrows = ({ onExited, active }) => {
         onExited={onExited}
       >
         <div className='arrow__right'>
-          <Link href={getPath(pathname, 1)}>
-            <a className='arrow__link' onClick={() => console.log('Click right!')} />
-          </Link>
+          <CSSTransition classNames={'arrow__link'} in={isRightActive} timeout={timeout}>
+            <a className='arrow__link' onClick={onClickRightArrow} href={nextPathname} />
+          </CSSTransition>
           <span className='arrow__text'>next</span>
           <div className='arrow__arrow' />
         </div>
       </CSSTransition>
       <CSSTransition classNames={'arrow__left'} timeout={timeout} in={active}>
         <div className='arrow__left'>
-          <Link href={getPath(pathname, -1)}>
-            <a className='arrow__link' />
-          </Link>
+          <CSSTransition classNames={'arrow__link'} in={isLeftActive} timeout={timeout}>
+            <a className='arrow__link' onClick={onClickLeftArrow} href={prevPathname} />
+          </CSSTransition>
           <div className='arrow__arrow' />
           <span className='arrow__text'>prev</span>
         </div>

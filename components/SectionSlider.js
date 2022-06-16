@@ -5,6 +5,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { getDir } from '../helpers/functions';
 import { useStateWithRef } from '../helpers/hooks';
 import Arrows from './Arrows';
+import Burger from './Burger';
 import PageLoader from './PageLoader';
 
 const SectionSlider = ({ Component, pageProps }) => {
@@ -127,6 +128,7 @@ const SectionSlider = ({ Component, pageProps }) => {
 
   return (
     <>
+      <Burger active={showNavigation} />
       <Arrows onExited={onArrowExited} active={showNavigation} />
 
       <div className='section-slider'>
