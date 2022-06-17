@@ -6,6 +6,7 @@ import { getDir } from '../helpers/functions';
 import { useStateWithRef } from '../helpers/hooks';
 import Arrows from './Arrows';
 import Burger from './Burger';
+import Menu from './Menu';
 import PageLoader from './PageLoader';
 
 const SectionSlider = ({ Component, pageProps }) => {
@@ -97,7 +98,7 @@ const SectionSlider = ({ Component, pageProps }) => {
 
   useEffect(() => {
     if (!NewComponent && Component.name !== RenderedComponent.Component.name) {
-      setShowNavigation(false);
+      setShowNavigation(false); // ??????
 
       if (immediateTransition && !pathsList.current.has(pathname)) setShowLoader(true);
       // Add the incoming path into pathlist history
@@ -128,8 +129,8 @@ const SectionSlider = ({ Component, pageProps }) => {
 
   return (
     <>
-      <Burger active={showNavigation} />
-      <Arrows onExited={onArrowExited} active={showNavigation} />
+      <Menu show={showNavigation} />
+      <Arrows onExited={onArrowExited} show={showNavigation} />
 
       <div className='section-slider'>
         <TransitionGroup component={null}>

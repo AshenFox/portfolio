@@ -1,38 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-const Burger = ({ active }) => {
+const Burger = ({ show, isMenuOpen, setIsMenuOpen }) => {
   const [stageOne, setStageOne] = useState(false);
   const [stageTwo, setStageTwo] = useState(false);
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isTransition, setIsTransition] = useState(false);
+
+  const transformBurger = (value) => {
+    value ? setStageOne(value) : setStageTwo(value);
+
+    setTimeout(() => {
+      value ? setStageTwo(value) : setStageOne(value);
+    }, 450);
+  };
 
   const onClick = () => {
-    if (!isMenuOpen) {
-      setIsMenuOpen(true);
+    if (!isTransition) {
+      setIsTransition(true);
 
-      if (stageOne) {
-        setStageTwo(false);
+      if (isMenuOpen) {
+        setIsMenuOpen(false);
 
-        setTimeout(() => {
-          setStageOne(false);
-        }, 450);
+        transformBurger(false);
       } else {
-        setStageOne(true);
+        setIsMenuOpen(true);
 
-        setTimeout(() => {
-          setStageTwo(true);
-        }, 450);
+        transformBurger(true);
       }
     }
   };
 
   useEffect(() => {
-    if (stageOne === stageTwo) setIsMenuOpen(false);
+    if (stageOne === stageTwo) setIsTransition(false);
   }, [stageOne, stageTwo]);
 
+  useEffect(() => {
+    if (!isTransition && !isMenuOpen) transformBurger(false);
+  }, [isMenuOpen]);
+
   return (
-    <CSSTransition classNames={'burger'} in={active} timeout={950}>
+    <CSSTransition classNames={'burger'} in={show} timeout={950}>
       <div
         className={`burger ${stageOne ? 'burger__st1' : ''} ${
           stageTwo ? 'burger__st2' : ''

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { getPath } from '../helpers/functions';
 import { CSSTransition } from 'react-transition-group';
 
-const Arrows = ({ onExited, active }) => {
+const Arrows = ({ onExited, show }) => {
   const router = useRouter();
   const { pathname } = router;
 
@@ -16,11 +16,11 @@ const Arrows = ({ onExited, active }) => {
   const [isLeftActive, setIsLeftActive] = useState(true);
 
   useEffect(() => {
-    if (active) {
+    if (show) {
       setIsRightActive(true);
       setIsLeftActive(true);
     }
-  }, [active]);
+  }, [show]);
 
   const nextPathname = getPath(pathname, 1);
   const prevPathname = getPath(pathname, -1);
@@ -41,7 +41,7 @@ const Arrows = ({ onExited, active }) => {
     <>
       <CSSTransition
         classNames={'arrow__right'}
-        in={active}
+        in={show}
         timeout={timeout}
         onExited={onExited}
       >
@@ -53,7 +53,7 @@ const Arrows = ({ onExited, active }) => {
           <div className='arrow__arrow' />
         </div>
       </CSSTransition>
-      <CSSTransition classNames={'arrow__left'} timeout={timeout} in={active}>
+      <CSSTransition classNames={'arrow__left'} timeout={timeout} in={show}>
         <div className='arrow__left'>
           <CSSTransition classNames={'arrow__link'} in={isLeftActive} timeout={timeout}>
             <a className='arrow__link' onClick={onClickLeftArrow} href={prevPathname} />

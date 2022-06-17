@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head />
-      <Header />
+      {/* <Header /> */}
       <SectionSlider Component={Component} pageProps={pageProps} />
     </>
   );

@@ -1,6 +1,6 @@
 export const routesOrderList = [
-  { path: '/' },
-  { path: '/about' },
-  { path: '/testpage' },
-  { path: '/somerandompage' },
+  { path: '/', title: 'home' },
+  { path: '/about', title: 'about' },
+  { path: '/testpage', title: 'test page' },
+  { path: '/somerandompage', title: 'some random page' },
 ];
