@@ -4,11 +4,9 @@ import { useRouter } from 'next/router';
 import { getPath } from '../helpers/functions';
 import { CSSTransition } from 'react-transition-group';
 
-const Arrows = ({ onExited, show }) => {
+const Arrows = ({ onExited, showNavigation }) => {
   const router = useRouter();
   const { pathname } = router;
-
-  const [value, setValue] = useState(false);
 
   const timeout = 950;
 
@@ -16,11 +14,11 @@ const Arrows = ({ onExited, show }) => {
   const [isLeftActive, setIsLeftActive] = useState(true);
 
   useEffect(() => {
-    if (show) {
+    if (showNavigation) {
       setIsRightActive(true);
       setIsLeftActive(true);
     }
-  }, [show]);
+  }, [showNavigation]);
 
   const nextPathname = getPath(pathname, 1);
   const prevPathname = getPath(pathname, -1);
@@ -41,7 +39,7 @@ const Arrows = ({ onExited, show }) => {
     <>
       <CSSTransition
         classNames={'arrow__right'}
-        in={show}
+        in={showNavigation}
         timeout={timeout}
         onExited={onExited}
       >
@@ -53,7 +51,7 @@ const Arrows = ({ onExited, show }) => {
           <div className='arrow__arrow' />
         </div>
       </CSSTransition>
-      <CSSTransition classNames={'arrow__left'} timeout={timeout} in={show}>
+      <CSSTransition classNames={'arrow__left'} timeout={timeout} in={showNavigation}>
         <div className='arrow__left'>
           <CSSTransition classNames={'arrow__link'} in={isLeftActive} timeout={timeout}>
             <a className='arrow__link' onClick={onClickLeftArrow} href={prevPathname} />

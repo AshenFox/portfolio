@@ -5,7 +5,6 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { getDir } from '../helpers/functions';
 import { useStateWithRef } from '../helpers/hooks';
 import Arrows from './Arrows';
-import Burger from './Burger';
 import Menu from './Menu';
 import PageLoader from './PageLoader';
 
@@ -19,6 +18,7 @@ const SectionSlider = ({ Component, pageProps }) => {
 
   const [showLoader, setShowLoader] = useState(false);
   const [showNavigation, setShowNavigation] = useState(true);
+  const [showMenu, setShowMenu, showMenuRef] = useStateWithRef(false);
 
   const [immediateTransition, setImmediateTransition] = useState(false);
 
@@ -46,6 +46,10 @@ const SectionSlider = ({ Component, pageProps }) => {
   // ===== Listners/Callbacks =====
   // ==============================
 
+  const onBurgerClick = () => {
+    setShowMenu(!showMenu);
+  };
+
   const onLoaderAnimationEnd = () => {
     setShowLoader(false);
 
@@ -60,6 +64,10 @@ const SectionSlider = ({ Component, pageProps }) => {
     }
   };
 
+  const onMenuExited = () => {
+    if (NewComponent) hideNavigation(pathname);
+  };
+
   const onSectionExited = () => {
     if (Component.name === NewComponent.Component.name) {
       setShowNavigation(true);
@@ -67,12 +75,22 @@ const SectionSlider = ({ Component, pageProps }) => {
     } else {
       setImmediateTransition(true);
     }
+
     setNewComponent(null);
   };
 
   // ===================
   // ===================
   // ===================
+
+  const hideNavigation = (path) => {
+    setShowNavigation(false);
+
+    console.log(pathsList.current, path);
+    if (!pathsList.current.has(path)) setShowLoader(true);
+  };
+
+  console.log(showLoader);
 
   // ===================
   // ===== Effects =====
@@ -83,9 +101,11 @@ const SectionSlider = ({ Component, pageProps }) => {
       const path = url.match(/^[^?]*/g)[0];
 
       if (RenderedComponentRef.current.pathname !== path) {
-        setShowNavigation(false); // ?????
-
-        if (!pathsList.current.has(path)) setShowLoader(true);
+        if (showMenuRef.current) {
+          setShowMenu(false);
+        } else {
+          hideNavigation(path);
+        }
       }
     };
 
@@ -98,8 +118,6 @@ const SectionSlider = ({ Component, pageProps }) => {
 
   useEffect(() => {
     if (!NewComponent && Component.name !== RenderedComponent.Component.name) {
-      setShowNavigation(false); // ??????
-
       if (immediateTransition && !pathsList.current.has(pathname)) setShowLoader(true);
       // Add the incoming path into pathlist history
       pathsList.current.add(pathname);
@@ -111,17 +129,13 @@ const SectionSlider = ({ Component, pageProps }) => {
       // Add a new component
       setNewComponent({ pathname, Component });
     }
-
-    if (!NewComponent && Component.name === RenderedComponent.Component.name) {
-      setShowNavigation(true);
-    }
   }, [Component, NewComponent]);
 
   useEffect(() => {
-    if (NewComponent && !showLoader && (showNavigation || immediateTransition)) {
+    if (NewComponent && immediateTransition && !showLoader) {
       setRenderedComponent({ ...NewComponent });
     }
-  }, [NewComponent]);
+  }, [NewComponent, Component]);
 
   // ===================
   // ===================
@@ -129,8 +143,13 @@ const SectionSlider = ({ Component, pageProps }) => {
 
   return (
     <>
-      <Menu show={showNavigation} />
-      <Arrows onExited={onArrowExited} show={showNavigation} />
+      <Menu
+        showNavigation={showNavigation}
+        showMenu={showMenu}
+        onBurgerClick={onBurgerClick}
+        onExited={onMenuExited}
+      />
+      <Arrows onExited={onArrowExited} showNavigation={showNavigation} />
 
       <div className='section-slider'>
         <TransitionGroup component={null}>
@@ -151,9 +170,3 @@ const SectionSlider = ({ Component, pageProps }) => {
 };
 
 export default SectionSlider;
-
-/* 
-<div className='section-slider'>
-    <TransitionGroup component={null}>{children}</TransitionGroup>
-</div> 
-*/

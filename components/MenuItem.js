@@ -1,19 +1,20 @@
 import React from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const MenuItem = ({ href, title, onClick }) => {
+const MenuItem = ({ href, title }) => {
   const router = useRouter();
   const { pathname } = router;
 
   return (
-    <a
-      className={`menu__link ${pathname === href ? 'menu__link--active' : ''}`}
-      href={href}
-      title={title}
-      onClick={onClick}
-    >
-      <span>{title}</span>
-    </a>
+    <Link href={href}>
+      <a
+        className={`menu__link ${pathname === href ? 'menu__link--active' : ''}`}
+        title={title}
+      >
+        <span>{title}</span>
+      </a>
+    </Link>
   );
 };
 

@@ -7,9 +7,9 @@
   cursor: pointer;
 
   &-exit-active,
-  &-exit-done,
   &-enter-active {
     cursor: auto;
+    pointer-events: none;
   }
 
   &-exit-active,
@@ -102,7 +102,7 @@
   }
 
   &:hover {
-    &.burger__st1.burger__st2 {
+    &.burger__toggle-enter-done {
       div {
         &:nth-child(1) {
           transform: translateY(10px) rotate(50deg) scale(1.5) !important;
@@ -115,66 +115,206 @@
     }
   }
 
-  &__st1 {
-    animation: rotate-back-in 0.8s cubic-bezier(0.2, 0.86, 0.35, 1) forwards;
+  // =====================================================
+  // Animation enter behaviour
+  // =====================================================
+
+  &__toggle-enter-active,
+  &__toggle-enter-done {
+    animation: burger-in 0.95s cubic-bezier(0.52, 0, 0.52, 1) forwards;
 
     div {
       &:nth-child(1) {
-        transform: translateY(9px) !important;
-      }
-
-      &:nth-child(3) {
-        transform: translateY(-9px) !important;
-      }
-    }
-  }
-
-  &__st2 {
-    animation: rotate-back-out 0.85s cubic-bezier(0.2, 0.86, 0.35, 1) forwards;
-
-    div {
-      &:nth-child(1) {
-        transform: translateY(10px) rotate(45deg) scale(1.5) !important;
+        animation: top-bar-in 0.95s cubic-bezier(0.37, 0.09, 0.16, 1.44);
+        transform: translateY(10px) rotate(45deg) scale(1.5);
       }
 
       &:nth-child(2) {
+        animation: middle-bar-in 0.95s cubic-bezier(0.37, 0.09, 0.16, 1.44);
         opacity: 0;
       }
 
       &:nth-child(3) {
-        transform: translateY(-10px) rotate(-45deg) scale(1.5) !important;
+        animation: bottom-bar-in 0.95s cubic-bezier(0.37, 0.09, 0.16, 1.44);
+        transform: translateY(-10px) rotate(-45deg) scale(1.5);
       }
     }
   }
+
+  &__toggle-enter {
+    cursor: auto;
+    pointer-events: none !important;
+  }
+
+  // =====================================================
+  // =====================================================
+  // =====================================================
+
+  // =====================================================
+  // Animation exit behaviour
+  // =====================================================
+
+  &__toggle-exit-active,
+  &__toggle-exit-done {
+    animation: burger-out 0.95s cubic-bezier(0.2, 0.86, 0.35, 1) forwards;
+
+    div {
+      &:nth-child(1) {
+        animation: top-bar-out 0.95s cubic-bezier(0.37, 0.09, 0.16, 1.44);
+      }
+
+      &:nth-child(2) {
+        animation: middle-bar-out 0.95s cubic-bezier(0.37, 0.09, 0.16, 1.44);
+      }
+
+      &:nth-child(3) {
+        animation: bottom-bar-out 0.95s cubic-bezier(0.37, 0.09, 0.16, 1.44);
+      }
+    }
+  }
+
+  &__toggle-exit {
+    cursor: auto;
+    pointer-events: none !important;
+  }
+
+  // =====================================================
+  // =====================================================
+  // =====================================================
 }
 
-// st-1 rotate-back-in .8s cubic-bezier(.2,.86,.35,1) forwards
-// st-2 rotate-back-out .85s cubic-bezier(.2,.86,.35,1) forwards
-
-@keyframes rotate-back-in {
+@keyframes burger-in {
   0% {
     transform: rotate(180deg);
   }
 
-  45% {
+  21% {
     transform: rotate(-5deg);
   }
 
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes rotate-back-out {
-  0% {
+  48% {
     transform: rotate(0deg);
   }
 
-  45% {
+  71% {
     transform: rotate(185deg);
   }
 
   100% {
     transform: rotate(180deg);
+  }
+}
+
+@keyframes burger-out {
+  0% {
+    transform: rotate(180deg);
+  }
+
+  45% {
+    transform: rotate(-10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+// ========================
+// ========================
+// ========================
+
+@keyframes middle-bar-in {
+  0% {
+    opacity: 1;
+  }
+
+  48% {
+    opacity: 1;
+  }
+
+  49% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes top-bar-in {
+  0% {
+    transform: translateY(0px);
+  }
+
+  48% {
+    transform: translateY(9px);
+  }
+
+  100% {
+    transform: translateY(10px) rotate(45deg) scale(1.5);
+  }
+}
+
+@keyframes bottom-bar-in {
+  0% {
+    transform: translateY(0px);
+  }
+
+  48% {
+    transform: translateY(-9px);
+  }
+
+  100% {
+    transform: translateY(-10px) rotate(-45deg) scale(1.5);
+  }
+}
+
+// ========================
+// ========================
+// ========================
+
+@keyframes middle-bar-out {
+  0% {
+    opacity: 0;
+  }
+
+  51% {
+    opacity: 0;
+  }
+
+  52% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes top-bar-out {
+  0% {
+    transform: translateY(10px) rotate(45deg) scale(1.5);
+  }
+
+  52% {
+    transform: translateY(9px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes bottom-bar-out {
+  0% {
+    transform: translateY(-10px) rotate(-45deg) scale(1.5);
+  }
+
+  52% {
+    transform: translateY(-9px);
+  }
+
+  100% {
+    transform: translateY(0px);
   }
 }
