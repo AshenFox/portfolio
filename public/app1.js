@@ -14,6 +14,8 @@ const SectionSlider = ({ Component, pageProps }) => {
 
   const loadingPathname = useRef(pathname);
 
+  console.log(pathname, Component.name, loadingPathname.current);
+
   // ============================
   // ===== State/Ref/Values =====
   // ============================
@@ -26,16 +28,17 @@ const SectionSlider = ({ Component, pageProps }) => {
 
   const [dir, setDir] = useState(null);
 
-  // Received Component
-  const [Received, setReceived, ReceivedRef] = useStateWithRef(null);
+  // New Component
+  const [NewComponent, setNewComponent] = useState(null);
   // Rendered Component
-  const [Rendered, setRendered, RenderedRef] = useStateWithRef({
-    pathname,
-    Component,
-  });
+  const [RenderedComponent, setRenderedComponent, RenderedComponentRef] = useStateWithRef(
+    {
+      pathname,
+      Component,
+    }
+  );
 
   const pathsList = useRef(new Set([pathname]));
-  const visited = (path) => pathsList.current.has(path);
 
   const timeout = 800;
 
@@ -52,17 +55,18 @@ const SectionSlider = ({ Component, pageProps }) => {
   };
 
   const onLoaderAnimationIteration = (e) => {
-    if (ReceivedRef.current && visited(loadingPathname.current)) {
+    // console.log(NewComponent, pathsList.current.has(pathname));
+    if (NewComponent && pathsList.current.has(pathname)) {
       setShowLoader(false);
 
-      setRendered({ ...ReceivedRef.current });
+      setRenderedComponent({ ...NewComponent });
     }
   };
 
   const onArrowExited = () => {
-    if (visited(loadingPathname.current)) {
-      if (Received && !showLoader) {
-        setRendered({ ...Received });
+    if (pathsList.current.has(pathname)) {
+      if (NewComponent && !showLoader) {
+        setRenderedComponent({ ...NewComponent });
       }
     } else {
       setShowLoader(true);
@@ -70,27 +74,49 @@ const SectionSlider = ({ Component, pageProps }) => {
   };
 
   const onMenuExited = () => {
-    if (loadingPathname.current !== Rendered.pathname) setShowNavigation(false);
+    if (NewComponent) hideNavigation(pathname);
   };
 
   const onSectionExited = () => {
-    if (loadingPathname.current === ReceivedRef.current.pathname) {
+    /* console.log(
+      pathname,
+      pathnameRef.current,
+      Component.name,
+      NewComponent.Component.name
+    ); */
+
+    if (loadingPathname.current === NewComponent.pathname) {
       setShowNavigation(true);
       setImmediateTransition(false);
     } else {
-      if (visited(loadingPathname.current)) {
+      if (pathsList.current.has(loadingPathname.current)) {
         setImmediateTransition(true);
       } else {
+        console.log(Component.name, NewComponent.name);
         setShowLoader(true);
       }
     }
 
-    setReceived(null);
+    /* if (Component.name === NewComponent.Component.name) {
+      setShowNavigation(true);
+      setImmediateTransition(false);
+    } else {
+      setImmediateTransition(true);
+    } */
+
+    setNewComponent(null);
   };
 
   // ===================
   // ===================
   // ===================
+
+  const hideNavigation = (path) => {
+    setShowNavigation(false);
+
+    // console.log(pathsList.current, path);
+    // if (!pathsList.current.has(path)) setShowLoader(true);
+  };
 
   // ===================
   // ===== Effects =====
@@ -101,11 +127,11 @@ const SectionSlider = ({ Component, pageProps }) => {
       const path = url.match(/^[^?]*/g)[0];
       loadingPathname.current = path;
 
-      if (RenderedRef.current.pathname !== path) {
+      if (RenderedComponentRef.current.pathname !== path) {
         if (showMenuRef.current) {
           setShowMenu(false);
         } else {
-          setShowNavigation(false);
+          hideNavigation(path);
         }
       }
     };
@@ -118,28 +144,30 @@ const SectionSlider = ({ Component, pageProps }) => {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      if (!Received && Component.name !== Rendered.Component.name) {
-        // Add the incoming path into pathlist history
-        pathsList.current.add(pathname);
+    /* setTimeout(() => {
+      
+    }, 2000); */
 
-        // Find new direction
-        const dir = getDir(pathname, Rendered.pathname);
-        setDir(dir);
+    if (!NewComponent && Component.name !== RenderedComponent.Component.name) {
+      // if (immediateTransition && !pathsList.current.has(pathname)) setShowLoader(true);
+      // Add the incoming path into pathlist history
+      pathsList.current.add(pathname);
 
-        // Add a new component
+      // Find new direction
+      const dir = getDir(pathname, RenderedComponent.pathname);
+      setDir(dir);
 
-        setReceived({ pathname, Component });
-      }
-    }, 2000);
-  }, [Component, Received]);
+      // Add a new component
+      setNewComponent({ pathname, Component });
+    }
+  }, [Component, NewComponent]);
 
   useEffect(() => {
-    if (Received && immediateTransition && !showLoader) {
-      setRendered({ ...Received });
+    if (NewComponent && immediateTransition && !showLoader) {
+      setRenderedComponent({ ...NewComponent });
       setImmediateTransition(false);
     }
-  }, [Component, Received, immediateTransition, showLoader]);
+  }, [NewComponent, Component, immediateTransition]);
 
   // ===================
   // ===================
@@ -158,12 +186,12 @@ const SectionSlider = ({ Component, pageProps }) => {
       <div className='section-slider'>
         <TransitionGroup component={null}>
           <CSSTransition
-            key={Rendered.pathname}
+            key={RenderedComponent.pathname}
             classNames='section-slider__section'
             timeout={timeout}
             onExited={onSectionExited}
           >
-            <Rendered.Component {...pageProps} dir={dir} />
+            <RenderedComponent.Component {...pageProps} dir={dir} />
           </CSSTransition>
         </TransitionGroup>
       </div>

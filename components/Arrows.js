@@ -42,6 +42,7 @@ const Arrows = ({ onExited, showNavigation }) => {
         in={showNavigation}
         timeout={timeout}
         onExited={onExited}
+        appear
       >
         <div className='arrow__right'>
           <CSSTransition classNames={'arrow__link'} in={isRightActive} timeout={timeout}>
@@ -51,7 +52,12 @@ const Arrows = ({ onExited, showNavigation }) => {
           <div className='arrow__arrow' />
         </div>
       </CSSTransition>
-      <CSSTransition classNames={'arrow__left'} timeout={timeout} in={showNavigation}>
+      <CSSTransition
+        classNames={'arrow__left'}
+        timeout={timeout}
+        in={showNavigation}
+        appear
+      >
         <div className='arrow__left'>
           <CSSTransition classNames={'arrow__link'} in={isLeftActive} timeout={timeout}>
             <a className='arrow__link' onClick={onClickLeftArrow} href={prevPathname} />

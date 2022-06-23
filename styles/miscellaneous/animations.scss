@@ -43,7 +43,8 @@
 }
 
 @keyframes page-loading {
-  0% {
+  0%,
+  10% {
     right: 100vw;
     left: 0;
   }
@@ -53,6 +54,7 @@
     left: 0;
   }
 
+  90%,
   100% {
     right: 0;
     left: 100vw;

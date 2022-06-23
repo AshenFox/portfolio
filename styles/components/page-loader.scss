@@ -1,17 +1,21 @@
 .page-loader {
   position: fixed;
-  height: 15px;
+  height: 10px;
   top: 0;
   left: 0;
   right: 100vw;
   background-color: #6a6a6a;
 
-  &-enter-active {
-    animation: page-loading 800ms forwards cubic-bezier(0.75, 0, 0.25, 1);
+  &-exit-done {
+    animation: none;
+  }
+
+  &-enter-done {
+    animation: page-loading 1000ms forwards cubic-bezier(0.75, 0, 0.25, 1) infinite;
   }
 }
 
-.testofsomething {
+/* .testofsomething {
   position: fixed;
   height: 15px;
   top: 0;
@@ -20,4 +24,4 @@
   background-color: #6a6a6a;
 
   animation: page-loading 800ms forwards cubic-bezier(0.75, 0, 0.25, 1) infinite;
-}
+} */
