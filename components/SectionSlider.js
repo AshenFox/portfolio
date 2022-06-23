@@ -61,10 +61,8 @@ const SectionSlider = ({ Component, pageProps }) => {
   };
 
   const onArrowExited = () => {
-    if (visited(loadingPathname.current)) {
-      if (Received && !showLoader) {
-        setRendered({ ...Received });
-      }
+    if (visited(loadingPathname.current) && Received && !showLoader) {
+      setRendered({ ...Received });
     } else {
       setShowLoader(true);
     }
@@ -107,10 +105,10 @@ const SectionSlider = ({ Component, pageProps }) => {
       const path = url.match(/^[^?]*/g)[0];
       loadingPathname.current = path;
 
-      if (RenderedRef.current.pathname !== path) {
-        if (showMenuRef.current) {
-          setShowMenu(false);
-        } else {
+      if (showMenuRef.current) {
+        setShowMenu(false);
+      } else {
+        if (RenderedRef.current.pathname !== path) {
           setShowNavigation(false);
         }
       }
