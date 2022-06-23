@@ -35,13 +35,14 @@ const SectionSlider = ({ Component, pageProps }) => {
   });
 
   const pathsList = useRef(new Set([pathname]));
-  const visited = (path) => pathsList.current.has(path);
 
   const timeout = 800;
 
   // ===================
   // ===================
   // ===================
+
+  const visited = (path) => pathsList.current.has(path);
 
   // ==============================
   // ===== Listners/Callbacks =====
@@ -52,7 +53,7 @@ const SectionSlider = ({ Component, pageProps }) => {
   };
 
   const onLoaderAnimationIteration = (e) => {
-    if (ReceivedRef.current && visited(loadingPathname.current)) {
+    if (ReceivedRef.current) {
       setShowLoader(false);
 
       setRendered({ ...ReceivedRef.current });
@@ -69,16 +70,21 @@ const SectionSlider = ({ Component, pageProps }) => {
     }
   };
 
-  const onMenuExited = () => {
-    if (loadingPathname.current !== Rendered.pathname) setShowNavigation(false);
-  };
+  const onMenuExited = () =>
+    loadingPathname.current !== Rendered.pathname && setShowNavigation(false);
 
   const onSectionExited = () => {
-    if (loadingPathname.current === ReceivedRef.current.pathname) {
+    if (
+      loadingPathname.current === ReceivedRef.current.pathname &&
+      ReceivedRef.current.Component.name === Component.name
+    ) {
       setShowNavigation(true);
       setImmediateTransition(false);
     } else {
-      if (visited(loadingPathname.current)) {
+      if (
+        visited(loadingPathname.current) &&
+        ReceivedRef.current.Component.name !== Component.name
+      ) {
         setImmediateTransition(true);
       } else {
         setShowLoader(true);
@@ -118,20 +124,17 @@ const SectionSlider = ({ Component, pageProps }) => {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      if (!Received && Component.name !== Rendered.Component.name) {
-        // Add the incoming path into pathlist history
-        pathsList.current.add(pathname);
+    if (!Received && Component.name !== Rendered.Component.name) {
+      // Add the incoming path into pathlist history
+      pathsList.current.add(pathname);
 
-        // Find new direction
-        const dir = getDir(pathname, Rendered.pathname);
-        setDir(dir);
+      // Find new direction
+      const dir = getDir(pathname, Rendered.pathname);
+      setDir(dir);
 
-        // Add a new component
-
-        setReceived({ pathname, Component });
-      }
-    }, 2000);
+      // Add a new component
+      setReceived({ pathname, Component });
+    }
   }, [Component, Received]);
 
   useEffect(() => {

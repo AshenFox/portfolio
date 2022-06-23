@@ -26,7 +26,7 @@ const SectionSlider = ({ Component, pageProps }) => {
 
   const [dir, setDir] = useState(null);
 
-  // New Component
+  // Received Component
   const [Received, setReceived, ReceivedRef] = useStateWithRef(null);
   // Rendered Component
   const [Rendered, setRendered, RenderedRef] = useStateWithRef({
@@ -52,16 +52,15 @@ const SectionSlider = ({ Component, pageProps }) => {
   };
 
   const onLoaderAnimationIteration = (e) => {
-    // console.log(Received, pathsList.current.has(pathname));
-    if (Received && visited(pathname)) {
+    if (ReceivedRef.current && visited(loadingPathname.current)) {
       setShowLoader(false);
 
-      setRendered({ ...Received });
+      setRendered({ ...ReceivedRef.current });
     }
   };
 
   const onArrowExited = () => {
-    if (visited(pathname)) {
+    if (visited(loadingPathname.current)) {
       if (Received && !showLoader) {
         setRendered({ ...Received });
       }
@@ -71,7 +70,6 @@ const SectionSlider = ({ Component, pageProps }) => {
   };
 
   const onMenuExited = () => {
-    // console.log('onMenuExited', Received);
     if (loadingPathname.current !== Rendered.pathname) setShowNavigation(false);
   };
 
@@ -130,6 +128,7 @@ const SectionSlider = ({ Component, pageProps }) => {
         setDir(dir);
 
         // Add a new component
+
         setReceived({ pathname, Component });
       }
     }, 2000);

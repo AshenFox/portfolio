@@ -7,7 +7,11 @@ const Burger = ({ showNavigation, showMenu, onClick, onExited }) => {
       <CSSTransition
         classNames={'burger__toggle'}
         in={showMenu}
-        timeout={1000}
+        timeout={{
+          appear: 1000,
+          enter: 1000,
+          exit: 750,
+        }}
         onExited={onExited}
       >
         <div className={`burger`} onClick={onClick}>
