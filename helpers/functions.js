@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import { routesOrderList } from './values';
 
 export const getPath = (pathname, dir) => {
@@ -19,4 +20,10 @@ export const getDir = (pathname_to, pathname_from) => {
   if (diff > 0) dir = 'right';
 
   return dir;
+};
+
+export const lazyWithPreload = (factory) => {
+  const Component = lazy(factory);
+  Component.preload = factory;
+  return Component;
 };

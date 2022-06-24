@@ -90,6 +90,10 @@
       transform: translate(0, -50%);
     }
 
+    &-appear {
+      transition-delay: 400ms;
+    }
+
     .arrow__link {
       &-exit-active,
       &-exit-done {
@@ -192,6 +196,10 @@
     &-appear-active,
     &-appear-done {
       transform: translate(0, -50%);
+    }
+
+    &-appear {
+      transition-delay: 400ms;
     }
 
     .arrow__link {

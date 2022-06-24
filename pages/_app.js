@@ -1,15 +1,14 @@
 import 'normalize.css';
 import '../styles/index.scss';
-import SectionSlider from '../components/SectionSlider';
 import Head from '../components/Head';
-import Header from '../components/Header';
+import React from 'react';
+import DynamicSectionSlider from '../components/DynamicSectionSlider';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head />
-      {/* <Header /> */}
-      <SectionSlider Component={Component} pageProps={pageProps} />
+      <DynamicSectionSlider Component={Component} pageProps={pageProps} />
     </>
   );
 }
