@@ -1,9 +1,9 @@
 import Button from '../components/Button';
 import Section from '../components/Section';
 
-export default function Home({ dir }) {
+export default function Home(props) {
   return (
-    <Section classNameStr={'home'} dir={dir}>
+    <Section classNameStr={'home'} {...props}>
       <main className='home__container'>
         <h1 className='home__greeting'>Hello, my name is Rafael Caferati.</h1>
         <h4 className='home__description'>

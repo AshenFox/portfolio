@@ -1,8 +1,8 @@
 import Section from '../components/Section';
 
-export default function About({ dir }) {
+export default function About(props) {
   return (
-    <Section classNameStr={'about'} dir={dir}>
+    <Section classNameStr={'about'} {...props}>
       <div className='page__container'>
         <div className='about__block'>
           <h1>About</h1>

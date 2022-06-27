@@ -1,10 +1,8 @@
 import ContentLoader from './ContentLoader';
-import React, { Suspense, useEffect, useState } from 'react';
-import { lazyWithPreload } from '../helpers/functions';
+import React, { useState } from 'react';
+import SectionSlider from './SectionSlider';
 
-const LazySectionSlider = lazyWithPreload(() => import('./SectionSlider'));
-
-const DynamicSectionSlider = ({ Component, pageProps }) => {
+const DynamicSectionSlider = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isAppearing, setIsAppearing] = useState(true);
 
@@ -12,27 +10,9 @@ const DynamicSectionSlider = ({ Component, pageProps }) => {
     setIsAppearing(false);
   };
 
-  useEffect(() => {
-    (async () => {
-      const result = await LazySectionSlider.preload();
-
-      /* await new Promise((res, rej) => {
-        setTimeout(() => {
-          res();
-        }, 5000);
-      }); */
-
-      if (result) setIsLoaded(true);
-    })();
-  }, []);
-
-  const showSlider = !isAppearing && isLoaded;
-
   return (
     <>
-      <Suspense>
-        {showSlider && <LazySectionSlider Component={Component} pageProps={pageProps} />}
-      </Suspense>
+      <SectionSlider {...props} setIsLoaded={setIsLoaded} />
 
       <ContentLoader
         isLoaded={isLoaded}

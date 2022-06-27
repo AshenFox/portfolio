@@ -8,7 +8,7 @@ import Arrows from './Arrows';
 import Menu from './Menu';
 import PageLoader from './PageLoader';
 
-const SectionSlider = ({ Component, pageProps }) => {
+const SectionSlider = ({ Component, pageProps, setIsLoaded }) => {
   const router = useRouter();
   const { pathname } = router;
 
@@ -164,7 +164,7 @@ const SectionSlider = ({ Component, pageProps }) => {
             timeout={timeout}
             onExited={onSectionExited}
           >
-            <Rendered.Component {...pageProps} dir={dir} />
+            <Rendered.Component {...pageProps} dir={dir} setIsLoaded={setIsLoaded} />
           </CSSTransition>
         </TransitionGroup>
       </div>

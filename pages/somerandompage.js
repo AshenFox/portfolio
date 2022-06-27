@@ -1,8 +1,8 @@
 import Section from '../components/Section';
 
-export default function SomeRandomPage({ dir }) {
+export default function SomeRandomPage(props) {
   return (
-    <Section classNameStr={'somerandompage'} dir={dir}>
+    <Section classNameStr={'somerandompage'} {...props}>
       <div className='page__container'>
         <h1>Some Random Page</h1>
         <p>

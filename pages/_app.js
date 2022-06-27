@@ -4,11 +4,11 @@ import Head from '../components/Head';
 import React from 'react';
 import DynamicSectionSlider from '../components/DynamicSectionSlider';
 
-function MyApp({ Component, pageProps }) {
+function MyApp(props) {
   return (
     <>
       <Head />
-      <DynamicSectionSlider Component={Component} pageProps={pageProps} />
+      <DynamicSectionSlider {...props} />
     </>
   );
 }
