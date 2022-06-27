@@ -90,9 +90,9 @@
       transform: translate(0, -50%);
     }
 
-    &-appear {
+    /* &-appear {
       transition-delay: 400ms;
-    }
+    } */
 
     .arrow__link {
       &-exit-active,
@@ -198,9 +198,9 @@
       transform: translate(0, -50%);
     }
 
-    &-appear {
+    /* &-appear {
       transition-delay: 400ms;
-    }
+    } */
 
     .arrow__link {
       &-exit-active,
@@ -291,14 +291,5 @@
     &.active {
       color: red;
     }
-  }
-
-  &__button {
-    position: fixed;
-    top: 100px;
-    right: 100px;
-    z-index: 1000;
-    width: 100px;
-    height: 50px;
   }
 }

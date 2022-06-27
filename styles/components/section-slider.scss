@@ -41,11 +41,15 @@
       transform-origin: left center;
 
       &.section-slider__section {
-        &-enter-active {
+        &-enter,
+        &-enter-active,
+        &-enter-done {
           animation: fade-in-right 800ms forwards cubic-bezier(0.75, 0, 0.25, 1);
         }
 
-        &-enter-active + .section-slider__section {
+        &-enter + .section-slider__section,
+        &-enter-active + .section-slider__section,
+        &-enter-done + .section-slider__section {
           animation: fade-out-right 800ms forwards cubic-bezier(0.75, 0, 0.25, 1);
         }
       }
@@ -55,11 +59,15 @@
       transform-origin: right center;
 
       &.section-slider__section {
-        &-enter-active {
+        &-enter,
+        &-enter-active,
+        &-enter-done {
           animation: fade-in-left 800ms forwards cubic-bezier(0.75, 0, 0.25, 1);
         }
 
-        &-enter-active + .section-slider__section {
+        &-enter + .section-slider__section,
+        &-enter-active + .section-slider__section,
+        &-enter-done + .section-slider__section {
           animation: fade-out-left 800ms forwards cubic-bezier(0.75, 0, 0.25, 1);
         }
       }

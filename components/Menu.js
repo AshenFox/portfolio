@@ -19,7 +19,7 @@ const Menu = ({ showNavigation, showMenu, onBurgerClick, onExited }) => {
       <CSSTransition classNames={'menu'} in={showMenu} timeout={timeout}>
         <div className={`menu ${showMenu ? 'menu__active' : ''}`}>
           {routesOrderList.map(({ path, title }) => (
-            <MenuItem href={path} title={title} />
+            <MenuItem href={path} title={title} key={path} />
           ))}
           <span className='menu__tip'>for a quick seach just start typing ...</span>
         </div>

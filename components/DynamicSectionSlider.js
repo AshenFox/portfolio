@@ -5,19 +5,25 @@ import SectionSlider from './SectionSlider';
 const DynamicSectionSlider = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isAppearing, setIsAppearing] = useState(true);
+  const [isExited, setIsExited] = useState(false);
 
   const onEntered = () => {
     setIsAppearing(false);
   };
 
+  const onExited = () => {
+    setIsExited(true);
+  };
+
   return (
     <>
-      <SectionSlider {...props} setIsLoaded={setIsLoaded} />
+      <SectionSlider {...props} setIsLoaded={setIsLoaded} isLoaderExited={isExited} />
 
       <ContentLoader
         isLoaded={isLoaded}
         isAppearing={isAppearing}
         onEntered={onEntered}
+        onExited={onExited}
       />
     </>
   );

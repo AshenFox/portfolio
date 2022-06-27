@@ -8,7 +8,7 @@ import Arrows from './Arrows';
 import Menu from './Menu';
 import PageLoader from './PageLoader';
 
-const SectionSlider = ({ Component, pageProps, setIsLoaded }) => {
+const SectionSlider = ({ Component, pageProps, setIsLoaded, isLoaderExited }) => {
   const router = useRouter();
   const { pathname } = router;
 
@@ -34,9 +34,12 @@ const SectionSlider = ({ Component, pageProps, setIsLoaded }) => {
     Component,
   });
 
+  const isLoaderExitedRef = useRef(isLoaderExited);
+  isLoaderExitedRef.current = isLoaderExited;
+
   const pathsList = useRef(new Set([pathname]));
 
-  const timeout = 800;
+  const timeout = 825;
 
   // ===================
   // ===================
@@ -79,10 +82,7 @@ const SectionSlider = ({ Component, pageProps, setIsLoaded }) => {
       setShowNavigation(true);
       setImmediateTransition(false);
     } else {
-      if (
-        visited(loadingPathname.current) &&
-        ReceivedRef.current.Component.name !== Component.name
-      ) {
+      if (visited(loadingPathname.current)) {
         setImmediateTransition(true);
       } else {
         setShowLoader(true);
@@ -140,21 +140,33 @@ const SectionSlider = ({ Component, pageProps, setIsLoaded }) => {
       setRendered({ ...Received });
       setImmediateTransition(false);
     }
-  }, [Component, Received, immediateTransition, showLoader]);
+  }, [Received, immediateTransition, showLoader]);
+
+  useEffect(() => {
+    if (Received) {
+      setRendered({ ...Received });
+    }
+  }, [isLoaderExited]);
 
   // ===================
   // ===================
   // ===================
+
+  console.log({ Component, Received, Rendered });
+  console.log({ isLoaderExited, showNavigation });
 
   return (
     <>
       <Menu
-        showNavigation={showNavigation}
+        showNavigation={isLoaderExited && showNavigation}
         showMenu={showMenu}
         onBurgerClick={onBurgerClick}
         onExited={onMenuExited}
       />
-      <Arrows onExited={onArrowExited} showNavigation={showNavigation} />
+      <Arrows
+        onExited={onArrowExited}
+        showNavigation={isLoaderExited && showNavigation}
+      />
 
       <div className='section-slider'>
         <TransitionGroup component={null}>
