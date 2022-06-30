@@ -27,6 +27,22 @@
     }
   }
 
+  &__frame-inner {
+    position: relative;
+    min-height: 100%;
+  }
+
+  &__granim {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    // backface-visibility: hidden;
+  }
+
   &__section {
     min-height: 100%;
     min-width: 100%;
@@ -44,12 +60,14 @@
         &-enter,
         &-enter-active,
         &-enter-done {
+          z-index: 2;
           animation: fade-in-right 800ms forwards cubic-bezier(0.75, 0, 0.25, 1);
         }
 
         &-enter + .section-slider__section,
         &-enter-active + .section-slider__section,
         &-enter-done + .section-slider__section {
+          z-index: 1;
           animation: fade-out-right 800ms forwards cubic-bezier(0.75, 0, 0.25, 1);
         }
       }
@@ -62,12 +80,14 @@
         &-enter,
         &-enter-active,
         &-enter-done {
+          z-index: 2;
           animation: fade-in-left 800ms forwards cubic-bezier(0.75, 0, 0.25, 1);
         }
 
         &-enter + .section-slider__section,
         &-enter-active + .section-slider__section,
         &-enter-done + .section-slider__section {
+          z-index: 1;
           animation: fade-out-left 800ms forwards cubic-bezier(0.75, 0, 0.25, 1);
         }
       }

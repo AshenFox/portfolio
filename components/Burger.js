@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 const Burger = ({ showNavigation, showMenu, onClick, onExited }) => {

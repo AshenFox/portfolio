@@ -152,9 +152,6 @@ const SectionSlider = ({ Component, pageProps, setIsLoaded, isLoaderExited }) =>
   // ===================
   // ===================
 
-  console.log({ Component, Received, Rendered });
-  console.log({ isLoaderExited, showNavigation });
-
   return (
     <>
       <Menu

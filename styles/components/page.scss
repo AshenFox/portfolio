@@ -1,5 +1,10 @@
-.page__container {
-  padding-top: 80px;
-  max-width: 1010px;
-  margin: 0 auto;
+.page {
+  &__container {
+    padding-top: 80px;
+    max-width: 1010px;
+    margin: 0 auto;
+    // position: relative;
+    // z-index: 2;
+    // backface-visibility: hidden;
+  }
 }
