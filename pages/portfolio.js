@@ -56,8 +56,18 @@ export default function Portfolio(props) {
         <footer className='portfolio__footer'>
           <h4>Let's talk</h4>
           <span>Wanna get in touch or talk about a project?</span>
-          <span>Feel free to contact me via email at rafael@caferati.me</span>
-          <span>or drop a line in the form at the contact page</span>
+          <span>
+            Feel free to contact me via email at{' '}
+            <span className='portfolio__footer-link'>
+              <span className='portfolio__footer-link-text'>rafael@caferati.me</span>
+            </span>
+          </span>
+          <span>
+            or drop a line in the form at the{' '}
+            <span className='portfolio__footer-link'>
+              <span className='portfolio__footer-link-text'>contact page</span>
+            </span>
+          </span>
         </footer>
       </div>
     </Section>

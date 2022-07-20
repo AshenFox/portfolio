@@ -1,10 +1,10 @@
 import Section from '../components/Section';
 
-export default function TestPage(props) {
+export default function GetInTouch(props) {
   return (
-    <Section classNameStr={'testpage'} {...props}>
+    <Section classNameStr={'get-in-touch'} {...props}>
       <div className='page__container'>
-        <h1>Test Page</h1>
+        <h1>Get In Touch</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque reiciendis id
           maiores corrupti dolorem, optio sequi tenetur? Sequi velit commodi, dolorem unde

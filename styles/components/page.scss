@@ -3,6 +3,8 @@
     padding-top: 80px;
     max-width: 1010px;
     margin: 0 auto;
+    overflow: hidden; // to include children margin into height
+
     // position: relative;
     // z-index: 2;
     // backface-visibility: hidden;

@@ -7,10 +7,24 @@ const ProjectItem = () => {
       <Link href={'/'}>
         <a className='portfolio__project-item-container' href='/'>
           <div className='portfolio__project-item-bar'>
-            <h2>sky go desktop</h2>
+            <h2>flashcards</h2>
           </div>
           <div className='portfolio__project-item-main'>
-            <img src='/1.jpg' alt='' className='portfolio__project-item-img' />
+            <img src='/6.jpg' alt='' className='portfolio__project-item-img-main' />
+            <div className='portfolio__project-item-hover'>
+              <div className='portfolio__project-item-img-hover'>
+                <img src='/7.jpg' alt='' />
+              </div>
+
+              <ul className='portfolio__project-item-tags'>
+                <li className='portfolio__project-item-tag'>back-end</li>
+                <li className='portfolio__project-item-tag'>front-end</li>
+                <li className='portfolio__project-item-tag'>html5</li>
+                <li className='portfolio__project-item-tag'>sass</li>
+              </ul>
+
+              <span className='portfolio__project-item-more'>more...</span>
+            </div>
           </div>
         </a>
       </Link>
