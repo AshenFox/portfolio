@@ -6,13 +6,20 @@ export default function Project(props) {
     <Section classNameStr={'project'} {...props}>
       <div className='page__container'>
         <header className='project__header'>
-          <h1 className='project__title'>portfolio</h1>
+          <h1 className='project__title'>flashcards</h1>
           <h3 className='project__description'>
             Built with custom VanillaJS Web Components and written entirely on Javascript,
             this website is a showcase of my recent projects as a Full-Stack Web
             Developer.
           </h3>
-          <Button isClicked={false}></Button>
+          <div className='project__links'>
+            <div className='project__links-left'>
+              <Button isClicked={false}></Button>
+            </div>
+            <div className='project__links-right'>
+              <Button isClicked={false}></Button>
+            </div>
+          </div>
         </header>
 
         <main className='project__main'></main>

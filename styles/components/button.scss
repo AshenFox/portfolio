@@ -1,10 +1,29 @@
+@mixin button-colors($main, $dark, $background) {
+  .button__content {
+    background-color: $main;
+  }
+
+  .button__left,
+  .button__middle,
+  .button__right {
+    &:hover {
+      & ~ .button__content {
+        background-color: $dark;
+      }
+    }
+  }
+
+  .button__background {
+    background-color: $background;
+  }
+}
+
 .button {
   height: 47px;
-  width: 241px;
   position: relative;
 
   &__click {
-    .button__text {
+    .button__content {
       transform: translateY(2px) !important;
     }
 
@@ -23,23 +42,13 @@
     height: 100%;
     width: 33.33333%;
     z-index: 4;
-
-    /* &:hover {
-        background-color: blue;
-      } */
-
-    &:hover {
-      & ~ .button__text {
-        background-color: $button-red-dark;
-      }
-    }
   }
 
   &__left {
     left: 0;
 
     &:hover {
-      & ~ .button__text {
+      & ~ .button__content {
         transform: skewY(-1deg) translate3d(0px, -0.5px, 0px);
         background-color: $button-red-dark;
       }
@@ -54,7 +63,7 @@
     left: 33.3333%;
 
     &:hover {
-      & ~ .button__text {
+      & ~ .button__content {
         transform: translateY(0.75px);
       }
 
@@ -68,7 +77,7 @@
     left: 66.6666%;
 
     &:hover {
-      & ~ .button__text {
+      & ~ .button__content {
         transform: skewY(1deg) translate3d(0px, -0.5px, 0px);
       }
 
@@ -78,15 +87,22 @@
     }
   }
 
-  &__text {
-    top: 0;
+  &__content {
+    position: relative;
     z-index: 3;
+    padding: 0 4rem;
 
-    color: white;
-    background-color: $button-red;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &__icon {
+  }
+
+  &__text {
+    color: white;
+
     line-height: 1;
     font-weight: 700;
     font-size: 1.2rem;
@@ -95,8 +111,6 @@
   &__background {
     top: 3px;
     z-index: 2;
-
-    background-color: $button-red-background;
   }
 
   &__shadow {
@@ -107,14 +121,45 @@
     opacity: 0.25;
   }
 
-  &__text,
+  &__content,
   &__background,
   &__shadow {
-    position: absolute;
     height: 40px;
-    width: 100%;
+
     border-radius: 3px;
 
     transition: transform 0.12s ease-out 0s, background-color 0.12s ease-out 0s;
+  }
+
+  &__background,
+  &__shadow {
+    position: absolute;
+    width: 100%;
+  }
+
+  // colors
+
+  &.red {
+    @include button-colors($button-red, $button-red-dark, $button-red-background);
+  }
+
+  &.green {
+    @include button-colors($button-green, $button-green-dark, $button-green-background);
+  }
+
+  &.skyblue {
+    @include button-colors(
+      $button-skyblue,
+      $button-skyblue-dark,
+      $button-skyblue-background
+    );
+  }
+
+  &.blue {
+    @include button-colors($button-blue, $button-blue-dark, $button-blue-background);
+  }
+
+  &.grey {
+    @include button-colors($button-grey, $button-grey-dark, $button-grey-background);
   }
 }
