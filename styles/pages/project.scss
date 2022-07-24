@@ -28,6 +28,14 @@
     justify-content: space-between;
   }
 
+  &__links-right {
+    display: flex;
+
+    .button:not(:nth-child(1)) {
+      margin-left: 0.8rem;
+    }
+  }
+
   &__main {
     margin-top: 3rem;
   }

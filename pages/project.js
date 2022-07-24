@@ -14,10 +14,14 @@ export default function Project(props) {
           </h3>
           <div className='project__links'>
             <div className='project__links-left'>
-              <Button isClicked={false}></Button>
+              <Button isClicked={false} color='green' icon='externallink'>
+                visit the webpage
+              </Button>
             </div>
             <div className='project__links-right'>
-              <Button isClicked={false}></Button>
+              <Button isClicked={false} color='blue' icon='facebook'></Button>
+              <Button isClicked={false} color='skyblue' icon='twitter'></Button>
+              <Button isClicked={false} color='red' icon='googleplus'></Button>
             </div>
           </div>
         </header>

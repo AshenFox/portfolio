@@ -36,7 +36,9 @@ export default function About(props) {
         </h4>
       </main>
       <footer className='about__footer'>
-        <Button isClicked={false} />
+        <Button isClicked={false} color='red' isBig={true}>
+          destroy this webpage
+        </Button>
       </footer>
     </Section>
   );
