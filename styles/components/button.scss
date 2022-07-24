@@ -22,10 +22,6 @@
   height: 47px;
   position: relative;
 
-  &.onlyicon {
-    width: 5.6rem;
-  }
-
   &__click {
     .button__content {
       transform: translateY(2px) !important;
@@ -103,6 +99,14 @@
   &.big {
     .button__content {
       padding: 0 4rem;
+    }
+  }
+
+  &.onlyicon {
+    width: 5.6rem;
+
+    .button__content {
+      padding: 0;
     }
   }
 

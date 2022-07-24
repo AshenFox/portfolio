@@ -1,3 +1,4 @@
+import ContactFooter from '../components/ContactFooter';
 import ProjectItem from '../components/ProjectItem';
 import Section from '../components/Section';
 import Tag from '../components/Tag';
@@ -53,22 +54,7 @@ export default function Portfolio(props) {
           </ul>
         </main>
 
-        <footer className='portfolio__footer'>
-          <h4>Let's talk</h4>
-          <span>Wanna get in touch or talk about a project?</span>
-          <span>
-            Feel free to contact me via email at{' '}
-            <span className='portfolio__footer-link'>
-              <span className='portfolio__footer-link-text'>rafael@caferati.me</span>
-            </span>
-          </span>
-          <span>
-            or drop a line in the form at the{' '}
-            <span className='portfolio__footer-link'>
-              <span className='portfolio__footer-link-text'>contact page</span>
-            </span>
-          </span>
-        </footer>
+        <ContactFooter />
       </div>
     </Section>
   );

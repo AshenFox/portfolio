@@ -1,4 +1,5 @@
 import Button from '../components/Button';
+import ContactFooter from '../components/ContactFooter';
 import Section from '../components/Section';
 
 export default function Project(props) {
@@ -26,14 +27,85 @@ export default function Project(props) {
           </div>
         </header>
 
-        <main className='project__main'></main>
+        <main className='project__main'>
+          <div className='project__slider'>
+            <div className='project__slider-bar'>
+              <h2>flashcards</h2>
+            </div>
+            <img src='/6.jpg' alt='' className='project__slider-item' />
+          </div>
+          <div className='project__slider-controls'>
+            <div className='project__slider-controls-item active'></div>
+            <div className='project__slider-controls-item '></div>
+            <div className='project__slider-controls-item '></div>
+          </div>
 
-        <footer className='project__footer'>
-          <h4>Let's talk</h4>
-          <span>Wanna get in touch or talk about a project?</span>
-          <span>Feel free to contact me via email at rafael@caferati.me</span>
-          <span>or drop a line in the form at the contact page</span>
-        </footer>
+          <section className='project__section'>
+            <h2 className='project__section-header'>About this project</h2>
+            <div className='project__section-devider'></div>
+            <p className='project__section-paragraph'>
+              Project developed as a contractor with the SKY GO (UK) Desktop team. The Sky
+              Go Desktop app is a React web application build on top of the Electron
+              framework.
+              <br />
+              <br />
+              At this project I acted as the lead UI/UX developer specialist being the
+              bridge between UI/UX Design, PO and the UI development team. The main
+              challenge was to reorganize the UI structure from a react-virtualized grid
+              into a pure CSS one. Which improved drastically the scalability and
+              maintainability of the project.
+            </p>
+          </section>
+
+          <section className='project__section'>
+            <h2 className='project__section-header'>Technical Sheet</h2>
+            <h3 className='project__section-description'>
+              Code technologies I got involved with while working on this project.
+            </h3>
+            <div className='project__section-devider'></div>
+            <ul className='project__section-list'>
+              <li className='project__section-list-item'>
+                <span>UI/UX Design</span>
+              </li>
+              <li className='project__section-list-item'>
+                <span>UI/UX Architecture</span>
+              </li>
+              <li className='project__section-list-item'>
+                <span>UI/UX Animations</span>
+              </li>
+              <li className='project__section-list-item'>
+                <span>HTML5 – semantic, audio, video, canvas</span>
+              </li>
+              <li className='project__section-list-item'>
+                <span>CSS3 – preprocessed with LESS + LESSHAT</span>
+              </li>
+              <li className='project__section-list-item'>
+                <span>Meteor.js</span>
+              </li>
+              <li className='project__section-list-item'>
+                <span>Blaze</span>
+              </li>
+              <li className='project__section-list-item'>
+                <span>MongoDB</span>
+              </li>
+            </ul>
+          </section>
+
+          <section className='project__section'>
+            <h2 className='project__section-header'>Resources</h2>
+            <div className='project__section-devider'></div>
+            <ul className='project__section-list'>
+              <li className='project__section-list-item'>
+                <span>The project is online at HTTPS://ROCKET.CHAT</span>
+              </li>
+              <li className='project__section-list-item'>
+                <span>Access the project's source on GITHUB</span>
+              </li>
+            </ul>
+          </section>
+        </main>
+
+        <ContactFooter />
       </div>
     </Section>
   );
