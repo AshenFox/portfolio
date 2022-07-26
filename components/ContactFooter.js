@@ -1,4 +1,5 @@
 import React from 'react';
+import FancyLink from './FancyLink';
 
 const ContactFooter = () => {
   return (
@@ -6,16 +7,10 @@ const ContactFooter = () => {
       <h4>Let's talk</h4>
       <span>Wanna get in touch or talk about a project?</span>
       <span>
-        Feel free to contact me via email at{' '}
-        <span className='contactfooter__link'>
-          <span className='contactfooter__link-text'>rafael@caferati.me</span>
-        </span>
+        Feel free to contact me via email at <FancyLink>rafael@caferati.me</FancyLink>
       </span>
       <span>
-        or drop a line in the form at the{' '}
-        <span className='contactfooter__link'>
-          <span className='contactfooter__link-text'>contact page</span>
-        </span>
+        or drop a line in the form at the <FancyLink>contact page</FancyLink>
       </span>
     </footer>
   );
