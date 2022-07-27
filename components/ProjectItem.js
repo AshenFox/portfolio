@@ -5,7 +5,7 @@ const ProjectItem = () => {
   return (
     <li className='portfolio__project-item'>
       <Link href={'/'}>
-        <a className='portfolio__project-item-container' href='/'>
+        <a className='portfolio__project-item-container' title='/'>
           <div className='portfolio__project-item-bar'>
             <h2>flashcards</h2>
           </div>

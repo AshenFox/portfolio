@@ -15,14 +15,38 @@ export default function Project(props) {
           </h3>
           <div className='project__links'>
             <div className='project__links-left'>
-              <Button isClicked={false} color='green' icon='externallink'>
+              <Button
+                isClicked={false}
+                color='green'
+                icon='externallink'
+                href='https://fox-flash-cards.herokuapp.com'
+                title='Flashcards'
+              >
                 visit the webpage
               </Button>
             </div>
             <div className='project__links-right'>
-              <Button isClicked={false} color='blue' icon='facebook'></Button>
-              <Button isClicked={false} color='skyblue' icon='twitter'></Button>
-              <Button isClicked={false} color='red' icon='googleplus'></Button>
+              <Button
+                isClicked={false}
+                color='blue'
+                icon='facebook'
+                href='https://facebook.com'
+                title='Facebook'
+              ></Button>
+              <Button
+                isClicked={false}
+                color='skyblue'
+                icon='twitter'
+                href='https://twitter.com'
+                title='Twitter'
+              ></Button>
+              <Button
+                isClicked={false}
+                color='red'
+                icon='googleplus'
+                href='https://google.com'
+                title='Google Plus'
+              ></Button>
             </div>
           </div>
         </header>

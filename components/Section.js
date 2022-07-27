@@ -38,8 +38,6 @@ const Section = ({ dir, classNameStr, children, setIsLoaded }) => {
         },
       },
     });
-
-    console.log(granimInstance);
   }, []);
 
   return (

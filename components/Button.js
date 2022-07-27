@@ -1,7 +1,6 @@
 import React from 'react';
 import Icons from './icons';
-
-console.log(Icons);
+import Link from 'next/link';
 
 // red
 // green
@@ -22,25 +21,31 @@ const Button = ({
   color = '',
   icon = false,
   isActive = true,
+  href = '',
+  title = '',
 }) => {
   const Icon = Icons[icon];
 
   return (
-    <div
-      className={`button ${isClicked && isActive ? 'button__click' : ''} ${color} ${
-        isBig ? 'big' : ''
-      } ${!children && icon ? 'onlyicon' : ''} ${isActive ? '' : 'inactive'}`}
-    >
-      <div className='button__left'></div>
-      <div className='button__middle'></div>
-      <div className='button__right'></div>
-      <div className='button__content'>
-        {icon && <Icon />}
-        {children && <span className='button__text'>{children}</span>}
-      </div>
-      <div className='button__background'></div>
-      <div className='button__shadow'></div>
-    </div>
+    <Link href={href}>
+      <button
+        className={`button ${isClicked && isActive ? 'button__click' : ''} ${color} ${
+          isBig ? 'big' : ''
+        } ${!children && icon ? 'onlyicon' : ''} ${isActive ? '' : 'inactive'}`}
+      >
+        <a title={title}>
+          <div className='button__left'></div>
+          <div className='button__middle'></div>
+          <div className='button__right'></div>
+          <div className='button__content'>
+            {icon && <Icon />}
+            {children && <span className='button__text'>{children}</span>}
+          </div>
+          <div className='button__background'></div>
+          <div className='button__shadow'></div>
+        </a>
+      </button>
+    </Link>
   );
 };
 

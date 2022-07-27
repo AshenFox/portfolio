@@ -36,7 +36,7 @@
   &__links-right {
     display: flex;
 
-    .button:not(:nth-child(1)) {
+    button:not(:nth-child(1)) {
       margin-left: 0.8rem;
     }
   }
