@@ -1,10 +1,11 @@
 .contact-page {
   &__container {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
+    padding: 8rem 0;
   }
 
   &__header {
@@ -43,7 +44,9 @@
   &__info-item {
     position: relative;
     cursor: pointer;
-    width: max-content;
+
+    width: 20rem;
+
     white-space: nowrap;
 
     padding: 7px 5px;
@@ -60,13 +63,15 @@
       height: 14px;
       margin-right: 5px;
       flex-shrink: 0;
+
+      transition: all 0.3s ease-in-out;
     }
 
     &:not(:nth-child(1)) {
       margin-left: 7px;
     }
 
-    &.not-filled {
+    &.placeholder {
       background-color: transparent;
       line-height: 3.1rem;
       font-size: 1.8rem;
@@ -74,23 +79,38 @@
       color: #727272;
       opacity: 0;
       pointer-events: none;
+      width: 29rem;
 
       svg {
         margin-right: 9px;
         height: 20px;
       }
+
+      &.name {
+        transform: translate(7px, 62px);
+      }
+
+      &.email {
+        transform: translate(-200px, 62px);
+      }
+
+      &.message {
+        transform: translate(-407px, 62px);
+      }
     }
 
-    &.name.not-filled {
-      transform: translate(7px, 62px);
-    }
+    &.active {
+      opacity: 1 !important;
 
-    &.email.not-filled {
-      transform: translate(-250px, 62px);
-    }
+      &:not(.placeholder) {
+        background-color: #464646;
 
-    &.message.not-filled {
-      transform: translate(-507px, 62px);
+        &.transitioned {
+          &::after {
+            box-shadow: 0 0 30px 25px #464646;
+          }
+        }
+      }
     }
 
     &::after {
@@ -101,11 +121,10 @@
       background-color: red;
       right: 0 - 1px;
       z-index: 1;
+      transition: all 0.3s ease-in-out;
     }
 
-    &.filled {
-      width: 25rem;
-
+    &.transitioned {
       &::after {
         box-shadow: 0 0 30px 25px #3a3a3a;
       }
@@ -119,7 +138,7 @@
     padding: 15px 12px;
     border-bottom: 1px solid #797979;
     margin-bottom: 1.5rem;
-    max-width: 70rem;
+    width: 70rem;
 
     textarea {
       flex-grow: 1;
@@ -137,6 +156,13 @@
       fill: #7a7a7a;
       height: 20px;
       margin-right: 9px;
+      opacity: 1;
+    }
+
+    &.placeholder {
+      svg {
+        opacity: 0;
+      }
     }
   }
 

@@ -15,7 +15,7 @@ const Icons = {
   twitter: TwitterIcon,
   person: PersonIcon,
   pentosquare: PentosquareIcon,
-  main: MailIcon,
+  mail: MailIcon,
 };
 
 export default Icons;

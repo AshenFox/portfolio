@@ -16,11 +16,12 @@ import Link from 'next/link';
 
 const Button = ({
   children,
+  onClick = () => {},
   isClicked,
   isBig = false,
+  isActive = true,
   color = '',
   icon = false,
-  isActive = true,
   href = '',
   title = '',
 }) => {
@@ -32,6 +33,7 @@ const Button = ({
         className={`button ${isClicked && isActive ? 'button__click' : ''} ${color} ${
           isBig ? 'big' : ''
         } ${!children && icon ? 'onlyicon' : ''} ${isActive ? '' : 'inactive'}`}
+        onClick={onClick}
       >
         <a title={title}>
           <div className='button__left'></div>
