@@ -33,7 +33,7 @@ const Button = ({
         className={`button ${isClicked && isActive ? 'button__click' : ''} ${color} ${
           isBig ? 'big' : ''
         } ${!children && icon ? 'onlyicon' : ''} ${isActive ? '' : 'inactive'}`}
-        onClick={onClick}
+        onClick={isActive && onClick}
       >
         <a title={title}>
           <div className='button__left'></div>

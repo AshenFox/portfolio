@@ -2,6 +2,32 @@ import React from 'react';
 import Icons from '../components/icons';
 import Button from '../components/Button';
 import { useEffect, useRef, useState } from 'react';
+import { Store } from 'react-notifications-component';
+
+// Add a success message on submit.
+
+const emailTestRegExp =
+  /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g;
+
+const ErrorChecks = {
+  invalidEmail: {
+    title: 'Ivalid email',
+    message: "The email you've inputted is ivalid.",
+    test: (value) => !emailTestRegExp.test(value),
+  },
+  shortMessage: {
+    title: 'Short message',
+    message: 'Your message has to contain at least 5 characters.',
+    test: (value) => value.length < 5,
+  },
+  emptyField: {
+    title: 'Empty field',
+    message: "You can't leave this field empty.",
+    test: (value) => !value,
+  },
+};
+
+const { invalidEmail, shortMessage, emptyField } = ErrorChecks;
 
 const ContactForm = () => {
   const textareaRef = useRef(null);
@@ -14,6 +40,9 @@ const ContactForm = () => {
       next: 'email',
       value: '',
       transitioned: false,
+      errorTypes: [emptyField],
+      isError: null,
+      errorID: 1,
     },
     email: {
       placeholder: 'Your email address',
@@ -21,6 +50,9 @@ const ContactForm = () => {
       next: 'message',
       value: '',
       transitioned: false,
+      errorTypes: [emptyField, invalidEmail],
+      isError: null,
+      errorID: 2,
     },
     message: {
       placeholder: 'Write your message :)',
@@ -28,12 +60,31 @@ const ContactForm = () => {
       next: null,
       value: '',
       transitioned: false,
+      errorTypes: [emptyField, shortMessage],
+      isError: null,
+      errorID: 3,
     },
   });
 
+  const fieldsRef = useRef(fields);
+  fieldsRef.current = fields;
+
+  const timersRef = useRef(
+    Object.keys(fields).reduce(
+      (timers, key) => ({
+        ...timers,
+        [key]: {
+          timer: false,
+        },
+      }),
+      {}
+    )
+  );
+
   const [activeField, setActiveField] = useState('name');
 
-  const { iconName, placeholder, next, transitioned } = fields[activeField];
+  const { iconName, next, transitioned, isError, errorTypes, errorID, value } =
+    fields[activeField];
   const IconEl = Icons[iconName];
 
   const setElHeight = (el) => {
@@ -42,10 +93,31 @@ const ContactForm = () => {
   };
 
   const onChange = (e) => {
-    const { target } = e;
+    const {
+      target: { value },
+    } = e;
 
-    setTextAreaValue(target.value);
-    setActiveFieldValue(target.value);
+    setTextAreaValue(value);
+    setActiveFieldValue(value);
+
+    clearTimeout(timersRef.current[activeField]);
+    timersRef.current[activeField] = setTimeout(() => {
+      const error = errorTypes.find((error) => error.test(value));
+
+      if (error) {
+        createNotif(errorID, error);
+      } else {
+        remove_notification(errorID);
+      }
+
+      setFields((prevFields) => ({
+        ...prevFields,
+        [activeField]: {
+          ...fields[activeField],
+          isError: !!error,
+        },
+      }));
+    }, 250);
   };
 
   const setActiveFieldValue = (value) => {
@@ -88,27 +160,61 @@ const ContactForm = () => {
     setElHeight(textareaRef.current);
   }, [textareaValue]);
 
+  /* useEffect(() => {
+    clearTimeout(timersRef.current[activeField]);
+    timersRef.current[activeField] = setTimeout(() => {
+      const error = errorTypes.find((error) => error.test(value));
+
+      if (error) {
+        createNotif(errorID, error);
+      } else {
+        remove_notification(errorID);
+      }
+
+      setFields((prevFields) => ({
+        ...prevFields,
+        [activeField]: {
+          ...fields[activeField],
+          isError: !!error,
+        },
+      }));
+    }, 250);
+  }, [textareaValue]); */
+
   const onEnter = (e) => {
     if (next && e.key === 'Enter') {
       e.preventDefault();
-      goToNext();
+
+      if (isNextActive) goToNext();
     }
   };
+
+  const isErrorNull = isError === null;
+  // const isActiveValid = ;
+  const isNextActive = !isErrorNull && !isError && next;
+  const isSubmitActive = !Object.values(fields).find(
+    ({ isError }) => isError || isError === null
+  );
+
+  console.log(transitioned);
 
   return (
     <form action='' className='contact-page__form' onSubmit={undefined}>
       <ul className='contact-page__info'>
         {Object.entries(fields).map(
-          ([name, { placeholder, value, iconName, transitioned }]) => {
+          ([name, { placeholder, value, iconName, transitioned, isError }]) => {
             const Icon = Icons[iconName];
             const isActive = activeField === name;
             const isNotPlaceholder = (textareaValue && isActive) || transitioned;
+            const isErrorNull = isError === null;
 
             return (
               <li
                 className={`contact-page__info-item ${name} ${
                   isNotPlaceholder ? '' : 'placeholder'
-                } ${value ? 'transitioned' : ''} ${isActive ? 'active' : ''}`}
+                } ${value ? 'transitioned' : ''} ${isActive ? 'active' : ''} ${
+                  isErrorNull ? '' : isError ? 'error' : 'valid'
+                }`}
                 key={name}
                 onClick={changeActiveField(name)}
               >
@@ -120,7 +226,11 @@ const ContactForm = () => {
         )}
       </ul>
 
-      <div className={`contact-page__textarea ${transitioned ? '' : 'placeholder'}`}>
+      <div
+        className={`contact-page__textarea ${
+          isErrorNull ? '' : isError ? 'error' : 'valid'
+        } ${transitioned ? '' : 'placeholder'}`}
+      >
         <IconEl />
         <textarea
           name={activeField}
@@ -133,10 +243,14 @@ const ContactForm = () => {
       </div>
 
       <div className='contact-page__form-contorls'>
-        <Button color='green' isActive={!!textareaValue && next} onClick={goToNext}>
+        <Button color='green' isActive={isNextActive} onClick={goToNext}>
           next
         </Button>
-        <Button color='green' isActive={activeField === 'message' && textareaValue}>
+        <Button
+          color='green'
+          isActive={isSubmitActive}
+          onClick={() => console.log('Submit!')}
+        >
           submit your message
         </Button>
       </div>
@@ -145,3 +259,30 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+
+const addCustomNotification = (custom_options) => {
+  Store.addNotification({
+    ...custom_options,
+    insert: 'top',
+    animationIn: ['animate__animated', 'animate__fadeIn'],
+    animationOut: ['animate__animated', 'animate__fadeOut'],
+    dismiss: {
+      duration: 6000,
+    },
+    container: 'top-center',
+  });
+};
+
+const createNotif = (i, error) => {
+  const { title, message } = error;
+
+  addCustomNotification({
+    title: title,
+    message: message,
+    type: 'danger',
+    container: 'top-left',
+    id: i,
+  });
+};
+
+const remove_notification = (id) => Store.removeNotification(id);
