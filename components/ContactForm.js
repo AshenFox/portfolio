@@ -4,8 +4,6 @@ import Button from '../components/Button';
 import { useEffect, useRef, useState } from 'react';
 import { Store } from 'react-notifications-component';
 
-// Add a success message on submit.
-
 const emailTestRegExp =
   /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g;
 
@@ -20,11 +18,11 @@ const ErrorChecks = {
     message: 'Your message has to contain at least 5 characters.',
     test: (value) => value.length < 5,
   },
-  emptyField: {
-    title: 'Empty field',
-    message: "You can't leave this field empty.",
+  emptyField: (fieldName) => ({
+    title: `Empty ${fieldName} field`,
+    message: `You can't leave ${fieldName} field empty.`,
     test: (value) => !value,
-  },
+  }),
 };
 
 const { invalidEmail, shortMessage, emptyField } = ErrorChecks;
@@ -40,7 +38,7 @@ const ContactForm = () => {
       next: 'email',
       value: '',
       transitioned: false,
-      errorTypes: [emptyField],
+      errorTypes: [emptyField('name')],
       isError: null,
       errorID: 1,
     },
@@ -50,7 +48,7 @@ const ContactForm = () => {
       next: 'message',
       value: '',
       transitioned: false,
-      errorTypes: [emptyField, invalidEmail],
+      errorTypes: [emptyField('email'), invalidEmail],
       isError: null,
       errorID: 2,
     },
@@ -60,14 +58,11 @@ const ContactForm = () => {
       next: null,
       value: '',
       transitioned: false,
-      errorTypes: [emptyField, shortMessage],
+      errorTypes: [emptyField('message'), shortMessage],
       isError: null,
       errorID: 3,
     },
   });
-
-  const fieldsRef = useRef(fields);
-  fieldsRef.current = fields;
 
   const timersRef = useRef(
     Object.keys(fields).reduce(
@@ -105,15 +100,15 @@ const ContactForm = () => {
       const error = errorTypes.find((error) => error.test(value));
 
       if (error) {
-        createNotif(errorID, error);
+        createErrorNotification(errorID, error);
       } else {
-        remove_notification(errorID);
+        removeNotification(errorID);
       }
 
-      setFields((prevFields) => ({
-        ...prevFields,
+      setFields((fieldsPrev) => ({
+        ...fieldsPrev,
         [activeField]: {
-          ...fields[activeField],
+          ...fieldsPrev[activeField],
           isError: !!error,
         },
       }));
@@ -160,27 +155,6 @@ const ContactForm = () => {
     setElHeight(textareaRef.current);
   }, [textareaValue]);
 
-  /* useEffect(() => {
-    clearTimeout(timersRef.current[activeField]);
-    timersRef.current[activeField] = setTimeout(() => {
-      const error = errorTypes.find((error) => error.test(value));
-
-      if (error) {
-        createNotif(errorID, error);
-      } else {
-        remove_notification(errorID);
-      }
-
-      setFields((prevFields) => ({
-        ...prevFields,
-        [activeField]: {
-          ...fields[activeField],
-          isError: !!error,
-        },
-      }));
-    }, 250);
-  }, [textareaValue]); */
-
   const onEnter = (e) => {
     if (next && e.key === 'Enter') {
       e.preventDefault();
@@ -190,13 +164,10 @@ const ContactForm = () => {
   };
 
   const isErrorNull = isError === null;
-  // const isActiveValid = ;
   const isNextActive = !isErrorNull && !isError && next;
   const isSubmitActive = !Object.values(fields).find(
     ({ isError }) => isError || isError === null
   );
-
-  console.log(transitioned);
 
   return (
     <form action='' className='contact-page__form' onSubmit={undefined}>
@@ -249,7 +220,7 @@ const ContactForm = () => {
         <Button
           color='green'
           isActive={isSubmitActive}
-          onClick={() => console.log('Submit!')}
+          onClick={createSubmitNotification}
         >
           submit your message
         </Button>
@@ -264,25 +235,34 @@ const addCustomNotification = (custom_options) => {
   Store.addNotification({
     ...custom_options,
     insert: 'top',
-    animationIn: ['animate__animated', 'animate__fadeIn'],
-    animationOut: ['animate__animated', 'animate__fadeOut'],
+    animationIn: ['notification__fadeIn'],
+    animationOut: ['notification__fadeOut'],
     dismiss: {
-      duration: 6000,
+      duration: 5000,
+      waitForAnimation: true,
     },
     container: 'top-center',
   });
 };
 
-const createNotif = (i, error) => {
+const createErrorNotification = (id, error) => {
   const { title, message } = error;
 
   addCustomNotification({
     title: title,
     message: message,
     type: 'danger',
-    container: 'top-left',
-    id: i,
+    id,
   });
 };
 
-const remove_notification = (id) => Store.removeNotification(id);
+const createSubmitNotification = () => {
+  addCustomNotification({
+    title: 'Successful sumbit',
+    message: 'Your message has been sent.',
+    type: 'success',
+    id: 4,
+  });
+};
+
+const removeNotification = (id) => Store.removeNotification(id);
