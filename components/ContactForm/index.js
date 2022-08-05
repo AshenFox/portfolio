@@ -1,8 +1,10 @@
 import React from 'react';
-import Icons from '../components/icons';
-import Button from '../components/Button';
+import Icons from '../icons';
 import { useEffect, useRef, useState } from 'react';
 import { Store } from 'react-notifications-component';
+import Controls from './Controls';
+import Textarea from './Textarea';
+import Info from './Info';
 
 const emailTestRegExp =
   /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g;
@@ -28,7 +30,6 @@ const ErrorChecks = {
 const { invalidEmail, shortMessage, emptyField } = ErrorChecks;
 
 const ContactForm = () => {
-  const textareaRef = useRef(null);
   const [textareaValue, setTextAreaValue] = useState('');
 
   const [fields, setFields] = useState({
@@ -81,11 +82,6 @@ const ContactForm = () => {
   const { iconName, next, transitioned, isError, errorTypes, errorID, value } =
     fields[activeField];
   const IconEl = Icons[iconName];
-
-  const setElHeight = (el) => {
-    el.style.height = `0px`;
-    el.style.height = `${el.scrollHeight}px`;
-  };
 
   const onChange = (e) => {
     const {
@@ -151,8 +147,6 @@ const ContactForm = () => {
         },
       });
     }
-
-    setElHeight(textareaRef.current);
   }, [textareaValue]);
 
   const onEnter = (e) => {
@@ -170,61 +164,29 @@ const ContactForm = () => {
   );
 
   return (
-    <form action='' className='contact-page__form' onSubmit={undefined}>
-      <ul className='contact-page__info'>
-        {Object.entries(fields).map(
-          ([name, { placeholder, value, iconName, transitioned, isError }]) => {
-            const Icon = Icons[iconName];
-            const isActive = activeField === name;
-            const isNotPlaceholder = (textareaValue && isActive) || transitioned;
-            const isErrorNull = isError === null;
-
-            return (
-              <li
-                className={`contact-page__info-item ${name} ${
-                  isNotPlaceholder ? '' : 'placeholder'
-                } ${value ? 'transitioned' : ''} ${isActive ? 'active' : ''} ${
-                  isErrorNull ? '' : isError ? 'error' : 'valid'
-                }`}
-                key={name}
-                onClick={changeActiveField(name)}
-              >
-                <Icon />
-                <span>{value ? value : placeholder}</span>
-              </li>
-            );
-          }
-        )}
-      </ul>
-
-      <div
-        className={`contact-page__textarea ${
-          isErrorNull ? '' : isError ? 'error' : 'valid'
-        } ${transitioned ? '' : 'placeholder'}`}
+    <form action='' className='form' onSubmit={undefined}>
+      <Info
+        activeField={activeField}
+        fields={fields}
+        textareaValue={textareaValue}
+        onItemClick={changeActiveField}
+      />
+      <Textarea
+        isError={isError}
+        transitioned={transitioned}
+        name={activeField}
+        onChange={onChange}
+        onKeyDown={onEnter}
+        value={textareaValue}
       >
         <IconEl />
-        <textarea
-          name={activeField}
-          rows='1'
-          onChange={onChange}
-          onKeyDown={onEnter}
-          value={textareaValue}
-          ref={textareaRef}
-        ></textarea>
-      </div>
-
-      <div className='contact-page__form-contorls'>
-        <Button color='green' isActive={isNextActive} onClick={goToNext}>
-          next
-        </Button>
-        <Button
-          color='green'
-          isActive={isSubmitActive}
-          onClick={createSubmitNotification}
-        >
-          submit your message
-        </Button>
-      </div>
+      </Textarea>
+      <Controls
+        isNextActive={isNextActive}
+        onNextClick={goToNext}
+        isSubmitActive={isSubmitActive}
+        onSubmitClick={createSubmitNotification}
+      />
     </form>
   );
 };
