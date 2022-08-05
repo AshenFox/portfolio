@@ -1,5 +1,5 @@
 import React from 'react';
-import Icons from '../icons';
+import Icons from '../Icons';
 import { useEffect, useRef, useState } from 'react';
 import { Store } from 'react-notifications-component';
 import Controls from './Controls';

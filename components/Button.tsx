@@ -1,5 +1,5 @@
-import React from 'react';
-import Icons from './icons';
+import React, { FC, MouseEventHandler, ReactNode } from 'react';
+import Icons from './Icons';
 import Link from 'next/link';
 
 // red
@@ -14,14 +14,28 @@ import Link from 'next/link';
 // externallink
 // github
 
-const Button = ({
+interface OwnProps {
+  children?: ReactNode;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  isClicked?: boolean;
+  isBig?: boolean;
+  isActive?: boolean;
+  color?: string;
+  icon?: string;
+  href?: string;
+  title?: string;
+}
+
+type Props = OwnProps;
+
+const Button: FC<Props> = ({
   children,
   onClick = () => {},
-  isClicked,
+  isClicked = false,
   isBig = false,
   isActive = true,
   color = '',
-  icon = false,
+  icon = '',
   href = '',
   title = '',
 }) => {
@@ -33,7 +47,7 @@ const Button = ({
         className={`button ${isClicked && isActive ? 'button__click' : ''} ${color} ${
           isBig ? 'big' : ''
         } ${!children && icon ? 'onlyicon' : ''} ${isActive ? '' : 'inactive'}`}
-        onClick={isActive && onClick}
+        onClick={isActive ? onClick : () => {}}
       >
         <a title={title}>
           <div className='button__left'></div>

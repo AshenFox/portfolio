@@ -1,9 +1,11 @@
-import Section from '../components/Section';
+import React, { FC } from 'react';
+import Section from '../components/DynamicSectionSlider/Section';
 import Button from '../components/Button';
 import FancyLink from '../components/FancyLink';
 import ContactForm from '../components/ContactForm';
+import { AppProps } from 'next/app';
 
-export default function ContactPage(props) {
+const ContactPage: FC<AppProps> = (props) => {
   return (
     <Section classNameStr={'contact-page'} {...props}>
       <div className='page__container'>
@@ -50,4 +52,6 @@ export default function ContactPage(props) {
       </div>
     </Section>
   );
-}
+};
+
+export default ContactPage;

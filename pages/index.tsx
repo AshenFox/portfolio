@@ -1,8 +1,10 @@
+import React, { FC } from 'react';
 import Button from '../components/Button';
 import FancyLink from '../components/FancyLink';
-import Section from '../components/Section';
+import Section from '../components/DynamicSectionSlider/Section';
+import { AppProps } from 'next/app';
 
-export default function About(props) {
+const About: FC<AppProps> = (props) => {
   return (
     <Section classNameStr={'about'} {...props}>
       <main className='about__container'>
@@ -49,4 +51,6 @@ export default function About(props) {
       </footer>
     </Section>
   );
-}
+};
+
+export default About;

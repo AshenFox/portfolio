@@ -1,7 +1,9 @@
+import React, { FC } from 'react';
 import ContactFooter from '../components/ContactFooter';
 import ProjectItem from '../components/ProjectItem';
-import Section from '../components/Section';
+import Section from '../components/DynamicSectionSlider/Section';
 import Tag from '../components/Tag';
+import { AppProps } from 'next/app';
 
 const tagList = [
   'show all',
@@ -24,7 +26,7 @@ const tagList = [
   'game design',
 ];
 
-export default function Portfolio(props) {
+const Portfolio: FC<AppProps> = (props) => {
   return (
     <Section classNameStr={'portfolio'} {...props}>
       <div className='page__container'>
@@ -58,4 +60,6 @@ export default function Portfolio(props) {
       </div>
     </Section>
   );
-}
+};
+
+export default Portfolio;

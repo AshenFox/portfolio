@@ -2,18 +2,17 @@ import 'normalize.css';
 import '../styles/index.scss';
 import 'react-notifications-component/dist/theme.css';
 import Head from '../components/Head';
-import React from 'react';
+import React, { FC } from 'react';
 import DynamicSectionSlider from '../components/DynamicSectionSlider';
 import { ReactNotifications } from 'react-notifications-component';
+import { AppProps } from 'next/app';
 
-function MyApp(props) {
-  return (
-    <>
-      <Head />
-      <ReactNotifications isMobile={true} />
-      <DynamicSectionSlider {...props} />
-    </>
-  );
-}
+const MyApp: FC<AppProps> = (props) => (
+  <>
+    <Head />
+    <ReactNotifications isMobile={true} />
+    <DynamicSectionSlider {...props} />
+  </>
+);
 
 export default MyApp;

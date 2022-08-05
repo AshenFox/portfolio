@@ -2,10 +2,9 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { getDir } from '../helpers/functions';
-import { useStateWithRef } from '../helpers/hooks';
-import Arrows from './Arrows';
-import Menu from './Menu';
+import { getDir } from '../../helpers/functions';
+import { useStateWithRef } from '../../helpers/hooks';
+import Controls from './Controls';
 import PageLoader from './PageLoader';
 
 const SectionSlider = ({ Component, pageProps, setIsLoaded, isLoaderExited }) => {
@@ -154,15 +153,12 @@ const SectionSlider = ({ Component, pageProps, setIsLoaded, isLoaderExited }) =>
 
   return (
     <>
-      <Menu
+      <Controls
         showNavigation={isLoaderExited && showNavigation}
         showMenu={showMenu}
         onBurgerClick={onBurgerClick}
-        onExited={onMenuExited}
-      />
-      <Arrows
-        onExited={onArrowExited}
-        showNavigation={isLoaderExited && showNavigation}
+        onMenuExited={onMenuExited}
+        onArrowExited={onArrowExited}
       />
 
       <div className='section-slider'>

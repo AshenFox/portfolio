@@ -20,7 +20,7 @@ const gradients3 = [
   ['#2c2c2c', '#3f3f3f', '#3f3f3f'],
 ];
 
-const Section = ({ dir, classNameStr, children, setIsLoaded }) => {
+const Section = ({ dir = '', classNameStr = '', children, setIsLoaded = false }) => {
   const granimClassName = 'granim-' + classNameStr;
 
   useEffect(() => {

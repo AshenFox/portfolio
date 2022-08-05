@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const FancyLink = ({ children, href = '', classStr = '', title }) => {
+const FancyLink = ({ children, href = '', classStr = '', title = '' }) => {
   return (
     <Link href={href}>
       <a title={title}>

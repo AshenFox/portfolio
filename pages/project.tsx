@@ -1,8 +1,10 @@
+import React, { FC } from 'react';
 import Button from '../components/Button';
 import ContactFooter from '../components/ContactFooter';
-import Section from '../components/Section';
+import Section from '../components/DynamicSectionSlider/Section';
+import { AppProps } from 'next/app';
 
-export default function Project(props) {
+const Project: FC<AppProps> = (props) => {
   return (
     <Section classNameStr={'project'} {...props}>
       <div className='page__container'>
@@ -133,4 +135,6 @@ export default function Project(props) {
       </div>
     </Section>
   );
-}
+};
+
+export default Project;
