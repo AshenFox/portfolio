@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { FC, MouseEventHandler } from 'react';
 import Icons from '../Icons';
 
-const InfoItem = ({
+interface OwnProps {
+  name: string;
+  activeField: string;
+  textareaValue: string;
+  transitioned: boolean;
+  iconName: string;
+  value: string;
+  isError: boolean;
+  onClick: MouseEventHandler<HTMLElement>;
+  placeholder: string;
+}
+
+type Props = OwnProps;
+
+const InfoItem: FC<Props> = ({
   name,
   activeField,
   textareaValue,
@@ -23,7 +37,7 @@ const InfoItem = ({
         value ? 'transitioned' : ''
       } ${isActive ? 'active' : ''} ${isErrorNull ? '' : isError ? 'error' : 'valid'}`}
       key={name}
-      onClick={onClick(name)}
+      onClick={onClick}
     >
       <Icon />
       <span>{value ? value : placeholder}</span>

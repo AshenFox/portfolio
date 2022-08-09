@@ -209,7 +209,7 @@ const ContactForm: FC<Props> = () => {
         activeField={activeField}
         fields={fields}
         textareaValue={textareaValue}
-        onItemClick={changeActiveField}
+        onItemClickCreator={changeActiveField}
       />
       <Textarea
         isError={isError}
