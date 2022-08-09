@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { FC, ReactNode, useEffect, Dispatch } from 'react';
 import Granim from 'granim';
+import { AppProps } from 'next/app';
 
 const gradients1 = [
   ['#ff9966', '#ff5e62'],
@@ -20,7 +21,16 @@ const gradients3 = [
   ['#2c2c2c', '#3f3f3f', '#3f3f3f'],
 ];
 
-const Section = ({ dir = '', classNameStr = '', children, setIsLoaded = false }) => {
+interface OwnProps {
+  dir: 'left' | 'right';
+  classNameStr: string;
+  children: ReactNode;
+  setIsLoaded: Dispatch<React.SetStateAction<boolean>>;
+}
+
+export type Props = OwnProps & AppProps;
+
+const Section: FC<Props> = ({ children, dir, classNameStr = '', setIsLoaded = null }) => {
   const granimClassName = 'granim-' + classNameStr;
 
   useEffect(() => {
@@ -31,7 +41,7 @@ const Section = ({ dir = '', classNameStr = '', children, setIsLoaded = false })
     const granimInstance = new Granim({
       element: '.' + granimClassName,
       name: 'granim',
-      opacity: [1, 1],
+      /* opacity: [1, 1], */
       states: {
         'default-state': {
           gradients: gradients3,

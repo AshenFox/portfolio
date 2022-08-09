@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const MenuItem = ({ href, title }) => {
+interface OwnProps {
+  href: string;
+  title: string;
+}
+
+type Props = OwnProps;
+
+const MenuItem: FC<Props> = ({ href, title }) => {
   const router = useRouter();
   const { pathname } = router;
 

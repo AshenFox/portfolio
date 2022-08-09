@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const ExternallinkIcon = () => {
+interface OwnProps {}
+
+type Props = OwnProps;
+
+const ExternallinkIcon: FC<Props> = () => {
   return (
     <svg width='25' height='25' viewBox='0 0 25 25' xmlns='http://www.w3.org/2000/svg'>
       <path d='M13.8888 0L18.4625 4.57361L8.74023 14.2958L10.7041 16.2597L20.4263 6.5375L25 11.1111V0H13.8888Z' />

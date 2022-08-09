@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import React, { FC, MouseEventHandler, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getPath } from '../../../helpers/functions';
 import { CSSTransition } from 'react-transition-group';
+import { ExitHandler } from 'react-transition-group/Transition';
 
-const Arrows = ({ onExited, showNavigation }) => {
+interface OwnProps {
+  showNavigation: boolean;
+  onExited: ExitHandler<HTMLDivElement>;
+}
+
+type Props = OwnProps;
+
+const Arrows: FC<Props> = ({ onExited, showNavigation }) => {
   const router = useRouter();
   const { pathname } = router;
 
-  const timeout = 950;
+  const timeout: number = 950;
 
   const [isRightActive, setIsRightActive] = useState(true);
   const [isLeftActive, setIsLeftActive] = useState(true);
@@ -23,13 +30,13 @@ const Arrows = ({ onExited, showNavigation }) => {
   const nextPathname = getPath(pathname, 1);
   const prevPathname = getPath(pathname, -1);
 
-  const onClickRightArrow = (e) => {
+  const onClickRightArrow: MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault();
     setIsRightActive(false);
     router.push(nextPathname);
   };
 
-  const onClickLeftArrow = (e) => {
+  const onClickLeftArrow: MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault();
     setIsLeftActive(false);
     router.push(prevPathname);

@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import Button from '../components/Button';
 import FancyLink from '../components/FancyLink';
-import Section from '../components/DynamicSectionSlider/Section';
-import { AppProps } from 'next/app';
+import Section, { Props } from '../components/DynamicSectionSlider/Section';
 
-const About: FC<AppProps> = (props) => {
+const About: FC<Props> = (props) => {
   return (
     <Section classNameStr={'about'} {...props}>
       <main className='about__container'>

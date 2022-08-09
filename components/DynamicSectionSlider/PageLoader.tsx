@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { AnimationEventHandler, FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-const PageLoader = ({ onAnimationIteration, active }) => {
+interface OwnProps {
+  onAnimationIteration: AnimationEventHandler<HTMLDivElement>;
+  active: boolean;
+}
+
+type Props = OwnProps;
+
+const PageLoader: FC<Props> = ({ onAnimationIteration, active }) => {
   const timeout = 0;
 
   return (

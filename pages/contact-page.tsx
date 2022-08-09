@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
-import Section from '../components/DynamicSectionSlider/Section';
+import Section, { Props } from '../components/DynamicSectionSlider/Section';
 import Button from '../components/Button';
 import FancyLink from '../components/FancyLink';
 import ContactForm from '../components/ContactForm';
-import { AppProps } from 'next/app';
 
-const ContactPage: FC<AppProps> = (props) => {
+const ContactPage: FC<Props> = (props) => {
   return (
     <Section classNameStr={'contact-page'} {...props}>
       <div className='page__container'>

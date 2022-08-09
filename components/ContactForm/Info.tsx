@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { FC, MouseEventHandler } from 'react';
 import InfoItem from './InfoItem';
+import { Fields } from './index';
 
-const Info = ({ activeField, fields, textareaValue, onItemClick }) => {
+interface OwnProps {
+  activeField: string;
+  fields: Fields;
+  textareaValue: string;
+  onItemClick: MouseEventHandler<HTMLElement>;
+}
+
+type Props = OwnProps;
+
+const Info: FC<Props> = ({ activeField, fields, textareaValue, onItemClick }) => {
   return (
     <ul className='form__info'>
       {Object.entries(fields).map(

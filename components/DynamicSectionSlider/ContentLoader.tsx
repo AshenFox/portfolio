@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { EnterHandler, ExitHandler } from 'react-transition-group/Transition';
 
-const ContentLoader = ({ isLoaded, isAppearing, onEntered, onExited }) => {
+interface OwnProps {
+  isLoaded: boolean;
+  isAppearing: boolean;
+  onEntered: EnterHandler<HTMLDivElement>;
+  onExited: ExitHandler<HTMLDivElement>;
+}
+
+type Props = OwnProps;
+
+const ContentLoader: FC<Props> = ({ isLoaded, isAppearing, onEntered, onExited }) => {
   const timeouts = {
     appear: 1000,
     enter: 1000,

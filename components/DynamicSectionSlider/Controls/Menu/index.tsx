@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useRouter } from 'next/router';
 import { CSSTransition } from 'react-transition-group';
 import MenuItem from './MenuItem';
 import { routesOrderList } from '../../../../helpers/values';
 
-const Menu = ({ showMenu }) => {
+interface OwnProps {
+  showMenu: boolean;
+}
+
+type Props = OwnProps;
+
+const Menu: FC<Props> = ({ showMenu }) => {
   const timeout = 450;
 
   return (

@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { FC, MouseEventHandler } from 'react';
 import Menu from './Menu';
 import Arrows from './Arrows';
 import Burger from './Burger';
+import { ExitHandler } from 'react-transition-group/Transition';
 
-const Controls = ({
+interface OwnProps {
+  showNavigation: boolean;
+  showMenu: boolean;
+  onBurgerClick: MouseEventHandler<HTMLDivElement>;
+  onMenuExited: ExitHandler<HTMLDivElement>;
+  onArrowExited: ExitHandler<HTMLDivElement>;
+}
+
+type Props = OwnProps;
+
+const Controls: FC<Props> = ({
   showNavigation,
   showMenu,
   onBurgerClick,
@@ -18,12 +29,7 @@ const Controls = ({
         onClick={onBurgerClick}
         onExited={onMenuExited}
       />
-      <Menu
-        showNavigation={showNavigation}
-        showMenu={showMenu}
-        onBurgerClick={onBurgerClick}
-        onExited={onMenuExited}
-      />
+      <Menu showMenu={showMenu} />
       <Arrows onExited={onArrowExited} showNavigation={showNavigation} />
     </>
   );

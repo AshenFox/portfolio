@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { FC, MouseEventHandler } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { ExitHandler } from 'react-transition-group/Transition';
 
-const Burger = ({ showNavigation, showMenu, onClick, onExited }) => {
+interface OwnProps {
+  showNavigation: boolean;
+  showMenu: boolean;
+  onClick: MouseEventHandler<HTMLDivElement>;
+  onExited: ExitHandler<HTMLDivElement>;
+}
+
+type Props = OwnProps;
+
+const Burger: FC<Props> = ({ showNavigation, showMenu, onClick, onExited }) => {
   const burgerTimeout = 950;
   const burgerToggleTimeouts = {
     appear: 1000,

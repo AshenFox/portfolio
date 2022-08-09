@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 import Link from 'next/link';
 
-const FancyLink = ({ children, href = '', classStr = '', title = '' }) => {
+interface OwnProps {
+  children: ReactNode;
+  href?: string;
+  classStr?: string;
+  title?: string;
+}
+
+type Props = OwnProps;
+
+const FancyLink: FC<Props> = ({ children, href = '', classStr = '', title = '' }) => {
   return (
     <Link href={href}>
       <a title={title}>

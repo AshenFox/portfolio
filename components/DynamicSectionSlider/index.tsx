@@ -1,8 +1,9 @@
 import ContentLoader from './ContentLoader';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import SectionSlider from './SectionSlider';
+import { AppProps } from 'next/app';
 
-const DynamicSectionSlider = (props) => {
+const DynamicSectionSlider: FC<AppProps> = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isAppearing, setIsAppearing] = useState(true);
   const [isExited, setIsExited] = useState(false);
@@ -18,7 +19,6 @@ const DynamicSectionSlider = (props) => {
   return (
     <>
       <SectionSlider {...props} setIsLoaded={setIsLoaded} isLoaderExited={isExited} />
-
       <ContentLoader
         isLoaded={isLoaded}
         isAppearing={isAppearing}

@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {
+  ChangeEventHandler,
+  FC,
+  FormEventHandler,
+  KeyboardEventHandler,
+} from 'react';
 import Icons from '../Icons';
 import { useEffect, useRef, useState } from 'react';
-import { Store } from 'react-notifications-component';
+import { iNotification, Store } from 'react-notifications-component';
 import Controls from './Controls';
 import Textarea from './Textarea';
 import Info from './Info';
@@ -9,30 +14,65 @@ import Info from './Info';
 const emailTestRegExp =
   /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g;
 
+interface ErrorCheck {
+  title: string;
+  message: string;
+  test: (value: string) => boolean;
+}
+
+type ErrorCheckCreator = (value?: string) => ErrorCheck;
+
 const ErrorChecks = {
-  invalidEmail: {
+  invalidEmail: () => ({
     title: 'Ivalid email',
     message: "The email you've inputted is ivalid.",
-    test: (value) => !emailTestRegExp.test(value),
-  },
-  shortMessage: {
+    test: (value: string) => !emailTestRegExp.test(value),
+  }),
+  shortMessage: () => ({
     title: 'Short message',
     message: 'Your message has to contain at least 5 characters.',
-    test: (value) => value.length < 5,
-  },
-  emptyField: (fieldName) => ({
+    test: (value: string) => value.length < 5,
+  }),
+  emptyField: (fieldName = 'placeholder') => ({
     title: `Empty ${fieldName} field`,
     message: `You can't leave ${fieldName} field empty.`,
-    test: (value) => !value,
+    test: (value: string) => !value,
   }),
 };
 
 const { invalidEmail, shortMessage, emptyField } = ErrorChecks;
 
-const ContactForm = () => {
+export interface Field {
+  placeholder: string;
+  iconName: string;
+  next: string;
+  value: string;
+  transitioned: boolean;
+  errorTypes: ErrorCheck[];
+  isError: boolean;
+  errorID: string;
+}
+
+export interface Fields {
+  [key: string]: Field;
+}
+
+interface Timer {
+  timer: ReturnType<typeof setTimeout>;
+}
+
+interface Timers {
+  [key: string]: Timer;
+}
+
+interface OwnProps {}
+
+type Props = OwnProps;
+
+const ContactForm: FC<Props> = () => {
   const [textareaValue, setTextAreaValue] = useState('');
 
-  const [fields, setFields] = useState({
+  const [fields, setFields] = useState<Fields>({
     name: {
       placeholder: 'Fill with your name',
       iconName: 'person',
@@ -41,7 +81,7 @@ const ContactForm = () => {
       transitioned: false,
       errorTypes: [emptyField('name')],
       isError: null,
-      errorID: 1,
+      errorID: '1',
     },
     email: {
       placeholder: 'Your email address',
@@ -49,9 +89,9 @@ const ContactForm = () => {
       next: 'message',
       value: '',
       transitioned: false,
-      errorTypes: [emptyField('email'), invalidEmail],
+      errorTypes: [emptyField('email'), invalidEmail()],
       isError: null,
-      errorID: 2,
+      errorID: '2',
     },
     message: {
       placeholder: 'Write your message :)',
@@ -59,18 +99,18 @@ const ContactForm = () => {
       next: null,
       value: '',
       transitioned: false,
-      errorTypes: [emptyField('message'), shortMessage],
+      errorTypes: [emptyField('message'), shortMessage()],
       isError: null,
-      errorID: 3,
+      errorID: '3',
     },
   });
 
-  const timersRef = useRef(
+  const timersRef = useRef<Timers>(
     Object.keys(fields).reduce(
       (timers, key) => ({
         ...timers,
         [key]: {
-          timer: false,
+          timer: null,
         },
       }),
       {}
@@ -81,9 +121,9 @@ const ContactForm = () => {
 
   const { iconName, next, transitioned, isError, errorTypes, errorID, value } =
     fields[activeField];
-  const IconEl = Icons[iconName];
+  const IconEl: FC = Icons[iconName];
 
-  const onChange = (e) => {
+  const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     const {
       target: { value },
     } = e;
@@ -91,8 +131,8 @@ const ContactForm = () => {
     setTextAreaValue(value);
     setActiveFieldValue(value);
 
-    clearTimeout(timersRef.current[activeField]);
-    timersRef.current[activeField] = setTimeout(() => {
+    clearTimeout(timersRef.current[activeField].timer);
+    timersRef.current[activeField].timer = setTimeout(() => {
       const error = errorTypes.find((error) => error.test(value));
 
       if (error) {
@@ -111,7 +151,7 @@ const ContactForm = () => {
     }, 250);
   };
 
-  const setActiveFieldValue = (value) => {
+  const setActiveFieldValue = (value: string) => {
     setFields({
       ...fields,
       [activeField]: {
@@ -129,7 +169,7 @@ const ContactForm = () => {
     }
   };
 
-  const changeActiveField = (field) => () => {
+  const changeActiveField = (field: string) => () => {
     if (field !== activeField) {
       setActiveFieldValue(textareaValue);
       setActiveField(field);
@@ -149,7 +189,7 @@ const ContactForm = () => {
     }
   }, [textareaValue]);
 
-  const onEnter = (e) => {
+  const onEnter: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     if (next && e.key === 'Enter') {
       e.preventDefault();
 
@@ -158,7 +198,7 @@ const ContactForm = () => {
   };
 
   const isErrorNull = isError === null;
-  const isNextActive = !isErrorNull && !isError && next;
+  const isNextActive = !!(!isErrorNull && !isError && next);
   const isSubmitActive = !Object.values(fields).find(
     ({ isError }) => isError || isError === null
   );
@@ -193,7 +233,7 @@ const ContactForm = () => {
 
 export default ContactForm;
 
-const addCustomNotification = (custom_options) => {
+const addCustomNotification = (custom_options: Partial<iNotification>) => {
   Store.addNotification({
     ...custom_options,
     insert: 'top',
@@ -207,7 +247,7 @@ const addCustomNotification = (custom_options) => {
   });
 };
 
-const createErrorNotification = (id, error) => {
+const createErrorNotification = (id: string, error: ErrorCheck) => {
   const { title, message } = error;
 
   addCustomNotification({
@@ -223,8 +263,8 @@ const createSubmitNotification = () => {
     title: 'Successful sumbit',
     message: 'Your message has been sent.',
     type: 'success',
-    id: 4,
+    id: '4',
   });
 };
 
-const removeNotification = (id) => Store.removeNotification(id);
+const removeNotification = (id: string) => Store.removeNotification(id);

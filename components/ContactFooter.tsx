@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import FancyLink from './FancyLink';
 
-const ContactFooter = () => {
+interface OwnProps {}
+
+type Props = OwnProps;
+
+const ContactFooter: FC<Props> = () => {
   return (
     <footer className='contactfooter'>
       <h4>Let's talk</h4>

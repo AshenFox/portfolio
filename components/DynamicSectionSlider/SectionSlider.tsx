@@ -1,13 +1,39 @@
+import { NextComponentType, NextPageContext } from 'next';
+import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, {
+  AnimationEvent,
+  AnimationEventHandler,
+  FC,
+  MouseEvent,
+  MouseEventHandler,
+} from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { getDir } from '../../helpers/functions';
 import { useStateWithRef } from '../../helpers/hooks';
+import { Direction } from '../../helpers/values';
 import Controls from './Controls';
 import PageLoader from './PageLoader';
 
-const SectionSlider = ({ Component, pageProps, setIsLoaded, isLoaderExited }) => {
+interface ComponentWithPathname {
+  Component: NextComponentType<NextPageContext, any, {}>;
+  pathname: string;
+}
+
+interface OwnProps {
+  setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoaderExited: boolean;
+}
+
+type Props = OwnProps & AppProps;
+
+const SectionSlider: FC<Props> = ({
+  Component,
+  pageProps,
+  setIsLoaded,
+  isLoaderExited,
+}) => {
   const router = useRouter();
   const { pathname } = router;
 
@@ -23,12 +49,13 @@ const SectionSlider = ({ Component, pageProps, setIsLoaded, isLoaderExited }) =>
 
   const [immediateTransition, setImmediateTransition] = useState(false);
 
-  const [dir, setDir] = useState(null);
+  const [dir, setDir] = useState<Direction>(null);
 
   // Received Component
-  const [Received, setReceived, ReceivedRef] = useStateWithRef(null);
+  const [Received, setReceived, ReceivedRef] =
+    useStateWithRef<ComponentWithPathname>(null);
   // Rendered Component
-  const [Rendered, setRendered, RenderedRef] = useStateWithRef({
+  const [Rendered, setRendered, RenderedRef] = useStateWithRef<ComponentWithPathname>({
     pathname,
     Component,
   });
@@ -38,23 +65,23 @@ const SectionSlider = ({ Component, pageProps, setIsLoaded, isLoaderExited }) =>
 
   const pathsList = useRef(new Set([pathname]));
 
-  const timeout = 825;
+  const timeout: number = 825;
 
   // ===================
   // ===================
   // ===================
 
-  const visited = (path) => pathsList.current.has(path);
+  const visited = (path: string) => pathsList.current.has(path);
 
   // ==============================
   // ===== Listners/Callbacks =====
   // ==============================
 
-  const onBurgerClick = () => {
+  const onBurgerClick: MouseEventHandler<HTMLDivElement> = (e) => {
     setShowMenu(!showMenu);
   };
 
-  const onLoaderAnimationIteration = (e) => {
+  const onLoaderAnimationIteration: AnimationEventHandler<HTMLDivElement> = (e) => {
     if (ReceivedRef.current) {
       setShowLoader(false);
 
@@ -100,7 +127,7 @@ const SectionSlider = ({ Component, pageProps, setIsLoaded, isLoaderExited }) =>
   // ===================
 
   useEffect(() => {
-    const loadingStart = (url) => {
+    const loadingStart = (url: string) => {
       const path = url.match(/^[^?]*/g)[0];
       loadingPathname.current = path;
 

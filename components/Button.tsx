@@ -2,17 +2,8 @@ import React, { FC, MouseEventHandler, ReactNode } from 'react';
 import Icons from './Icons';
 import Link from 'next/link';
 
-// red
-// green
-// skyblue
-// blue
-// grey
-
-// googleplus
-// facebook
-// twitter
-// externallink
-// github
+type ColorType = 'red' | 'green' | 'skyblue' | 'blue' | 'green' | 'grey';
+type IconType = 'googleplus' | 'facebook' | 'twitter' | 'externallink' | 'github' | '';
 
 interface OwnProps {
   children?: ReactNode;
@@ -20,8 +11,8 @@ interface OwnProps {
   isClicked?: boolean;
   isBig?: boolean;
   isActive?: boolean;
-  color?: string;
-  icon?: string;
+  color?: ColorType;
+  icon?: IconType;
   href?: string;
   title?: string;
 }
@@ -34,7 +25,7 @@ const Button: FC<Props> = ({
   isClicked = false,
   isBig = false,
   isActive = true,
-  color = '',
+  color = 'red',
   icon = '',
   href = '',
   title = '',

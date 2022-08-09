@@ -1,7 +1,11 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { FC } from 'react';
 
-const ProjectItem = () => {
+interface OwnProps {}
+
+type Props = OwnProps;
+
+const ProjectItem: FC<Props> = () => {
   return (
     <li className='portfolio__project-item'>
       <Link href={'/'}>

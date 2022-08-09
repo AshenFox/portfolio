@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import Button from '../components/Button';
 import ContactFooter from '../components/ContactFooter';
-import Section from '../components/DynamicSectionSlider/Section';
-import { AppProps } from 'next/app';
+import Section, { Props } from '../components/DynamicSectionSlider/Section';
 
-const Project: FC<AppProps> = (props) => {
+const Project: FC<Props> = (props) => {
   return (
     <Section classNameStr={'project'} {...props}>
       <div className='page__container'>

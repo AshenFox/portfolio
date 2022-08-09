@@ -1,3 +1,5 @@
+export type Direction = 'left' | 'right';
+
 export const routesOrderList = [
   { path: '/', title: 'about' },
   { path: '/portfolio', title: 'portfolio' },
