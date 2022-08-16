@@ -12,7 +12,8 @@ import { useState, useEffect, useRef } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { getDir } from '../../helpers/functions';
 import { useStateWithRef } from '../../helpers/hooks';
-import { Direction } from '../../helpers/values';
+import { Direction } from '../../store/reducers/game/sectionSliderInitState';
+
 import Controls from './Controls';
 import PageLoader from './PageLoader';
 

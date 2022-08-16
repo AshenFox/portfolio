@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import gameReducer from './game/gameReducer';
+import sectionSliderReducer from './game/sectionSliderReducer';
 
 export default combineReducers({
-  game: gameReducer,
+  sslider: sectionSliderReducer,
 });

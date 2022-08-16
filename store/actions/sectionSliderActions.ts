@@ -1,5 +1,5 @@
-import { AppActions } from './../types/types';
-import { ThunkActionApp } from './../store';
+import { AppActions } from '../types/types';
+import { ThunkActionApp } from '../store';
 import { RESET_ALL_GAME_FIELDS } from '../types/types';
 
 /* // SAVE_FLASHCARDS_ANSWER

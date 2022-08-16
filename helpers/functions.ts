@@ -1,5 +1,6 @@
 import { lazy } from 'react';
-import { Direction, routesOrderList } from './values';
+import { routesOrderList } from './values';
+import { Direction } from '../store/reducers/game/sectionSliderInitState';
 
 export const getPath = (pathname: string, dir: 1 | -1) => {
   const pathname_i = routesOrderList.findIndex((el) => el.path === pathname);
