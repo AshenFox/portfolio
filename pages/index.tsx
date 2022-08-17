@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Button from '../components/Button';
 import FancyLink from '../components/FancyLink';
-import Section, { Props } from '../components/DynamicSectionSlider/Section';
+import Section, { Props } from '../components/SectionSlider/Section';
 
 const About: FC<Props> = (props) => {
   return (

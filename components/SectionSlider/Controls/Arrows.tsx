@@ -3,18 +3,24 @@ import { useRouter } from 'next/router';
 import { getPath } from '../../../helpers/functions';
 import { CSSTransition } from 'react-transition-group';
 import { ExitHandler } from 'react-transition-group/Transition';
+import { useAppSelector } from '../../../store/hooks';
 
 interface OwnProps {
-  showNavigation: boolean;
   onExited: ExitHandler<HTMLDivElement>;
 }
 
 type Props = OwnProps;
 
-const Arrows: FC<Props> = ({ onExited, showNavigation }) => {
+const Arrows: FC<Props> = ({ onExited }) => {
   const router = useRouter();
   const { pathname } = router;
 
+  const {
+    content_loader: { is_exited },
+    show_navigation,
+  } = useAppSelector(({ sslider }) => sslider);
+
+  const showNavigation = is_exited && show_navigation;
   const timeout: number = 950;
 
   const [isRightActive, setIsRightActive] = useState(true);

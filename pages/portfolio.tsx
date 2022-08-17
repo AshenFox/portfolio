@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import ContactFooter from '../components/ContactFooter';
 import ProjectItem from '../components/ProjectItem';
-import Section, { Props } from '../components/DynamicSectionSlider/Section';
+import Section, { Props } from '../components/SectionSlider/Section';
 import Tag from '../components/Tag';
 
 const tagList = [

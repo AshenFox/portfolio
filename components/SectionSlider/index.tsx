@@ -1,40 +1,35 @@
 import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import React, {
-  AnimationEvent,
-  AnimationEventHandler,
-  FC,
-  MouseEvent,
-  MouseEventHandler,
-} from 'react';
+import React, { AnimationEventHandler, FC } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { getDir } from '../../helpers/functions';
-import { useStateWithRef } from '../../helpers/hooks';
-import { Direction } from '../../store/reducers/game/sectionSliderInitState';
+import { useStateWithRef, useUpdatedRef } from '../../helpers/hooks';
+import { useActions, useAppSelector } from '../../store/hooks';
+import ContentLoader from './ContentLoader';
 
 import Controls from './Controls';
-import PageLoader from './PageLoader';
+import PageLoader from './SectionLoader';
 
 interface ComponentWithPathname {
   Component: NextComponentType<NextPageContext, any, {}>;
   pathname: string;
 }
 
-interface OwnProps {
-  setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoaderExited: boolean;
-}
+interface OwnProps {}
 
 type Props = OwnProps & AppProps;
 
-const SectionSlider: FC<Props> = ({
-  Component,
-  pageProps,
-  setIsLoaded,
-  isLoaderExited,
-}) => {
+const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
+  const { set_show_section_loader, set_show_navigation, set_show_menu, set_direction } =
+    useActions();
+
+  const {
+    content_loader: { is_exited },
+    show_menu,
+    show_section_loader,
+  } = useAppSelector(({ sslider }) => sslider);
+
   const router = useRouter();
   const { pathname } = router;
 
@@ -44,13 +39,8 @@ const SectionSlider: FC<Props> = ({
   // ===== State/Ref/Values =====
   // ============================
 
-  const [showLoader, setShowLoader] = useState(false);
-  const [showNavigation, setShowNavigation] = useState(true);
-  const [showMenu, setShowMenu, showMenuRef] = useStateWithRef(false);
-
+  const showMenuRef = useUpdatedRef(show_menu);
   const [immediateTransition, setImmediateTransition] = useState(false);
-
-  const [dir, setDir] = useState<Direction>(null);
 
   // Received Component
   const [Received, setReceived, ReceivedRef] =
@@ -60,9 +50,6 @@ const SectionSlider: FC<Props> = ({
     pathname,
     Component,
   });
-
-  const isLoaderExitedRef = useRef(isLoaderExited);
-  isLoaderExitedRef.current = isLoaderExited;
 
   const pathsList = useRef(new Set([pathname]));
 
@@ -78,41 +65,37 @@ const SectionSlider: FC<Props> = ({
   // ===== Listners/Callbacks =====
   // ==============================
 
-  const onBurgerClick: MouseEventHandler<HTMLDivElement> = (e) => {
-    setShowMenu(!showMenu);
-  };
-
   const onLoaderAnimationIteration: AnimationEventHandler<HTMLDivElement> = (e) => {
     if (ReceivedRef.current) {
-      setShowLoader(false);
+      set_show_section_loader(false);
 
       setRendered({ ...ReceivedRef.current });
     }
   };
 
   const onArrowExited = () => {
-    if (visited(loadingPathname.current) && Received && !showLoader) {
+    if (visited(loadingPathname.current) && Received && !show_section_loader) {
       setRendered({ ...Received });
     } else {
-      setShowLoader(true);
+      set_show_section_loader(true);
     }
   };
 
-  const onMenuExited = () =>
-    loadingPathname.current !== Rendered.pathname && setShowNavigation(false);
+  const onBurgerExited = () =>
+    loadingPathname.current !== Rendered.pathname && set_show_navigation(false); // ???????!!!!!!!!!!!
 
   const onSectionExited = () => {
     if (
       loadingPathname.current === ReceivedRef.current.pathname &&
       ReceivedRef.current.Component.name === Component.name
     ) {
-      setShowNavigation(true);
+      set_show_navigation(true);
       setImmediateTransition(false);
     } else {
       if (visited(loadingPathname.current)) {
         setImmediateTransition(true);
       } else {
-        setShowLoader(true);
+        set_show_section_loader(true);
       }
     }
 
@@ -133,10 +116,10 @@ const SectionSlider: FC<Props> = ({
       loadingPathname.current = path;
 
       if (showMenuRef.current) {
-        setShowMenu(false);
+        set_show_menu(false);
       } else {
         if (RenderedRef.current.pathname !== path) {
-          setShowNavigation(false);
+          set_show_navigation(false);
         }
       }
     };
@@ -154,8 +137,7 @@ const SectionSlider: FC<Props> = ({
       pathsList.current.add(pathname);
 
       // Find new direction
-      const dir = getDir(pathname, Rendered.pathname);
-      setDir(dir);
+      set_direction(pathname, Rendered.pathname);
 
       // Add a new component
       setReceived({ pathname, Component });
@@ -163,17 +145,17 @@ const SectionSlider: FC<Props> = ({
   }, [Component, Received]);
 
   useEffect(() => {
-    if (Received && immediateTransition && !showLoader) {
+    if (Received && immediateTransition && !show_section_loader) {
       setRendered({ ...Received });
       setImmediateTransition(false);
     }
-  }, [Received, immediateTransition, showLoader]);
+  }, [Received, immediateTransition, show_section_loader]);
 
   useEffect(() => {
     if (Received) {
       setRendered({ ...Received });
     }
-  }, [isLoaderExited]);
+  }, [is_exited]);
 
   // ===================
   // ===================
@@ -181,13 +163,7 @@ const SectionSlider: FC<Props> = ({
 
   return (
     <>
-      <Controls
-        showNavigation={isLoaderExited && showNavigation}
-        showMenu={showMenu}
-        onBurgerClick={onBurgerClick}
-        onMenuExited={onMenuExited}
-        onArrowExited={onArrowExited}
-      />
+      <Controls onBurgerExited={onBurgerExited} onArrowExited={onArrowExited} />
 
       <div className='section-slider'>
         <TransitionGroup component={null}>
@@ -197,12 +173,14 @@ const SectionSlider: FC<Props> = ({
             timeout={timeout}
             onExited={onSectionExited}
           >
-            <Rendered.Component {...pageProps} dir={dir} setIsLoaded={setIsLoaded} />
+            <Rendered.Component {...pageProps} />
           </CSSTransition>
         </TransitionGroup>
       </div>
 
-      <PageLoader onAnimationIteration={onLoaderAnimationIteration} active={showLoader} />
+      <PageLoader onAnimationIteration={onLoaderAnimationIteration} />
+
+      <ContentLoader />
     </>
   );
 };

@@ -26,3 +26,12 @@ export const useStateWithRef = <InitValue extends unknown>(
 
   return [value, setValue, valueRef];
 };
+
+export const useUpdatedRef = <InitValue extends unknown>(
+  initValue: InitValue
+): MutableRefObject<InitValue> => {
+  const valueRef = useRef(initValue);
+  valueRef.current = initValue;
+
+  return valueRef;
+};

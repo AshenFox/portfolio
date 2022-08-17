@@ -1,23 +1,29 @@
 import React, { AnimationEventHandler, FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { useAppSelector } from '../../store/hooks';
 
 interface OwnProps {
   onAnimationIteration: AnimationEventHandler<HTMLDivElement>;
-  active: boolean;
 }
 
 type Props = OwnProps;
 
-const PageLoader: FC<Props> = ({ onAnimationIteration, active }) => {
+const SectionLoader: FC<Props> = ({ onAnimationIteration }) => {
+  const { show_section_loader } = useAppSelector(({ sslider }) => sslider);
+
   const timeout = 0;
 
   return (
     <>
-      <CSSTransition classNames={'page-loader'} timeout={timeout} in={active}>
+      <CSSTransition
+        classNames={'page-loader'}
+        timeout={timeout}
+        in={show_section_loader}
+      >
         <div className='page-loader' onAnimationIteration={onAnimationIteration} />
       </CSSTransition>
     </>
   );
 };
 
-export default PageLoader;
+export default SectionLoader;

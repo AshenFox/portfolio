@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Section, { Props } from '../components/DynamicSectionSlider/Section';
+import Section, { Props } from '../components/SectionSlider/Section';
 import Button from '../components/Button';
 import FancyLink from '../components/FancyLink';
 import ContactForm from '../components/ContactForm';

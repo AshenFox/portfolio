@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useEffect, Dispatch } from 'react';
 import Granim from 'granim';
 import { AppProps } from 'next/app';
+import { useActions, useAppSelector } from '../../store/hooks';
 
 const gradients1 = [
   ['#ff9966', '#ff5e62'],
@@ -22,19 +23,21 @@ const gradients3 = [
 ];
 
 interface OwnProps {
-  dir: 'left' | 'right';
   classNameStr: string;
   children: ReactNode;
-  setIsLoaded: Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type Props = OwnProps & AppProps;
 
-const Section: FC<Props> = ({ children, dir, classNameStr = '', setIsLoaded = null }) => {
+const Section: FC<Props> = ({ children, classNameStr = '' }) => {
+  const { set_content_loaded } = useActions();
+
+  const { dir } = useAppSelector(({ sslider }) => sslider);
+
   const granimClassName = 'granim-' + classNameStr;
 
   useEffect(() => {
-    setIsLoaded(true);
+    set_content_loaded(true);
   }, []);
 
   useEffect(() => {

@@ -1,17 +1,28 @@
 import React, { FC, MouseEventHandler } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { ExitHandler } from 'react-transition-group/Transition';
+import { useActions, useAppSelector } from '../../../store/hooks';
 
 interface OwnProps {
-  showNavigation: boolean;
-  showMenu: boolean;
-  onClick: MouseEventHandler<HTMLDivElement>;
   onExited: ExitHandler<HTMLDivElement>;
 }
 
 type Props = OwnProps;
 
-const Burger: FC<Props> = ({ showNavigation, showMenu, onClick, onExited }) => {
+const Burger: FC<Props> = ({ onExited }) => {
+  const { set_show_section_loader, set_show_navigation, set_show_menu, set_direction } =
+    useActions();
+
+  const {
+    content_loader: { is_exited },
+    show_menu,
+    show_navigation,
+  } = useAppSelector(({ sslider }) => sslider);
+
+  const onClick: MouseEventHandler<HTMLDivElement> = (e) => {
+    set_show_menu(!show_menu);
+  };
+
   const burgerTimeout = 950;
   const burgerToggleTimeouts = {
     appear: 1000,
@@ -23,13 +34,13 @@ const Burger: FC<Props> = ({ showNavigation, showMenu, onClick, onExited }) => {
     <div className='burger__container'>
       <CSSTransition
         classNames={'burger'}
-        in={showNavigation}
+        in={show_navigation && is_exited}
         timeout={burgerTimeout}
         appear
       >
         <CSSTransition
           classNames={'burger__toggle'}
-          in={showMenu}
+          in={show_menu}
           timeout={burgerToggleTimeouts}
           onExited={onExited}
         >

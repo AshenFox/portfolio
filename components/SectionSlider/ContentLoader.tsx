@@ -5,18 +5,21 @@ import { useAppSelector } from '../../store/hooks/index';
 import { useActions } from '../../store/hooks/index';
 
 interface OwnProps {
-  isLoaded: boolean;
-  isAppearing: boolean;
-  onEntered: EnterHandler<HTMLDivElement>;
-  onExited: ExitHandler<HTMLDivElement>;
+  // isLoaded: boolean;
+  // isAppearing: boolean;
+  // onEntered: EnterHandler<HTMLDivElement>;
+  // onExited: ExitHandler<HTMLDivElement>;
 }
 
 type Props = OwnProps;
 
-const ContentLoader: FC<Props> = ({ isLoaded, isAppearing, onEntered, onExited }) => {
+const ContentLoader: FC<Props> = () => {
   const { set_content_loader_isappearing, set_content_loader_isexited } = useActions();
 
-  const sslider = useAppSelector(({ sslider }) => sslider);
+  const {
+    content_loader: { is_appearing },
+    content_loaded,
+  } = useAppSelector(({ sslider }) => sslider);
 
   const timeouts = {
     appear: 1000,
@@ -24,19 +27,19 @@ const ContentLoader: FC<Props> = ({ isLoaded, isAppearing, onEntered, onExited }
     exit: 700,
   };
 
-  /* const onEntered = () => {
-    setIsAppearing(false);
+  const onEntered: EnterHandler<HTMLDivElement> = () => {
+    set_content_loader_isappearing(false);
   };
 
-  const onExited = () => {
-    setIsExited(true);
-  }; */
+  const onExited: ExitHandler<HTMLDivElement> = () => {
+    set_content_loader_isexited(true);
+  };
 
   return (
     <CSSTransition
       classNames={'content-loader'}
       timeout={timeouts}
-      in={isAppearing ? true : !isLoaded}
+      in={is_appearing ? true : !content_loaded}
       appear
       onEntered={onEntered}
       onExited={onExited}
