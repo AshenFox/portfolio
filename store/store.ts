@@ -32,8 +32,8 @@ export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch &
   ThunkDispatch<RootState, null, AppActions>;
-// Customized dispatch and selector hooks for the Tuner App
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+// export const useAppDispatch = () => useDispatch<AppDispatch>();
+// export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export type ThunkActionApp = ThunkAction<void, RootState, unknown, AppActions>;

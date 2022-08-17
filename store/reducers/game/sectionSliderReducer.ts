@@ -20,6 +20,49 @@ const sectionSliderReducer = (
     case SET_CONTENT_LOADED:
       return {
         ...state,
+        content_loaded: payload.value,
+      };
+
+    case SET_CONTENT_LOADER_ISAPPEARING:
+      return {
+        ...state,
+        content_loader: {
+          ...state.content_loader,
+          is_appearing: payload.value,
+        },
+      };
+
+    case SET_CONTENT_LOADER_ISEXITED:
+      return {
+        ...state,
+        content_loader: {
+          ...state.content_loader,
+          is_exited: payload.value,
+        },
+      };
+
+    case SET_SHOW_SECTION_LOADER:
+      return {
+        ...state,
+        show_section_loader: payload.value,
+      };
+
+    case SET_SHOW_NAVIGATION:
+      return {
+        ...state,
+        show_navigation: payload.value,
+      };
+
+    case SET_SHOW_MENU:
+      return {
+        ...state,
+        show_menu: payload.value,
+      };
+
+    case SET_DIRECTION:
+      return {
+        ...state,
+        dir: payload.value,
       };
 
     default:
