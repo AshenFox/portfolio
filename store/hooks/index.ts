@@ -2,6 +2,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { AppDispatch, RootState } from '../store';
 import * as sectionSliderActions from '../actions/sectionSliderActions';
+import * as contactFormActions from '../actions/contactFormActions';
 
 // Customized dispatch and selector hooks for the Tuner App
 export const useAppDispatch = () => useDispatch<AppDispatch>();
@@ -14,6 +15,7 @@ export const useActions = () => {
   return bindActionCreators(
     {
       ...sectionSliderActions,
+      ...contactFormActions,
     },
     dispatch
   );

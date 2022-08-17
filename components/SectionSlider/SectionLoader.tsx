@@ -16,11 +16,11 @@ const SectionLoader: FC<Props> = ({ onAnimationIteration }) => {
   return (
     <>
       <CSSTransition
-        classNames={'page-loader'}
+        classNames={'section-loader'}
         timeout={timeout}
         in={show_section_loader}
       >
-        <div className='page-loader' onAnimationIteration={onAnimationIteration} />
+        <div className='section-loader' onAnimationIteration={onAnimationIteration} />
       </CSSTransition>
     </>
   );

@@ -10,52 +10,8 @@ import { iNotification, Store } from 'react-notifications-component';
 import Controls from './Controls';
 import Textarea from './Textarea';
 import Info from './Info';
-
-const emailTestRegExp =
-  /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g;
-
-interface ErrorCheck {
-  title: string;
-  message: string;
-  test: (value: string) => boolean;
-}
-
-type ErrorCheckCreator = (value?: string) => ErrorCheck;
-
-const ErrorChecks = {
-  invalidEmail: () => ({
-    title: 'Ivalid email',
-    message: "The email you've inputted is ivalid.",
-    test: (value: string) => !emailTestRegExp.test(value),
-  }),
-  shortMessage: () => ({
-    title: 'Short message',
-    message: 'Your message has to contain at least 5 characters.',
-    test: (value: string) => value.length < 5,
-  }),
-  emptyField: (fieldName = 'placeholder') => ({
-    title: `Empty ${fieldName} field`,
-    message: `You can't leave ${fieldName} field empty.`,
-    test: (value: string) => !value,
-  }),
-};
-
-const { invalidEmail, shortMessage, emptyField } = ErrorChecks;
-
-export interface Field {
-  placeholder: string;
-  iconName: string;
-  next: string;
-  value: string;
-  transitioned: boolean;
-  errorTypes: ErrorCheck[];
-  isError: boolean;
-  errorID: string;
-}
-
-export interface Fields {
-  [key: string]: Field;
-}
+import { useActions, useAppSelector } from '../../store/hooks';
+import { Error, FieldName } from '../../store/reducers/form/contactFormInitState';
 
 interface Timer {
   timer: ReturnType<typeof setTimeout>;
@@ -70,40 +26,15 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const ContactForm: FC<Props> = () => {
-  const [textareaValue, setTextAreaValue] = useState('');
+  const {
+    set_textarea_value,
+    set_active_field,
+    set_active_field_value,
+    set_active_field_transitioned,
+    set_active_field_iserror,
+  } = useActions();
 
-  const [fields, setFields] = useState<Fields>({
-    name: {
-      placeholder: 'Fill with your name',
-      iconName: 'person',
-      next: 'email',
-      value: '',
-      transitioned: false,
-      errorTypes: [emptyField('name')],
-      isError: null,
-      errorID: '1',
-    },
-    email: {
-      placeholder: 'Your email address',
-      iconName: 'mail',
-      next: 'message',
-      value: '',
-      transitioned: false,
-      errorTypes: [emptyField('email'), invalidEmail()],
-      isError: null,
-      errorID: '2',
-    },
-    message: {
-      placeholder: 'Write your message :)',
-      iconName: 'pentosquare',
-      next: null,
-      value: '',
-      transitioned: false,
-      errorTypes: [emptyField('message'), shortMessage()],
-      isError: null,
-      errorID: '3',
-    },
-  });
+  const { fields, textarea_value, active_field } = useAppSelector(({ form }) => form);
 
   const timersRef = useRef<Timers>(
     Object.keys(fields).reduce(
@@ -117,23 +48,21 @@ const ContactForm: FC<Props> = () => {
     )
   );
 
-  const [activeField, setActiveField] = useState('name');
-
-  const { iconName, next, transitioned, isError, errorTypes, errorID, value } =
-    fields[activeField];
-  const IconEl: FC = Icons[iconName];
+  const { icon_name, next, transitioned, is_error, errors, errorID, value } =
+    fields[active_field];
+  const IconEl: FC = Icons[icon_name];
 
   const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     const {
       target: { value },
     } = e;
 
-    setTextAreaValue(value);
-    setActiveFieldValue(value);
+    set_textarea_value(value);
+    set_active_field_value(value);
 
-    clearTimeout(timersRef.current[activeField].timer);
-    timersRef.current[activeField].timer = setTimeout(() => {
-      const error = errorTypes.find((error) => error.test(value));
+    clearTimeout(timersRef.current[active_field].timer);
+    timersRef.current[active_field].timer = setTimeout(() => {
+      const error: Error = errors.find((error: Error) => error.test(value));
 
       if (error) {
         createErrorNotification(errorID, error);
@@ -141,53 +70,31 @@ const ContactForm: FC<Props> = () => {
         removeNotification(errorID);
       }
 
-      setFields((fieldsPrev) => ({
-        ...fieldsPrev,
-        [activeField]: {
-          ...fieldsPrev[activeField],
-          isError: !!error,
-        },
-      }));
+      set_active_field_iserror(!!error); // Add thunk to assecc a previous state
     }, 250);
-  };
-
-  const setActiveFieldValue = (value: string) => {
-    setFields({
-      ...fields,
-      [activeField]: {
-        ...fields[activeField],
-        value,
-      },
-    });
   };
 
   const goToNext = () => {
     if (next) {
-      setActiveFieldValue(textareaValue);
-      setActiveField(next);
-      setTextAreaValue('');
+      set_active_field_value(textarea_value);
+      set_active_field(next);
+      set_textarea_value('');
     }
   };
 
-  const changeActiveField = (field: string) => () => {
-    if (field !== activeField) {
-      setActiveFieldValue(textareaValue);
-      setActiveField(field);
-      setTextAreaValue(fields[field].value);
+  const changeActiveField = (field: FieldName) => () => {
+    if (field !== active_field) {
+      set_active_field_value(textarea_value);
+      set_active_field(field);
+      set_textarea_value(fields[field].value);
     }
   };
 
   useEffect(() => {
-    if (textareaValue && !transitioned) {
-      setFields({
-        ...fields,
-        [activeField]: {
-          ...fields[activeField],
-          transitioned: true,
-        },
-      });
+    if (textarea_value && !transitioned) {
+      set_active_field_transitioned(true);
     }
-  }, [textareaValue]);
+  }, [textarea_value]);
 
   const onEnter: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     if (next && e.key === 'Enter') {
@@ -197,27 +104,27 @@ const ContactForm: FC<Props> = () => {
     }
   };
 
-  const isErrorNull = isError === null;
-  const isNextActive = !!(!isErrorNull && !isError && next);
+  const isErrorNull = is_error === null;
+  const isNextActive = !!(!isErrorNull && !is_error && next);
   const isSubmitActive = !Object.values(fields).find(
-    ({ isError }) => isError || isError === null
+    ({ is_error }) => is_error || is_error === null
   );
 
   return (
     <form action='' className='form' onSubmit={undefined}>
       <Info
-        activeField={activeField}
+        activeField={active_field}
         fields={fields}
-        textareaValue={textareaValue}
+        textareaValue={textarea_value}
         onItemClickCreator={changeActiveField}
       />
       <Textarea
-        isError={isError}
+        isError={is_error}
         transitioned={transitioned}
-        name={activeField}
+        name={active_field}
         onChange={onChange}
         onKeyDown={onEnter}
-        value={textareaValue}
+        value={textarea_value}
       >
         <IconEl />
       </Textarea>
@@ -247,7 +154,7 @@ const addCustomNotification = (custom_options: Partial<iNotification>) => {
   });
 };
 
-const createErrorNotification = (id: string, error: ErrorCheck) => {
+const createErrorNotification = (id: string, error: Error) => {
   const { title, message } = error;
 
   addCustomNotification({
@@ -268,3 +175,13 @@ const createSubmitNotification = () => {
 };
 
 const removeNotification = (id: string) => Store.removeNotification(id);
+
+/* 
+STATE
+
+fields
+active_field
+textarea_value
+
+
+*/

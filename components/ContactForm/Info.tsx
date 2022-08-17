@@ -1,6 +1,6 @@
 import React, { FC, MouseEventHandler } from 'react';
+import { Fields } from '../../store/reducers/form/contactFormInitState';
 import InfoItem from './InfoItem';
-import { Fields } from './index';
 
 interface OwnProps {
   activeField: string;
@@ -15,7 +15,7 @@ const Info: FC<Props> = ({ activeField, fields, textareaValue, onItemClickCreato
   return (
     <ul className='form__info'>
       {Object.entries(fields).map(
-        ([name, { placeholder, value, iconName, transitioned, isError }]) => {
+        ([name, { placeholder, value, icon_name, transitioned, is_error }]) => {
           const onClick = onItemClickCreator(name);
 
           return (
@@ -25,9 +25,9 @@ const Info: FC<Props> = ({ activeField, fields, textareaValue, onItemClickCreato
               activeField={activeField}
               textareaValue={textareaValue}
               transitioned={transitioned}
-              iconName={iconName}
+              iconName={icon_name}
               value={value}
-              isError={isError}
+              isError={is_error}
               onClick={onClick}
               placeholder={placeholder}
             />

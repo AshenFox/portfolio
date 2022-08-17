@@ -1,5 +1,5 @@
 import { routesOrderList } from '../../helpers/values';
-import { Direction } from '../reducers/game/sectionSliderInitState';
+import { Direction } from '../reducers/sslider/sectionSliderInitState';
 
 export const getDir = (pathname_to: string, pathname_from: string) => {
   const pathname_to_i = routesOrderList.findIndex((el) => el.path === pathname_to);
