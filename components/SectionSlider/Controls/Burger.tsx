@@ -10,8 +10,7 @@ interface OwnProps {
 type Props = OwnProps;
 
 const Burger: FC<Props> = ({ onExited }) => {
-  const { set_show_section_loader, set_show_navigation, set_show_menu, set_direction } =
-    useActions();
+  const { set_show_menu } = useActions();
 
   const {
     content_loader: { is_exited },
