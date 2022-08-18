@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 
 // type InitValueStateWithRef = any;
 type UseStateWithRef = (
-  initValue: any
+  initValue: unknown
 ) => [any, Dispatch<React.SetStateAction<any>>, MutableRefObject<any>];
 
 export const useStateWithRef = <InitValue extends unknown>(

@@ -5,6 +5,8 @@ import {
   SET_ACTIVE_FIELD_VALUE,
   SET_ACTIVE_FIELD_TRANSITIONED,
   SET_ACTIVE_FIELD_ISERROR,
+  GO_TO_NEXT,
+  CHANGE_ACTIVE_FIELD,
 } from '../../types/types';
 import initialState, { ContactFormState } from './contactFormInitState';
 
@@ -61,6 +63,34 @@ const contactFormReducer = (
             is_error: payload.value,
           },
         },
+      };
+
+    case GO_TO_NEXT:
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          [state.active_field]: {
+            ...state.fields[state.active_field],
+            value: state.textarea_value,
+          },
+        },
+        active_field: state.fields[state.active_field].next,
+        textarea_value: '',
+      };
+
+    case CHANGE_ACTIVE_FIELD:
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          [state.active_field]: {
+            ...state.fields[state.active_field],
+            value: state.textarea_value,
+          },
+        },
+        active_field: payload.field,
+        textarea_value: state.fields[payload.field].value,
       };
 
     default:

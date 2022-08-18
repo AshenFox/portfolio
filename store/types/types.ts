@@ -74,6 +74,8 @@ export const SET_ACTIVE_FIELD_VALUE = 'SET_ACTIVE_FIELD_VALUE';
 export const SET_ACTIVE_FIELD = 'SET_ACTIVE_FIELD';
 export const SET_ACTIVE_FIELD_ISERROR = 'SET_ACTIVE_FIELD_ISERROR';
 export const SET_ACTIVE_FIELD_TRANSITIONED = 'SET_ACTIVE_FIELD_TRANSITIONED';
+export const GO_TO_NEXT = 'GO_TO_NEXT';
+export const CHANGE_ACTIVE_FIELD = 'CHANGE_ACTIVE_FIELD';
 
 export interface SetTextareaValueAction {
   type: typeof SET_TEXTAREA_VALUE;
@@ -110,12 +112,26 @@ export interface SetActiveFieldTransitionedAction {
   };
 }
 
+export interface GoToNextAction {
+  type: typeof GO_TO_NEXT;
+  payload?: {};
+}
+
+export interface ChangeActiveFieldAction {
+  type: typeof CHANGE_ACTIVE_FIELD;
+  payload: {
+    field: FieldName;
+  };
+}
+
 export type ContactFormActions =
   | SetTextareaValueAction
   | SetFormFieldValueAction
   | SetActiveFieldAction
   | SetActiveFieldIserrorAction
-  | SetActiveFieldTransitionedAction;
+  | SetActiveFieldTransitionedAction
+  | GoToNextAction
+  | ChangeActiveFieldAction;
 
 // ===========
 

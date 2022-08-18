@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { routesOrderList } from './values';
 import { Direction } from '../store/reducers/sslider/sectionSliderInitState';
+import { iNotification, Store } from 'react-notifications-component';
 
 export const getPath = (pathname: string, dir: 1 | -1) => {
   const pathname_i = routesOrderList.findIndex((el) => el.path === pathname);
@@ -9,22 +10,18 @@ export const getPath = (pathname: string, dir: 1 | -1) => {
   return routesOrderList.find((el, i) => i === new_pathname_i).path;
 };
 
-export const getDir = (pathname_to: string, pathname_from: string) => {
-  const pathname_to_i = routesOrderList.findIndex((el) => el.path === pathname_to);
-  const pathname_from_i = routesOrderList.findIndex((el) => el.path === pathname_from);
-
-  const diff = pathname_to_i - pathname_from_i;
-
-  let dir: Direction = null;
-
-  if (diff < 0) dir = 'left';
-  if (diff > 0) dir = 'right';
-
-  return dir;
+export const addCustomNotification = (custom_options: Partial<iNotification>) => {
+  Store.addNotification({
+    ...custom_options,
+    insert: 'top',
+    animationIn: ['notification__fadeIn'],
+    animationOut: ['notification__fadeOut'],
+    dismiss: {
+      duration: 5000,
+      waitForAnimation: true,
+    },
+    container: 'top-center',
+  });
 };
 
-/* export const lazyWithPreload = (factory) => {
-  const Component = lazy(factory);
-  Component.preload = factory;
-  return Component;
-}; */
+export const removeNotification = (id: string) => Store.removeNotification(id);

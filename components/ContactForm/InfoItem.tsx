@@ -2,7 +2,7 @@ import React, { FC, MouseEventHandler } from 'react';
 import Icons from '../Icons';
 
 interface OwnProps {
-  name: string;
+  field: string;
   activeField: string;
   textareaValue: string;
   transitioned: boolean;
@@ -16,7 +16,7 @@ interface OwnProps {
 type Props = OwnProps;
 
 const InfoItem: FC<Props> = ({
-  name,
+  field,
   activeField,
   textareaValue,
   transitioned,
@@ -27,16 +27,16 @@ const InfoItem: FC<Props> = ({
   placeholder,
 }) => {
   const Icon = Icons[iconName];
-  const isActive = activeField === name;
+  const isActive = activeField === field;
   const isNotPlaceholder = (textareaValue && isActive) || transitioned;
   const isErrorNull = isError === null;
 
   return (
     <li
-      className={`form__info-item ${name} ${isNotPlaceholder ? '' : 'placeholder'} ${
+      className={`form__info-item ${field} ${isNotPlaceholder ? '' : 'placeholder'} ${
         value ? 'transitioned' : ''
       } ${isActive ? 'active' : ''} ${isErrorNull ? '' : isError ? 'error' : 'valid'}`}
-      key={name}
+      key={field}
       onClick={onClick}
     >
       <Icon />
