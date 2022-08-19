@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import Button from '../components/Button';
 import ContactFooter from '../components/ContactFooter';
+import ImageSlider from '../components/ImageSlider';
 import Section, { Props } from '../components/SectionSlider/Section';
 
 const Project: FC<Props> = (props) => {
@@ -53,17 +54,7 @@ const Project: FC<Props> = (props) => {
         </header>
 
         <main className='project__main'>
-          <div className='project__slider'>
-            <div className='project__slider-bar'>
-              <h2>flashcards</h2>
-            </div>
-            <img src='/6.jpg' alt='' className='project__slider-item' />
-          </div>
-          <div className='project__slider-controls'>
-            <div className='project__slider-controls-item active'></div>
-            <div className='project__slider-controls-item '></div>
-            <div className='project__slider-controls-item '></div>
-          </div>
+          <ImageSlider />
 
           <section className='project__section'>
             <h2 className='project__section-header'>About this project</h2>
