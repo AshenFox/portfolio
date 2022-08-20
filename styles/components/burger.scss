@@ -15,7 +15,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    cursor: pointer;
+    // cursor: pointer;
     display: none;
   }
 
@@ -31,7 +31,8 @@
 
   &-exit,
   &-enter,
-  &-appear {
+  &-appear,
+  &-exit-done {
     cursor: auto;
     pointer-events: none;
 
