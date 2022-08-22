@@ -1,59 +1,71 @@
-import React, { MouseEventHandler, useEffect, useState } from 'react';
+import React, { FC, MouseEventHandler, useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-const Arrows = () => {
-  const timeout: number = 950;
+interface OwnProps {
+  showArrows: boolean;
+  setShowArrows: React.Dispatch<React.SetStateAction<boolean>>;
+  transition: boolean;
+  setTransition: React.Dispatch<React.SetStateAction<boolean>>;
+  dir: 'left' | 'right';
+  setDir: React.Dispatch<React.SetStateAction<'left' | 'right'>>;
+  goToPrev: () => void;
+  goToNext: () => void;
+}
 
-  const [value, setValue] = useState(true);
+type Props = OwnProps;
+
+const Arrows: FC<Props> = ({
+  showArrows,
+  setShowArrows,
+  transition,
+  setTransition,
+  dir,
+  setDir,
+  goToPrev,
+  goToNext,
+}) => {
+  const timeout: number = 950;
 
   const [isRightActive, setIsRightActive] = useState(true);
   const [isLeftActive, setIsLeftActive] = useState(true);
 
-  const onArrowClick = () => setValue(false);
-
   useEffect(() => {
-    if (value) {
+    if (showArrows) {
       setIsRightActive(true);
       setIsLeftActive(true);
-    } else {
-      setTimeout(() => {
-        setValue(true);
-      }, 1500);
     }
-  }, [value]);
+  }, [showArrows]);
 
-  const onClickRightArrow: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const onClickArrowCreator: (
+    dir: 'left' | 'right'
+  ) => MouseEventHandler<HTMLButtonElement> = (dir) => (e) => {
     e.preventDefault();
-    setIsRightActive(false);
 
-    // router.push(nextPathname);
-    setValue(false);
+    if (transition) return;
 
-    console.log('Click right!');
+    setTransition(true);
+    setShowArrows(false);
+    // setDir(dir);
+
+    if (dir === 'left') setIsLeftActive(false);
+    if (dir === 'right') setIsRightActive(false);
+
+    console.log(`Click ${dir}!`);
   };
 
-  const onClickLeftArrow: MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault();
-    setIsLeftActive(false);
-
-    // router.push(prevPathname);
-    setValue(false);
-
-    console.log('Click left!');
+  const onExited = () => {
+    if (dir === 'left') goToPrev();
+    if (dir === 'right') goToNext();
   };
 
   return (
     <>
-      <button className='image-slider__test' onClick={onArrowClick}>
-        Click
-      </button>
-
       <div className='image-slider__arrow image-slider__arrow--left'>
         <CSSTransition
           classNames={'image-slider__arrow-container'}
-          in={value}
+          in={showArrows}
           timeout={timeout}
-          onExited={() => {}}
+          onExited={onExited}
           appear
         >
           <div className='image-slider__arrow-container'>
@@ -62,7 +74,10 @@ const Arrows = () => {
               in={isLeftActive}
               timeout={timeout}
             >
-              <button className='image-slider__arrow-button' onClick={onClickLeftArrow} />
+              <button
+                className='image-slider__arrow-button'
+                onClick={onClickArrowCreator('left')}
+              />
             </CSSTransition>
             <div className='image-slider__arrow-icon' />
           </div>
@@ -74,9 +89,9 @@ const Arrows = () => {
       <div className='image-slider__arrow image-slider__arrow--right'>
         <CSSTransition
           classNames={'image-slider__arrow-container'}
-          in={value}
+          in={showArrows}
           timeout={timeout}
-          onExited={() => {}}
+          /* onExited={() => {}} */
           appear
         >
           <div className='image-slider__arrow-container'>
@@ -87,7 +102,7 @@ const Arrows = () => {
             >
               <button
                 className='image-slider__arrow-button'
-                onClick={onClickRightArrow}
+                onClick={onClickArrowCreator('right')}
               />
             </CSSTransition>
             <div className='image-slider__arrow-icon' />
