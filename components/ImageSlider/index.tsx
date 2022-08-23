@@ -1,5 +1,6 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, Touch, TouchEventHandler, useEffect, useRef, useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { useStateWithRef } from '../../helpers/hooks';
 import Arrows from './Arrows';
 import Controls from './Controls';
 import SliderItem from './SliderItem';
@@ -32,9 +33,9 @@ const ImageSlider: FC<Props> = () => {
   ]);
 
   const [activeID, setActiveID] = useState(0);
-  const [nextIDArr, setNextIDArr] = useState<{ dir: 'right' | 'left'; id: number }[]>([]);
-  const nextIDArrRef = useRef(nextIDArr);
-  nextIDArrRef.current = nextIDArr;
+  const [nextIDArr, setNextIDArr, nextIDArrRef] = useStateWithRef<
+    { dir: 'right' | 'left'; id: number; isArrows?: boolean }[]
+  >([]);
 
   const [dir, setDir] = useState({ dir: null });
   const [transition, setTransition] = useState(false);
@@ -42,26 +43,27 @@ const ImageSlider: FC<Props> = () => {
 
   const data = images[activeID];
 
-  /* const goToNext = () => setActiveID((activeID + 1) % images.length);
+  const frameEl = useRef(null);
 
-  const goToPrev = () => setActiveID((activeID - 1 + images.length) % images.length);
+  const goToNext = (dir: 'right' | 'left', isArrows = false) => {
+    console.log({ dir, isArrows });
+    const next = {
+      id: null,
+      dir,
+      isArrows,
+    };
+
+    const arr = nextIDArr;
+    const calcID = arr.length ? arr[arr.length - 1].id : activeID;
+
+    if (dir === 'right') next.id = (calcID + 1) % images.length;
+    if (dir === 'left') next.id = (calcID - 1 + images.length) % images.length;
+
+    setNextIDArr([...nextIDArr, next]);
+  };
 
   const goTo = (id: number) => {
-    if (id !== activeID) {
-      const dif = activeID - id;
-      dif < 0 ? setDir('right') : setDir('left');
-
-      setTransition(true);
-
-      setTimeout(() => {
-        setActiveID(id);
-      }, 0);
-
-      // setActiveID(id);
-    }
-  }; */
-
-  const addIdToNextIDArr = (id: number) => {
+    console.log('fire', { id });
     const arr = nextIDArr;
     const last = arr[0];
 
@@ -74,14 +76,10 @@ const ImageSlider: FC<Props> = () => {
   };
 
   const onControlItemClickCreator = (id: number) => () => {
-    addIdToNextIDArr(id);
+    goTo(id);
   };
 
-  const onExited = () => {
-    setShowArrows(true);
-
-    // console.log(nextIDArr);
-
+  const onImageExited = () => {
     if (nextIDArrRef.current.length) {
       setTransition(true);
 
@@ -90,17 +88,17 @@ const ImageSlider: FC<Props> = () => {
       setDir({ dir });
     } else {
       setTransition(false);
+      setShowArrows(true);
     }
 
-    console.log('onExited', { nextIDArr, dir, transition });
+    (document.activeElement as HTMLElement).blur();
   };
 
-  /* useEffect(() => {
-    console.log(dir);
-  }, [dir]); */
-
   useEffect(() => {
-    if (nextIDArr.length === 1 && !transition) {
+    console.log('Fire!');
+    const last = nextIDArr[0];
+
+    if ((nextIDArr.length === 1 && !transition) || (last && last.isArrows)) {
       setTransition(true);
 
       const { dir } = nextIDArr[0];
@@ -117,118 +115,39 @@ const ImageSlider: FC<Props> = () => {
 
       setTimeout(() => {
         setActiveID(id);
-      }, 100);
+      }, 50);
     }
   }, [dir]);
 
-  const timeout = 825;
+  const [touchActive, setTouchActive] = useState<Touch>(null);
 
-  console.log('render', { nextIDArr, dir, transition });
+  const onTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
+    if (!touchActive) {
+      const touchArr = Array.from(e.changedTouches);
 
-  return (
-    <>
-      <div className='image-slider'>
-        <div className='image-slider__bar'>
-          <h2>flashcards</h2>
-        </div>
-        <div className='image-slider__frame'>
-          <TransitionGroup component={null}>
-            <CSSTransition
-              key={activeID}
-              classNames='image-slider__item'
-              timeout={timeout}
-              onExited={onExited}
-            >
-              <SliderItem data={{ id: activeID, ...data }} dir={dir.dir} />
-            </CSSTransition>
-          </TransitionGroup>
-          {/* <Arrows
-            showArrows={showArrows}
-            setShowArrows={setShowArrows}
-            transition={transition}
-            setTransition={setTransition}
-            dir={dir}
-            setDir={setDir}
-            goToNext={goToNext}
-            goToPrev={goToPrev}
-          /> */}
-        </div>
-      </div>
-      <Controls
-        images={images}
-        activeID={activeID}
-        onClickCreator={onControlItemClickCreator}
-      />
-    </>
-  );
-};
-
-export default ImageSlider;
-
-/* {images.map((data) => (
-              <SliderItem data={data} />
-            ))} */
-
-/* 
-            
-            const ImageSlider: FC<Props> = () => {
-  const [images, setImages] = useState<Images>([
-    {
-      path: '/6.jpg',
-      alt: 'image',
-    },
-    {
-      path: '/5.jpg',
-      alt: 'image',
-    },
-    {
-      path: '/4.jpg',
-      alt: 'image',
-    },
-  ]);
-
-  const [activeID, setActiveID] = useState(0);
-  const [nextIDArr, setNextIDArr] = useState([]);
-
-  const [dir, setDir] = useState(null);
-  const [transition, setTransition] = useState(false);
-  const [showArrows, setShowArrows] = useState(true);
-
-  // const data = images.find((el) => el.id === activeID);
-  const data = images[activeID];
-  // const { path, alt } = data;
-
-  const goToNext = () => setActiveID((activeID + 1) % images.length);
-
-  const goToPrev = () => setActiveID((activeID - 1 + images.length) % images.length);
-
-  const goTo = (id: number) => {
-    if (id !== activeID) {
-      const dif = activeID - id;
-      dif < 0 ? setDir('right') : setDir('left');
-
-      setTransition(true);
-
-      setTimeout(() => {
-        setActiveID(id);
-      }, 0);
+      setTouchActive(touchArr[0]);
     }
   };
 
-  const onControlItemClickCreator = (id: number) => () => {
-    if (transition) return;
+  const onTouchEnd: TouchEventHandler<HTMLDivElement> = (e) => {
+    if (touchActive) {
+      const touchArr = Array.from(e.changedTouches);
+      const touch = touchArr.find((touch) => touch.identifier === touchActive.identifier);
 
-    goTo(id);
+      if (touch) {
+        const dif = touchActive.clientX - touch.clientX;
+
+        if (Math.abs(dif) >= 75) {
+          e.preventDefault();
+
+          if (dif < 0) goToNext('left');
+          if (dif > 0) goToNext('right');
+        }
+      }
+    }
+
+    setTouchActive(null);
   };
-
-  const onExited = () => {
-    setShowArrows(true);
-    setTransition(false);
-  };
-
-  useEffect(() => {
-
-  }, [nextIDArr])
 
   const timeout = 825;
 
@@ -238,15 +157,20 @@ export default ImageSlider;
         <div className='image-slider__bar'>
           <h2>flashcards</h2>
         </div>
-        <div className='image-slider__frame'>
+        <div
+          className='image-slider__frame'
+          ref={frameEl}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
           <TransitionGroup component={null}>
             <CSSTransition
               key={activeID}
               classNames='image-slider__item'
               timeout={timeout}
-              onExited={onExited}
+              onExited={onImageExited}
             >
-              <SliderItem data={{ id: activeID, ...data }} dir={dir} />
+              <SliderItem data={{ id: activeID, ...data }} dir={dir.dir} />
             </CSSTransition>
           </TransitionGroup>
           <Arrows
@@ -254,10 +178,7 @@ export default ImageSlider;
             setShowArrows={setShowArrows}
             transition={transition}
             setTransition={setTransition}
-            dir={dir}
-            setDir={setDir}
             goToNext={goToNext}
-            goToPrev={goToPrev}
           />
         </div>
       </div>
@@ -271,5 +192,3 @@ export default ImageSlider;
 };
 
 export default ImageSlider;
-            
-            */

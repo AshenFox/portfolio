@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useEffect, useState } from 'react';
+import React, { FC, MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 interface OwnProps {
@@ -6,10 +6,7 @@ interface OwnProps {
   setShowArrows: React.Dispatch<React.SetStateAction<boolean>>;
   transition: boolean;
   setTransition: React.Dispatch<React.SetStateAction<boolean>>;
-  dir: 'left' | 'right';
-  setDir: React.Dispatch<React.SetStateAction<'left' | 'right'>>;
-  goToPrev: () => void;
-  goToNext: () => void;
+  goToNext: (dir: 'left' | 'right', isArrows?: boolean) => void;
 }
 
 type Props = OwnProps;
@@ -19,9 +16,6 @@ const Arrows: FC<Props> = ({
   setShowArrows,
   transition,
   setTransition,
-  dir,
-  setDir,
-  goToPrev,
   goToNext,
 }) => {
   const timeout: number = 950;
@@ -29,10 +23,15 @@ const Arrows: FC<Props> = ({
   const [isRightActive, setIsRightActive] = useState(true);
   const [isLeftActive, setIsLeftActive] = useState(true);
 
+  const [isLeftExited, setIsLeftExited] = useState(true);
+  const [isRightExited, setIsRightExited] = useState(true);
+
+  const isDuringTransitionRef = useRef(false);
+
   useEffect(() => {
     if (showArrows) {
-      setIsRightActive(true);
       setIsLeftActive(true);
+      setIsRightActive(true);
     }
   }, [showArrows]);
 
@@ -41,21 +40,38 @@ const Arrows: FC<Props> = ({
   ) => MouseEventHandler<HTMLButtonElement> = (dir) => (e) => {
     e.preventDefault();
 
-    if (transition) return;
-
-    setTransition(true);
     setShowArrows(false);
-    // setDir(dir);
 
-    if (dir === 'left') setIsLeftActive(false);
-    if (dir === 'right') setIsRightActive(false);
+    if (dir === 'left') {
+      setIsLeftActive(false);
+      setIsLeftExited(false);
+    }
+    if (dir === 'right') {
+      setIsRightActive(false);
+      setIsRightExited(false);
+    }
 
-    console.log(`Click ${dir}!`);
+    if (transition) {
+      isDuringTransitionRef.current = true;
+      goToNext(dir);
+
+      return;
+    }
+
+    // setTransition(true);
   };
 
   const onExited = () => {
-    if (dir === 'left') goToPrev();
-    if (dir === 'right') goToNext();
+    setIsLeftExited(true);
+    setIsRightExited(true);
+
+    if (isDuringTransitionRef.current) {
+      isDuringTransitionRef.current = false;
+      return;
+    }
+
+    if (!isRightActive) goToNext('right');
+    if (!isLeftActive) goToNext('left');
   };
 
   return (
@@ -71,7 +87,7 @@ const Arrows: FC<Props> = ({
           <div className='image-slider__arrow-container'>
             <CSSTransition
               classNames={'image-slider__arrow-button'}
-              in={isLeftActive}
+              in={isLeftActive && isLeftExited}
               timeout={timeout}
             >
               <button
@@ -91,13 +107,12 @@ const Arrows: FC<Props> = ({
           classNames={'image-slider__arrow-container'}
           in={showArrows}
           timeout={timeout}
-          /* onExited={() => {}} */
           appear
         >
           <div className='image-slider__arrow-container'>
             <CSSTransition
               classNames={'image-slider__arrow-button'}
-              in={isRightActive}
+              in={isRightActive && isRightExited}
               timeout={timeout}
             >
               <button

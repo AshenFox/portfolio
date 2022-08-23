@@ -16,7 +16,7 @@ const SliderItem: FC<Props> = ({ data, dir }) => {
 
   return (
     <div className={`image-slider__item ${dir}`}>
-      <img src={path} alt={alt} />
+      <img src={path} alt={alt} draggable={false} />
     </div>
   );
 };

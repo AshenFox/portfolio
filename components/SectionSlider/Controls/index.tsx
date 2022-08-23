@@ -16,7 +16,7 @@ const Controls: FC<Props> = ({ onBurgerExited, onArrowExited }) => {
     <>
       <Burger onExited={onBurgerExited} />
       <Menu />
-      <Arrows onExited={onArrowExited} />
+      {/* <Arrows onExited={onArrowExited} /> */}
     </>
   );
 };
