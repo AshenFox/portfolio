@@ -45,8 +45,8 @@ const ContentLoader: FC<Props> = () => {
       onExited={onExited}
     >
       <div className='content-loader'>
-        <div className='content-loader__spinner-container'>
-          <div className='content-loader__spinner'></div>
+        <div className='spinner'>
+          <div className='spinner__inner'></div>
         </div>
       </div>
     </CSSTransition>

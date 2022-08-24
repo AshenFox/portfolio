@@ -1,3 +1,4 @@
+import BrokenImageIcon from './BrokenImageIcon';
 import ExternallinkIcon from './ExternallinkIcon';
 import FacebookIcon from './FacebookIcon';
 import GithubIcon from './GithubIcon';
@@ -16,6 +17,7 @@ const Icons = {
   person: PersonIcon,
   pentosquare: PentosquareIcon,
   mail: MailIcon,
+  brokenimage: BrokenImageIcon,
 };
 
 export default Icons;

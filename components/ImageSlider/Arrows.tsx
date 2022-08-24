@@ -6,18 +6,12 @@ interface OwnProps {
   setShowArrows: React.Dispatch<React.SetStateAction<boolean>>;
   transition: boolean;
   setTransition: React.Dispatch<React.SetStateAction<boolean>>;
-  goToNext: (dir: 'left' | 'right', isArrows?: boolean) => void;
+  goToNext: (dir: 'left' | 'right') => void;
 }
 
 type Props = OwnProps;
 
-const Arrows: FC<Props> = ({
-  showArrows,
-  setShowArrows,
-  transition,
-  setTransition,
-  goToNext,
-}) => {
+const Arrows: FC<Props> = ({ showArrows, setShowArrows, transition, goToNext }) => {
   const timeout: number = 950;
 
   const [isRightActive, setIsRightActive] = useState(true);
@@ -57,8 +51,6 @@ const Arrows: FC<Props> = ({
 
       return;
     }
-
-    // setTransition(true);
   };
 
   const onExited = () => {
@@ -131,53 +123,3 @@ const Arrows: FC<Props> = ({
 };
 
 export default Arrows;
-
-/* 
-
-<>
-      <button className='image-slider__test' onClick={onArrowClick}>
-        Click
-      </button>
-      <CSSTransition
-        classNames={'image-slider__arrow--left'}
-        in={value}
-        timeout={timeout}
-        onExited={() => {}}
-        appear
-      >
-        <div className='image-slider__arrow image-slider__arrow--left'>
-          <CSSTransition
-            classNames={'image-slider__arrow-button'}
-            in={isLeftActive}
-            timeout={timeout}
-          >
-            <button className='image-slider__arrow-button' onClick={onClickLeftArrow} />
-          </CSSTransition>
-          <div className='image-slider__arrow-icon' />
-          <div className='image-slider__arrow-shadow' />
-        </div>
-      </CSSTransition>
-
-      <CSSTransition
-        classNames={'image-slider__arrow--right'}
-        in={value}
-        timeout={timeout}
-        onExited={() => {}}
-        appear
-      >
-        <div className='image-slider__arrow image-slider__arrow--right'>
-          <CSSTransition
-            classNames={'image-slider__arrow-button'}
-            in={isRightActive}
-            timeout={timeout}
-          >
-            <button className='image-slider__arrow-button' onClick={onClickRightArrow} />
-          </CSSTransition>
-          <div className='image-slider__arrow-icon' />
-          <div className='image-slider__arrow-shadow' />
-        </div>
-      </CSSTransition>
-    </>
-
-
-*/

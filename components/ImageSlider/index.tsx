@@ -17,22 +17,26 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const ImageSlider: FC<Props> = () => {
-  const [images, setImages] = useState<Images>([
-    {
-      path: '/6.jpg',
-      alt: 'image',
-    },
-    {
-      path: '/5.jpg',
-      alt: 'image',
-    },
-    {
-      path: '/4.jpg',
-      alt: 'image',
-    },
-  ]);
+  const [images, setImages] = useState<Images>([]);
 
-  const [activeID, setActiveID] = useState(0);
+  useEffect(() => {
+    setImages([
+      {
+        path: '/6.jpg',
+        alt: 'image',
+      },
+      {
+        path: '/5.jpg',
+        alt: 'image',
+      },
+      {
+        path: '/4.jpg',
+        alt: 'image',
+      },
+    ]);
+  }, []);
+
+  const [activeID, setActiveID] = useState({ id: 0 });
   const [nextIDArr, setNextIDArr, nextIDArrRef] = useStateWithRef<
     { dir: 'right' | 'left'; id: number; isArrows?: boolean }[]
   >([]);
@@ -41,20 +45,18 @@ const ImageSlider: FC<Props> = () => {
   const [transition, setTransition] = useState(false);
   const [showArrows, setShowArrows] = useState(true);
 
-  const data = images[activeID];
+  const data = images[activeID.id];
 
   const frameEl = useRef(null);
 
-  const goToNext = (dir: 'right' | 'left', isArrows = false) => {
-    console.log({ dir, isArrows });
+  const goToNext = (dir: 'right' | 'left') => {
     const next = {
       id: null,
       dir,
-      isArrows,
     };
 
     const arr = nextIDArr;
-    const calcID = arr.length ? arr[arr.length - 1].id : activeID;
+    const calcID = arr.length ? arr[arr.length - 1].id : activeID.id;
 
     if (dir === 'right') next.id = (calcID + 1) % images.length;
     if (dir === 'left') next.id = (calcID - 1 + images.length) % images.length;
@@ -63,14 +65,13 @@ const ImageSlider: FC<Props> = () => {
   };
 
   const goTo = (id: number) => {
-    console.log('fire', { id });
     const arr = nextIDArr;
-    const last = arr[0];
+    const last = arr[arr.length - 1];
 
     if (arr.length && last && last.id === id) return;
-    if (!arr.length && activeID === id) return;
+    if (!arr.length && activeID.id === id) return;
 
-    const dif = arr.length ? arr[arr.length - 1].id - id : activeID - id;
+    const dif = arr.length ? arr[arr.length - 1].id - id : activeID.id - id;
 
     setNextIDArr([...nextIDArr, { dir: dif < 0 ? 'right' : 'left', id }]);
   };
@@ -80,27 +81,21 @@ const ImageSlider: FC<Props> = () => {
   };
 
   const onImageExited = () => {
-    if (nextIDArrRef.current.length) {
-      setTransition(true);
+    setTransition(false);
 
+    if (nextIDArrRef.current.length) {
       const { dir } = nextIDArrRef.current[0];
 
       setDir({ dir });
+
+      return;
     } else {
-      setTransition(false);
       setShowArrows(true);
     }
-
-    (document.activeElement as HTMLElement).blur();
   };
 
   useEffect(() => {
-    console.log('Fire!');
-    const last = nextIDArr[0];
-
-    if ((nextIDArr.length === 1 && !transition) || (last && last.isArrows)) {
-      setTransition(true);
-
+    if (nextIDArr.length && !transition) {
       const { dir } = nextIDArr[0];
 
       setDir({ dir });
@@ -109,12 +104,14 @@ const ImageSlider: FC<Props> = () => {
 
   useEffect(() => {
     if (nextIDArr.length) {
+      setTransition(true);
+
       const { id } = nextIDArr[0];
 
       setNextIDArr(nextIDArr.filter((el, i) => i !== 0));
 
       setTimeout(() => {
-        setActiveID(id);
+        setActiveID({ id });
       }, 50);
     }
   }, [dir]);
@@ -137,7 +134,7 @@ const ImageSlider: FC<Props> = () => {
       if (touch) {
         const dif = touchActive.clientX - touch.clientX;
 
-        if (Math.abs(dif) >= 75) {
+        if (Math.abs(dif) >= 50) {
           e.preventDefault();
 
           if (dif < 0) goToNext('left');
@@ -165,12 +162,12 @@ const ImageSlider: FC<Props> = () => {
         >
           <TransitionGroup component={null}>
             <CSSTransition
-              key={activeID}
+              key={activeID.id}
               classNames='image-slider__item'
               timeout={timeout}
               onExited={onImageExited}
             >
-              <SliderItem data={{ id: activeID, ...data }} dir={dir.dir} />
+              <SliderItem data={{ id: activeID.id, ...data }} dir={dir.dir} />
             </CSSTransition>
           </TransitionGroup>
           <Arrows
@@ -184,7 +181,7 @@ const ImageSlider: FC<Props> = () => {
       </div>
       <Controls
         images={images}
-        activeID={activeID}
+        activeID={activeID.id}
         onClickCreator={onControlItemClickCreator}
       />
     </>
