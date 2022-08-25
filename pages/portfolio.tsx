@@ -1,29 +1,7 @@
 import React, { FC } from 'react';
 import ContactFooter from '../components/ContactFooter';
-import ProjectItem from '../components/ProjectItem';
 import Section, { Props } from '../components/SectionSlider/Section';
-import Tag from '../components/Tag';
-
-const tagList = [
-  'show all',
-  'front-end',
-  'back-end',
-  'html5',
-  'sass',
-  'less',
-  'javascript',
-  'nodejs',
-  'electron',
-  'reactjs',
-  'meteor',
-  'coffeescript',
-  'mongodb',
-  'mysql',
-  'backbonejs',
-  'ui/ux design',
-  'animations',
-  'game design',
-];
+import Filter from '../components/Filter';
 
 const Portfolio: FC<Props> = (props) => {
   return (
@@ -35,24 +13,10 @@ const Portfolio: FC<Props> = (props) => {
             From Web Components and UI/UX animations to React.JS, Redux, Vue.JS, and
             Node.JS. Check out my latest web software development portfolio projects.
           </h3>
-          <ul className='portfolio__filter'>
-            {tagList.map((value) => (
-              <Tag key={value} active={value === 'show all'}>
-                {value}
-              </Tag>
-            ))}
-          </ul>
-          <small className='portfolio__filter-info'>
-            Showing all projects. Use the filter to list them by skill or technology.
-          </small>
         </header>
 
         <main className='portfolio__main'>
-          <ul className='portfolio__project-list'>
-            <ProjectItem />
-            <ProjectItem />
-            <ProjectItem />
-          </ul>
+          <Filter />
         </main>
 
         <ContactFooter />
