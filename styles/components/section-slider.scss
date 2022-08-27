@@ -14,7 +14,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    overflow-y: auto;
+    overflow-y: scroll; // auto
 
     &::-webkit-scrollbar {
       background-color: #2a2a2a;

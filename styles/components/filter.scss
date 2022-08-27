@@ -63,21 +63,57 @@
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+    margin: 20px;
+
+    position: relative;
+
+    gap: calc(1.92rem * 2);
+
+    height: 2000px;
+
+    align-content: flex-start;
   }
 
   &__project {
     display: block;
-    padding: 1.92rem;
-    width: 50%;
+    // padding: 1.92rem;
+    flex-grow: 1;
+    flex-basis: 33%;
+    max-width: 15.5rem;
+    // width: 25%;
+
+    height: calc(24px + 27rem);
+
+    opacity: 1;
+
+    transition: all 0.4s ease-in-out;
+
+    &-exit-active {
+      opacity: 0;
+    }
+
+    &-enter {
+      opacity: 0;
+    }
+
+    &-enter-active {
+      opacity: 1;
+    }
 
     &-container {
+      position: absolute;
+
+      transition: all 0.5s ease-in-out;
+    }
+
+    &-link {
       @include link;
       display: block;
       box-shadow: 8px 8px 0 rgb(black, 15%);
     }
 
     &-bar {
-      height: 24px;
+      height: 24px; // !!!!!!!!!!!!!!!!!!
       background-color: #d9d9d9;
       width: 100%;
       display: flex;
@@ -95,7 +131,7 @@
 
     &-main {
       overflow: hidden; // ????
-      height: 27rem;
+      height: 27rem; // !!!!!!!!!!!!!!!!!!
       box-shadow: inset 0px 0px 75px 0px black;
       position: relative;
     }
@@ -170,37 +206,41 @@
       opacity: 0;
     }
 
-    &:hover {
-      .filter__project-hover {
-        transform: translateY(0%);
-      }
-
-      .filter__project-tag {
-        transform: translateY(0);
-        opacity: 1;
-
-        &:nth-child(1) {
-          transition-delay: 0.3s;
+    &-container {
+      &:hover {
+        .filter__project-hover {
+          transform: translateY(0%);
         }
 
-        &:nth-child(2) {
-          transition-delay: 0.4s;
+        .filter__project-tag {
+          transform: translateY(0);
+          opacity: 1;
+
+          &:nth-child(1) {
+            transition-delay: 0.3s;
+          }
+
+          &:nth-child(2) {
+            transition-delay: 0.4s;
+          }
+
+          &:nth-child(3) {
+            transition-delay: 0.5s;
+          }
+
+          &:nth-child(4) {
+            transition-delay: 0.6s;
+          }
         }
 
-        &:nth-child(3) {
-          transition-delay: 0.5s;
+        .filter__project-more {
+          transition-delay: 0.7s;
+          transform: translate(-50%, 0);
+          opacity: 1;
         }
-
-        &:nth-child(4) {
-          transition-delay: 0.6s;
-        }
-      }
-
-      .filter__project-more {
-        transition-delay: 0.7s;
-        transform: translate(-50%, 0);
-        opacity: 1;
       }
     }
+
+    // &:hover
   }
 }

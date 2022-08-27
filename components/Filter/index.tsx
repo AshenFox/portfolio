@@ -77,27 +77,82 @@ const Filter: FC<Props> = (props) => {
     {
       id: 2,
       name: 'test2',
-      tags: ['backbonejs', 'electron'],
+      tags: ['backbonejs', 'electron', 'front-end'],
     },
     {
       id: 3,
       name: 'test3',
-      tags: ['game design', 'electron'],
+      tags: ['game design', 'electron', 'front-end'],
     },
     {
       id: 4,
       name: 'test4',
-      tags: ['ui/ux design', 'sass'],
+      tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
     },
     {
       id: 5,
       name: 'test5',
-      tags: ['mongodb', 'mongodb'],
+      tags: ['mongodb', 'mongodb', 'back-end'],
     },
     {
       id: 6,
       name: 'test6',
-      tags: ['backbonejs', 'sass'],
+      tags: ['backbonejs', 'sass', 'back-end'],
+    },
+    {
+      id: 7,
+      name: 'test1',
+      tags: ['back-end', 'coffeescript'],
+    },
+    {
+      id: 8,
+      name: 'test2',
+      tags: ['backbonejs', 'electron', 'front-end'],
+    },
+    {
+      id: 9,
+      name: 'test3',
+      tags: ['game design', 'electron', 'front-end'],
+    },
+    {
+      id: 10,
+      name: 'test4',
+      tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
+    },
+    {
+      id: 11,
+      name: 'test5',
+      tags: ['mongodb', 'mongodb', 'back-end'],
+    },
+    {
+      id: 12,
+      name: 'test6',
+      tags: ['backbonejs', 'sass', 'back-end'],
+    },
+    {
+      id: 13,
+      name: 'test6',
+      tags: ['backbonejs', 'sass', 'back-end'],
+    },
+    {
+      id: 14,
+      name: 'test3',
+      tags: ['game design', 'electron', 'front-end'],
+    },
+    {
+      id: 15,
+      name: 'test4',
+      tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
+    },
+    {
+      id: 16,
+      name: 'test2',
+      tags: ['backbonejs', 'electron', 'front-end'],
+    },
+    {
+      id: 17,
+      name: 'test3',
+      tags: ['game design', 'electron', 'front-end'],
     },
   ]);
 
@@ -107,7 +162,9 @@ const Filter: FC<Props> = (props) => {
     setFilteredProjects(filterArr(by));
   }, [by]);
 
-  console.log({ by, filteredProjects });
+  console.log(filteredProjects);
+
+  // console.log({ by, filteredProjects });
 
   return (
     <div className='filter'>
@@ -125,7 +182,7 @@ const Filter: FC<Props> = (props) => {
       <small className='filter__info'>
         Showing all projects. Use the filter to list them by skill or technology.
       </small>
-      <Projects data={filteredProjects} />
+      <Projects projects={projects} filteredProjects={filteredProjects} />
     </div>
   );
 };
