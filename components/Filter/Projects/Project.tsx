@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React, { CSSProperties, FC, useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { ProjectInt, ProjectsType } from '..';
+import { ProjectInt, ProjectsInt } from '..';
 
 interface OwnProps {
   data: ProjectInt;
-  list: ProjectsType;
+  list: string[];
 }
 
 type Props = OwnProps;
@@ -88,7 +88,7 @@ const Project: FC<Props> = ({ data, list }) => {
 
   const [styleContainer, setStyleContainer] = useState<CSSProperties>({});
 
-  const styleMain: CSSProperties = { backgroundColor: colors[(id % 6) + 1] };
+  const styleMain: CSSProperties = { backgroundColor: colors[(+id % 6) + 1] };
 
   return (
     <li className={`filter__project ${id}`} ref={projectEl}>
