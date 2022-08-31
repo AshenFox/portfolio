@@ -99,67 +99,67 @@ const value: ProjectsInt = {
   },
   '7': {
     id: '7',
-    name: 'test1',
+    name: 'test7',
     tags: ['back-end', 'coffeescript'],
     in: true,
   },
   '8': {
     id: '8',
-    name: 'test2',
+    name: 'test8',
     tags: ['backbonejs', 'electron', 'front-end'],
     in: true,
   },
   '9': {
     id: '9',
-    name: 'test3',
+    name: 'test9',
     tags: ['game design', 'electron', 'front-end'],
     in: true,
   },
   '10': {
     id: '10',
-    name: 'test4',
+    name: 'test10',
     tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
     in: true,
   },
   '11': {
     id: '11',
-    name: 'test5',
+    name: 'test11',
     tags: ['mongodb', 'mongodb', 'back-end'],
     in: true,
   },
   '12': {
     id: '12',
-    name: 'test6',
+    name: 'test12',
     tags: ['backbonejs', 'sass', 'back-end'],
     in: true,
   },
   '13': {
     id: '13',
-    name: 'test6',
+    name: 'test13',
     tags: ['backbonejs', 'sass', 'back-end'],
     in: true,
   },
   '14': {
     id: '14',
-    name: 'test3',
+    name: 'test14',
     tags: ['game design', 'electron', 'front-end'],
     in: true,
   },
   '15': {
     id: '15',
-    name: 'test4',
+    name: 'test15',
     tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
     in: true,
   },
   '16': {
     id: '16',
-    name: 'test2',
+    name: 'test16',
     tags: ['backbonejs', 'electron', 'front-end'],
     in: true,
   },
   '17': {
     id: '17',
-    name: 'test3',
+    name: 'test17',
     tags: ['game design', 'electron', 'front-end'],
     in: true,
   },
@@ -168,14 +168,6 @@ const value: ProjectsInt = {
 const Filter: FC<Props> = (props) => {
   const [by, setBy] = useState<TagType>('show all');
 
-  const filterArr = (by: TagType) => {
-    const keys = Object.keys(projects);
-
-    if (by === 'show all') return keys;
-    // return projects.filter(({ tags }) => tags.includes(by));
-    return keys.filter((key) => projects[key].tags.includes(by));
-  };
-
   const clickTagCreator: (value: TagType) => MouseEventHandler<HTMLLIElement> =
     (value) => (e) => {
       setBy(value);
@@ -183,46 +175,47 @@ const Filter: FC<Props> = (props) => {
 
   const [projects, setProjects] = useState<ProjectsInt>(value);
 
-  const [filteredProjects, setFilteredProjects] = useState<string[]>(filterArr(by));
-  const [order, setOrder] = useState<string[]>(filterArr(by));
+  const [order, setOrder] = useState<string[]>(Object.keys(projects));
 
-  const test = (by: TagType) => {
-    let newF = filterArr(by);
+  const filterProjects = (by: TagType) => {
+    const isAll = by === 'show all';
 
-    let oldF = [...filteredProjects];
+    const res: {
+      filtered: string[];
+      inArr: string[];
+      projects: ProjectsInt;
+    } = Object.entries(projects).reduce(
+      (res, [id, project], i, arr) => {
+        const prevIn = project.in;
+        const newIn = isAll || project.tags.includes(by);
+        const newProject = {
+          ...project,
+          in: newIn,
+        };
 
-    // console.log({ newF, oldF });
+        res.projects[id] = newProject;
 
-    for (let i = 0; i < oldF.length; ++i) {
-      const el = oldF[i];
+        if (newIn) {
+          res.inArr.push(id);
+          if (prevIn) res.filtered = [...res.filtered, ...res.inArr.splice(0, 1)];
+        } else {
+          res.filtered.push(id);
+        }
 
-      const included = newF.includes(el); // included in newF
+        if (arr.length === i + 1) res.filtered = [...res.filtered, ...res.inArr];
 
-      if (included) {
-        oldF[i] = newF[0];
-        newF.splice(0, 1);
-      } else {
-        continue;
-      }
-    }
+        return res;
+      },
+      { filtered: [], inArr: [], projects: {} }
+    );
 
-    const order = [...oldF, ...newF];
-
-    const keys = Object.keys(projects);
-
-    const rest = keys.filter((key) => !order.includes(key));
-
-    return [...order, ...rest];
+    setOrder(res.filtered);
+    setProjects(res.projects);
   };
 
   useEffect(() => {
-    test(by);
-
-    setFilteredProjects(filterArr(by));
-    setOrder(test(by));
+    filterProjects(by);
   }, [by]);
-
-  console.log({ order });
 
   return (
     <div className='filter'>
@@ -240,132 +233,9 @@ const Filter: FC<Props> = (props) => {
       <small className='filter__info'>
         Showing all projects. Use the filter to list them by skill or technology.
       </small>
-      <Projects projects={projects} filteredProjects={filteredProjects} order={order} />
+      <Projects order={order} projects={projects} />
     </div>
   );
 };
 
 export default Filter;
-
-const arr = [1, 2, 3, 4, 5, 6];
-
-const arr2 = [2, 3, 5];
-
-const arr3 = [1, 2, 5, 6];
-
-arr.sort((a, b) => {
-  // console.log(arr, a, b);;
-
-  return 0;
-});
-
-// [1, 3, 2, 5, 6, 4]
-
-/* 
-
-[
-    {
-      id: 1,
-      name: 'test1',
-      tags: ['back-end', 'coffeescript'],
-      in: true,
-    },
-    {
-      id: 2,
-      name: 'test2',
-      tags: ['backbonejs', 'electron', 'front-end'],
-      in: true,
-    },
-    {
-      id: 3,
-      name: 'test3',
-      tags: ['game design', 'electron', 'front-end'],
-      in: true,
-    },
-    {
-      id: 4,
-      name: 'test4',
-      tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
-      in: true,
-    },
-    {
-      id: 5,
-      name: 'test5',
-      tags: ['mongodb', 'mongodb', 'back-end'],
-      in: true,
-    },
-    {
-      id: 6,
-      name: 'test6',
-      tags: ['backbonejs', 'sass', 'back-end'],
-      in: true,
-    },
-    {
-      id: 7,
-      name: 'test1',
-      tags: ['back-end', 'coffeescript'],
-      in: true,
-    },
-    {
-      id: 8,
-      name: 'test2',
-      tags: ['backbonejs', 'electron', 'front-end'],
-      in: true,
-    },
-    {
-      id: 9,
-      name: 'test3',
-      tags: ['game design', 'electron', 'front-end'],
-      in: true,
-    },
-    {
-      id: 10,
-      name: 'test4',
-      tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
-      in: true,
-    },
-    {
-      id: 11,
-      name: 'test5',
-      tags: ['mongodb', 'mongodb', 'back-end'],
-      in: true,
-    },
-    {
-      id: 12,
-      name: 'test6',
-      tags: ['backbonejs', 'sass', 'back-end'],
-      in: true,
-    },
-    {
-      id: 13,
-      name: 'test6',
-      tags: ['backbonejs', 'sass', 'back-end'],
-      in: true,
-    },
-    {
-      id: 14,
-      name: 'test3',
-      tags: ['game design', 'electron', 'front-end'],
-      in: true,
-    },
-    {
-      id: 15,
-      name: 'test4',
-      tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
-      in: true,
-    },
-    {
-      id: 16,
-      name: 'test2',
-      tags: ['backbonejs', 'electron', 'front-end'],
-      in: true,
-    },
-    {
-      id: 17,
-      name: 'test3',
-      tags: ['game design', 'electron', 'front-end'],
-      in: true,
-    },
-  ]
-
-*/

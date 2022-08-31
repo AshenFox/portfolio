@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { CSSProperties, FC, useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { ProjectInt, ProjectsInt } from '..';
+import { ProjectInt } from '..';
 
 interface OwnProps {
   data: ProjectInt;
@@ -30,8 +30,6 @@ const Project: FC<Props> = ({ data, list }) => {
 
     const { offsetLeft, offsetTop } = el || {};
 
-    // console.log({ offsetLeft, offsetTop });
-
     setStyleContainer((prev) => ({
       ...prev,
       top: `${offsetTop}px`,
@@ -40,13 +38,6 @@ const Project: FC<Props> = ({ data, list }) => {
   };
 
   useEffect(() => {
-    // console.log({ id, el, offsetParent, offsetLeft, offsetTop });
-
-    /* setStyleContainer({
-      top: `${offsetTop}px`,
-      left: `${offsetLeft}px`,
-    }); */
-
     setProjectCoord();
 
     setTimeout(() => {
@@ -58,7 +49,6 @@ const Project: FC<Props> = ({ data, list }) => {
     const el = projectEl.current;
 
     const observer = new ResizeObserver((entries) => {
-      // console.log({ id, entries });
       if (entries.length) {
         const [
           {

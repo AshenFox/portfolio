@@ -4,63 +4,26 @@ import { ProjectsInt } from '..';
 import Project from './Project';
 
 interface OwnProps {
-  // data: ProjectsType;projects
-  projects: ProjectsInt;
-  filteredProjects: string[];
   order: string[];
+  projects: ProjectsInt;
 }
 
 type Props = OwnProps;
 
-const Projects: FC<Props> = ({ projects, filteredProjects, order }) => {
+const Projects: FC<Props> = ({ order, projects }) => {
+  const timeout = 400;
+
   return (
     <ul className='filter__projects'>
-      {/* <TransitionGroup component={null}>
-        {filteredProjects.map((project) => (
-          <CSSTransition
-            key={project.id}
-            classNames='filter__project'
-            timeout={400000}
-            unmountOnExit={true}
-          >
-            <Project data={project} list={filteredProjects} />
-          </CSSTransition>
-        ))}
-      </TransitionGroup> */}
-
-      {/* {projects.map((project) => (
-        <CSSTransition
-          key={project.id}
-          in={!!filteredProjects.find((el) => el.id === project.id)}
-          classNames='filter__project'
-          timeout={400}
-          unmountOnExit={true}
-        >
-          <Project data={project} list={filteredProjects} />
-        </CSSTransition>
-      ))} */}
-
-      {/* {Object.values(projects).map((project) => (
-        <CSSTransition
-          key={project.id}
-          in={filteredProjects.includes(project.id)}
-          classNames='filter__project'
-          timeout={400}
-          unmountOnExit={true}
-        >
-          <Project data={project} list={filteredProjects} />
-        </CSSTransition>
-      ))} */}
-
       {order.map((id) => (
         <CSSTransition
           key={id}
-          in={filteredProjects.includes(id)}
+          in={projects[id].in}
           classNames='filter__project'
-          timeout={400}
+          timeout={timeout}
           unmountOnExit={true}
         >
-          <Project data={projects[id]} list={filteredProjects} />
+          <Project data={projects[id]} list={order} />
         </CSSTransition>
       ))}
     </ul>
