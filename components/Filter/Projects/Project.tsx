@@ -1,26 +1,17 @@
 import Link from 'next/link';
 import React, { CSSProperties, FC, useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { ProjectInt } from '..';
+import { ProjectInt, TagType } from '..';
 
 interface OwnProps {
   data: ProjectInt;
-  list: string[];
+  order: string[];
 }
 
 type Props = OwnProps;
 
-const colors = {
-  '1': 'red',
-  '2': 'yellow',
-  '3': 'green',
-  '4': 'orange',
-  '5': 'blue',
-  '6': 'cyan',
-};
-
-const Project: FC<Props> = ({ data, list }) => {
-  const { name, id } = data;
+const Project: FC<Props> = ({ data, order }) => {
+  const { name, id, tags, thumbnails } = data;
 
   const projectEl = useRef<HTMLLIElement>(null);
   const containerEl = useRef<HTMLDivElement>(null);
@@ -42,8 +33,8 @@ const Project: FC<Props> = ({ data, list }) => {
 
     setTimeout(() => {
       setProjectCoord();
-    }, 600);
-  }, [list]);
+    }, 700); // 600
+  }, [order]);
 
   useEffect(() => {
     const el = projectEl.current;
@@ -78,28 +69,26 @@ const Project: FC<Props> = ({ data, list }) => {
 
   const [styleContainer, setStyleContainer] = useState<CSSProperties>({});
 
-  const styleMain: CSSProperties = { backgroundColor: colors[(+id % 6) + 1] };
-
   return (
     <li className={`filter__project ${id}`} ref={projectEl}>
       <div className='filter__project-container' ref={containerEl} style={styleContainer}>
-        <Link href={'/'}>
-          <a className='filter__project-link' title='/'>
+        <Link href={'/project'}>
+          <a className='filter__project-link' title='/project'>
             <div className='filter__project-bar'>
               <h2>{name}</h2>
             </div>
-            <div className='filter__project-main' style={styleMain}>
-              <img src='/6.jpg' alt='' className='filter__project-img-main' />
+            <div className='filter__project-main'>
+              <img src={thumbnails.main} alt='' className='filter__project-img-main' />
+              <div className='filter__project-shadow'></div>
               <div className='filter__project-hover'>
                 <div className='filter__project-img-hover'>
-                  <img src='/7.jpg' alt='' />
+                  <img src={thumbnails.hover} alt='' />
                 </div>
 
                 <ul className='filter__project-tags'>
-                  <li className='filter__project-tag'>back-end</li>
-                  <li className='filter__project-tag'>front-end</li>
-                  <li className='filter__project-tag'>html5</li>
-                  <li className='filter__project-tag'>sass</li>
+                  {[...tags].splice(0, 4).map((tag) => (
+                    <li className='filter__project-tag'>{tag}</li>
+                  ))}
                 </ul>
 
                 <span className='filter__project-more'>more...</span>
