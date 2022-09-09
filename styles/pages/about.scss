@@ -23,6 +23,14 @@
     font-family: Lato;
   }
 
+  &__char {
+    opacity: 0;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+
   /* &__link {
     display: inline-block;
     position: relative;
