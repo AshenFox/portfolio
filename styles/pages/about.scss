@@ -23,6 +23,11 @@
     font-family: Lato;
   }
 
+  &__greeting,
+  &__description {
+    white-space: pre;
+  }
+
   &__char {
     opacity: 0;
 

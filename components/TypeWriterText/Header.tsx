@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { HeaderDataInt } from '.';
+import { HeaderDataInt, HeaderItemType } from '.';
 import FancyLink from '../FancyLink';
 import Char from './Char';
 
@@ -29,27 +29,85 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show }) => {
 
   let charNumber = rangeStart;
 
-  // console.log({ rangeStart, rangeEnd });
+  let hiddenElArr = [];
+  let visibleElArr = [];
 
-  const testFunction = () => {
+  const wrapArrOfChar = (charArr: JSX.Element[], data: HeaderItemType) => {
+    const { type, props } = data;
+
+    if (type === 'link') return [<FancyLink {...props}>{charArr}</FancyLink>];
+    if (type === 'text') return charArr;
+  };
+
+  content.forEach((el, i) => {
+    const { content } = el;
+
+    const charElArr = content.split('').map((char, i) => {
+      const key = charNumber + i + 1;
+
+      return (
+        <Char key={key} active={key <= show}>
+          {char}
+        </Char>
+      );
+    });
+
+    const diff = show - charNumber;
+    charNumber += charElArr.length;
+
+    const hidden = charElArr;
+    const visible = hidden.splice(0, diff);
+
+    if (hidden.length) hiddenElArr = [...hiddenElArr, ...wrapArrOfChar(hidden, el)];
+    if (visible.length) visibleElArr = [...visibleElArr, ...wrapArrOfChar(visible, el)];
+  });
+
+  return (
+    <TagName className={classStr}>
+      <span>{visibleElArr}</span>
+      <span>{hiddenElArr}</span>
+    </TagName>
+  );
+};
+
+export default Header;
+
+/* 
+
+<span key={i} className={`about__char ${charNumber <= show ? 'active' : ''}`}>
+              {char}
+            </span>
+
+<span>{visibleElArr}</span>
+      <span>{hiddenElArr}</span>
+*/
+
+/* 
+const testFunction = () => {
     console.log('=======');
     let charNumber = rangeStart;
 
-    content.map((el, i) => {
-      const { content, type } = el;
+    let hiddenElArr = [];
+    let visibleElArr = [];
+
+    const wrapArrOfChar = (charArr: JSX.Element[], data: HeaderItemType) => {
+      const { type, props } = data;
+
+      if (type === 'link') return [<FancyLink {...props}>{charArr}</FancyLink>];
+      if (type === 'text') return charArr;
+    };
+
+    content.forEach((el, i) => {
+      const { content } = el;
 
       const charElArr = content.split('').map((char, i) => {
-        /* 
-        <Char key={charNumber + i + 1} active={charNumber <= show}>
+        const key = charNumber + i + 1;
+
+        return (
+          <Char key={key} active={key <= show}>
             {char}
           </Char>
-        
-        */
-        return {
-          key: charNumber + i + 1,
-          active: charNumber + i + 1 <= show,
-          char,
-        };
+        );
       });
 
       const diff = show - charNumber;
@@ -58,22 +116,19 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show }) => {
       const hidden = charElArr;
       const visible = hidden.splice(0, diff);
 
-      console.log({ charElArr, diff, show, rangeStart, charNumber });
-      console.log({ visible, hidden });
+      if (hidden.length) hiddenElArr = [...hiddenElArr, ...wrapArrOfChar(hidden, el)];
+      if (visible.length) visibleElArr = [...visibleElArr, ...wrapArrOfChar(visible, el)];
     });
 
-    const testArr = 'Hello world!'.split('');
-    const cutArr = testArr.splice(0, -5);
-    // console.log({ testArr, cutArr });
+    console.log({ hiddenElArr, visibleElArr });
   };
 
-  useEffect(() => {
-    testFunction();
-  }, []);
 
-  return (
-    <TagName className={classStr}>
-      {content.map((el, i) => {
+*/
+
+/* 
+
+content.map((el, i) => {
         const { content, type } = el;
 
         const charElArr = content.split('').map((char, i) => {
@@ -93,18 +148,6 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show }) => {
             </FancyLink>
           );
         if (type === 'text') return charElArr;
-      })}
-    </TagName>
-  );
-};
-
-export default Header;
-
-/* 
-
-<span key={i} className={`about__char ${charNumber <= show ? 'active' : ''}`}>
-              {char}
-            </span>
-
+      })
 
 */

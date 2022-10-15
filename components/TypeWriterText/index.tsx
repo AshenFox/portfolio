@@ -7,6 +7,7 @@ import Header from './Header';
 interface HeaderItemTextInt {
   content: string;
   type: 'text';
+  props?: {};
 }
 
 interface HeaderItemLinkInt {
@@ -19,7 +20,7 @@ interface HeaderItemLinkInt {
   };
 }
 
-type HeaderItemType = HeaderItemTextInt | HeaderItemLinkInt;
+export type HeaderItemType = HeaderItemTextInt | HeaderItemLinkInt;
 
 type HeaderItemArrType = HeaderItemType[];
 
@@ -126,13 +127,13 @@ const TypeWriterText: FC<Props> = () => {
     }, 0)
   );
 
-  const [show, setShow] = useState(50);
+  const [show, setShow] = useState(0);
 
   useEffect(() => {
     if (show < allChar && content_loaded && is_exited) {
-      /* setTimeout(() => {
+      setTimeout(() => {
         setShow((prev) => prev + 1);
-      }, 12); */
+      }, 12);
     }
   }, [show, content_loaded, is_exited]);
 
