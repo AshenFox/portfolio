@@ -21,12 +21,12 @@ interface HeaderItemLinkInt {
 
 type HeaderItemType = HeaderItemTextInt | HeaderItemLinkInt;
 
-type HeaderItemTypeArrType = HeaderItemType[];
+type HeaderItemArrType = HeaderItemType[];
 
 type HeaderType = 'greeting' | 'description';
 
 export interface HeaderDataInt {
-  content: HeaderItemTypeArrType;
+  content: HeaderItemArrType;
   type: HeaderType;
 }
 
@@ -109,7 +109,7 @@ const TypeWriterText: FC<Props> = () => {
     },
   ]);
 
-  const countCharInElement = (data: HeaderItemTypeArrType) =>
+  const countCharInElement = (data: HeaderItemArrType) =>
     data.reduce((sum, el) => {
       const { content } = el;
       sum += content.length;
@@ -126,15 +126,15 @@ const TypeWriterText: FC<Props> = () => {
     }, 0)
   );
 
-  const [show, setShow] = useState(0);
+  const [show, setShow] = useState(50);
 
   useEffect(() => {
-    if (show < allChar && content_loaded && is_exited && show_navigation) {
-      setTimeout(() => {
+    if (show < allChar && content_loaded && is_exited) {
+      /* setTimeout(() => {
         setShow((prev) => prev + 1);
-      }, 40);
+      }, 12); */
     }
-  }, [show, content_loaded, is_exited, show_navigation]);
+  }, [show, content_loaded, is_exited]);
 
   let rangeStart = 0;
 
