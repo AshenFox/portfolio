@@ -28,6 +28,25 @@
     white-space: pre;
   }
 
+  &__cursor-containter {
+    display: inline-block;
+    position: relative;
+
+    &::after {
+      content: '_';
+      display: none;
+      position: absolute;
+      font-weight: 700;
+      animation: cursor-animation 0.5s forwards infinite;
+    }
+
+    &.active {
+      &::after {
+        display: inline-block;
+      }
+    }
+  }
+
   &__char {
     opacity: 0;
 
@@ -108,10 +127,10 @@
     font-size: 1.9rem;
   }
 
-  &__cursor {
+  /* &__cursor {
     font-size: 1.9rem;
     animation: cursor-animation 0.5s forwards infinite;
-  }
+  } */
 
   &__footer {
     position: absolute;

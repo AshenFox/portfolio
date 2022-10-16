@@ -62,10 +62,16 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show }) => {
     if (visible.length) visibleElArr = [...visibleElArr, ...wrapArrOfChar(visible, el)];
   });
 
+  const showCursor = show >= rangeStart && show <= rangeEnd;
+
+  console.log({ rangeStart, rangeEnd, show });
+
   return (
     <TagName className={classStr}>
-      <span>{visibleElArr}</span>
-      <span>{hiddenElArr}</span>
+      <span className={`about__cursor-containter ${showCursor ? 'active' : ''}`}>
+        {visibleElArr}
+      </span>
+      {hiddenElArr}
     </TagName>
   );
 };
