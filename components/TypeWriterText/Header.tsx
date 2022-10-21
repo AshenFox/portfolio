@@ -71,6 +71,7 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show }) => {
       <span className={`about__cursor-containter ${showCursor ? 'active' : ''}`}>
         {visibleElArr}
       </span>
+      {/* <span></span> */}
       {hiddenElArr}
     </TagName>
   );

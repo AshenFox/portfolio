@@ -123,11 +123,13 @@ const TypeWriterText: FC<Props> = () => {
 
       sum += countCharInElement(content);
 
+      console.log({ sum, count: countCharInElement(content) });
+
       return sum;
     }, 0)
   );
 
-  const [show, setShow] = useState(0);
+  const [show, setShow] = useState(95);
 
   useEffect(() => {
     if (show < allChar && content_loaded && is_exited) {
@@ -147,11 +149,13 @@ const TypeWriterText: FC<Props> = () => {
         const range = countCharInElement(content);
         const rangeEnd = rangeStart + range;
 
+        console.log({ rangeStart, rangeEnd, show });
+
         const HeaderEl = (
           <Header
             key={i}
             data={data}
-            rangeStart={rangeStart}
+            rangeStart={rangeStart + 1}
             rangeEnd={rangeEnd}
             show={show}
           />
