@@ -8,73 +8,56 @@ interface OwnProps {
   rangeStart: number;
   rangeEnd: number; // ?????
   show: number;
+  TagName: keyof JSX.IntrinsicElements;
+  classStr: string;
 }
 
 type Props = OwnProps;
 
-const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show }) => {
+const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, TagName, classStr }) => {
   const { content, type } = data;
 
-  let TagName = null as keyof JSX.IntrinsicElements;
-  let classStr = null;
+  let charElArr = [
+    <Char key={rangeStart} active={rangeStart <= show} isCursor={rangeStart === show} />,
+  ];
 
-  if (type === 'greeting') {
-    TagName = 'h1';
-    classStr = 'about__greeting';
-  }
-  if (type === 'description') {
-    TagName = 'h4';
-    classStr = 'about__description';
-  }
+  let charNumber = rangeStart + 1;
 
-  let charNumber = rangeStart;
-
-  let hiddenElArr = [];
-  let visibleElArr = [];
-
-  const wrapArrOfChar = (charArr: JSX.Element[], data: HeaderItemType) => {
+  const wrapArrOfChar = (
+    charArr: JSX.Element[],
+    data: HeaderItemType,
+    wrapperIndex: number
+  ) => {
     const { type, props } = data;
 
-    if (type === 'link') return [<FancyLink {...props}>{charArr}</FancyLink>];
+    if (type === 'link')
+      return [
+        <FancyLink key={wrapperIndex + type} {...props}>
+          {charArr}
+        </FancyLink>,
+      ];
     if (type === 'text') return charArr;
   };
 
   content.forEach((el, i) => {
     const { content } = el;
 
-    const charElArr = content.split('').map((char, i) => {
-      const key = charNumber + i + 1;
+    const charElEndArr = content.split('').map((char, i) => {
+      const key = charNumber + i;
 
       return (
-        <Char key={key} active={key <= show}>
+        <Char key={key} active={key <= show} isCursor={key === show}>
           {char}
         </Char>
       );
     });
 
-    const diff = show - charNumber;
-    charNumber += charElArr.length;
+    charNumber += charElEndArr.length;
 
-    const hidden = charElArr;
-    const visible = hidden.splice(0, diff);
-
-    if (hidden.length) hiddenElArr = [...hiddenElArr, ...wrapArrOfChar(hidden, el)];
-    if (visible.length) visibleElArr = [...visibleElArr, ...wrapArrOfChar(visible, el)];
+    charElArr = [...charElArr, ...wrapArrOfChar(charElEndArr, el, i)];
   });
 
-  const showCursor = show >= rangeStart && show <= rangeEnd;
-
-  console.log({ rangeStart, rangeEnd, show });
-
-  return (
-    <TagName className={classStr}>
-      <span className={`about__cursor-containter ${showCursor ? 'active' : ''}`}>
-        {visibleElArr}
-      </span>
-      {/* <span></span> */}
-      {hiddenElArr}
-    </TagName>
-  );
+  return <TagName className={classStr}>{charElArr}</TagName>;
 };
 
 export default Header;

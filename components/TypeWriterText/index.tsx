@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useAppSelector } from '../../store/hooks';
+import Cursor from './Cursor';
 import Header from './Header';
 
 // type HeaderTextType = 'text' | 'link';
@@ -118,53 +119,70 @@ const TypeWriterText: FC<Props> = () => {
     }, 0);
 
   const [allChar, setAllChar] = useState(
-    text.reduce((sum, el) => {
+    text.reduce((sum, el, i) => {
       const { content } = el;
 
       sum += countCharInElement(content);
-
-      console.log({ sum, count: countCharInElement(content) });
+      if (i !== text.length - 1) sum += 1;
 
       return sum;
     }, 0)
   );
 
-  const [show, setShow] = useState(95);
+  const [show, setShow] = useState(0);
 
   useEffect(() => {
-    if (show < allChar && content_loaded && is_exited) {
+    if (show < allChar && content_loaded && is_exited && show_navigation)
       setTimeout(() => {
         setShow((prev) => prev + 1);
-      }, 12);
-    }
-  }, [show, content_loaded, is_exited]);
+      }, 10);
+  }, [show, content_loaded, is_exited, show_navigation]);
 
   let rangeStart = 0;
+  let isCursorSmall = false;
+
+  const Headers = text.map((data, i) => {
+    const { content, type } = data;
+
+    const range = countCharInElement(content);
+    const rangeEnd = rangeStart + range;
+
+    let TagName = null as keyof JSX.IntrinsicElements;
+    let classStr: string = null;
+
+    if (type === 'greeting') {
+      TagName = 'h1';
+      classStr = 'about__greeting';
+    }
+    if (type === 'description') {
+      TagName = 'h4';
+      classStr = 'about__description';
+    }
+
+    const containsCursor = show >= rangeStart && show <= rangeEnd;
+    if (type === 'description' && containsCursor) isCursorSmall = true;
+
+    const HeaderEl = (
+      <Header
+        key={i}
+        data={data}
+        rangeStart={rangeStart}
+        rangeEnd={rangeEnd}
+        show={show}
+        TagName={TagName}
+        classStr={classStr}
+      />
+    );
+
+    rangeStart += range + 1;
+
+    return HeaderEl;
+  });
 
   return (
     <>
-      {text.map((data, i) => {
-        const { content, type } = data;
-
-        const range = countCharInElement(content);
-        const rangeEnd = rangeStart + range;
-
-        console.log({ rangeStart, rangeEnd, show });
-
-        const HeaderEl = (
-          <Header
-            key={i}
-            data={data}
-            rangeStart={rangeStart + 1}
-            rangeEnd={rangeEnd}
-            show={show}
-          />
-        );
-
-        rangeStart += range;
-
-        return HeaderEl;
-      })}
+      {Headers}
+      <Cursor isActive={true} isSmall={isCursorSmall} />
     </>
   );
 };

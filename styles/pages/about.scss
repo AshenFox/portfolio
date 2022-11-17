@@ -8,6 +8,32 @@
     flex-direction: column;
 
     overflow: hidden;
+
+    position: relative;
+  }
+
+  &__cursor {
+    position: absolute;
+    top: 0;
+    left: 0; // -100%
+    animation: cursor-animation 0.5s forwards infinite;
+    // line-height: 4.9rem;
+    font-weight: 700;
+    font-size: 2.9rem;
+    letter-spacing: -1.5px;
+    display: none;
+    transform: translate(1px, 1px);
+
+    &.active {
+      display: inline-block;
+      opacity: 1;
+    }
+
+    &.small {
+      font-size: 1.7rem;
+      font-family: Lato;
+      // line-height: 3.3rem;
+    }
   }
 
   &__greeting {
@@ -18,7 +44,7 @@
     color: #cacaca;
 
     span {
-      display: inline-block;
+      // display: inline-block;
       min-height: 4.9rem;
     }
   }
@@ -30,24 +56,23 @@
     font-family: Lato;
 
     span {
-      display: inline-block;
+      // display: inline-block;
       min-height: 3.3rem;
     }
   }
 
   &__greeting,
   &__description {
-    //
     text-align: center;
     white-space: pre-wrap;
 
     span {
-      display: inline-block;
+      // display: inline-block;
       vertical-align: bottom;
     }
   }
 
-  &__cursor-containter {
+  /* &__cursor-containter {
     position: relative;
     display: inline-block;
     // background-color: red;
@@ -68,7 +93,7 @@
         display: inline-block;
       }
     }
-  }
+  } */
 
   &__char {
     opacity: 0;

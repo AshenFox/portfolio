@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { AppDispatch, RootState } from '../store';
 import * as sectionSliderActions from '../actions/sectionSliderActions';
 import * as contactFormActions from '../actions/contactFormActions';
+import * as gameActions from '../actions/gameActions';
 
 // Customized dispatch and selector hooks for the Tuner App
 export const useAppDispatch = () => useDispatch<AppDispatch>();
@@ -16,6 +17,7 @@ export const useActions = () => {
     {
       ...sectionSliderActions,
       ...contactFormActions,
+      ...gameActions,
     },
     dispatch
   );

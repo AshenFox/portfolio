@@ -124,6 +124,19 @@ export interface ChangeActiveFieldAction {
   };
 }
 
+// game
+export const SET_CURSOR_POSITION = 'SET_CURSOR_POSITION';
+
+export interface SetCursorPositionAction {
+  type: typeof SET_CURSOR_POSITION;
+  payload: {
+    x: number;
+    y: number;
+  };
+}
+
+export type GameActions = SetCursorPositionAction;
+
 export type ContactFormActions =
   | SetTextareaValueAction
   | SetFormFieldValueAction
@@ -135,4 +148,4 @@ export type ContactFormActions =
 
 // ===========
 
-export type AppActions = SectionSliderActions | ContactFormActions;
+export type AppActions = SectionSliderActions | ContactFormActions | GameActions;
