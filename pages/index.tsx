@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import Button from '../components/Button';
 import FancyLink from '../components/FancyLink';
 import Section, { Props } from '../components/SectionSlider/Section';
+import SideLinks from '../components/SideLinks';
 import TypeWriterText from '../components/TypeWriterText';
 
 const About: FC<Props> = (props) => {
@@ -10,6 +11,7 @@ const About: FC<Props> = (props) => {
       <main className='about__container'>
         <TypeWriterText />
       </main>
+      <SideLinks />
       <footer className='about__footer'>
         <Button
           isClicked={false}

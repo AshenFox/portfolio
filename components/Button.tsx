@@ -3,7 +3,7 @@ import Icons from './Icons';
 import Link from 'next/link';
 
 type ColorType = 'red' | 'green' | 'skyblue' | 'blue' | 'green' | 'grey';
-type IconType = 'googleplus' | 'facebook' | 'twitter' | 'externallink' | 'github' | '';
+type TIcon = 'googleplus' | 'facebook' | 'twitter' | 'externallink' | 'github' | '';
 
 interface OwnProps {
   children?: ReactNode;
@@ -12,7 +12,7 @@ interface OwnProps {
   isBig?: boolean;
   isActive?: boolean;
   color?: ColorType;
-  icon?: IconType;
+  icon?: TIcon;
   href?: string;
   title?: string;
 }

@@ -1,0 +1,91 @@
+.side-links {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translate(-2rem, -50%);
+
+  display: flex;
+  flex-direction: column;
+
+  list-style: none;
+
+  & li {
+    opacity: 0;
+    transform: translateX(-150px);
+
+    transition: transform 425ms cubic-bezier(0.69, 0.03, 0.03, 0.93),
+      opacity 0.15s ease-out;
+
+    &:nth-child(1) {
+      transition-delay: 0.7s, 0.7s;
+    }
+
+    &:nth-child(2) {
+      transition-delay: 0.75s, 0.75s;
+    }
+
+    &:nth-child(3) {
+      transition-delay: 0.8s, 0.8s;
+    }
+  }
+
+  &-exit,
+  &-exit-done {
+    li {
+      opacity: 0;
+      transform: translateX(-150px);
+    }
+  }
+
+  &-enter,
+  &-enter-done {
+    li {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+
+  &__link-container {
+    cursor: pointer;
+    width: 7.5rem;
+    height: 5.5rem;
+    background-color: black;
+    display: flex;
+    flex-direction: row-reverse;
+    transition: transform 425ms cubic-bezier(0.05, 0.65, 0.18, 1);
+
+    &:hover {
+      transform: translateX(2rem);
+    }
+
+    &.github {
+      background-color: #4e545a;
+
+      svg {
+        height: 4rem;
+      }
+    }
+
+    &.linkedin {
+      background-color: #0077b5;
+    }
+
+    &.telegram {
+      background-color: #2fa5dd;
+    }
+  }
+
+  &__link {
+    width: 5.5rem;
+    height: 5.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      height: 3.5rem;
+      fill: white;
+    }
+  }
+}

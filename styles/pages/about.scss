@@ -15,9 +15,7 @@
   &__cursor {
     position: absolute;
     top: 0;
-    left: 0; // -100%
     animation: cursor-animation 0.5s forwards infinite;
-    // line-height: 4.9rem;
     font-weight: 700;
     font-size: 2.9rem;
     letter-spacing: -1.5px;
@@ -32,7 +30,6 @@
     &.small {
       font-size: 1.7rem;
       font-family: Lato;
-      // line-height: 3.3rem;
     }
   }
 
@@ -65,35 +62,12 @@
   &__description {
     text-align: center;
     white-space: pre-wrap;
+    padding: 0 5.5rem;
 
     span {
-      // display: inline-block;
       vertical-align: bottom;
     }
   }
-
-  /* &__cursor-containter {
-    position: relative;
-    display: inline-block;
-    // background-color: red;
-
-    &::after {
-      content: '_';
-      display: none;
-      position: absolute;
-      font-weight: 700;
-      right: 0px;
-      bottom: 0px;
-      transform: translateX(100%);
-      animation: cursor-animation 0.5s forwards infinite;
-    }
-
-    &.active {
-      &::after {
-        display: inline-block;
-      }
-    }
-  } */
 
   &__char {
     opacity: 0;
@@ -103,82 +77,10 @@
     }
   }
 
-  /* &__link {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-
-    &::before,
-    &::after {
-      transition: all 0.325s cubic-bezier(0.65, 0.2, 0, 1);
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      background-color: #3a3a3a;
-      width: 0;
-      height: 50%;
-
-      left: 0;
-      top: 0;
-
-      opacity: 0.5;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      background-color: #3d3d3d;
-      width: 0;
-      height: 50%;
-
-      right: 0;
-      bottom: 0;
-
-      opacity: 0.5;
-
-      transition-delay: 0.1s;
-    }
-
-    &:hover {
-      &::after {
-        width: 100%;
-      }
-
-      &::before {
-        width: 100%;
-      }
-    }
-
-    &:hover {
-      .about__link-text {
-        color: #b6b6b6;
-      }
-    }
-
-    //
-  }
-
-  &__link-text {
-    transition: all 0.325s cubic-bezier(0.65, 0.2, 0, 1);
-    position: relative;
-    line-height: 3.3rem;
-    font-size: 1.9rem;
-    font-weight: bold;
-    color: #9a9a9a;
-    z-index: 2;
-  } */
-
   &__link {
     line-height: 3.3rem;
     font-size: 1.9rem;
   }
-
-  /* &__cursor {
-    font-size: 1.9rem;
-    animation: cursor-animation 0.5s forwards infinite;
-  } */
 
   &__footer {
     position: absolute;
