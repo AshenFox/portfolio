@@ -86,8 +86,10 @@ const Project: FC<Props> = ({ data, order }) => {
                 </div>
 
                 <ul className='filter__project-tags'>
-                  {[...tags].splice(0, 4).map((tag) => (
-                    <li className='filter__project-tag'>{tag}</li>
+                  {[...tags].splice(0, 4).map((tag, i) => (
+                    <li className='filter__project-tag' key={i}>
+                      {tag}
+                    </li>
                   ))}
                 </ul>
 
