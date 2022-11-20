@@ -33,6 +33,11 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   const router = useRouter();
   const { pathname } = router;
 
+  const isReadyRef = useRef(router.isReady);
+  isReadyRef.current = router.isReady;
+
+  // console.log({ pathname, router });
+
   const loadingPathname = useRef(pathname);
 
   // ============================
@@ -118,7 +123,8 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
       if (showMenuRef.current) {
         set_show_menu(false);
       } else {
-        if (RenderedRef.current.pathname !== path) {
+        if (RenderedRef.current.pathname !== path && isReadyRef.current) {
+          console.log(RenderedRef.current.pathname, { path });
           set_show_navigation(false);
         }
       }

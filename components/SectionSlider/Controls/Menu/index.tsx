@@ -21,6 +21,11 @@ const Menu: FC<Props> = () => {
           {routesOrderList.map(({ path, title }) => (
             <MenuItem href={path} title={title} key={path} />
           ))}
+          <MenuItem
+            href={'/portfolio/flashcards'}
+            title={'portfolio flashcards'}
+            key={'project flashcards'}
+          />
           <span className='menu__tip'>for a quick seach just start typing ...</span>
         </div>
       </CSSTransition>

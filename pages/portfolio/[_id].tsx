@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import Button from '../components/Button';
-import ContactFooter from '../components/ContactFooter';
-import ImageSlider from '../components/ImageSlider';
-import Section, { Props } from '../components/SectionSlider/Section';
+import Button from '../../components/Button';
+import ContactFooter from '../../components/ContactFooter';
+import ImageSlider from '../../components/ImageSlider';
+import Section, { Props } from '../../components/SectionSlider/Section';
 
 const Project: FC<Props> = (props) => {
   return (

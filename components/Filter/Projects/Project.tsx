@@ -72,8 +72,8 @@ const Project: FC<Props> = ({ data, order }) => {
   return (
     <li className={`filter__project ${id}`} ref={projectEl}>
       <div className='filter__project-container' ref={containerEl} style={styleContainer}>
-        <Link href={'/project'}>
-          <a className='filter__project-link' title='/project'>
+        <Link href={'/portfolio/flashcards'}>
+          <a className='filter__project-link' title='/portfolio/flashcards'>
             <div className='filter__project-bar'>
               <h2>{name}</h2>
             </div>

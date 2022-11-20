@@ -13,12 +13,18 @@ type Props = OwnProps;
 
 const Arrows: FC<Props> = ({ onExited }) => {
   const router = useRouter();
-  const { pathname } = router;
+  const { asPath } = router;
+
+  console.log({ router });
+
+  // console.log(router);
 
   const {
     content_loader: { is_exited },
     show_navigation,
   } = useAppSelector(({ sslider }) => sslider);
+
+  // console.log(pathname);
 
   const showNavigation = is_exited && show_navigation;
   const timeout: number = 950;
@@ -33,8 +39,18 @@ const Arrows: FC<Props> = ({ onExited }) => {
     }
   }, [showNavigation]);
 
-  const nextPathname = getPath(pathname, 1);
-  const prevPathname = getPath(pathname, -1);
+  const nextPathname = getPath(asPath, 1); // UseMemo??
+  const prevPathname = getPath(asPath, -1); // UseMemo??
+
+  // console.log({ nextPathname, prevPathname, asPath });
+
+  const isRightEnd = nextPathname === asPath;
+  const isLeftEnd = prevPathname === asPath;
+
+  console.log({ nextPathname, asPath, prevPathname, showNavigation });
+
+  const inRight = !isRightEnd && showNavigation;
+  const inLeft = !isLeftEnd && showNavigation;
 
   const onClickRightArrow: MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault();
@@ -52,7 +68,7 @@ const Arrows: FC<Props> = ({ onExited }) => {
     <>
       <CSSTransition
         classNames={'arrow__right'}
-        in={showNavigation}
+        in={inRight}
         timeout={timeout}
         onExited={onExited}
         appear
@@ -72,8 +88,9 @@ const Arrows: FC<Props> = ({ onExited }) => {
       </CSSTransition>
       <CSSTransition
         classNames={'arrow__left'}
+        in={inLeft}
         timeout={timeout}
-        in={showNavigation}
+        onExited={onExited}
         appear
       >
         <div className='arrow__left'>
