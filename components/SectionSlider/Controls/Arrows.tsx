@@ -15,7 +15,7 @@ const Arrows: FC<Props> = ({ onExited }) => {
   const router = useRouter();
   const { asPath } = router;
 
-  console.log({ router });
+  // console.log({ router });
 
   // console.log(router);
 
@@ -47,7 +47,7 @@ const Arrows: FC<Props> = ({ onExited }) => {
   const isRightEnd = nextPathname === asPath;
   const isLeftEnd = prevPathname === asPath;
 
-  console.log({ nextPathname, asPath, prevPathname, showNavigation });
+  // console.log({ nextPathname, asPath, prevPathname, showNavigation });
 
   const inRight = !isRightEnd && showNavigation;
   const inLeft = !isLeftEnd && showNavigation;

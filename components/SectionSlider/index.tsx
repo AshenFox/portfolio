@@ -31,7 +31,7 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   } = useAppSelector(({ sslider }) => sslider);
 
   const router = useRouter();
-  const { pathname } = router;
+  const { asPath: pathname } = router;
 
   const isReadyRef = useRef(router.isReady);
   isReadyRef.current = router.isReady;
@@ -55,6 +55,11 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
     pathname,
     Component,
   });
+
+  /* console.log(
+    { router, Rendered, Received, Component },
+    Component === Rendered.Component
+  ); */
 
   const pathsList = useRef(new Set([pathname]));
 
@@ -124,7 +129,7 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
         set_show_menu(false);
       } else {
         if (RenderedRef.current.pathname !== path && isReadyRef.current) {
-          console.log(RenderedRef.current.pathname, { path });
+          // console.log(RenderedRef.current.pathname, { path });
           set_show_navigation(false);
         }
       }
@@ -138,7 +143,15 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   }, []);
 
   useEffect(() => {
-    if (!Received && Component.name !== Rendered.Component.name) {
+    /* console.log(
+      'use Effect',
+      { Received, Component, Rendered },
+      Component !== Rendered.Component
+    ); */
+    console.log('use effect', { pathname });
+
+    if (!Received && loadingPathname.current !== Rendered.pathname) {
+      // Component.name !== Rendered.Component.name
       // Add the incoming path into pathlist history
       pathsList.current.add(pathname);
 
@@ -148,7 +161,7 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
       // Add a new component
       setReceived({ pathname, Component });
     }
-  }, [Component, Received]);
+  }, [Component, Received, pathname]);
 
   useEffect(() => {
     if (Received && immediateTransition && !show_section_loader) {
@@ -163,9 +176,16 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
     }
   }, [is_exited]);
 
+  useEffect(() => {
+    // console.log(router);
+  }, [router]);
+
   // ===================
   // ===================
   // ===================
+
+  // console.log({ Component });
+  console.log(' ========== ');
 
   return (
     <>
