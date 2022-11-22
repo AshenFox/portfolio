@@ -14,11 +14,15 @@ import PageLoader from './SectionLoader';
 interface ComponentWithPathname {
   Component: NextComponentType<NextPageContext, any, {}>;
   pathname: string;
+  uniqueID: number;
+  isFirstRender?: boolean;
 }
 
 interface OwnProps {}
 
 type Props = OwnProps & AppProps;
+
+let uniqueID = 0;
 
 const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   const { set_show_section_loader, set_show_navigation, set_show_menu, set_direction } =
@@ -31,10 +35,10 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   } = useAppSelector(({ sslider }) => sslider);
 
   const router = useRouter();
-  const { asPath: pathname } = router;
+  const { asPath: pathname, isReady, query } = router;
 
-  const isReadyRef = useRef(router.isReady);
-  isReadyRef.current = router.isReady;
+  const isReadyRef = useRef(router.isReady); //?????????
+  isReadyRef.current = router.isReady; //?????????
 
   // console.log({ pathname, router });
 
@@ -54,6 +58,8 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   const [Rendered, setRendered, RenderedRef] = useStateWithRef<ComponentWithPathname>({
     pathname,
     Component,
+    uniqueID: Math.random(),
+    isFirstRender: true,
   });
 
   /* console.log(
@@ -121,6 +127,11 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   // ===================
 
   useEffect(() => {
+    console.log('Fix rendered');
+    if (isReady) setRendered({ ...Rendered, pathname, isFirstRender: false });
+  }, [isReady]);
+
+  useEffect(() => {
     const loadingStart = (url: string) => {
       const path = url.match(/^[^?]*/g)[0];
       loadingPathname.current = path;
@@ -148,9 +159,13 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
       { Received, Component, Rendered },
       Component !== Rendered.Component
     ); */
-    console.log('use effect', { pathname });
+    console.log('use effect', { pathname }, loadingPathname.current);
 
-    if (!Received && loadingPathname.current !== Rendered.pathname) {
+    if (
+      !Received &&
+      loadingPathname.current !== Rendered.pathname &&
+      !Rendered.isFirstRender
+    ) {
       // Component.name !== Rendered.Component.name
       // Add the incoming path into pathlist history
       pathsList.current.add(pathname);
@@ -159,7 +174,8 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
       set_direction(pathname, Rendered.pathname);
 
       // Add a new component
-      setReceived({ pathname, Component });
+      console.log('Set Received!');
+      setReceived({ pathname, Component, uniqueID: Math.random() }); //
     }
   }, [Component, Received, pathname]);
 
@@ -176,15 +192,11 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
     }
   }, [is_exited]);
 
-  useEffect(() => {
-    // console.log(router);
-  }, [router]);
-
   // ===================
   // ===================
   // ===================
 
-  // console.log({ Component });
+  console.log({ Rendered, Received });
   console.log(' ========== ');
 
   return (
@@ -194,7 +206,7 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
       <div className='section-slider'>
         <TransitionGroup component={null}>
           <CSSTransition
-            key={Rendered.pathname}
+            key={Rendered.uniqueID}
             classNames='section-slider__section'
             timeout={timeout}
             onExited={onSectionExited}

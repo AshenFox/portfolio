@@ -41,8 +41,6 @@ export const getDir = (pathname_to: string, pathname_from: string): Direction =>
     const pathname_to_part = pathname_to_arr[i];
     const pathname_from_part = pathname_from_arr[i];
 
-    console.log({ routes_list_to, routes_list_from });
-
     const route_to_i = routes_list_to.findIndex((el) => el.path === pathname_to_part);
     const route_from_i = routes_list_from.findIndex(
       (el) => el.path === pathname_from_part
