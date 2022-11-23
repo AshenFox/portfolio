@@ -129,13 +129,13 @@ const TypeWriterText: FC<Props> = () => {
     }, 0)
   );
 
-  const [show, setShow] = useState(0);
+  const [show, setShow] = useState(326); // 326
 
   useEffect(() => {
-    if (show < allChar && content_loaded && is_exited && show_navigation)
+    /* if (show < allChar && content_loaded && is_exited && show_navigation)
       setTimeout(() => {
         setShow((prev) => prev + 1);
-      }, 10);
+      }, 10); */
   }, [show, content_loaded, is_exited, show_navigation]);
 
   let rangeStart = 0;

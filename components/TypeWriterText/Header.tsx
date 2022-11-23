@@ -21,6 +21,8 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, TagName, classStr
     <Char key={rangeStart} active={rangeStart <= show} isCursor={rangeStart === show} />,
   ];
 
+  const linksActive = show >= rangeEnd;
+
   let charNumber = rangeStart + 1;
 
   const wrapArrOfChar = (
@@ -57,7 +59,11 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, TagName, classStr
     charElArr = [...charElArr, ...wrapArrOfChar(charElEndArr, el, i)];
   });
 
-  return <TagName className={classStr}>{charElArr}</TagName>;
+  return (
+    <TagName className={classStr + ' ' + (linksActive ? 'active' : '')}>
+      {charElArr}
+    </TagName>
+  );
 };
 
 export default Header;

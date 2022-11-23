@@ -32,10 +32,16 @@ const Arrows: FC<Props> = ({ onExited }) => {
   const [isRightActive, setIsRightActive] = useState(true);
   const [isLeftActive, setIsLeftActive] = useState(true);
 
+  const [isRightEnd, setIsRightEnd] = useState(false);
+  const [isLeftEnd, setIsLeftEnd] = useState(false);
+
   useEffect(() => {
     if (showNavigation) {
       setIsRightActive(true);
       setIsLeftActive(true);
+
+      setIsRightEnd(nextPathname === asPath);
+      setIsLeftEnd(prevPathname === asPath);
     }
   }, [showNavigation]);
 
@@ -44,8 +50,8 @@ const Arrows: FC<Props> = ({ onExited }) => {
 
   // console.log({ nextPathname, prevPathname, asPath });
 
-  const isRightEnd = nextPathname === asPath;
-  const isLeftEnd = prevPathname === asPath;
+  // const isRightEnd = nextPathname === asPath;
+  // const isLeftEnd = prevPathname === asPath;
 
   // console.log({ nextPathname, asPath, prevPathname, showNavigation });
 

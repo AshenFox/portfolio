@@ -1,15 +1,23 @@
-import React, { FC } from 'react';
+import { useRouter } from 'next/router';
+import React, { FC, useEffect, useRef } from 'react';
 import Button from '../../components/Button';
 import ContactFooter from '../../components/ContactFooter';
 import ImageSlider from '../../components/ImageSlider';
 import Section, { Props } from '../../components/SectionSlider/Section';
 
 const Project: FC<Props> = (props) => {
+  const { query, isReady } = useRouter();
+
+  const { _id } = query;
+
+  const _idRef = useRef<string | string[]>();
+  if (_id && !_idRef.current) _idRef.current = _id;
+
   return (
     <Section classNameStr={'project'} {...props}>
       <div className='page__container'>
         <header className='project__header'>
-          <h1 className='project__title'>flashcards</h1>
+          <h1 className='project__title'>{_idRef.current}</h1>
           <h3 className='project__description'>
             Built with custom VanillaJS Web Components and written entirely on Javascript,
             this website is a showcase of my recent projects as a Full-Stack Web

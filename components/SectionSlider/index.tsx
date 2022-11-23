@@ -13,8 +13,8 @@ import PageLoader from './SectionLoader';
 
 interface ComponentWithPathname {
   Component: NextComponentType<NextPageContext, any, {}>;
-  pathname: string;
-  uniqueID: number;
+  path: string;
+  id: number;
   isFirstRender?: boolean;
 }
 
@@ -22,7 +22,9 @@ interface OwnProps {}
 
 type Props = OwnProps & AppProps;
 
-let uniqueID = 0;
+let unique = {
+  id: 0,
+};
 
 const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   const { set_show_section_loader, set_show_navigation, set_show_menu, set_direction } =
@@ -35,14 +37,12 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   } = useAppSelector(({ sslider }) => sslider);
 
   const router = useRouter();
-  const { asPath: pathname, isReady, query } = router;
+  const { asPath: path, isReady } = router;
 
   const isReadyRef = useRef(router.isReady); //?????????
   isReadyRef.current = router.isReady; //?????????
 
-  // console.log({ pathname, router });
-
-  const loadingPathname = useRef(pathname);
+  const loadingPath = useRef(path);
 
   // ============================
   // ===== State/Ref/Values =====
@@ -56,18 +56,13 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
     useStateWithRef<ComponentWithPathname>(null);
   // Rendered Component
   const [Rendered, setRendered, RenderedRef] = useStateWithRef<ComponentWithPathname>({
-    pathname,
+    path,
     Component,
-    uniqueID: Math.random(),
+    id: unique.id,
     isFirstRender: true,
   });
 
-  /* console.log(
-    { router, Rendered, Received, Component },
-    Component === Rendered.Component
-  ); */
-
-  const pathsList = useRef(new Set([pathname]));
+  const pathsList = useRef(new Set([path]));
 
   const timeout: number = 825;
 
@@ -90,25 +85,25 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   };
 
   const onArrowExited = () => {
-    if (visited(loadingPathname.current) && Received && !show_section_loader) {
+    if (visited(loadingPath.current) && Received && !show_section_loader) {
       setRendered({ ...Received });
-    } else {
+    } else if (loadingPath.current !== Rendered.path) {
       set_show_section_loader(true);
     }
   };
 
   const onBurgerExited = () =>
-    loadingPathname.current !== Rendered.pathname && set_show_navigation(false); // ???????!!!!!!!!!!!
+    loadingPath.current !== Rendered.path && set_show_navigation(false); // ???????!!!!!!!!!!!
 
   const onSectionExited = () => {
     if (
-      loadingPathname.current === ReceivedRef.current.pathname &&
+      loadingPath.current === ReceivedRef.current.path &&
       ReceivedRef.current.Component.name === Component.name
     ) {
       set_show_navigation(true);
       setImmediateTransition(false);
     } else {
-      if (visited(loadingPathname.current)) {
+      if (visited(loadingPath.current)) {
         setImmediateTransition(true);
       } else {
         set_show_section_loader(true);
@@ -127,20 +122,18 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   // ===================
 
   useEffect(() => {
-    console.log('Fix rendered');
-    if (isReady) setRendered({ ...Rendered, pathname, isFirstRender: false });
+    if (isReady) setRendered({ ...Rendered, path, isFirstRender: false });
   }, [isReady]);
 
   useEffect(() => {
     const loadingStart = (url: string) => {
       const path = url.match(/^[^?]*/g)[0];
-      loadingPathname.current = path;
+      loadingPath.current = path;
 
       if (showMenuRef.current) {
         set_show_menu(false);
       } else {
-        if (RenderedRef.current.pathname !== path && isReadyRef.current) {
-          // console.log(RenderedRef.current.pathname, { path });
+        if (RenderedRef.current.path !== path && isReadyRef.current) {
           set_show_navigation(false);
         }
       }
@@ -154,33 +147,22 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   }, []);
 
   useEffect(() => {
-    /* console.log(
-      'use Effect',
-      { Received, Component, Rendered },
-      Component !== Rendered.Component
-    ); */
-    console.log('use effect', { pathname }, loadingPathname.current);
-
-    if (
-      !Received &&
-      loadingPathname.current !== Rendered.pathname &&
-      !Rendered.isFirstRender
-    ) {
-      // Component.name !== Rendered.Component.name
+    if (!Received && loadingPath.current !== Rendered.path && !Rendered.isFirstRender) {
       // Add the incoming path into pathlist history
-      pathsList.current.add(pathname);
+      pathsList.current.add(path);
 
       // Find new direction
-      set_direction(pathname, Rendered.pathname);
+      set_direction(path, Rendered.path);
 
       // Add a new component
-      console.log('Set Received!');
-      setReceived({ pathname, Component, uniqueID: Math.random() }); //
+      unique.id += 1;
+      setReceived({ path, Component, id: unique.id }); //
     }
-  }, [Component, Received, pathname]);
+  }, [Component, Received, path]);
 
   useEffect(() => {
     if (Received && immediateTransition && !show_section_loader) {
+      console.log('fire!');
       setRendered({ ...Received });
       setImmediateTransition(false);
     }
@@ -190,14 +172,11 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
     if (Received) {
       setRendered({ ...Received });
     }
-  }, [is_exited]);
+  }, [is_exited]); // ???????????
 
   // ===================
   // ===================
   // ===================
-
-  console.log({ Rendered, Received });
-  console.log(' ========== ');
 
   return (
     <>
@@ -206,7 +185,7 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
       <div className='section-slider'>
         <TransitionGroup component={null}>
           <CSSTransition
-            key={Rendered.uniqueID}
+            key={Rendered.id}
             classNames='section-slider__section'
             timeout={timeout}
             onExited={onSectionExited}
@@ -218,7 +197,7 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
 
       <PageLoader onAnimationIteration={onLoaderAnimationIteration} />
 
-      <ContentLoader />
+      {/* <ContentLoader /> */}
     </>
   );
 };
