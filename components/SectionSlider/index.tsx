@@ -197,7 +197,7 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
 
       <PageLoader onAnimationIteration={onLoaderAnimationIteration} />
 
-      {/* <ContentLoader /> */}
+      <ContentLoader />
     </>
   );
 };

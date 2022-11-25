@@ -124,8 +124,18 @@ export interface ChangeActiveFieldAction {
   };
 }
 
+export type ContactFormActions =
+  | SetTextareaValueAction
+  | SetFormFieldValueAction
+  | SetActiveFieldAction
+  | SetActiveFieldIserrorAction
+  | SetActiveFieldTransitionedAction
+  | GoToNextAction
+  | ChangeActiveFieldAction;
+
 // game
 export const SET_CURSOR_POSITION = 'SET_CURSOR_POSITION';
+export const SET_BARRIER_DIMENSIONS = 'SET_BARRIER_DIMENSIONS';
 
 export interface SetCursorPositionAction {
   type: typeof SET_CURSOR_POSITION;
@@ -135,16 +145,17 @@ export interface SetCursorPositionAction {
   };
 }
 
-export type GameActions = SetCursorPositionAction;
+export interface SetBarrierDimensionsAction {
+  type: typeof SET_BARRIER_DIMENSIONS;
+  payload: {
+    x: number;
+    y: number;
+    height: number;
+    width: number;
+  };
+}
 
-export type ContactFormActions =
-  | SetTextareaValueAction
-  | SetFormFieldValueAction
-  | SetActiveFieldAction
-  | SetActiveFieldIserrorAction
-  | SetActiveFieldTransitionedAction
-  | GoToNextAction
-  | ChangeActiveFieldAction;
+export type GameActions = SetCursorPositionAction | SetBarrierDimensionsAction;
 
 // ===========
 

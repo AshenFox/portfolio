@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useRef, useState, memo } from 'react';
+import { createDots } from '../../pages';
 import { useActions } from '../../store/hooks';
 
 interface OwnProps {
@@ -25,6 +26,24 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
 
     set_cursor_position(x + width, y);
   };
+
+  useEffect(() => {
+    if (active && children) {
+      const rect = charElRef.current.getBoundingClientRect();
+
+      const { x, y, width, height } = rect;
+
+      createDots(
+        Math.round(x + width / 2),
+        Math.round(y + height),
+        2,
+        2.5,
+        5,
+        3,
+        'white'
+      );
+    }
+  }, [active]);
 
   useEffect(() => {
     if (!resizeListenerRef.current && isCursor) {

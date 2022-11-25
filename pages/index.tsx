@@ -4,6 +4,7 @@ import FancyLink from '../components/FancyLink';
 import Section, { Props } from '../components/SectionSlider/Section';
 import SideLinks from '../components/SideLinks';
 import TypeWriterText from '../components/TypeWriterText';
+import { useActions } from '../store/hooks';
 
 interface IPos {
   x: number;
@@ -35,82 +36,18 @@ let prevTime = 0;
 const accelX = 0;
 const accelY = 0.2;
 
-const maxSpeedX = 5;
+const maxSpeedX = 20;
 const maxSpeedY = 20;
 
-const minBounceSpeedX = 2;
-const minBounceSpeedY = 2;
+const minBounceSpeedX = 3.5;
+const minBounceSpeedY = 3.5;
 
-const barrier: IRect = {
-  x: 305,
-  y: 700,
-  w: 300,
-  h: 50,
-};
+const bounceX = 0.45;
+const bounceY = 0.45;
 
 let dotArr: TDotArr = [];
 
-for (let i = 0; i <= 300; i++) {
-  dotArr.push(
-    {
-      x: 0 + i * 5,
-      y: 10,
-      w: 2,
-      h: 2,
-      speedX: 3,
-      speedY: 0,
-      color: 'white',
-    },
-    {
-      x: 0 + i * 5,
-      y: 10,
-      w: 2,
-      h: 2,
-      speedX: 4,
-      speedY: 0,
-      color: 'red',
-    },
-    {
-      x: 0 + i * 5,
-      y: 500,
-      w: 2,
-      h: 2,
-      speedX: 3,
-      speedY: 0,
-      color: 'yellow',
-    },
-    {
-      x: 0 + i * 5,
-      y: 600,
-      w: 2,
-      h: 2,
-      speedX: 3,
-      speedY: 0,
-      color: 'green',
-    },
-
-    {
-      x: 450 + i * 5,
-      y: 530,
-      w: 2,
-      h: 2,
-      speedX: -1,
-      speedY: 0,
-      color: 'orange',
-    },
-    {
-      x: 450 + i * 5,
-      y: 350,
-      w: 2,
-      h: 2,
-      speedX: -3,
-      speedY: 0,
-      color: 'skyblue',
-    }
-  );
-}
-
-const createDots = (
+export const createDots = (
   x: number,
   y: number,
   size: number,
@@ -118,7 +55,28 @@ const createDots = (
   speedY: number,
   num: number,
   color: string = 'white'
-) => {};
+) => {
+  const res: TDotArr = [];
+
+  const step = 0.5;
+  const spreadX = (num - 1) * step;
+  const startSpeedX = speedX - spreadX / 2;
+  const spreadY = 0.75;
+
+  for (let i = 0; i < num; i++) {
+    res.push({
+      x,
+      y,
+      w: size,
+      h: size,
+      speedX: startSpeedX + step * i,
+      speedY: speedY + ((step * i) % spreadY),
+      color,
+    });
+  }
+
+  dotArr.push(...res);
+};
 
 type TDir = 'top' | 'left' | 'right' | 'bottom';
 
@@ -164,9 +122,12 @@ const lineRectCol = (l: ILine, r: IRect) => {
 };
 
 const About: FC<Props> = (props) => {
+  const { set_barrier_dimensions } = useActions();
+
   const containerRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const ctxRef = useRef<CanvasRenderingContext2D>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const requestRef = useRef<number>();
 
@@ -174,7 +135,7 @@ const About: FC<Props> = (props) => {
     if (prevTime === 0) prevTime = time;
     let diff = time - prevTime;
     // const isFrame = diff > oneFrameTime;
-    console.log({ diff, oneFrameTime, res: diff / oneFrameTime });
+    // console.log({ diff, oneFrameTime, res: diff / oneFrameTime });
     // if (isFrame) prevTime = time;
     prevTime = time;
 
@@ -182,10 +143,6 @@ const About: FC<Props> = (props) => {
     const canvas = canvasRef.current;
 
     ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-
-    const { x, y, w, h } = barrier;
-    ctx.fillStyle = 'red';
-    ctx.fillRect(x, y, w, h);
 
     const moveDot = (dot: IDot) => {
       if (canvas.height > dot.y && canvas.width > dot.x) {
@@ -202,25 +159,29 @@ const About: FC<Props> = (props) => {
 
         const line: ILine = { a: { x: dot.x, y: dot.y }, b: { x: newX, y: newY } };
 
-        const col = lineRectCol(line, barrier);
+        const rect = buttonRef.current.getBoundingClientRect();
+
+        const { x, y, height, width } = rect;
+
+        const col = lineRectCol(line, { x, y, h: height, w: width });
 
         if (col) {
           const { type, pos } = col;
 
           if (type === 'top') {
-            dot.speedY = -Math.abs(Math.max(dot.speedY * 0.25, minBounceSpeedY));
+            dot.speedY = -Math.abs(Math.max(dot.speedY * bounceY, minBounceSpeedY));
             newX = pos.x;
             newY = pos.y - 0.01;
           } else if (type === 'left') {
-            dot.speedX = -Math.abs(Math.max(dot.speedX * 0.25, minBounceSpeedX));
+            dot.speedX = -Math.abs(Math.max(dot.speedX * bounceX, minBounceSpeedX));
             newX = pos.x - 0.01;
             newY = pos.y;
           } else if (type === 'right') {
-            dot.speedX = Math.abs(Math.max(dot.speedX * 0.25, minBounceSpeedX));
+            dot.speedX = Math.abs(Math.max(dot.speedX * bounceX, minBounceSpeedX));
             newX = pos.x + 0.01;
             newY = pos.y;
           } else if (type === 'bottom') {
-            dot.speedY = Math.abs(Math.max(dot.speedY * 0.25, minBounceSpeedY));
+            dot.speedY = Math.abs(Math.max(dot.speedY * bounceY, minBounceSpeedY));
             newX = pos.x;
             newY = pos.y + 0.01;
           }
@@ -246,6 +207,7 @@ const About: FC<Props> = (props) => {
 
     // if (isFrame) dotArr = dotArr.filter(moveDot);
     dotArr = dotArr.filter(moveDot);
+    // if (!dotArr.length) createDots(300, 400, 2, 3, 6, 5, 'white');
 
     // console.log(dotArr);
 
@@ -263,13 +225,23 @@ const About: FC<Props> = (props) => {
     ctxRef.current = canvasRef.current.getContext('2d');
     // const ctx = ctxRef.current;
 
-    setCanvasSize();
+    const onResize = () => {
+      setCanvasSize();
 
-    window.addEventListener('resize', setCanvasSize);
+      const rect = buttonRef.current.getBoundingClientRect();
+
+      const { x, y, height, width } = rect;
+
+      set_barrier_dimensions(x, y, height, width);
+    };
+
+    onResize();
+
+    window.addEventListener('resize', onResize);
 
     return () => {
       cancelAnimationFrame(requestID);
-      window.removeEventListener('resize', setCanvasSize);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 
@@ -280,17 +252,18 @@ const About: FC<Props> = (props) => {
           <TypeWriterText />
         </main>
         <SideLinks />
-        {/* <footer className='about__footer'>
+        <footer className='about__footer'>
           <Button
             isClicked={false}
             color='red'
             isBig={true}
             href={'/portfolio'}
             title={'Portfolio'}
+            ref={buttonRef}
           >
             see the portfolio
           </Button>
-        </footer> */}
+        </footer>
         <canvas ref={canvasRef} className='about__game-canvas'></canvas>
       </Section>
     </>
@@ -298,65 +271,3 @@ const About: FC<Props> = (props) => {
 };
 
 export default About;
-
-/* 
-
-const dotArr: TDotArr = [
-  {
-    x: 200,
-    y: 10,
-    w: 2,
-    h: 2,
-    speedX: 3,
-    speedY: 0,
-    color: 'white',
-  },
-  {
-    x: 200,
-    y: 10,
-    w: 2,
-    h: 2,
-    speedX: 4,
-    speedY: 0,
-    color: 'red',
-  },
-  {
-    x: 200,
-    y: 500,
-    w: 2,
-    h: 2,
-    speedX: 3,
-    speedY: 0,
-    color: 'yellow',
-  },
-  {
-    x: 200,
-    y: 600,
-    w: 2,
-    h: 2,
-    speedX: 3,
-    speedY: 0,
-    color: 'green',
-  },
-
-  {
-    x: 650,
-    y: 530,
-    w: 2,
-    h: 2,
-    speedX: -1,
-    speedY: 0,
-    color: 'orange',
-  },
-  {
-    x: 650,
-    y: 350,
-    w: 2,
-    h: 2,
-    speedX: -3,
-    speedY: 0,
-    color: 'skyblue',
-  },
-];
-
-*/
