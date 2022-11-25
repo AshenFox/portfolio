@@ -38,8 +38,8 @@ const accelY = 0.2;
 const maxSpeedX = 5;
 const maxSpeedY = 20;
 
-const minBounceSpeedX = 2.5;
-const minBounceSpeedY = 2.5;
+const minBounceSpeedX = 2;
+const minBounceSpeedY = 2;
 
 const barrier: IRect = {
   x: 305,
@@ -48,45 +48,77 @@ const barrier: IRect = {
   h: 50,
 };
 
-const dot: IDot = {
-  x: 200,
-  y: 10,
-  w: 3,
-  h: 3,
-  speedX: 3,
-  speedY: 0,
-  color: 'white',
-};
+let dotArr: TDotArr = [];
 
-const dotArr: TDotArr = [
-  {
-    x: 200,
-    y: 10,
-    w: 3,
-    h: 3,
-    speedX: 3,
-    speedY: 0,
-    color: 'white',
-  },
-  {
-    x: 200,
-    y: 10,
-    w: 3,
-    h: 3,
-    speedX: 4,
-    speedY: 0,
-    color: 'red',
-  },
-  {
-    x: 200,
-    y: 500,
-    w: 3,
-    h: 3,
-    speedX: 3,
-    speedY: 0,
-    color: 'yellow',
-  },
-];
+for (let i = 0; i <= 300; i++) {
+  dotArr.push(
+    {
+      x: 0 + i * 5,
+      y: 10,
+      w: 2,
+      h: 2,
+      speedX: 3,
+      speedY: 0,
+      color: 'white',
+    },
+    {
+      x: 0 + i * 5,
+      y: 10,
+      w: 2,
+      h: 2,
+      speedX: 4,
+      speedY: 0,
+      color: 'red',
+    },
+    {
+      x: 0 + i * 5,
+      y: 500,
+      w: 2,
+      h: 2,
+      speedX: 3,
+      speedY: 0,
+      color: 'yellow',
+    },
+    {
+      x: 0 + i * 5,
+      y: 600,
+      w: 2,
+      h: 2,
+      speedX: 3,
+      speedY: 0,
+      color: 'green',
+    },
+
+    {
+      x: 450 + i * 5,
+      y: 530,
+      w: 2,
+      h: 2,
+      speedX: -1,
+      speedY: 0,
+      color: 'orange',
+    },
+    {
+      x: 450 + i * 5,
+      y: 350,
+      w: 2,
+      h: 2,
+      speedX: -3,
+      speedY: 0,
+      color: 'skyblue',
+    }
+  );
+}
+
+const createDots = (
+  x: number,
+  y: number,
+  size: number,
+  speedX: number,
+  speedY: number,
+  num: number,
+  color: string = 'white'
+) => {};
 
 type TDir = 'top' | 'left' | 'right' | 'bottom';
 
@@ -134,28 +166,36 @@ const lineRectCol = (l: ILine, r: IRect) => {
 const About: FC<Props> = (props) => {
   const containerRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const ctx = useRef<CanvasRenderingContext2D>(null);
+  const ctxRef = useRef<CanvasRenderingContext2D>(null);
 
   const requestRef = useRef<number>();
 
   const animate: FrameRequestCallback = (time) => {
-    const diff = time - prevTime;
-    const isFrame = diff > oneFrameTime;
+    if (prevTime === 0) prevTime = time;
+    let diff = time - prevTime;
+    // const isFrame = diff > oneFrameTime;
+    console.log({ diff, oneFrameTime, res: diff / oneFrameTime });
+    // if (isFrame) prevTime = time;
+    prevTime = time;
+
+    const ctx = ctxRef.current;
+    const canvas = canvasRef.current;
+
+    ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+
+    const { x, y, w, h } = barrier;
+    ctx.fillStyle = 'red';
+    ctx.fillRect(x, y, w, h);
 
     const moveDot = (dot: IDot) => {
-      if (
-        isFrame &&
-        canvasRef.current.height > dot.y &&
-        canvasRef.current.width > dot.x
-      ) {
-        prevTime = time;
-        // ctx.current.clearRect(x, y, xSize, ySize);
-        // ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      if (canvas.height > dot.y && canvas.width > dot.x) {
+        // ctx.clearRect(x, y, xSize, ySize);
+        // ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        ctx.current.fillStyle = dot.color;
-
-        dot.speedX = Math.min(dot.speedX + accelX, maxSpeedX);
-        dot.speedY = Math.min(dot.speedY + accelY, maxSpeedY);
+        ctx.fillStyle = dot.color;
+        const accelK = diff / oneFrameTime;
+        dot.speedX = Math.min(dot.speedX + accelX * accelK, maxSpeedX);
+        dot.speedY = Math.min(dot.speedY + accelY * accelK, maxSpeedY);
 
         let newX = dot.x + dot.speedX;
         let newY = dot.y + dot.speedY;
@@ -164,28 +204,50 @@ const About: FC<Props> = (props) => {
 
         const col = lineRectCol(line, barrier);
 
-        if (dot.color === 'yellow' && col) {
-          console.log({ col, barrier, line });
-        }
-
         if (col) {
           const { type, pos } = col;
 
           if (type === 'top') {
-            dot.speedY = Math.min(-dot.speedY * 0.25, -minBounceSpeedY);
+            dot.speedY = -Math.abs(Math.max(dot.speedY * 0.25, minBounceSpeedY));
             newX = pos.x;
-            newY = pos.y - 0.1;
+            newY = pos.y - 0.01;
+          } else if (type === 'left') {
+            dot.speedX = -Math.abs(Math.max(dot.speedX * 0.25, minBounceSpeedX));
+            newX = pos.x - 0.01;
+            newY = pos.y;
+          } else if (type === 'right') {
+            dot.speedX = Math.abs(Math.max(dot.speedX * 0.25, minBounceSpeedX));
+            newX = pos.x + 0.01;
+            newY = pos.y;
+          } else if (type === 'bottom') {
+            dot.speedY = Math.abs(Math.max(dot.speedY * 0.25, minBounceSpeedY));
+            newX = pos.x;
+            newY = pos.y + 0.01;
           }
         }
 
         dot.x = newX;
         dot.y = newY;
 
-        ctx.current.fillRect(dot.x - dot.w / 2, dot.y - dot.h / 2, dot.w, dot.h);
+        ctx.fillRect(
+          Math.round(dot.x - dot.w / 2),
+          Math.round(dot.y - dot.h / 2),
+          dot.w,
+          dot.h
+        );
+
+        return true;
+      } else {
+        return false;
       }
     };
 
-    dotArr.forEach(moveDot);
+    // console.log(dotArr);
+
+    // if (isFrame) dotArr = dotArr.filter(moveDot);
+    dotArr = dotArr.filter(moveDot);
+
+    // console.log(dotArr);
 
     requestRef.current = requestAnimationFrame(animate);
   };
@@ -198,13 +260,10 @@ const About: FC<Props> = (props) => {
   useEffect(() => {
     const requestID = requestAnimationFrame(animate);
 
-    ctx.current = canvasRef.current.getContext('2d');
+    ctxRef.current = canvasRef.current.getContext('2d');
+    // const ctx = ctxRef.current;
 
     setCanvasSize();
-
-    const { x, y, w, h } = barrier;
-    ctx.current.fillStyle = 'red';
-    ctx.current.fillRect(x, y, w, h);
 
     window.addEventListener('resize', setCanvasSize);
 
@@ -239,3 +298,65 @@ const About: FC<Props> = (props) => {
 };
 
 export default About;
+
+/* 
+
+const dotArr: TDotArr = [
+  {
+    x: 200,
+    y: 10,
+    w: 2,
+    h: 2,
+    speedX: 3,
+    speedY: 0,
+    color: 'white',
+  },
+  {
+    x: 200,
+    y: 10,
+    w: 2,
+    h: 2,
+    speedX: 4,
+    speedY: 0,
+    color: 'red',
+  },
+  {
+    x: 200,
+    y: 500,
+    w: 2,
+    h: 2,
+    speedX: 3,
+    speedY: 0,
+    color: 'yellow',
+  },
+  {
+    x: 200,
+    y: 600,
+    w: 2,
+    h: 2,
+    speedX: 3,
+    speedY: 0,
+    color: 'green',
+  },
+
+  {
+    x: 650,
+    y: 530,
+    w: 2,
+    h: 2,
+    speedX: -1,
+    speedY: 0,
+    color: 'orange',
+  },
+  {
+    x: 650,
+    y: 350,
+    w: 2,
+    h: 2,
+    speedX: -3,
+    speedY: 0,
+    color: 'skyblue',
+  },
+];
+
+*/
