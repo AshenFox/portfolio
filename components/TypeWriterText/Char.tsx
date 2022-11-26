@@ -16,6 +16,7 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
   // const moveCursorRef = useRef(false);
   const charElRef = useRef<HTMLSpanElement>(null);
   const resizeListenerRef = useRef<(e: Event) => void>(null);
+  const computedStyleRef = useRef<CSSStyleDeclaration>(null);
 
   // console.log({ isCursor });
 
@@ -33,14 +34,17 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
 
       const { x, y, width, height } = rect;
 
+      const color = computedStyleRef.current.getPropertyValue('color');
+
       createDots(
         Math.round(x + width / 2),
-        Math.round(y + height),
-        2,
+        Math.round(y + height / 2),
+        1,
         2.5,
-        5,
-        3,
-        'white'
+        4.5,
+        2,
+        color,
+        children.charCodeAt(0)
       );
     }
   }, [active]);
@@ -65,6 +69,10 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
     };
   }, [isCursor]);
 
+  useEffect(() => {
+    computedStyleRef.current = window.getComputedStyle(charElRef.current);
+  }, []);
+
   return (
     <span className={`about__char ${active ? 'active' : ''}`} ref={charElRef}>
       {children}
@@ -73,31 +81,3 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
 };
 
 export default memo(Char);
-
-/* 
-
-
-const observer = new ResizeObserver((entries) => {
-      if (entries.length) {
-        const [
-          {
-            contentRect: { height },
-          },
-        ] = entries;
-
-        const transition = 'all 1s ease-in-out';
-
-        setContainerStyle((prev) => ({
-          height: height,
-          transition: height < prev.height ? transition : '',
-        }));
-      }
-    });
-
-    observer.observe(el);
-
-    return () => {
-      observer.disconnect();
-    };
-
-*/

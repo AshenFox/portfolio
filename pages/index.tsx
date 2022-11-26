@@ -39,8 +39,11 @@ const accelY = 0.2;
 const maxSpeedX = 20;
 const maxSpeedY = 20;
 
-const minBounceSpeedX = 3.5;
-const minBounceSpeedY = 3.5;
+const minSpeedX = 1.5;
+const minSpeedY = 1.5;
+
+const minBounceSpeedX = 1.5;
+const minBounceSpeedY = 1.5;
 
 const bounceX = 0.45;
 const bounceY = 0.45;
@@ -54,23 +57,24 @@ export const createDots = (
   speedX: number,
   speedY: number,
   num: number,
-  color: string = 'white'
+  color: string = 'white',
+  seed: number
 ) => {
   const res: TDotArr = [];
 
-  const step = 0.5;
-  const spreadX = (num - 1) * step;
-  const startSpeedX = speedX - spreadX / 2;
-  const spreadY = 0.75;
+  const spreadX = num * 2.2;
+  const spreadY = 1.75;
 
   for (let i = 0; i < num; i++) {
+    const dotSeed = seed + i;
+
     res.push({
       x,
       y,
-      w: size,
-      h: size,
-      speedX: startSpeedX + step * i,
-      speedY: speedY + ((step * i) % spreadY),
+      w: size + (dotSeed % 3),
+      h: size + (dotSeed % 3),
+      speedX: speedX + (dotSeed % spreadX),
+      speedY: speedY + (dotSeed % spreadY),
       color,
     });
   }
