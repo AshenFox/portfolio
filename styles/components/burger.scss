@@ -1,5 +1,5 @@
 .burger {
-  padding: 5px 4px;
+  // padding: 5px 4px;
   cursor: pointer;
 
   &__container {
@@ -7,6 +7,24 @@
     top: 5rem;
     right: 8rem;
     z-index: 1100;
+
+    @media (max-width: $laptop-l) {
+      top: 3.5rem;
+      right: 4rem;
+    }
+
+    @media (max-width: $laptop-l) {
+      right: 3rem;
+    }
+
+    @media (max-width: $tablet) {
+      top: auto;
+      right: 2rem;
+      bottom: 3.5rem;
+      background-color: $menu-button-color;
+      padding: 1rem;
+      border-radius: 100%;
+    }
   }
 
   &__click {
@@ -27,6 +45,10 @@
     transition: transform 0.45s cubic-bezier(0.43, 0.77, 0.15, 1.5),
       background-color 0.3s ease; // background-color?
     transform: translateX(150px);
+
+    @media (max-width: $tablet) {
+      width: 24px;
+    }
   }
 
   &-exit,

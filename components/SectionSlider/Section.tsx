@@ -1,4 +1,12 @@
-import React, { FC, ReactNode, useEffect, Dispatch } from 'react';
+import React, {
+  FC,
+  ReactNode,
+  useEffect,
+  Dispatch,
+  forwardRef,
+  ForwardRefExoticComponent,
+  RefAttributes,
+} from 'react';
 import Granim from 'granim';
 import { AppProps } from 'next/app';
 import { useActions, useAppSelector } from '../../store/hooks';
@@ -29,40 +37,42 @@ interface OwnProps {
 
 export type Props = OwnProps & AppProps;
 
-const Section: FC<Props> = ({ children, classNameStr = '' }) => {
-  const { set_content_loaded } = useActions();
+const Section = forwardRef<HTMLDivElement, Props>(
+  ({ children, classNameStr = '' }, ref) => {
+    const { set_content_loaded } = useActions();
 
-  const { dir } = useAppSelector(({ sslider }) => sslider);
+    const { dir } = useAppSelector(({ sslider }) => sslider);
 
-  const granimClassName = 'granim-' + classNameStr;
+    const granimClassName = 'granim-' + classNameStr;
 
-  useEffect(() => {
-    set_content_loaded(true);
-  }, []);
+    useEffect(() => {
+      set_content_loaded(true);
+    }, []);
 
-  useEffect(() => {
-    const granimInstance = new Granim({
-      element: '.' + granimClassName,
-      name: 'granim',
-      /* opacity: [1, 1], */
-      states: {
-        'default-state': {
-          gradients: gradients3,
+    useEffect(() => {
+      const granimInstance = new Granim({
+        element: '.' + granimClassName,
+        name: 'granim',
+        /* opacity: [1, 1], */
+        states: {
+          'default-state': {
+            gradients: gradients3,
+          },
         },
-      },
-    });
-  }, []);
+      });
+    }, []);
 
-  return (
-    <section className={`section-slider__section ${dir} ${classNameStr}`}>
-      <div className='section-slider__frame'>
-        <div className='section-slider__frame-inner'>
-          <canvas className={`section-slider__granim ${granimClassName}`} />
-          {children}
+    return (
+      <section className={`section-slider__section ${dir} ${classNameStr}`}>
+        <div className='section-slider__frame'>
+          <div className='section-slider__frame-inner' ref={ref}>
+            <canvas className={`section-slider__granim ${granimClassName}`} />
+            {children}
+          </div>
         </div>
-      </div>
-    </section>
-  );
-};
+      </section>
+    );
+  }
+);
 
 export default Section;

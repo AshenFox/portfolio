@@ -10,7 +10,7 @@ const About: FC<Props> = (props) => {
   const { set_barrier_dimensions, set_game_container_dimensions } = useActions();
   const { show_navigation } = useAppSelector(({ sslider }) => sslider);
 
-  const containerRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const updateGameContinaerDimen = () => {
@@ -50,11 +50,10 @@ const About: FC<Props> = (props) => {
 
   return (
     <>
-      <Section classNameStr={'about'} {...props}>
-        <main className='about__container' ref={containerRef}>
+      <Section classNameStr={'about'} {...props} ref={containerRef}>
+        <main className='about__main'>
           <TypeWriterText />
         </main>
-        <SideLinks />
         <footer className='about__footer'>
           <Button
             isClicked={false}
@@ -67,6 +66,8 @@ const About: FC<Props> = (props) => {
             see the portfolio
           </Button>
         </footer>
+        <SideLinks />
+
         <FallingParticles />
       </Section>
     </>
