@@ -1,5 +1,9 @@
 import { GameActions } from './../../types/types';
-import { SET_CURSOR_POSITION, SET_BARRIER_DIMENSIONS } from '../../types/types';
+import {
+  SET_CURSOR_POSITION,
+  SET_BARRIER_DIMENSIONS,
+  SET_GAME_CONTAINER_DIMENSIONS,
+} from '../../types/types';
 import initialState, { GameState } from './gameInitState';
 
 const gameReducer = (state = initialState, action: GameActions): GameState => {
@@ -21,6 +25,15 @@ const gameReducer = (state = initialState, action: GameActions): GameState => {
         barrier_dimensions: {
           x: payload.x,
           y: payload.y,
+          height: payload.height,
+          width: payload.width,
+        },
+      };
+
+    case SET_GAME_CONTAINER_DIMENSIONS:
+      return {
+        ...state,
+        game_container_dimensions: {
           height: payload.height,
           width: payload.width,
         },

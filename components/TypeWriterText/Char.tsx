@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useRef, useState, memo } from 'react';
-import { createDots } from '../../pages';
+
 import { useActions } from '../../store/hooks';
+import { createDots } from '../FallingParticles';
 
 interface OwnProps {
   active: boolean;
@@ -13,12 +14,9 @@ type Props = OwnProps;
 const Char: FC<Props> = ({ active, children, isCursor }) => {
   const { set_cursor_position } = useActions();
 
-  // const moveCursorRef = useRef(false);
   const charElRef = useRef<HTMLSpanElement>(null);
   const resizeListenerRef = useRef<(e: Event) => void>(null);
   const computedStyleRef = useRef<CSSStyleDeclaration>(null);
-
-  // console.log({ isCursor });
 
   const updateCursorPosition = () => {
     const rect = charElRef.current.getBoundingClientRect();
@@ -29,7 +27,7 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
   };
 
   useEffect(() => {
-    if (active && children) {
+    if (active && children && children !== ' ') {
       const rect = charElRef.current.getBoundingClientRect();
 
       const { x, y, width, height } = rect;
@@ -40,8 +38,8 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
         Math.round(x + width / 2),
         Math.round(y + height / 2),
         1,
-        2.5,
-        4.5,
+        2,
+        5,
         2,
         color,
         children.charCodeAt(0)

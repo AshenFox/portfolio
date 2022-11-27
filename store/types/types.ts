@@ -136,6 +136,7 @@ export type ContactFormActions =
 // game
 export const SET_CURSOR_POSITION = 'SET_CURSOR_POSITION';
 export const SET_BARRIER_DIMENSIONS = 'SET_BARRIER_DIMENSIONS';
+export const SET_GAME_CONTAINER_DIMENSIONS = 'SET_GAME_CONTAINER_DIMENSIONS';
 
 export interface SetCursorPositionAction {
   type: typeof SET_CURSOR_POSITION;
@@ -155,7 +156,18 @@ export interface SetBarrierDimensionsAction {
   };
 }
 
-export type GameActions = SetCursorPositionAction | SetBarrierDimensionsAction;
+export interface SetGameContainerDimensionsAction {
+  type: typeof SET_GAME_CONTAINER_DIMENSIONS;
+  payload: {
+    height: number;
+    width: number;
+  };
+}
+
+export type GameActions =
+  | SetCursorPositionAction
+  | SetBarrierDimensionsAction
+  | SetGameContainerDimensionsAction;
 
 // ===========
 

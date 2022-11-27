@@ -9,6 +9,10 @@ export interface GameState {
     height: number;
     width: number;
   };
+  game_container_dimensions: {
+    height: number;
+    width: number;
+  };
 }
 
 // =========================
@@ -21,6 +25,10 @@ const gameInitState: GameState = {
   barrier_dimensions: {
     x: 0,
     y: 0,
+    height: 0,
+    width: 0,
+  },
+  game_container_dimensions: {
     height: 0,
     width: 0,
   },
