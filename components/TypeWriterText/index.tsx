@@ -132,6 +132,7 @@ const TypeWriterText: FC<Props> = () => {
   const [show, setShow] = useState(0); // 326
 
   useEffect(() => {
+    console.log(show < allChar, content_loaded, is_exited, show_navigation);
     if (show < allChar && content_loaded && is_exited && show_navigation)
       setTimeout(() => {
         setShow((prev) => prev + 1);
@@ -188,32 +189,3 @@ const TypeWriterText: FC<Props> = () => {
 };
 
 export default TypeWriterText;
-
-/* <h1 className='about__greeting'>Hello, my name is Rafael Caferati.</h1>
-      <h4 className='about__description'>
-        I am an{' '}
-        <FancyLink href='/portfolio' classStr='about__link' title={'Portfolio'}>
-          award-winning
-        </FancyLink>{' '}
-        full-stack web developer and UI/UX javascript specialist.
-      </h4>
-      <h4 className='about__description'>
-        Check out my articles, React and React Native UI components at the{' '}
-        <FancyLink href='/portfolio' classStr='about__link' title={'Portfolio'}>
-          code laboratory
-        </FancyLink>
-        .
-      </h4>
-      <h4 className='about__description'>
-        Feel free to take a look at my latest projects on the{' '}
-        <FancyLink href='/portfolio' classStr='about__link' title={'Portfolio'}>
-          web portfolio page
-        </FancyLink>
-        .
-      </h4>
-      <h4 className='about__description'>
-        Remotely available UTC−1 to UTC+8.{' '}
-        <FancyLink href='/contact-page' classStr='about__link'>
-          rafael@caferati.me
-        </FancyLink>
-      </h4> */

@@ -46,26 +46,30 @@
     }
 
     .arrow__text {
-      transform: translateX(30px);
+      @media (hover: hover) {
+        transform: translateX(30px);
+      }
     }
 
     .arrow__link {
       right: 0;
 
-      &:hover {
-        & ~ .arrow__arrow {
-          &::after {
-            transform: translateY(-100%) rotate(-30deg);
+      @media (hover: hover) {
+        &:hover {
+          & ~ .arrow__arrow {
+            &::after {
+              transform: translateY(-100%) rotate(-30deg);
+            }
+
+            &::before {
+              transform: rotate(30deg);
+            }
           }
 
-          &::before {
-            transform: rotate(30deg);
+          & ~ .arrow__text {
+            opacity: 1;
+            transform: translateX(0px);
           }
-        }
-
-        & ~ .arrow__text {
-          opacity: 1;
-          transform: translateX(0px);
         }
       }
     }
@@ -117,8 +121,13 @@
         }
 
         & ~ .arrow__text {
-          transition: opacity 0.2s ease-out 0.5s;
+          transition: opacity 0.2s ease-out;
+          opacity: 1;
           transform: translateX(0px) !important;
+
+          @media (hover: hover) {
+            transition: opacity 0.2s ease-out 0.5s;
+          }
         }
       }
     }
@@ -154,26 +163,30 @@
     }
 
     .arrow__text {
-      transform: translateX(-30px);
+      @media (hover: hover) {
+        transform: translateX(-30px);
+      }
     }
 
     .arrow__link {
       left: 0;
 
-      &:hover {
-        & ~ .arrow__arrow {
-          &::after {
-            transform: translateY(-100%) rotate(30deg);
+      @media (hover: hover) {
+        &:hover {
+          & ~ .arrow__arrow {
+            &::after {
+              transform: translateY(-100%) rotate(30deg);
+            }
+
+            &::before {
+              transform: rotate(-30deg);
+            }
           }
 
-          &::before {
-            transform: rotate(-30deg);
+          & ~ .arrow__text {
+            opacity: 1;
+            transform: translateX(0px);
           }
-        }
-
-        & ~ .arrow__text {
-          opacity: 1;
-          transform: translateX(0px);
         }
       }
     }
@@ -225,8 +238,13 @@
         }
 
         & ~ .arrow__text {
-          transition: opacity 0.2s ease-out 0.5s;
+          transition: opacity 0.2s ease-out;
+          opacity: 1;
           transform: translateX(0px) !important;
+
+          @media (hover: hover) {
+            transition: opacity 0.2s ease-out 0.5s;
+          }
         }
       }
     }

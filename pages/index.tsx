@@ -4,33 +4,31 @@ import FallingParticles from '../components/FallingParticles';
 import Section, { Props } from '../components/SectionSlider/Section';
 import SideLinks from '../components/SideLinks';
 import TypeWriterText from '../components/TypeWriterText';
-import { useActions } from '../store/hooks';
+import { useActions, useAppSelector } from '../store/hooks';
 
 const About: FC<Props> = (props) => {
   const { set_barrier_dimensions, set_game_container_dimensions } = useActions();
+  const { show_navigation } = useAppSelector(({ sslider }) => sslider);
 
   const containerRef = useRef<HTMLElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
+  const updateGameContinaerDimen = () => {
+    set_game_container_dimensions(
+      containerRef.current.offsetHeight,
+      containerRef.current.offsetWidth
+    );
+  };
+
+  const updateBarrierDimen = () => {
+    const rect = buttonRef.current.getBoundingClientRect();
+
+    const { x, y, height, width } = rect;
+
+    set_barrier_dimensions(x, y, height, width);
+  };
+
   useEffect(() => {
-    const updateGameContinaerDimen = () => {
-      set_game_container_dimensions(
-        containerRef.current.offsetHeight,
-        containerRef.current.offsetWidth
-      );
-    };
-
-    const updateBarrierDimen = () => {
-      const rect = buttonRef.current.getBoundingClientRect();
-
-      const { x, y, height, width } = rect;
-
-      set_barrier_dimensions(x, y, height, width);
-    };
-
-    updateGameContinaerDimen();
-    updateBarrierDimen();
-
     const onResize = () => {
       updateGameContinaerDimen();
       updateBarrierDimen();
@@ -44,6 +42,11 @@ const About: FC<Props> = (props) => {
       window.removeEventListener('resize', onResize);
     };
   }, []);
+
+  useEffect(() => {
+    updateGameContinaerDimen();
+    updateBarrierDimen();
+  }, [show_navigation]);
 
   return (
     <>

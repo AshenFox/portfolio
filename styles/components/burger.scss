@@ -70,9 +70,11 @@
 
   &-enter-active,
   &-appear-active {
-    &:hover {
-      div {
-        transform: translateX(0px) !important;
+    @media (hover: hover) {
+      &:hover {
+        div {
+          transform: translateX(0px) !important;
+        }
       }
     }
   }
@@ -83,34 +85,40 @@
       transform: translateX(150px) !important;
     }
 
+    @media (hover: hover) {
+      &:hover {
+        div {
+          transform: translateX(150px) !important;
+        }
+      }
+    }
+  }
+
+  @media (hover: hover) {
     &:hover {
       div {
-        transform: translateX(150px) !important;
-      }
-    }
-  }
-
-  &:hover {
-    div {
-      &:nth-child(1) {
-        transform: translateY(-4px);
-      }
-
-      &:nth-child(3) {
-        transform: translateY(4px);
-      }
-    }
-  }
-
-  &:hover {
-    &.burger__toggle-enter-done {
-      div {
         &:nth-child(1) {
-          transform: translateY(10px) rotate(50deg) scale(1.5) !important;
+          transform: translateY(-4px);
         }
 
         &:nth-child(3) {
-          transform: translateY(-10px) rotate(-50deg) scale(1.5) !important;
+          transform: translateY(4px);
+        }
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      &.burger__toggle-enter-done {
+        div {
+          &:nth-child(1) {
+            transform: translateY(10px) rotate(50deg) scale(1.5) !important;
+          }
+
+          &:nth-child(3) {
+            transform: translateY(-10px) rotate(-50deg) scale(1.5) !important;
+          }
         }
       }
     }
