@@ -26,7 +26,7 @@ const Menu: FC<Props> = () => {
             title={'portfolio flashcards'}
             key={'project flashcards'}
           />
-          <span className='menu__tip'>for a quick seach just start typing ...</span>
+          {/* <span className='menu__tip'>for a quick seach just start typing ...</span> */}
         </div>
       </CSSTransition>
     </>

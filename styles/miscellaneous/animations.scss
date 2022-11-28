@@ -208,6 +208,26 @@
   }
 }
 
+@keyframes burger-rotate-in {
+  0% {
+    transform: translateX(200px) rotate(360deg);
+  }
+
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes burger-rotate-out {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+
+  100% {
+    transform: translateX(100px) rotate(270deg);
+  }
+}
+
 // ========================
 // ========================
 // ========================

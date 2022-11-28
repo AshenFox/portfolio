@@ -30,13 +30,13 @@ const Burger: FC<Props> = ({ onExited }) => {
   };
 
   return (
-    <div className='burger__container'>
-      <CSSTransition
-        classNames={'burger'}
-        in={show_navigation && is_exited}
-        timeout={burgerTimeout}
-        appear
-      >
+    <CSSTransition
+      classNames={'burger'}
+      in={show_navigation && is_exited}
+      timeout={burgerTimeout}
+      appear
+    >
+      <div className='burger__container'>
         <CSSTransition
           classNames={'burger__toggle'}
           in={show_menu}
@@ -44,14 +44,14 @@ const Burger: FC<Props> = ({ onExited }) => {
           onExited={onExited}
         >
           <div className={`burger`} onClick={onClick}>
-            <div />
-            <div />
-            <div />
+            <div className='burger__bar' />
+            <div className='burger__bar' />
+            <div className='burger__bar' />
           </div>
         </CSSTransition>
-      </CSSTransition>
-      <div className='burger__click' onClick={onClick}></div>
-    </div>
+        <div className='burger__click' onClick={onClick}></div>
+      </div>
+    </CSSTransition>
   );
 };
 
