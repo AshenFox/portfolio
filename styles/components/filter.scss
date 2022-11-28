@@ -81,11 +81,17 @@
     flex-grow: 1;
     flex-basis: 33%;
     max-width: calc(50% - 1.92rem);
-    padding-top: calc(24px + 29% - 1.92rem);
+    aspect-ratio: 9.3 / 5.9;
+    // padding-top: calc(24px + 29% - 1.92rem);
 
     opacity: 1;
 
     transition: all 0.5s ease-in-out; // 0.4
+
+    @media (max-width: 800px) {
+      flex-basis: 100%;
+      max-width: 100%;
+    }
 
     &-exit-active {
       opacity: 0;
