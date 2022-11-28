@@ -26,11 +26,15 @@
       justify-content: center;
       padding: 5rem 0;
     }
+
+    @media (max-width: $tablet) and (max-height: $tablet) {
+      padding: 5rem 0 12.5rem;
+    }
   }
 
   &__main {
     grid-row-start: 2;
-    padding: 0 7rem;
+    padding: 0 9rem;
 
     @media (max-width: $tablet), (max-height: $tablet) {
       padding: 0 2.5rem;

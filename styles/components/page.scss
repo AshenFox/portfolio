@@ -4,10 +4,34 @@
     max-width: 1010px;
     min-height: 100%;
     margin: 0 auto;
-    overflow: hidden; // to include children margin into height
+    overflow-y: hidden; // to include children margin into height
 
     // position: relative;
     // z-index: 2;
     // backface-visibility: hidden;
+
+    @media (max-width: $laptop-xl) {
+      max-width: 880px;
+    }
+
+    @media (max-width: $laptop-l) {
+      max-width: 800px;
+    }
+
+    @media (max-width: 1300px) {
+      max-width: 760px;
+    }
+
+    @media (max-width: 1100px) {
+      max-width: 700px;
+    }
+
+    @media (max-width: 900px) {
+      max-width: 600px;
+    }
+
+    @media (max-width: 800px) {
+      max-width: 500px;
+    }
   }
 }
