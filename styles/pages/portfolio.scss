@@ -22,8 +22,6 @@
 
 .portfolio {
   &__header {
-    margin: 0 20px;
-    margin-top: 8rem;
   }
 
   &__title {
@@ -105,6 +103,7 @@
   } */
 
   &__main {
+    margin-top: 2rem;
   }
 
   &__footer {

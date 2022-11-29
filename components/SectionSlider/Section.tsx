@@ -31,14 +31,15 @@ const gradients3 = [
 ];
 
 interface OwnProps {
-  classNameStr: string;
+  classNameStr?: string;
+  containerClassNameStr?: string;
   children: ReactNode;
 }
 
 export type Props = OwnProps & AppProps;
 
 const Section = forwardRef<HTMLDivElement, Props>(
-  ({ children, classNameStr = '' }, ref) => {
+  ({ children, classNameStr = '', containerClassNameStr = '' }, ref) => {
     const { set_content_loaded } = useActions();
 
     const { dir } = useAppSelector(({ sslider }) => sslider);
@@ -53,7 +54,7 @@ const Section = forwardRef<HTMLDivElement, Props>(
       const granimInstance = new Granim({
         element: '.' + granimClassName,
         name: 'granim',
-        /* opacity: [1, 1], */
+        //opacity: [1, 1],
         states: {
           'default-state': {
             gradients: gradients3,
@@ -65,7 +66,10 @@ const Section = forwardRef<HTMLDivElement, Props>(
     return (
       <section className={`section-slider__section ${dir} ${classNameStr}`}>
         <div className='section-slider__frame'>
-          <div className='section-slider__frame-inner' ref={ref}>
+          <div
+            className={`section-slider__frame-inner ${containerClassNameStr}`}
+            ref={ref}
+          >
             <canvas className={`section-slider__granim ${granimClassName}`} />
             {children}
           </div>

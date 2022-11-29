@@ -1,11 +1,18 @@
 .contact-page {
-  &__container {
-    min-height: 100vh; // ???????????????????????
+  .section-slider__frame-inner {
     display: flex;
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
-    padding: 8rem 0;
+  }
+
+  &__container {
+    /* min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 8rem 0; */
   }
 
   &__header {

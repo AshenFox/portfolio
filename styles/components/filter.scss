@@ -1,16 +1,15 @@
 .filter {
   &__tags {
     list-style: none;
-    margin-top: 20px;
-    margin-left: 16px; // -4px
-    margin-right: 16px;
+    margin-left: -4px; // -4px
+    margin-right: -4px;
     user-select: none;
   }
 
   &__info {
     font-size: 1.4rem;
     line-height: 1.4rem;
-    margin: 26px 20px 4px;
+    margin: 2.6rem 0 0.4rem;
     display: block;
     font-family: Lato;
   }
@@ -63,7 +62,6 @@
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    margin: 20px;
 
     position: relative;
 
@@ -73,6 +71,7 @@
   }
 
   &__projects-container {
+    margin: 2rem 0;
   }
 
   &__project {
@@ -116,6 +115,8 @@
       @include link;
       display: block;
       box-shadow: 8px 8px 0 rgb(black, 15%);
+      height: 100%;
+      width: 100%;
     }
 
     &-bar {
@@ -138,7 +139,8 @@
     &-main {
       overflow: hidden; // ????
       // height: 27rem;
-      padding-top: 58%;
+      // padding-top: 58%;
+      height: calc(100% - 24px);
 
       position: relative;
     }

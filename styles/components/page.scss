@@ -4,7 +4,8 @@
     max-width: 1010px;
     min-height: 100%;
     margin: 0 auto;
-    overflow-y: hidden; // to include children margin into height
+    padding: 8rem 2rem 6rem;
+    overflow: hidden; // to include children margin into height
 
     // position: relative;
     // z-index: 2;
@@ -32,6 +33,7 @@
 
     @media (max-width: 800px) {
       max-width: 500px;
+      padding: 4.2rem 2rem;
     }
   }
 }

@@ -43,7 +43,7 @@ const Project: FC<Props> = ({ data, order }) => {
       if (entries.length) {
         const [
           {
-            contentRect: { width },
+            contentRect: { width, height },
           },
         ] = entries;
 
@@ -53,6 +53,7 @@ const Project: FC<Props> = ({ data, order }) => {
 
         setStyleContainer((prev) => ({
           ...prev,
+          height: `${height}px`,
           width: `${width}px`,
           top: `${offsetTop}px`,
           left: `${offsetLeft}px`,

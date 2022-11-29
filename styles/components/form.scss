@@ -5,14 +5,21 @@
     list-style: none;
     display: flex;
     margin-bottom: 1.5rem;
-    height: 3.2rem;
+    gap: 7px;
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      height: auto;
+      // margin-top: -3.2rem;
+    }
   }
 
   &__info-item {
     position: relative;
     cursor: pointer;
 
-    width: 20rem;
+    width: 200px;
+    height: 3.2rem;
 
     white-space: nowrap;
 
@@ -25,6 +32,13 @@
 
     transition: all 0.3s ease-in-out;
 
+    /* height: 0rem;
+    padding: 0; */
+
+    @media (max-width: 900px) {
+      width: 250px;
+    }
+
     svg {
       fill: #7a7a7a;
       height: 14px;
@@ -32,10 +46,6 @@
       flex-shrink: 0;
 
       transition: all 0.3s ease-in-out;
-    }
-
-    &:not(:nth-child(1)) {
-      margin-left: 7px;
     }
 
     &.placeholder {
@@ -46,23 +56,48 @@
       color: #727272;
       opacity: 0;
       pointer-events: none;
-      width: 29rem;
+      width: auto;
+      overflow: visible;
+      transition: transform 0.3s ease-in-out;
 
       svg {
         margin-right: 9px;
         height: 20px;
       }
 
+      &.active {
+        @media (max-width: 900px) {
+          margin-top: -3.2rem;
+        }
+      }
+
+      &:not(.active) {
+        height: 0rem;
+        padding: 0;
+      }
+
       &.name {
-        transform: translate(7px, 62px);
+        transform: translate(0.7rem, 6.2rem);
+
+        @media (max-width: 900px) {
+          transform: translate(0.7rem, 7.7rem);
+        }
       }
 
       &.email {
-        transform: translate(-200px, 62px);
+        transform: translate(-20rem, 6.2rem);
+
+        @media (max-width: 900px) {
+          transform: translate(0.7rem, 7rem);
+        }
       }
 
       &.message {
-        transform: translate(-407px, 62px);
+        transform: translate(-40.7rem, 6.2rem);
+
+        @media (max-width: 900px) {
+          transform: translate(0.7rem, 6.3rem);
+        }
       }
     }
 
@@ -116,7 +151,7 @@
     padding: 15px 12px;
     border-bottom: 1px solid #797979;
     margin-bottom: 1.5rem;
-    width: 70rem;
+    max-width: 70rem;
     transition: all 0.3s ease-in-out;
 
     textarea {
@@ -129,6 +164,7 @@
       border: none;
       outline: none;
       resize: none;
+      // overflow: hidden; ???????????????????????
     }
 
     svg {
