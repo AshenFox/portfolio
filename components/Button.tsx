@@ -15,6 +15,7 @@ interface OwnProps {
   icon?: TIcon;
   href?: string;
   title?: string;
+  classStr?: string;
 }
 
 type Props = OwnProps;
@@ -31,6 +32,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       icon = '',
       href = '',
       title = '',
+      classStr = '',
     },
     ref
   ) => {
@@ -41,7 +43,9 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         <button
           className={`button ${isClicked && isActive ? 'button__click' : ''} ${color} ${
             isBig ? 'big' : ''
-          } ${!children && icon ? 'onlyicon' : ''} ${isActive ? '' : 'inactive'}`}
+          } ${!children && icon ? 'onlyicon' : ''} ${
+            isActive ? '' : 'inactive'
+          } ${classStr}`}
           onClick={isActive ? onClick : () => {}}
           ref={ref}
         >
@@ -61,6 +65,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     );
   }
 );
+
+Button.displayName = 'Button';
 
 export default Button;
 

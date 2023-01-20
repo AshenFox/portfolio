@@ -1,12 +1,6 @@
 .project {
-  &__header,
-  &__main,
-  &__footer {
-    margin: 0 20px;
-  }
-
   &__header {
-    margin-top: 8rem;
+    // margin-top: 8rem;
   }
 
   &__title {
@@ -30,20 +24,23 @@
   &__links {
     margin-top: 3.5rem;
     display: flex;
+    gap: 1rem;
     justify-content: space-between;
   }
 
   &__links-right {
     display: flex;
+    gap: 0.8rem;
 
-    button:not(:nth-child(1)) {
-      margin-left: 0.8rem;
+    & .button.hide {
+      @media (max-width: $tablet) {
+        display: none;
+      }
     }
   }
 
   &__main {
     margin-top: 3rem;
-    margin-bottom: 8.7rem;
   }
 
   &__section {
@@ -63,6 +60,11 @@
     &-list-item {
       line-height: 3.4rem;
       font-size: 2.1rem;
+
+      @media (max-width: $laptop) {
+        line-height: 2.9rem;
+        font-size: 1.8rem;
+      }
     }
 
     &-devider {

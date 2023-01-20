@@ -5,9 +5,13 @@
   flex-direction: column;
 
   margin-top: 4.2rem;
-  // margin-bottom: 3rem;
+
   line-height: 2.3rem;
   font-size: 1.6rem;
+
+  @media (max-width: $tablet) {
+    margin-bottom: 7rem;
+  }
 
   h4 {
     font-size: 1.8rem;
@@ -17,5 +21,6 @@
 
   p {
     font-family: 'Lato';
+    text-align: center;
   }
 }

@@ -7,11 +7,13 @@
   display: flex;
   flex-direction: column;
 
-  height: 64rem;
+  // height: 64rem;
+
+  aspect-ratio: 9.3/5.9;
 
   background-color: grey;
 
-  box-shadow: 12px 12px 0 rgb(black, 15%);
+  box-shadow: 8px 8px 0 rgb(black, 15%);
 
   &__bar {
     height: 24px;
@@ -20,6 +22,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: $tablet) {
+      height: 20px;
+    }
 
     h2 {
       color: $text-color;
@@ -123,12 +129,24 @@
     width: 15rem;
     top: 0;
 
+    @media (max-width: $laptop) {
+      width: 10rem;
+    }
+
+    @media (max-width: $tablet) {
+      width: 7.5rem;
+    }
+
     &--left {
       left: 0;
 
       .#{$c}__arrow-container {
         justify-content: flex-start;
-        padding-left: 6rem;
+        padding-left: 3rem;
+
+        @media (max-width: $tablet) {
+          padding-left: 2rem;
+        }
       }
     }
 
@@ -137,7 +155,11 @@
 
       .#{$c}__arrow-container {
         justify-content: flex-end;
-        padding-right: 6rem;
+        padding-right: 3rem;
+
+        @media (max-width: $tablet) {
+          padding-right: 2rem;
+        }
       }
     }
 
@@ -169,23 +191,33 @@
     &-icon {
       position: relative;
 
-      width: 25px;
-      height: 25px;
+      width: 20px;
+      height: 20px;
       position: relative;
 
       z-index: 1;
 
       transition: transform 0.2s ease-out 0.2s;
 
+      @media (max-width: $tablet) {
+        width: 15px;
+        height: 15px;
+      }
+
       &::after,
       &::before {
         position: absolute;
         content: '';
         width: 2px;
-        height: 25px;
-        background-color: #8a8a8a;
+        height: 20px;
+        background-color: rgb(106, 106, 106);
+        opacity: 0.75;
 
-        transition: transform 0.16s ease-out;
+        transition: all 0.16s ease-out;
+
+        @media (max-width: $tablet) {
+          height: 15px;
+        }
       }
 
       &::after {
@@ -242,10 +274,12 @@
             .#{$c}__arrow-icon {
               &::after {
                 transform: translateY(-100%) rotate(30deg);
+                opacity: 1;
               }
 
               &::before {
                 transform: rotate(-30deg);
+                opacity: 1;
               }
             }
           }
@@ -323,6 +357,10 @@
             &::after,
             &::before {
               height: 20px;
+
+              @media (max-width: $tablet) {
+                height: 15px;
+              }
             }
 
             &::after {
@@ -374,10 +412,12 @@
             .#{$c}__arrow-icon {
               &::after {
                 transform: translateY(-100%) rotate(-30deg);
+                opacity: 1;
               }
 
               &::before {
                 transform: rotate(30deg);
+                opacity: 1;
               }
             }
           }
@@ -455,6 +495,10 @@
             &::after,
             &::before {
               height: 20px;
+
+              @media (max-width: $tablet) {
+                height: 15px;
+              }
             }
 
             &::after {
@@ -475,7 +519,7 @@
   }
 
   &__controls {
-    margin-top: 4.6rem;
+    margin-top: 3.2rem;
     margin-bottom: 2.8rem;
     height: 1.7rem;
 

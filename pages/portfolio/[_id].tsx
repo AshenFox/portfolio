@@ -5,7 +5,7 @@ import ContactFooter from '../../components/ContactFooter';
 import ImageSlider from '../../components/ImageSlider';
 import Section, { Props } from '../../components/SectionSlider/Section';
 
-const Project: FC<Props> = (props) => {
+const Project: FC<Props> = props => {
   const { query, isReady } = useRouter();
 
   const { _id } = query;
@@ -42,6 +42,7 @@ const Project: FC<Props> = (props) => {
                 icon='facebook'
                 href='https://facebook.com'
                 title='Facebook'
+                classStr='hide'
               ></Button>
               <Button
                 isClicked={false}
@@ -49,6 +50,7 @@ const Project: FC<Props> = (props) => {
                 icon='twitter'
                 href='https://twitter.com'
                 title='Twitter'
+                classStr='hide'
               ></Button>
               <Button
                 isClicked={false}

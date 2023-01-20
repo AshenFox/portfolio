@@ -18,6 +18,12 @@
     bottom: 3.5rem;
   }
 
+  @media (max-width: 600px), (max-height: 600px) {
+    position: absolute;
+    top: auto;
+    bottom: 3.5rem;
+  }
+
   & li {
     opacity: 0;
     transform: translateX(-150px);
