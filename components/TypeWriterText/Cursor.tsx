@@ -1,8 +1,6 @@
 import React, { CSSProperties, FC } from 'react';
 import { useAppSelector } from '../../store/hooks';
 
-// type HeaderTextType = 'text' | 'link';
-
 interface OwnProps {
   isSmall?: boolean;
   isActive?: boolean;

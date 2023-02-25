@@ -132,12 +132,12 @@ const TypeWriterText: FC<Props> = () => {
   const [show, setShow] = useState(0); // 326
 
   useEffect(() => {
-    console.log(show < allChar, content_loaded, is_exited, show_navigation);
+    // console.log(show < allChar, content_loaded, is_exited, show_navigation);
     if (show < allChar && content_loaded && is_exited && show_navigation)
       setTimeout(() => {
-        setShow((prev) => prev + 1);
+        setShow(prev => prev + 1);
       }, 10);
-  }, [show, content_loaded, is_exited, show_navigation]);
+  }, [show, content_loaded, is_exited, show_navigation, allChar]);
 
   let rangeStart = 0;
   let isCursorSmall = false;

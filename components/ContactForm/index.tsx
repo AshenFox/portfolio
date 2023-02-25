@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, FormEventHandler, useCallback } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import Controls from './Controls';
 import Textarea from './Textarea';
@@ -22,8 +22,12 @@ const ContactForm: FC<Props> = () => {
     }
   }, [textarea_value]);
 
+  const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(e => {
+    e.preventDefault();
+  }, []);
+
   return (
-    <form action='' className='form' onSubmit={undefined}>
+    <form action='' className='form' onSubmit={onSubmit}>
       <Info />
       <Textarea />
       <Controls />

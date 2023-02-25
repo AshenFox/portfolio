@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useEffect, useState } from 'react';
+import React, { FC, MouseEventHandler, useCallback, useEffect, useState } from 'react';
 import Projects from './Projects';
 import Tag from './Tag';
 
@@ -237,11 +237,11 @@ const value: ProjectsInt = {
   },
 };
 
-const Filter: FC<Props> = (props) => {
+const Filter: FC<Props> = props => {
   const [by, setBy] = useState<TagType>('show all');
 
   const clickTagCreator: (value: TagType) => MouseEventHandler<HTMLLIElement> =
-    (value) => (e) => {
+    value => e => {
       setBy(value);
     };
 
@@ -292,7 +292,7 @@ const Filter: FC<Props> = (props) => {
   return (
     <div className='filter'>
       <ul className='filter__tags'>
-        {tagList.map((value) => {
+        {tagList.map(value => {
           const onClick = clickTagCreator(value);
 
           return (

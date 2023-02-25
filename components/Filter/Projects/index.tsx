@@ -11,6 +11,8 @@ interface OwnProps {
 type Props = OwnProps;
 
 const Projects: FC<Props> = ({ order, projects }) => {
+  console.log({ projects });
+
   const timeout = 500; // 400
 
   const projectsEl = useRef<HTMLUListElement>(null);
@@ -20,7 +22,7 @@ const Projects: FC<Props> = ({ order, projects }) => {
   useEffect(() => {
     const el = projectsEl.current;
 
-    const observer = new ResizeObserver((entries) => {
+    const observer = new ResizeObserver(entries => {
       if (entries.length) {
         const [
           {
@@ -30,7 +32,7 @@ const Projects: FC<Props> = ({ order, projects }) => {
 
         const transition = 'all 1s ease-in-out';
 
-        setContainerStyle((prev) => ({
+        setContainerStyle(prev => ({
           height: height,
           transition: height < prev.height ? transition : '',
         }));
@@ -47,7 +49,7 @@ const Projects: FC<Props> = ({ order, projects }) => {
   return (
     <div className='filter__projects-container' style={containerStyle}>
       <ul className='filter__projects' ref={projectsEl}>
-        {order.map((id) => (
+        {order.map(id => (
           <CSSTransition
             key={id}
             in={projects[id].in}
@@ -64,3 +66,16 @@ const Projects: FC<Props> = ({ order, projects }) => {
 };
 
 export default Projects;
+
+{
+  /*<Project key={id} data={projects[id]} order={order} />
+   <CSSTransition
+            key={id}
+            in={projects[id].in}
+            classNames='filter__project'
+            timeout={timeout}
+            unmountOnExit={true}
+          >
+            <Project data={projects[id]} order={order} />
+          </CSSTransition> */
+}

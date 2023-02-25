@@ -1,0 +1,254 @@
+@mixin interactive-element-colors($main, $dark, $background) {
+  .interactive-element__content {
+    background-color: $main;
+  }
+
+  .interactive-element__left,
+  .interactive-element__middle,
+  .interactive-element__right {
+    @media (hover: hover) {
+      &:hover {
+        & ~ .interactive-element__content {
+          background-color: $dark;
+        }
+      }
+    }
+  }
+
+  .interactive-element__background {
+    background-color: $background;
+  }
+
+  &.interactive-element__click {
+    .interactive-element__content {
+      background-color: $dark;
+    }
+  }
+}
+
+.interactive-element {
+  height: 47px;
+  position: relative;
+  display: inline-flex;
+  background-color: transparent;
+  text-decoration: none;
+  border: none;
+  outline: none;
+
+  &__click {
+    .interactive-element__content {
+      transform: translateY(1px) !important;
+    }
+
+    .interactive-element__shadow {
+      transform: translateY(-3.5px) !important;
+    }
+  }
+
+  &__left,
+  &__middle,
+  &__right {
+    cursor: pointer;
+    position: absolute;
+
+    display: inline-block;
+    height: 100%;
+    width: 33.33333%;
+    z-index: 4;
+  }
+
+  &__left {
+    left: 0;
+
+    @media (hover: hover) {
+      &:hover {
+        & ~ .interactive-element__content {
+          transform: skewY(-1deg) translate3d(0px, -0.5px, 0px);
+        }
+
+        & ~ .interactive-element__shadow {
+          transform: skewY(1deg) translate3d(0px, -0.5px, 0px);
+        }
+      }
+    }
+  }
+
+  &__middle {
+    left: 33.3333%;
+
+    @media (hover: hover) {
+      &:hover {
+        & ~ .interactive-element__content {
+          transform: translateY(0.75px);
+        }
+
+        & ~ .interactive-element__shadow {
+          transform: translateY(-1px);
+        }
+      }
+    }
+  }
+
+  &__right {
+    left: 66.6666%;
+
+    @media (hover: hover) {
+      &:hover {
+        & ~ .interactive-element__content {
+          transform: skewY(1deg) translate3d(0px, -0.5px, 0px);
+        }
+
+        & ~ .interactive-element__shadow {
+          transform: skewY(-1deg) translate3d(0px, -0.5px, 0px);
+        }
+      }
+    }
+  }
+
+  &__content {
+    position: relative;
+    width: 100%;
+    z-index: 3;
+    padding: 0 1.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      height: 20px;
+      fill: #fff;
+    }
+  }
+
+  &.big {
+    .interactive-element__content {
+      padding: 0 4rem;
+    }
+  }
+
+  &.onlyicon {
+    width: 5.6rem;
+
+    .interactive-element__content {
+      padding: 0;
+    }
+  }
+
+  &.inactive {
+    .interactive-element__left,
+    .interactive-element__middle,
+    .interactive-element__right {
+      cursor: auto !important;
+    }
+
+    .interactive-element__content {
+      transform: none !important;
+    }
+
+    .interactive-element__shadow {
+      transform: none !important;
+    }
+
+    .interactive-element__content {
+      background-color: $interactive-element-inactive !important;
+    }
+
+    .interactive-element__background {
+      background-color: $interactive-element-inactive-background !important;
+    }
+
+    .interactive-element__text {
+      color: #c4c4bc;
+    }
+  }
+
+  &__icon {
+    transition: all 0.12s ease-out 0s;
+  }
+
+  &__text {
+    color: white;
+
+    line-height: 0;
+    font-weight: 700;
+    font-size: 1.2rem;
+
+    text-transform: uppercase;
+
+    &:nth-child(2) {
+      margin-left: 1rem;
+    }
+  }
+
+  &__background {
+    top: 3px;
+    z-index: 2;
+  }
+
+  &__shadow {
+    top: 7px;
+    z-index: 1;
+
+    background-color: black;
+    opacity: 0.25;
+  }
+
+  &__content,
+  &__background,
+  &__shadow {
+    height: 40px;
+
+    border-radius: 3px;
+
+    transition: transform 0.12s ease-out 0s, background-color 0.12s ease-out 0s;
+  }
+
+  &__background,
+  &__shadow {
+    position: absolute;
+    width: 100%;
+  }
+
+  // colors
+
+  &.red {
+    @include interactive-element-colors(
+      $interactive-element-red,
+      $interactive-element-red-dark,
+      $interactive-element-red-background
+    );
+  }
+
+  &.green {
+    @include interactive-element-colors(
+      $interactive-element-green,
+      $interactive-element-green-dark,
+      $interactive-element-green-background
+    );
+  }
+
+  &.skyblue {
+    @include interactive-element-colors(
+      $interactive-element-skyblue,
+      $interactive-element-skyblue-dark,
+      $interactive-element-skyblue-background
+    );
+  }
+
+  &.blue {
+    @include interactive-element-colors(
+      $interactive-element-blue,
+      $interactive-element-blue-dark,
+      $interactive-element-blue-background
+    );
+  }
+
+  &.grey {
+    @include interactive-element-colors(
+      $interactive-element-grey,
+      $interactive-element-grey-dark,
+      $interactive-element-grey-background
+    );
+  }
+}

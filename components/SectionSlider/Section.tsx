@@ -61,7 +61,7 @@ const Section = forwardRef<HTMLDivElement, Props>(
           },
         },
       });
-    }, []);
+    }, [granimClassName]);
 
     return (
       <section className={`section-slider__section ${dir} ${classNameStr}`}>
@@ -78,5 +78,7 @@ const Section = forwardRef<HTMLDivElement, Props>(
     );
   }
 );
+
+Section.displayName = 'Section';
 
 export default Section;

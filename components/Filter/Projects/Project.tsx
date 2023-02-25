@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { CSSProperties, FC, useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { ProjectInt, TagType } from '..';
+import Img from 'next/image';
 
 interface OwnProps {
   data: ProjectInt;
@@ -21,7 +22,7 @@ const Project: FC<Props> = ({ data, order }) => {
 
     const { offsetLeft, offsetTop } = el || {};
 
-    setStyleContainer((prev) => ({
+    setStyleContainer(prev => ({
       ...prev,
       top: `${offsetTop}px`,
       left: `${offsetLeft}px`,
@@ -39,7 +40,7 @@ const Project: FC<Props> = ({ data, order }) => {
   useEffect(() => {
     const el = projectEl.current;
 
-    const observer = new ResizeObserver((entries) => {
+    const observer = new ResizeObserver(entries => {
       if (entries.length) {
         const [
           {
@@ -51,7 +52,7 @@ const Project: FC<Props> = ({ data, order }) => {
 
         const { offsetLeft, offsetTop } = el || {};
 
-        setStyleContainer((prev) => ({
+        setStyleContainer(prev => ({
           ...prev,
           height: `${height}px`,
           width: `${width}px`,
@@ -79,11 +80,16 @@ const Project: FC<Props> = ({ data, order }) => {
               <h2>{name}</h2>
             </div>
             <div className='filter__project-main'>
-              <img src={thumbnails.main} alt='' className='filter__project-img-main' />
+              <Img
+                src={thumbnails.main}
+                alt=''
+                className='filter__project-img-main'
+                layout='fill'
+              />
               <div className='filter__project-shadow'></div>
               <div className='filter__project-hover'>
                 <div className='filter__project-img-hover'>
-                  <img src={thumbnails.hover} alt='' />
+                  <Img src={thumbnails.hover} alt='' layout='fill' />
                 </div>
 
                 <ul className='filter__project-tags'>

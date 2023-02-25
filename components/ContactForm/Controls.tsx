@@ -28,10 +28,10 @@ const Controls: FC<Props> = () => {
 
   return (
     <div className='form__controls'>
-      <Button color='green' isActive={isNextActive} onClick={onNextClick}>
+      <Button color='green' isActive={isNextActive} onClickAction={onNextClick}>
         next
       </Button>
-      <Button color='green' isActive={isSubmitActive} onClick={onSubmitClick}>
+      <Button color='green' isActive={isSubmitActive} onClickAction={onSubmitClick}>
         submit your message
       </Button>
     </div>

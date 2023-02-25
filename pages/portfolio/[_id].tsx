@@ -3,6 +3,7 @@ import React, { FC, useEffect, useRef } from 'react';
 import Button from '../../components/Button';
 import ContactFooter from '../../components/ContactFooter';
 import ImageSlider from '../../components/ImageSlider';
+import Link from '../../components/Link';
 import Section, { Props } from '../../components/SectionSlider/Section';
 
 const Project: FC<Props> = props => {
@@ -25,40 +26,36 @@ const Project: FC<Props> = props => {
           </h3>
           <div className='project__links'>
             <div className='project__links-left'>
-              <Button
-                isClicked={false}
+              <Link
                 color='green'
                 icon='externallink'
                 href='https://fox-flash-cards.herokuapp.com'
                 title='Flashcards'
               >
                 visit the webpage
-              </Button>
+              </Link>
             </div>
             <div className='project__links-right'>
-              <Button
-                isClicked={false}
+              <Link
                 color='blue'
                 icon='facebook'
                 href='https://facebook.com'
                 title='Facebook'
                 classStr='hide'
-              ></Button>
-              <Button
-                isClicked={false}
+              ></Link>
+              <Link
                 color='skyblue'
                 icon='twitter'
                 href='https://twitter.com'
                 title='Twitter'
                 classStr='hide'
-              ></Button>
-              <Button
-                isClicked={false}
+              ></Link>
+              <Link
                 color='red'
                 icon='googleplus'
                 href='https://google.com'
                 title='Google Plus'
-              ></Button>
+              ></Link>
             </div>
           </div>
         </header>
@@ -125,7 +122,7 @@ const Project: FC<Props> = props => {
                 <span>The project is online at HTTPS://ROCKET.CHAT</span>
               </li>
               <li className='project__section-list-item'>
-                <span>Access the project's source on GITHUB</span>
+                <span>Access the project&apos;s source on GITHUB</span>
               </li>
             </ul>
           </section>

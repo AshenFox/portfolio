@@ -32,7 +32,7 @@
     display: flex;
     gap: 0.8rem;
 
-    & .button.hide {
+    & .interactive-element.hide {
       @media (max-width: $tablet) {
         display: none;
       }

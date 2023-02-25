@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useRef, useState, memo } from 'react';
+import React, { FC, useEffect, useRef, useState, memo, useCallback } from 'react';
+import { useOrientationChange } from '../../helpers/hooks';
 
 import { useActions } from '../../store/hooks';
 import { createDots } from '../FallingParticles';
@@ -18,13 +19,13 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
   const resizeListenerRef = useRef<(e: Event) => void>(null);
   const computedStyleRef = useRef<CSSStyleDeclaration>(null);
 
-  const updateCursorPosition = () => {
+  const updateCursorPosition = useCallback(() => {
     const rect = charElRef.current.getBoundingClientRect();
 
     const { x, y, width } = rect;
 
     set_cursor_position(x + width, y);
-  };
+  }, [set_cursor_position]);
 
   useEffect(() => {
     if (active && children && children !== ' ') {
@@ -45,11 +46,11 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
         children.charCodeAt(0)
       );
     }
-  }, [active]);
+  }, [active, children]);
 
   useEffect(() => {
     if (!resizeListenerRef.current && isCursor) {
-      resizeListenerRef.current = (e) => {
+      resizeListenerRef.current = e => {
         updateCursorPosition();
       };
     }
@@ -65,7 +66,9 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
     return () => {
       window.removeEventListener('resize', resizeListenerRef.current);
     };
-  }, [isCursor]);
+  }, [isCursor, updateCursorPosition]);
+
+  useOrientationChange(updateCursorPosition, 200);
 
   useEffect(() => {
     computedStyleRef.current = window.getComputedStyle(charElRef.current);

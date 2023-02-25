@@ -1,17 +1,15 @@
 import {
   Dispatch,
   MutableRefObject,
+  useCallback,
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
-import { useRouter } from 'next/router';
 
-// type InitValueStateWithRef = any;
-type UseStateWithRef = (
+/* type UseStateWithRef = (
   initValue: unknown
-) => [any, Dispatch<React.SetStateAction<any>>, MutableRefObject<any>];
+) => [any, Dispatch<React.SetStateAction<any>>, MutableRefObject<any>]; */
 
 export const useStateWithRef = <InitValue extends unknown>(
   initValue: InitValue
@@ -34,4 +32,37 @@ export const useUpdatedRef = <InitValue extends unknown>(
   valueRef.current = initValue;
 
   return valueRef;
+};
+
+export const useOrientationChange = (
+  onOrientationChangeAction: () => void,
+  timeout?: number
+) => {
+  const onOrientationChange = useCallback(() => {
+    if (timeout) {
+      setTimeout(() => {
+        onOrientationChangeAction();
+      }, timeout);
+    } else {
+      onOrientationChangeAction();
+    }
+  }, [onOrientationChangeAction, timeout]);
+
+  useEffect(() => {
+    const orientation = screen?.orientation;
+
+    if (orientation) {
+      orientation.addEventListener('change', onOrientationChange);
+    } else {
+      window.addEventListener('orientationchange', onOrientationChange);
+    }
+
+    return () => {
+      if (orientation) {
+        orientation.removeEventListener('change', onOrientationChange);
+      } else {
+        window.removeEventListener('orientationchange', onOrientationChange);
+      }
+    };
+  }, [onOrientationChange]);
 };
