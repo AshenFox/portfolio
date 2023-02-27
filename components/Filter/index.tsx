@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import Projects from './Projects';
 import Tag from './Tag';
 
@@ -53,8 +53,6 @@ export interface ProjectInt {
     hover: string;
   };
 }
-
-// export type ProjectsType = ProjectInt[];
 
 export interface ProjectsInt {
   [key: string]: ProjectInt;
@@ -240,67 +238,77 @@ const value: ProjectsInt = {
 const Filter: FC<Props> = props => {
   const [by, setBy] = useState<TagType>('show all');
 
-  const clickTagCreator: (value: TagType) => MouseEventHandler<HTMLLIElement> =
-    value => e => {
-      setBy(value);
-    };
-
   const [projects, setProjects] = useState<ProjectsInt>(value);
 
   const [order, setOrder] = useState<string[]>(Object.keys(projects));
 
-  const filterProjects = (by: TagType) => {
-    const res: {
-      filtered: string[];
-      inArr: string[];
-      projects: ProjectsInt;
-    } = Object.entries(projects).reduce(
-      (res, [id, project], i, arr) => {
-        const prevIn = project.in;
-        const newIn = isAll || project.tags.includes(by);
-        const newProject = {
-          ...project,
-          in: newIn,
-        };
+  const isAll = by === 'show all';
 
-        res.projects[id] = newProject;
+  const filterProjects = useCallback(
+    (by: TagType) => {
+      const isAll = by === 'show all';
 
-        if (newIn) {
-          res.inArr.push(id);
-          if (prevIn) res.filtered = [...res.filtered, ...res.inArr.splice(0, 1)];
-        } else {
-          res.filtered.push(id);
-        }
+      const res: {
+        filtered: string[];
+        inArr: string[];
+        projects: ProjectsInt;
+      } = Object.entries(projects).reduce(
+        (res, [id, project], i, arr) => {
+          const prevIn = project.in;
+          const newIn = isAll || project.tags.includes(by);
 
-        if (arr.length === i + 1) res.filtered = [...res.filtered, ...res.inArr];
+          const newProject = {
+            ...project,
+            in: newIn,
+          };
 
-        return res;
-      },
-      { filtered: [], inArr: [], projects: {} }
-    );
+          res.projects[id] = newProject;
 
-    setOrder(res.filtered);
-    setProjects(res.projects);
-  };
+          if (newIn) {
+            res.inArr.push(id);
+            if (prevIn) res.filtered = [...res.filtered, ...res.inArr.splice(0, 1)];
+          } else {
+            res.filtered.push(id);
+          }
+
+          if (arr.length === i + 1) res.filtered = [...res.filtered, ...res.inArr];
+
+          return res;
+        },
+        { filtered: [], inArr: [], projects: {} }
+      );
+
+      setOrder(res.filtered);
+      setProjects(res.projects);
+    },
+    [projects]
+  );
+
+  const onTagClickAction = useCallback(
+    (value: TagType) => {
+      setBy(value);
+      filterProjects(value);
+    },
+    [filterProjects]
+  );
 
   useEffect(() => {
-    filterProjects(by);
-  }, [by]);
-
-  const isAll = by === 'show all';
+    filterProjects('show all');
+  }, []);
 
   return (
     <div className='filter'>
       <ul className='filter__tags'>
-        {tagList.map(value => {
-          const onClick = clickTagCreator(value);
-
-          return (
-            <Tag key={value} active={value === by} onClick={onClick}>
-              {value}
-            </Tag>
-          );
-        })}
+        {tagList.map(value => (
+          <Tag
+            key={value}
+            value={value}
+            active={value === by}
+            onClickAction={onTagClickAction}
+          >
+            {value}
+          </Tag>
+        ))}
       </ul>
       <small className='filter__info'>
         Showing {isAll ? 'all' : by} projects. Use the filter to list them by skill or

@@ -12,10 +12,12 @@
 
     position: relative;
   } */
+
   .section-slider__frame-inner {
     position: relative;
 
     display: grid;
+    overflow: hidden;
 
     grid-template-rows: 1fr auto 1fr;
 
@@ -145,8 +147,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
-    /* height: 500px;
-    width: 500px; */
+    // z-index: -1;
   }
 }
