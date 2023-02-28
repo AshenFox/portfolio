@@ -2,50 +2,67 @@ import React, { FC, useCallback, useEffect, useRef } from 'react';
 import Button from '../components/Button';
 import FallingParticles from '../components/FallingParticles';
 import Link from '../components/Link';
-import Section, { Props } from '../components/SectionSlider/Section';
+import Section, { SectionProps } from '../components/SectionSlider/Section';
 import SideLinks from '../components/SideLinks';
 import TypeWriterText from '../components/TypeWriterText';
 import { useOrientationChange } from '../helpers/hooks';
 import { useActions, useAppSelector } from '../store/hooks';
 
-const About: FC<Props> = props => {
-  const { set_barrier_dimensions, set_game_container_dimensions } = useActions();
-  const { show_navigation } = useAppSelector(({ sslider }) => sslider);
+const About: FC<SectionProps> = props => {
+  const {
+    set_barrier_dimensions,
+    set_game_container_dimensions,
+    set_game_container_scroll,
+  } = useActions();
+  const show_navigation = useAppSelector(({ sslider }) => sslider.show_navigation);
+  const scrollTop = useAppSelector(
+    ({ game }) => game.game_container_dimensions.scrollTop
+  );
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const frameInnerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLAnchorElement>(null);
 
   const updateGameContinaerDimen = useCallback(() => {
     set_game_container_dimensions(
-      containerRef.current.offsetHeight,
-      containerRef.current.offsetWidth
+      frameInnerRef.current.offsetHeight,
+      frameInnerRef.current.offsetWidth
     );
   }, [set_game_container_dimensions]);
+
+  const updateGameContinaerScroll = useCallback(() => {
+    set_game_container_scroll(frameRef.current.scrollTop, frameRef.current.scrollLeft);
+  }, [set_game_container_scroll]);
 
   const updateBarrierDimen = useCallback(() => {
     const rect = buttonRef.current.getBoundingClientRect();
 
     const { x, y, height, width } = rect;
 
-    set_barrier_dimensions(x, y, height, width);
-  }, [set_barrier_dimensions]);
+    set_barrier_dimensions(x, y + scrollTop, height, width);
+  }, [set_barrier_dimensions, scrollTop]);
 
   const updateGameElements = useCallback(() => {
     updateGameContinaerDimen();
+    updateGameContinaerScroll();
     updateBarrierDimen();
-  }, [updateGameContinaerDimen, updateBarrierDimen]);
+  }, [updateGameContinaerDimen, updateBarrierDimen, updateGameContinaerScroll]);
 
   useEffect(() => {
     updateGameElements();
 
+    const frameEl = frameRef.current;
+
     window.addEventListener('resize', updateGameElements);
+    frameEl.addEventListener('scroll', updateGameContinaerScroll);
 
     return () => {
       window.removeEventListener('resize', updateGameElements);
+      frameEl.removeEventListener('scroll', updateGameContinaerScroll);
     };
-  }, [updateGameElements]);
+  }, [updateGameElements, updateGameContinaerScroll]);
 
-  useOrientationChange(updateGameElements, 200);
+  useOrientationChange(updateGameElements);
 
   useEffect(() => {
     updateGameContinaerDimen();
@@ -54,21 +71,16 @@ const About: FC<Props> = props => {
 
   return (
     <>
-      <Section classNameStr={'about'} {...props} ref={containerRef}>
+      <Section
+        classNameStr={'about'}
+        {...props}
+        frameRef={frameRef}
+        frameInnerRef={frameInnerRef}
+      >
         <main className='about__main'>
           <TypeWriterText />
         </main>
         <footer className='about__footer'>
-          {/* <Button
-            color='red'
-            isBig={true}
-            href={'/portfolio'}
-            title={'Portfolio'}
-            ref={buttonRef}
-          >
-            see the portfolio
-          </Button> */}
-
           <Link
             color='red'
             isBig={true}

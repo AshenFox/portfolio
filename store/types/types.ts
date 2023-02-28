@@ -137,6 +137,7 @@ export type ContactFormActions =
 export const SET_CURSOR_POSITION = 'SET_CURSOR_POSITION';
 export const SET_BARRIER_DIMENSIONS = 'SET_BARRIER_DIMENSIONS';
 export const SET_GAME_CONTAINER_DIMENSIONS = 'SET_GAME_CONTAINER_DIMENSIONS';
+export const SET_GAME_CONTAINER_SCROLL = 'SET_GAME_CONTAINER_SCROLL';
 
 export interface SetCursorPositionAction {
   type: typeof SET_CURSOR_POSITION;
@@ -164,10 +165,19 @@ export interface SetGameContainerDimensionsAction {
   };
 }
 
+export interface SetGameContainerScroll {
+  type: typeof SET_GAME_CONTAINER_SCROLL;
+  payload: {
+    scrollLeft: number;
+    scrollTop: number;
+  };
+}
+
 export type GameActions =
   | SetCursorPositionAction
   | SetBarrierDimensionsAction
-  | SetGameContainerDimensionsAction;
+  | SetGameContainerDimensionsAction
+  | SetGameContainerScroll;
 
 // ===========
 

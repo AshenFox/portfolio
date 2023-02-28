@@ -4,6 +4,7 @@ import {
   SET_CURSOR_POSITION,
   SET_BARRIER_DIMENSIONS,
   SET_GAME_CONTAINER_DIMENSIONS,
+  SET_GAME_CONTAINER_SCROLL,
 } from '../types/types';
 
 // SET_CURSOR_POSITION
@@ -40,6 +41,18 @@ export const set_game_container_dimensions = (
   payload: {
     height,
     width,
+  },
+});
+
+// SET_GAME_CONTAINER_SCROLL
+export const set_game_container_scroll = (
+  scrollTop: number,
+  scrollLeft: number
+): AppActions => ({
+  type: SET_GAME_CONTAINER_SCROLL,
+  payload: {
+    scrollTop,
+    scrollLeft,
   },
 });
 

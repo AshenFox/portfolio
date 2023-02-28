@@ -3,6 +3,7 @@ import {
   SET_CURSOR_POSITION,
   SET_BARRIER_DIMENSIONS,
   SET_GAME_CONTAINER_DIMENSIONS,
+  SET_GAME_CONTAINER_SCROLL,
 } from '../../types/types';
 import initialState, { GameState } from './gameInitState';
 
@@ -34,8 +35,19 @@ const gameReducer = (state = initialState, action: GameActions): GameState => {
       return {
         ...state,
         game_container_dimensions: {
+          ...state.game_container_dimensions,
           height: payload.height,
           width: payload.width,
+        },
+      };
+
+    case SET_GAME_CONTAINER_SCROLL:
+      return {
+        ...state,
+        game_container_dimensions: {
+          ...state.game_container_dimensions,
+          scrollLeft: payload.scrollLeft,
+          scrollTop: payload.scrollTop,
         },
       };
 

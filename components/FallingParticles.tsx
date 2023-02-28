@@ -122,7 +122,7 @@ const lineRectCol = (l: ILine, r: IRect) => {
 
 interface Props {}
 
-const FallingParticles: FC<Props> = (props) => {
+const FallingParticles: FC<Props> = props => {
   const { game_container_dimensions, barrier_dimensions } = useAppSelector(
     ({ game }) => game
   );
@@ -135,7 +135,7 @@ const FallingParticles: FC<Props> = (props) => {
 
   const requestRef = useRef<number>();
 
-  const animate: FrameRequestCallback = (time) => {
+  const animate: FrameRequestCallback = time => {
     if (prevTime === 0) prevTime = time;
     let diff = time - prevTime;
     prevTime = time;

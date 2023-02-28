@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef, useState, memo, useCallback } from 'react';
 import { useOrientationChange } from '../../helpers/hooks';
 
-import { useActions } from '../../store/hooks';
+import { useActions, useAppSelector } from '../../store/hooks';
 import { createDots } from '../FallingParticles';
 
 interface OwnProps {
@@ -13,11 +13,18 @@ interface OwnProps {
 type Props = OwnProps;
 
 const Char: FC<Props> = ({ active, children, isCursor }) => {
+  const scrollTop = useAppSelector(
+    ({ game }) => game.game_container_dimensions.scrollTop
+  );
+
   const { set_cursor_position } = useActions();
 
   const charElRef = useRef<HTMLSpanElement>(null);
   const resizeListenerRef = useRef<(e: Event) => void>(null);
   const computedStyleRef = useRef<CSSStyleDeclaration>(null);
+
+  const scrollTopRef = useRef(scrollTop);
+  scrollTopRef.current = scrollTop;
 
   const updateCursorPosition = useCallback(() => {
     const rect = charElRef.current.getBoundingClientRect();
@@ -35,9 +42,11 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
 
       const color = computedStyleRef.current.getPropertyValue('color');
 
+      console.log({ 'scrollTopRef.current': scrollTopRef.current });
+
       createDots(
         Math.round(x + width / 2),
-        Math.round(y + height / 2),
+        Math.round(y + scrollTopRef.current + height / 2),
         1,
         2,
         5,
@@ -68,7 +77,7 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
     };
   }, [isCursor, updateCursorPosition]);
 
-  useOrientationChange(updateCursorPosition, 200);
+  useOrientationChange(updateCursorPosition);
 
   useEffect(() => {
     computedStyleRef.current = window.getComputedStyle(charElRef.current);

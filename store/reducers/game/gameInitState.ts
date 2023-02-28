@@ -12,6 +12,8 @@ export interface GameState {
   game_container_dimensions: {
     height: number;
     width: number;
+    scrollLeft: number;
+    scrollTop: number;
   };
 }
 
@@ -31,6 +33,8 @@ const gameInitState: GameState = {
   game_container_dimensions: {
     height: 0,
     width: 0,
+    scrollLeft: 0,
+    scrollTop: 0,
   },
 };
 
