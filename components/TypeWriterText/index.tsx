@@ -163,13 +163,20 @@ const TypeWriterText: FC<Props> = () => {
     const containsCursor = show >= rangeStart && show <= rangeEnd;
     if (type === 'description' && containsCursor) isCursorSmall = true;
 
+    let headerShow = rangeStart - 1;
+
+    if (show >= rangeStart) headerShow = show;
+    if (show >= rangeEnd) headerShow = rangeEnd;
+
+    // console.log({ headerShow, show });
+
     const HeaderEl = (
       <Header
         key={i}
         data={data}
         rangeStart={rangeStart}
         rangeEnd={rangeEnd}
-        show={show}
+        show={headerShow}
         TagName={TagName}
         classStr={classStr}
       />

@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import ContactFooter from '../components/ContactFooter';
-import Section, { Props } from '../components/SectionSlider/Section';
+import Section, { SectionProps } from '../components/SectionSlider/Section';
 import Filter from '../components/Filter';
 
-const Portfolio: FC<Props> = props => {
+const Portfolio: FC<SectionProps> = props => {
   return (
     <Section classNameStr={'portfolio'} {...props}>
       <div className='page__container'>

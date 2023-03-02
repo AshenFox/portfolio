@@ -1,5 +1,6 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, memo, useCallback } from 'react';
 import { HeaderDataInt, HeaderItemType } from '.';
+import { useAppSelector } from '../../store/hooks';
 import FancyLink from '../FancyLink';
 import Char from './Char';
 
@@ -15,31 +16,39 @@ interface OwnProps {
 type Props = OwnProps;
 
 const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, TagName, classStr }) => {
-  const { content, type } = data;
+  const scrollTop = useAppSelector(
+    ({ game }) => game.game_container_dimensions.scrollTop
+  );
+
+  const { content } = data;
 
   let charElArr = [
-    <Char key={rangeStart} active={rangeStart <= show} isCursor={rangeStart === show} />,
+    <Char
+      key={rangeStart}
+      active={rangeStart <= show}
+      isCursor={rangeStart === show}
+      scrollTop={rangeStart === show ? scrollTop : 0}
+    />,
   ];
 
   const linksActive = show >= rangeEnd;
 
   let charNumber = rangeStart + 1;
 
-  const wrapArrOfChar = (
-    charArr: JSX.Element[],
-    data: HeaderItemType,
-    wrapperIndex: number
-  ) => {
-    const { type, props } = data;
+  const wrapArrOfChar = useCallback(
+    (charArr: JSX.Element[], data: HeaderItemType, wrapperIndex: number) => {
+      const { type, props } = data;
 
-    if (type === 'link')
-      return [
-        <FancyLink key={wrapperIndex + type} {...props}>
-          {charArr}
-        </FancyLink>,
-      ];
-    if (type === 'text') return charArr;
-  };
+      if (type === 'link')
+        return [
+          <FancyLink key={wrapperIndex + type} {...props}>
+            {charArr}
+          </FancyLink>,
+        ];
+      if (type === 'text') return charArr;
+    },
+    []
+  );
 
   content.forEach((el, i) => {
     const { content } = el;
@@ -48,7 +57,12 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, TagName, classStr
       const key = charNumber + i;
 
       return (
-        <Char key={key} active={key <= show} isCursor={key === show}>
+        <Char
+          key={key}
+          active={key <= show}
+          isCursor={key === show}
+          scrollTop={key === show ? scrollTop : 0}
+        >
           {char}
         </Char>
       );
@@ -66,84 +80,4 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, TagName, classStr
   );
 };
 
-export default Header;
-
-/* 
-
-<span key={i} className={`about__char ${charNumber <= show ? 'active' : ''}`}>
-              {char}
-            </span>
-
-<span>{visibleElArr}</span>
-      <span>{hiddenElArr}</span>
-*/
-
-/* 
-const testFunction = () => {
-    console.log('=======');
-    let charNumber = rangeStart;
-
-    let hiddenElArr = [];
-    let visibleElArr = [];
-
-    const wrapArrOfChar = (charArr: JSX.Element[], data: HeaderItemType) => {
-      const { type, props } = data;
-
-      if (type === 'link') return [<FancyLink {...props}>{charArr}</FancyLink>];
-      if (type === 'text') return charArr;
-    };
-
-    content.forEach((el, i) => {
-      const { content } = el;
-
-      const charElArr = content.split('').map((char, i) => {
-        const key = charNumber + i + 1;
-
-        return (
-          <Char key={key} active={key <= show}>
-            {char}
-          </Char>
-        );
-      });
-
-      const diff = show - charNumber;
-      charNumber += charElArr.length;
-
-      const hidden = charElArr;
-      const visible = hidden.splice(0, diff);
-
-      if (hidden.length) hiddenElArr = [...hiddenElArr, ...wrapArrOfChar(hidden, el)];
-      if (visible.length) visibleElArr = [...visibleElArr, ...wrapArrOfChar(visible, el)];
-    });
-
-    console.log({ hiddenElArr, visibleElArr });
-  };
-
-
-*/
-
-/* 
-
-content.map((el, i) => {
-        const { content, type } = el;
-
-        const charElArr = content.split('').map((char, i) => {
-          charNumber += 1;
-
-          return (
-            <Char key={i} active={charNumber <= show}>
-              {char}
-            </Char>
-          );
-        });
-
-        if (type === 'link')
-          return (
-            <FancyLink key={i} {...el.props}>
-              {charElArr}
-            </FancyLink>
-          );
-        if (type === 'text') return charElArr;
-      })
-
-*/
+export default memo(Header);

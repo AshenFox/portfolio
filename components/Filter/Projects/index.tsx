@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { ProjectsInt, TagType } from '..';
 import Project from './Project';
@@ -11,8 +11,6 @@ interface OwnProps {
 type Props = OwnProps;
 
 const Projects: FC<Props> = ({ order, projects }) => {
-  console.log({ projects });
-
   const timeout = 500; // 400
 
   const projectsEl = useRef<HTMLUListElement>(null);
@@ -65,7 +63,7 @@ const Projects: FC<Props> = ({ order, projects }) => {
   );
 };
 
-export default Projects;
+export default memo(Projects);
 
 {
   /*<Project key={id} data={projects[id]} order={order} />

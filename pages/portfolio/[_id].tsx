@@ -4,9 +4,9 @@ import Button from '../../components/Button';
 import ContactFooter from '../../components/ContactFooter';
 import ImageSlider from '../../components/ImageSlider';
 import Link from '../../components/Link';
-import Section, { Props } from '../../components/SectionSlider/Section';
+import Section, { SectionProps } from '../../components/SectionSlider/Section';
 
-const Project: FC<Props> = props => {
+const Project: FC<SectionProps> = props => {
   const { query, isReady } = useRouter();
 
   const { _id } = query;

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { CSSProperties, FC, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { ProjectInt, TagType } from '..';
 import Img from 'next/image';
@@ -110,4 +110,4 @@ const Project: FC<Props> = ({ data, order }) => {
   );
 };
 
-export default Project;
+export default memo(Project);

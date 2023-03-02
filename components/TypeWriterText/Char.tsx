@@ -1,22 +1,19 @@
 import React, { FC, useEffect, useRef, useState, memo, useCallback } from 'react';
 import { useOrientationChange } from '../../helpers/hooks';
 
-import { useActions, useAppSelector } from '../../store/hooks';
+import { useActions } from '../../store/hooks';
 import { createDots } from '../FallingParticles';
 
 interface OwnProps {
   active: boolean;
+  scrollTop?: number;
   children?: string;
   isCursor?: boolean;
 }
 
 type Props = OwnProps;
 
-const Char: FC<Props> = ({ active, children, isCursor }) => {
-  const scrollTop = useAppSelector(
-    ({ game }) => game.game_container_dimensions.scrollTop
-  );
-
+const Char: FC<Props> = ({ active, children, isCursor, scrollTop = 0 }) => {
   const { set_cursor_position } = useActions();
 
   const charElRef = useRef<HTMLSpanElement>(null);
@@ -41,8 +38,6 @@ const Char: FC<Props> = ({ active, children, isCursor }) => {
       const { x, y, width, height } = rect;
 
       const color = computedStyleRef.current.getPropertyValue('color');
-
-      console.log({ 'scrollTopRef.current': scrollTopRef.current });
 
       createDots(
         Math.round(x + width / 2),

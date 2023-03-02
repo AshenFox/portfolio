@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useCallback, useEffect, useRef } from 'react';
 import { useAppSelector } from '../store/hooks';
 
 interface IPos {
@@ -123,9 +123,15 @@ const lineRectCol = (l: ILine, r: IRect) => {
 interface Props {}
 
 const FallingParticles: FC<Props> = props => {
-  const { game_container_dimensions, barrier_dimensions } = useAppSelector(
-    ({ game }) => game
+  const game_container_width = useAppSelector(
+    ({ game }) => game.game_container_dimensions.width
   );
+
+  const game_container_height = useAppSelector(
+    ({ game }) => game.game_container_dimensions.height
+  );
+
+  const barrier_dimensions = useAppSelector(({ game }) => game.barrier_dimensions);
 
   const barrierDimensionsRef = useRef(barrier_dimensions);
   barrierDimensionsRef.current = barrier_dimensions;
@@ -135,7 +141,7 @@ const FallingParticles: FC<Props> = props => {
 
   const requestRef = useRef<number>();
 
-  const animate: FrameRequestCallback = time => {
+  const animate: FrameRequestCallback = useCallback(time => {
     if (prevTime === 0) prevTime = time;
     let diff = time - prevTime;
     prevTime = time;
@@ -204,14 +210,12 @@ const FallingParticles: FC<Props> = props => {
     dotArr = dotArr.filter(moveDot);
 
     requestRef.current = requestAnimationFrame(animate);
-  };
+  }, []);
 
   useEffect(() => {
-    const { width, height } = game_container_dimensions;
-
-    canvasRef.current.width = width;
-    canvasRef.current.height = height;
-  }, [game_container_dimensions]);
+    canvasRef.current.width = game_container_width;
+    canvasRef.current.height = game_container_height;
+  }, [game_container_width, game_container_height]);
 
   useEffect(() => {
     const requestID = requestAnimationFrame(animate);
@@ -221,7 +225,7 @@ const FallingParticles: FC<Props> = props => {
     return () => {
       cancelAnimationFrame(requestID);
     };
-  }, []);
+  }, [animate]);
 
   return <canvas ref={canvasRef} className='about__game-canvas'></canvas>;
 };

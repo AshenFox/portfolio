@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import Section, { Props } from '../components/SectionSlider/Section';
+import Section, { SectionProps } from '../components/SectionSlider/Section';
 import Button from '../components/Button';
 import FancyLink from '../components/FancyLink';
 import ContactForm from '../components/ContactForm';
 import Link from '../components/Link';
 
-const ContactPage: FC<Props> = props => {
+const ContactPage: FC<SectionProps> = props => {
   return (
     <Section classNameStr={'contact-page'} {...props}>
       <div className='page__container'>
