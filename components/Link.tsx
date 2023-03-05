@@ -63,7 +63,6 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       e => {
         setIsClicked(true);
         setTimeout(() => {
-          console.log({ 'isLoadingRef.current': isLoadingRef.current });
           if (!isLoadingRef.current) {
             setIsClicked(false);
           }

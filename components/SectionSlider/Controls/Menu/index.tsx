@@ -18,14 +18,16 @@ const Menu: FC<Props> = () => {
     <>
       <CSSTransition classNames={'menu'} in={show_menu} timeout={timeout}>
         <div className={`menu ${show_menu ? 'menu__active' : ''}`}>
-          {routesOrderList.map(({ path, title }) => (
-            <MenuItem href={path} title={title} key={path} />
-          ))}
-          <MenuItem
-            href={'/portfolio/flashcards'}
-            title={'portfolio flashcards'}
-            key={'project flashcards'}
-          />
+          <div className='menu__list'>
+            {routesOrderList.map(({ path, title }) => (
+              <MenuItem href={path} title={title} key={path} />
+            ))}
+            <MenuItem
+              href={'/portfolio/flashcards'}
+              title={'portfolio flashcards'}
+              key={'project flashcards'}
+            />
+          </div>
           {/* <span className='menu__tip'>for a quick seach just start typing ...</span> */}
         </div>
       </CSSTransition>

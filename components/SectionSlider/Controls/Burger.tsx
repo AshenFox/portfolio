@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler } from 'react';
+import React, { FC, MouseEventHandler, useCallback, useMemo, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { ExitHandler } from 'react-transition-group/Transition';
 import { useActions, useAppSelector } from '../../../store/hooks';
@@ -18,16 +18,24 @@ const Burger: FC<Props> = ({ onExited }) => {
     show_navigation,
   } = useAppSelector(({ sslider }) => sslider);
 
-  const onClick: MouseEventHandler<HTMLDivElement> = (e) => {
+  const onClick: MouseEventHandler<HTMLDivElement> = e => {
     set_show_menu(!show_menu);
   };
 
-  const burgerTimeout = 950;
-  const burgerToggleTimeouts = {
-    appear: 1000,
-    enter: 1000,
-    exit: 750,
+  const onContainerClick: MouseEventHandler<HTMLDivElement> = e => {
+    e.stopPropagation();
+    e.preventDefault();
   };
+
+  const burgerTimeout = 950;
+  const burgerToggleTimeouts = useMemo(
+    () => ({
+      appear: 1000,
+      enter: 1000,
+      exit: 750,
+    }),
+    []
+  );
 
   return (
     <CSSTransition
@@ -36,7 +44,7 @@ const Burger: FC<Props> = ({ onExited }) => {
       timeout={burgerTimeout}
       appear
     >
-      <div className='burger__container'>
+      <div className='burger__container' onClick={onContainerClick}>
         <CSSTransition
           classNames={'burger__toggle'}
           in={show_menu}

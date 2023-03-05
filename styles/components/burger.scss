@@ -1,5 +1,4 @@
 .burger {
-  // padding: 5px 4px;
   cursor: pointer;
 
   @media (max-width: $tablet) {
@@ -70,7 +69,6 @@
   &-appear,
   &-exit-done {
     cursor: auto;
-    pointer-events: none;
 
     .burger__bar {
       transition: transform 0.35s cubic-bezier(0.69, 0.03, 0.03, 0.93);
@@ -140,6 +138,11 @@
         transform: translateX(0px) !important;
       }
     }
+  }
+
+  &-enter-done,
+  &-exit-done,
+  &-appear-done {
   }
 
   @media (hover: hover) {
