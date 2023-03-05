@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import Section, { SectionProps } from '../components/SectionSlider/Section';
 import Button from '../components/Button';
 import FancyLink from '../components/FancyLink';
@@ -47,4 +47,4 @@ const ContactPage: FC<SectionProps> = props => {
   );
 };
 
-export default ContactPage;
+export default memo(ContactPage);

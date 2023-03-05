@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import ContactFooter from '../components/ContactFooter';
 import Section, { SectionProps } from '../components/SectionSlider/Section';
 import Filter from '../components/Filter';
@@ -25,4 +25,4 @@ const Portfolio: FC<SectionProps> = props => {
   );
 };
 
-export default Portfolio;
+export default memo(Portfolio);

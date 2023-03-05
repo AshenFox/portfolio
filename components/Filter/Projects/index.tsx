@@ -64,16 +64,3 @@ const Projects: FC<Props> = ({ order, projects }) => {
 };
 
 export default memo(Projects);
-
-{
-  /*<Project key={id} data={projects[id]} order={order} />
-   <CSSTransition
-            key={id}
-            in={projects[id].in}
-            classNames='filter__project'
-            timeout={timeout}
-            unmountOnExit={true}
-          >
-            <Project data={projects[id]} order={order} />
-          </CSSTransition> */
-}

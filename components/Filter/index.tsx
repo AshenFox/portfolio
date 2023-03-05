@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 import Projects from './Projects';
 import Tag from './Tag';
 
@@ -319,4 +319,4 @@ const Filter: FC<Props> = props => {
   );
 };
 
-export default Filter;
+export default memo(Filter);

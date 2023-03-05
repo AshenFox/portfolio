@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, memo, useEffect, useRef } from 'react';
 import Button from '../../components/Button';
 import ContactFooter from '../../components/ContactFooter';
 import ImageSlider from '../../components/ImageSlider';
@@ -134,4 +134,4 @@ const Project: FC<SectionProps> = props => {
   );
 };
 
-export default Project;
+export default memo(Project);

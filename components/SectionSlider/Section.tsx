@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect } from 'react';
+import React, { FC, ReactNode, useEffect, memo } from 'react';
 import { AppProps } from 'next/app';
 import { useActions, useAppSelector } from '../../store/hooks';
 
@@ -29,11 +29,7 @@ const Section: FC<SectionProps> = ({
 
   return (
     <section className={`section-slider__section ${dir} ${classNameStr}`}>
-      <div
-        className='section-slider__frame'
-        onScroll={e => console.log('Fire!', e)}
-        ref={frameRef}
-      >
+      <div className='section-slider__frame' ref={frameRef}>
         <div
           className={`section-slider__frame-inner ${containerClassNameStr}`}
           ref={frameInnerRef}
@@ -47,4 +43,4 @@ const Section: FC<SectionProps> = ({
 
 Section.displayName = 'Section';
 
-export default Section;
+export default memo(Section);

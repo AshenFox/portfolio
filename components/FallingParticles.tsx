@@ -1,4 +1,5 @@
-import { FC, useCallback, useEffect, useRef } from 'react';
+import { FC, useCallback, useEffect, useRef, memo } from 'react';
+import { shallowEqual } from 'react-redux';
 import { useAppSelector } from '../store/hooks';
 
 interface IPos {
@@ -122,16 +123,19 @@ const lineRectCol = (l: ILine, r: IRect) => {
 
 interface Props {}
 
-const FallingParticles: FC<Props> = props => {
-  const game_container_width = useAppSelector(
-    ({ game }) => game.game_container_dimensions.width
+const FallingParticles: FC<Props> = () => {
+  const game_container_dimensions = useAppSelector(
+    ({ game }) => ({
+      height: game.game_container_dimensions.height,
+      width: game.game_container_dimensions.width,
+    }),
+    shallowEqual
   );
 
-  const game_container_height = useAppSelector(
-    ({ game }) => game.game_container_dimensions.height
+  const barrier_dimensions = useAppSelector(
+    ({ game }) => game.barrier_dimensions,
+    shallowEqual
   );
-
-  const barrier_dimensions = useAppSelector(({ game }) => game.barrier_dimensions);
 
   const barrierDimensionsRef = useRef(barrier_dimensions);
   barrierDimensionsRef.current = barrier_dimensions;
@@ -213,9 +217,9 @@ const FallingParticles: FC<Props> = props => {
   }, []);
 
   useEffect(() => {
-    canvasRef.current.width = game_container_width;
-    canvasRef.current.height = game_container_height;
-  }, [game_container_width, game_container_height]);
+    canvasRef.current.width = game_container_dimensions.width;
+    canvasRef.current.height = game_container_dimensions.height;
+  }, [game_container_dimensions]);
 
   useEffect(() => {
     const requestID = requestAnimationFrame(animate);
@@ -230,4 +234,4 @@ const FallingParticles: FC<Props> = props => {
   return <canvas ref={canvasRef} className='about__game-canvas'></canvas>;
 };
 
-export default FallingParticles;
+export default memo(FallingParticles);

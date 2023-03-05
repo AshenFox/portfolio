@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useRef } from 'react';
+import React, { FC, useCallback, useEffect, useRef, memo } from 'react';
 import Button from '../components/Button';
 import FallingParticles from '../components/FallingParticles';
 import Link from '../components/Link';
@@ -14,6 +14,7 @@ const About: FC<SectionProps> = props => {
     set_game_container_dimensions,
     set_game_container_scroll,
   } = useActions();
+
   const show_navigation = useAppSelector(({ sslider }) => sslider.show_navigation);
   const scrollTop = useAppSelector(
     ({ game }) => game.game_container_dimensions.scrollTop
@@ -100,4 +101,4 @@ const About: FC<SectionProps> = props => {
   );
 };
 
-export default About;
+export default memo(About);
