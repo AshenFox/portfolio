@@ -7,6 +7,7 @@ import {
   SET_SHOW_NAVIGATION,
   SET_SHOW_MENU,
   SET_DIRECTION,
+  SET_MENU_IS_EXITED,
 } from '../../types/types';
 import initialState, { SectionSliderState } from './sectionSliderInitState';
 
@@ -56,7 +57,19 @@ const sectionSliderReducer = (
     case SET_SHOW_MENU:
       return {
         ...state,
-        show_menu: payload.value,
+        menu: {
+          ...state.menu,
+          show_menu: payload.value,
+        },
+      };
+
+    case SET_MENU_IS_EXITED:
+      return {
+        ...state,
+        menu: {
+          ...state.menu,
+          is_exited: payload.value,
+        },
       };
 
     case SET_DIRECTION:

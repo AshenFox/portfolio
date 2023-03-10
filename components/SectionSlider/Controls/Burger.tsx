@@ -14,7 +14,7 @@ const Burger: FC<Props> = ({ onExited }) => {
 
   const {
     content_loader: { is_exited },
-    show_menu,
+    menu: { show_menu },
     show_navigation,
   } = useAppSelector(({ sslider }) => sslider);
 

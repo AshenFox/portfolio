@@ -1,0 +1,111 @@
+.uppper-level-link {
+  cursor: pointer;
+  position: fixed;
+  top: 3rem;
+  left: 9rem;
+  z-index: 1000;
+
+  height: 5.5rem;
+  width: 5.5rem;
+  padding: 1.25rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+
+  transition: transform 0.25s ease-out 0.3s;
+  transform: translateX(-500px);
+
+  &-exit-active,
+  &-exit-done {
+    pointer-events: none;
+    transition-delay: 0.38s;
+    transform: translateX(-500px);
+  }
+
+  &-appear-active,
+  &-appear-done,
+  &-enter-active,
+  &-enter-done {
+    transform: translateX(0);
+  }
+
+  div {
+    background-color: #7a7a7a;
+    height: 0.8rem;
+    width: 0.8rem;
+
+    transition: transform 0.15s ease-out;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      div:nth-child(1) {
+        transform: translate(-0.3rem, -0.3rem);
+      }
+
+      div:nth-child(2) {
+        transform: translate(0, -0.3rem);
+      }
+
+      div:nth-child(3) {
+        transform: translate(0.3rem, -0.3rem);
+      }
+
+      div:nth-child(4) {
+        transform: translate(-0.3rem, 0);
+      }
+
+      div:nth-child(6) {
+        transform: translate(0.3rem, 0);
+      }
+
+      div:nth-child(7) {
+        transform: translate(-0.3rem, 0.3rem);
+      }
+
+      div:nth-child(8) {
+        transform: translate(0, 0.3rem);
+      }
+
+      div:nth-child(9) {
+        transform: translate(0.3rem, 0.3rem);
+      }
+    }
+  }
+
+  &-clicked-enter-active,
+  &-clicked-enter-done {
+    div:nth-child(1) {
+      transform: translate(0.3rem, 0.3rem);
+    }
+
+    div:nth-child(2) {
+      transform: translate(0, 0.3rem);
+    }
+
+    div:nth-child(3) {
+      transform: translate(-0.3rem, 0.3rem);
+    }
+
+    div:nth-child(4) {
+      transform: translate(0.3rem, 0);
+    }
+
+    div:nth-child(6) {
+      transform: translate(-0.3rem, 0);
+    }
+
+    div:nth-child(7) {
+      transform: translate(0.3rem, -0.3rem);
+    }
+
+    div:nth-child(8) {
+      transform: translate(0, -0.3rem);
+    }
+
+    div:nth-child(9) {
+      transform: translate(-0.3rem, -0.3rem);
+    }
+  }
+}

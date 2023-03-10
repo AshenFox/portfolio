@@ -3,16 +3,38 @@ import { routesOrderList, TRoutesArr } from './values';
 import { Direction } from '../store/reducers/sslider/sectionSliderInitState';
 import { iNotification, Store } from 'react-notifications-component';
 
-/* export const getPath = (pathname: string, dir: 1 | -1) => {
-  const pathname_i = routesOrderList.findIndex((el) => el.path === pathname); // find index and array of routes
-  let new_pathname_i = (pathname_i + dir) % routesOrderList.length; // find new pathname according in the found array of routes
-  if (new_pathname_i < 0) new_pathname_i = routesOrderList.length - 1;
-  return routesOrderList.find((el, i) => i === new_pathname_i).path; // if it's the end of an array return false value
-}; */
+export const getUpperLevelPath = (pathname: string) => {
+  let upper_level_path = '';
+  let level = 0;
+
+  const search = (
+    routesOrder: TRoutesArr,
+    parent_path: string = '/',
+    i: number = 0
+  ): boolean => {
+    return !!routesOrder.find(el => {
+      let found_path = (parent_path + el.path).replace('//', '/');
+
+      if (found_path === pathname) {
+        level = i;
+        upper_level_path = parent_path;
+        return true;
+      } else {
+        if (el.inbed) {
+          return search(el.inbed, found_path, i + 1);
+        }
+      }
+
+      return false;
+    });
+  };
+
+  search(routesOrderList);
+
+  return { upper_level_path, level };
+};
 
 export const getPath = (pathname: string, dir: 1 | -1) => {
-  // console.log(pathname);
-
   const pathname_arr = pathname.split(/(?=\/)/g);
 
   let routes_list = routesOrderList;
@@ -26,7 +48,7 @@ export const getPath = (pathname: string, dir: 1 | -1) => {
     const { length } = pathname_arr;
     const is_last = length === +i + 1;
 
-    const route_i = routes_list.findIndex((el) => el.path === pathname_part);
+    const route_i = routes_list.findIndex(el => el.path === pathname_part);
 
     if (route_i < 0) break;
 
@@ -48,12 +70,8 @@ export const getPath = (pathname: string, dir: 1 | -1) => {
     }
   }
 
-  // console.log(new_pathname);
-
   return new_pathname ? new_pathname : '/';
 };
-
-// console.log(getPath('/portfolio/portfolio', 1));
 
 export const addCustomNotification = (custom_options: Partial<iNotification>) => {
   Store.addNotification({

@@ -8,6 +8,7 @@ export const SET_CONTENT_LOADER_ISEXITED = 'SET_CONTENT_LOADER_ISEXITED';
 export const SET_SHOW_SECTION_LOADER = 'SET_SHOW_SECTION_LOADER';
 export const SET_SHOW_NAVIGATION = 'SET_SHOW_NAVIGATION';
 export const SET_SHOW_MENU = 'SET_SHOW_MENU';
+export const SET_MENU_IS_EXITED = 'SET_MENU_IS_EXITED';
 export const SET_DIRECTION = 'SET_DIRECTION';
 
 export interface SetContentLoadedAction {
@@ -52,6 +53,13 @@ export interface SetShowMenuAction {
   };
 }
 
+export interface SetMenuIsEntering {
+  type: typeof SET_MENU_IS_EXITED;
+  payload: {
+    value: boolean;
+  };
+}
+
 export interface SetDirectionAction {
   type: typeof SET_DIRECTION;
   payload: {
@@ -66,7 +74,8 @@ export type SectionSliderActions =
   | SetShowSectionLoaderAction
   | SetShowNavigationAction
   | SetShowMenuAction
-  | SetDirectionAction;
+  | SetDirectionAction
+  | SetMenuIsEntering;
 
 // form
 export const SET_TEXTAREA_VALUE = 'SET_TEXTAREA_VALUE';

@@ -1,6 +1,6 @@
 import React, { FC, MouseEventHandler, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getPath } from '../../../helpers/functions';
+import { getPath, getUpperLevelPath } from '../../../helpers/functions';
 import { CSSTransition } from 'react-transition-group';
 import { ExitHandler } from 'react-transition-group/Transition';
 import { useAppSelector } from '../../../store/hooks';
@@ -15,16 +15,10 @@ const Arrows: FC<Props> = ({ onExited }) => {
   const router = useRouter();
   const { asPath } = router;
 
-  // console.log({ router });
-
-  // console.log(router);
-
   const {
     content_loader: { is_exited },
     show_navigation,
   } = useAppSelector(({ sslider }) => sslider);
-
-  // console.log(pathname);
 
   const showNavigation = is_exited && show_navigation;
   const timeout: number = 950;
@@ -48,23 +42,16 @@ const Arrows: FC<Props> = ({ onExited }) => {
   const nextPathname = getPath(asPath, 1); // UseMemo??
   const prevPathname = getPath(asPath, -1); // UseMemo??
 
-  // console.log({ nextPathname, prevPathname, asPath });
-
-  // const isRightEnd = nextPathname === asPath;
-  // const isLeftEnd = prevPathname === asPath;
-
-  // console.log({ nextPathname, asPath, prevPathname, showNavigation });
-
   const inRight = !isRightEnd && showNavigation;
   const inLeft = !isLeftEnd && showNavigation;
 
-  const onClickRightArrow: MouseEventHandler<HTMLAnchorElement> = (e) => {
+  const onClickRightArrow: MouseEventHandler<HTMLAnchorElement> = e => {
     e.preventDefault();
     setIsRightActive(false);
     router.push(nextPathname);
   };
 
-  const onClickLeftArrow: MouseEventHandler<HTMLAnchorElement> = (e) => {
+  const onClickLeftArrow: MouseEventHandler<HTMLAnchorElement> = e => {
     e.preventDefault();
     setIsLeftActive(false);
     router.push(prevPathname);

@@ -3,6 +3,7 @@ import Menu from './Menu';
 import Arrows from './Arrows';
 import Burger from './Burger';
 import { ExitHandler } from 'react-transition-group/Transition';
+import UpperLevelLink from './UpperLevelLink';
 
 interface OwnProps {
   onBurgerExited: ExitHandler<HTMLDivElement>;
@@ -17,6 +18,7 @@ const Controls: FC<Props> = ({ onBurgerExited, onArrowExited }) => {
       <Burger onExited={onBurgerExited} />
       <Menu />
       <Arrows onExited={onArrowExited} />
+      <UpperLevelLink />
     </>
   );
 };

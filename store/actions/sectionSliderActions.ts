@@ -1,4 +1,4 @@
-import { AppActions } from '../types/types';
+import { AppActions, SET_MENU_IS_EXITED } from '../types/types';
 import { ThunkActionApp } from '../store';
 import {
   SET_CONTENT_LOADED,
@@ -54,6 +54,14 @@ export const set_show_navigation = (value: boolean): AppActions => ({
 // SET_SHOW_MENU
 export const set_show_menu = (value: boolean): AppActions => ({
   type: SET_SHOW_MENU,
+  payload: {
+    value,
+  },
+});
+
+// SET_MENU_IS_EXITED
+export const set_menu_is_exited = (value: boolean): AppActions => ({
+  type: SET_MENU_IS_EXITED,
   payload: {
     value,
   },

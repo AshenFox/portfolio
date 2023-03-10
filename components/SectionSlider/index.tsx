@@ -1,10 +1,10 @@
 import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import React, { AnimationEventHandler, FC } from 'react';
+import React, { AnimationEventHandler, CSSProperties, FC, useMemo } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { useStateWithRef, useUpdatedRef } from '../../helpers/hooks';
+import { useStateWithRef, useUpdatedRef, useWindowSize } from '../../helpers/hooks';
 import { useActions, useAppSelector } from '../../store/hooks';
 import ContentLoader from './ContentLoader';
 
@@ -32,7 +32,7 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
 
   const {
     content_loader: { is_exited },
-    show_menu,
+    menu: { show_menu },
     show_section_loader,
   } = useAppSelector(({ sslider }) => sslider);
 
@@ -43,6 +43,8 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   isReadyRef.current = router.isReady; //?????????
 
   const loadingPath = useRef(path);
+
+  const sectionSliderSize = useWindowSize();
 
   // ============================
   // ===== State/Ref/Values =====
@@ -76,7 +78,7 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   // ===== Listners/Callbacks =====
   // ==============================
 
-  const onLoaderAnimationIteration: AnimationEventHandler<HTMLDivElement> = (e) => {
+  const onLoaderAnimationIteration: AnimationEventHandler<HTMLDivElement> = e => {
     if (ReceivedRef.current) {
       set_show_section_loader(false);
 
@@ -178,11 +180,21 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   // ===================
   // ===================
 
+  const sectionSliderStyles = useMemo<CSSProperties | undefined>(() => {
+    const hasSize = !!sectionSliderSize.height && !!sectionSliderSize.width;
+
+    if (hasSize)
+      return {
+        height: `${sectionSliderSize.height}px`,
+        width: `${sectionSliderSize.width}px`,
+      };
+  }, [sectionSliderSize]);
+
   return (
     <>
       <Controls onBurgerExited={onBurgerExited} onArrowExited={onArrowExited} />
 
-      <div className='section-slider'>
+      <div className='section-slider' style={sectionSliderStyles}>
         <TransitionGroup component={null}>
           <CSSTransition
             key={Rendered.id}
