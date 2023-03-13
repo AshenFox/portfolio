@@ -1,7 +1,13 @@
 .menu {
   position: absolute;
   width: 100%;
-  height: 100%;
+  // height: 100%;
+  height: 100vh;
+
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
+
   left: 0;
   bottom: 0;
   background-color: #333;

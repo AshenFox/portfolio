@@ -1,7 +1,10 @@
 .burger {
   cursor: pointer;
+  padding: 3rem;
 
-  @media (max-width: $tablet) {
+  @media (max-width: $tablet), (max-height: $tablet-s) {
+    padding: 0;
+
     &::after {
       content: '';
       position: absolute;
@@ -18,20 +21,20 @@
 
   &__container {
     position: fixed;
-    top: 5rem;
-    right: 8rem;
+    top: 2rem;
+    right: 5rem;
     z-index: 1100;
 
     @media (max-width: $laptop-l) {
-      top: 3.5rem;
-      right: 4rem;
+      top: 2rem;
+      right: 2.5rem;
     }
 
     @media (max-width: $laptop-l) {
-      right: 3rem;
+      right: 1.5rem;
     }
 
-    @media (max-width: $tablet) {
+    @media (max-width: $tablet), (max-height: $tablet-s) {
       top: auto;
       right: 2rem;
       bottom: 3.5rem;
@@ -58,7 +61,7 @@
       background-color 0.3s ease; // background-color?
     transform: translateX(150px);
 
-    @media (max-width: $tablet) {
+    @media (max-width: $tablet), (max-height: $tablet-s) {
       width: 24px;
       transform: translateX(0);
     }
@@ -101,7 +104,7 @@
       transform: translateX(0px);
     }
 
-    @media (max-width: $tablet) {
+    @media (max-width: $tablet), (max-height: $tablet-s) {
       animation: burger-rotate-in 0.7s cubic-bezier(0.2, 0.86, 0.35, 1) forwards !important;
     }
   }
@@ -131,18 +134,13 @@
       }
     }
 
-    @media (max-width: $tablet) {
+    @media (max-width: $tablet), (max-height: $tablet-s) {
       animation: burger-rotate-out 0.7s cubic-bezier(0.2, 0.86, 0.35, 1) forwards !important;
 
       .burger__bar {
         transform: translateX(0px) !important;
       }
     }
-  }
-
-  &-enter-done,
-  &-exit-done,
-  &-appear-done {
   }
 
   @media (hover: hover) {

@@ -62,29 +62,3 @@ export const useOrientationChange = (
     };
   }, [onOrientationChange]);
 };
-
-export const useWindowSize = () => {
-  const [size, setSize] = useState<{ height: number; width: number }>({
-    height: 0,
-    width: 0,
-  });
-
-  const updateSize = useCallback(() => {
-    const res = { width: window.innerWidth, height: window.innerHeight };
-    console.log(res);
-    setSize(res);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener('resize', updateSize);
-    window.addEventListener('orientationchange', updateSize);
-    // updateSize();
-
-    return () => {
-      window.removeEventListener('resize', updateSize);
-      window.removeEventListener('orientationchange', updateSize);
-    };
-  }, [updateSize]);
-
-  return size;
-};

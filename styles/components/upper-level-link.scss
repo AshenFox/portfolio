@@ -1,12 +1,12 @@
 .uppper-level-link {
   cursor: pointer;
   position: fixed;
-  top: 3rem;
+  top: 4rem;
   left: 9rem;
   z-index: 1000;
 
   height: 5.5rem;
-  width: 5.5rem;
+  width: 6rem;
   padding: 1.25rem;
 
   display: flex;
@@ -15,6 +15,19 @@
 
   transition: transform 0.25s ease-out 0.3s;
   transform: translateX(-500px);
+
+  @media (max-width: $laptop-l) {
+    top: 4rem;
+    left: 4.5rem;
+  }
+
+  @media (max-width: $laptop-l) {
+    right: 1.5rem;
+  }
+
+  @media (max-width: $tablet), (max-height: $tablet-s) {
+    display: none;
+  }
 
   &-exit-active,
   &-exit-done {

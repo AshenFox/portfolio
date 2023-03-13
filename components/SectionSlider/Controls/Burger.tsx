@@ -18,14 +18,21 @@ const Burger: FC<Props> = ({ onExited }) => {
     show_navigation,
   } = useAppSelector(({ sslider }) => sslider);
 
-  const onClick: MouseEventHandler<HTMLDivElement> = e => {
-    set_show_menu(!show_menu);
-  };
+  const canOpenMenu = show_navigation && is_exited;
 
-  const onContainerClick: MouseEventHandler<HTMLDivElement> = e => {
+  const onClick: MouseEventHandler<HTMLDivElement> = useCallback(
+    e => {
+      if (canOpenMenu) {
+        set_show_menu(!show_menu);
+      }
+    },
+    [set_show_menu, show_menu, canOpenMenu]
+  );
+
+  const onContainerClick: MouseEventHandler<HTMLDivElement> = useCallback(e => {
     e.stopPropagation();
     e.preventDefault();
-  };
+  }, []);
 
   const burgerTimeout = 950;
   const burgerToggleTimeouts = useMemo(
@@ -38,12 +45,7 @@ const Burger: FC<Props> = ({ onExited }) => {
   );
 
   return (
-    <CSSTransition
-      classNames={'burger'}
-      in={show_navigation && is_exited}
-      timeout={burgerTimeout}
-      appear
-    >
+    <CSSTransition classNames={'burger'} in={canOpenMenu} timeout={burgerTimeout} appear>
       <div className='burger__container' onClick={onContainerClick}>
         <CSSTransition
           classNames={'burger__toggle'}
