@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useEffect, useState } from 'react';
+import React, { FC, MouseEventHandler, useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { getPath, getUpperLevelPath } from '../../../helpers/functions';
 import { CSSTransition } from 'react-transition-group';
@@ -23,11 +23,23 @@ const Arrows: FC<Props> = ({ onExited }) => {
   const showNavigation = is_exited && show_navigation;
   const timeout: number = 950;
 
+  const { path: nextPathname, title: nextTitle } = useMemo(
+    () => getPath(asPath, 1),
+    [asPath]
+  );
+  const { path: prevPathname, title: prevTitle } = useMemo(
+    () => getPath(asPath, -1),
+    [asPath]
+  );
+
   const [isRightActive, setIsRightActive] = useState(true);
   const [isLeftActive, setIsLeftActive] = useState(true);
 
   const [isRightEnd, setIsRightEnd] = useState(false);
   const [isLeftEnd, setIsLeftEnd] = useState(false);
+
+  const [rightTitle, setRightTitle] = useState(nextTitle);
+  const [leftTitle, setLeftTitle] = useState(prevTitle);
 
   useEffect(() => {
     if (showNavigation) {
@@ -36,11 +48,11 @@ const Arrows: FC<Props> = ({ onExited }) => {
 
       setIsRightEnd(nextPathname === asPath);
       setIsLeftEnd(prevPathname === asPath);
+
+      setRightTitle(nextTitle);
+      setLeftTitle(prevTitle);
     }
   }, [showNavigation]);
-
-  const nextPathname = getPath(asPath, 1); // UseMemo??
-  const prevPathname = getPath(asPath, -1); // UseMemo??
 
   const inRight = !isRightEnd && showNavigation;
   const inLeft = !isLeftEnd && showNavigation;
@@ -72,10 +84,10 @@ const Arrows: FC<Props> = ({ onExited }) => {
               className='arrow__link'
               onClick={onClickRightArrow}
               href={nextPathname}
-              title='Next'
+              title={rightTitle}
             />
           </CSSTransition>
-          <span className='arrow__text'>next</span>
+          <span className='arrow__text'>{rightTitle}</span>
           <div className='arrow__arrow' />
         </div>
       </CSSTransition>
@@ -92,11 +104,11 @@ const Arrows: FC<Props> = ({ onExited }) => {
               className='arrow__link'
               onClick={onClickLeftArrow}
               href={prevPathname}
-              title='Prev'
+              title={leftTitle}
             />
           </CSSTransition>
           <div className='arrow__arrow' />
-          <span className='arrow__text'>prev</span>
+          <span className='arrow__text'>{leftTitle}</span>
         </div>
       </CSSTransition>
     </>

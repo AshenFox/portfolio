@@ -19,7 +19,10 @@ const UpperLevelLink = () => {
 
   const timeout: number = 950;
 
-  const { upper_level_path, level } = useMemo(() => getUpperLevelPath(asPath), [asPath]);
+  const { upper_level_path, level, title } = useMemo(
+    () => getUpperLevelPath(asPath),
+    [asPath]
+  );
 
   const isUpperLevel = level > 0;
 
@@ -49,7 +52,7 @@ const UpperLevelLink = () => {
         appear
       >
         <Link href={upper_level_path}>
-          <a className='uppper-level-link' title='Back to something' onClick={onClick}>
+          <a className='uppper-level-link' onClick={onClick} title={`Back to ${title}`}>
             <div />
             <div />
             <div />

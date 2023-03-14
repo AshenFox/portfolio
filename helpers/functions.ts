@@ -6,10 +6,12 @@ import { iNotification, Store } from 'react-notifications-component';
 export const getUpperLevelPath = (pathname: string) => {
   let upper_level_path = '';
   let level = 0;
+  let title = '';
 
   const search = (
     routesOrder: TRoutesArr,
     parent_path: string = '/',
+    parent_title: string = '',
     i: number = 0
   ): boolean => {
     return !!routesOrder.find(el => {
@@ -18,10 +20,11 @@ export const getUpperLevelPath = (pathname: string) => {
       if (found_path === pathname) {
         level = i;
         upper_level_path = parent_path;
+        title = parent_title;
         return true;
       } else {
         if (el.inbed) {
-          return search(el.inbed, found_path, i + 1);
+          return search(el.inbed, found_path, el.title, i + 1);
         }
       }
 
@@ -31,14 +34,17 @@ export const getUpperLevelPath = (pathname: string) => {
 
   search(routesOrderList);
 
-  return { upper_level_path, level };
+  return { upper_level_path, title, level };
 };
 
-export const getPath = (pathname: string, dir: 1 | -1) => {
+export const getPath = (
+  pathname: string,
+  dir: 1 | -1
+): { path: string; title: string } => {
   const pathname_arr = pathname.split(/(?=\/)/g);
 
   let routes_list = routesOrderList;
-  let new_pathname = '';
+  let res = { path: '', title: '' };
 
   for (let i in pathname_arr) {
     if (!routes_list) break;
@@ -59,18 +65,22 @@ export const getPath = (pathname: string, dir: 1 | -1) => {
       if (length < new_route_i + 1) new_route_i = length - 1;
       else if (new_route_i < 0) new_route_i = 0;
 
-      new_pathname += routes_list[new_route_i].path;
+      // console.log({ 'routes_list[new_route_i]': routes_list[new_route_i] });
+      res.path += routes_list[new_route_i].path;
+      res.title = routes_list[new_route_i].title;
 
       break;
     } else {
-      new_pathname += routes_list[route_i].path;
+      res.path += routes_list[route_i].path;
       routes_list = routes_list[route_i].inbed;
 
       continue;
     }
   }
 
-  return new_pathname ? new_pathname : '/';
+  if (!res.path) res.path = '/';
+
+  return res;
 };
 
 export const addCustomNotification = (custom_options: Partial<iNotification>) => {
