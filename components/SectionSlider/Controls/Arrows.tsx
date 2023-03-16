@@ -4,6 +4,30 @@ import { getPath, getUpperLevelPath } from '../../../helpers/functions';
 import { CSSTransition } from 'react-transition-group';
 import { ExitHandler } from 'react-transition-group/Transition';
 import { useAppSelector } from '../../../store/hooks';
+import styles from './styles.module.scss';
+
+const rightArrowClassNames = {
+  exitActive: styles.right_out_active,
+  exitDone: styles.right_out_done,
+  enterActive: styles.right_in_active,
+  enterDone: styles.right_in_done,
+  appearActive: styles.right_in_active,
+  appearDone: styles.right_in_done,
+};
+
+const leftArrowClassNames = {
+  exitActive: styles.left_out_active,
+  exitDone: styles.left_out_done,
+  enterActive: styles.left_in_active,
+  enterDone: styles.left_in_done,
+  appearActive: styles.left_in_active,
+  appearDone: styles.left_in_done,
+};
+
+const linkClassNames = {
+  exitActive: styles.link_out_active,
+  exitDone: styles.link_out_done,
+};
 
 interface OwnProps {
   onExited: ExitHandler<HTMLDivElement>;
@@ -14,6 +38,8 @@ type Props = OwnProps;
 const Arrows: FC<Props> = ({ onExited }) => {
   const router = useRouter();
   const { asPath } = router;
+
+  console.log({ styles });
 
   const {
     content_loader: { is_exited },
@@ -72,43 +98,43 @@ const Arrows: FC<Props> = ({ onExited }) => {
   return (
     <>
       <CSSTransition
-        classNames={'arrow__right'}
+        classNames={rightArrowClassNames}
         in={inRight}
         timeout={timeout}
         onExited={onExited}
         appear
       >
-        <div className='arrow__right'>
-          <CSSTransition classNames={'arrow__link'} in={isRightActive} timeout={timeout}>
+        <div className={styles.right}>
+          <CSSTransition classNames={linkClassNames} in={isRightActive} timeout={timeout}>
             <a
-              className='arrow__link'
+              className={styles.link}
               onClick={onClickRightArrow}
               href={nextPathname}
               title={rightTitle}
             />
           </CSSTransition>
-          <span className='arrow__text'>{rightTitle}</span>
-          <div className='arrow__arrow' />
+          <span className={styles.text}>{rightTitle}</span>
+          <div className={styles.arrow} />
         </div>
       </CSSTransition>
       <CSSTransition
-        classNames={'arrow__left'}
+        classNames={leftArrowClassNames}
         in={inLeft}
         timeout={timeout}
         onExited={onExited}
         appear
       >
-        <div className='arrow__left'>
-          <CSSTransition classNames={'arrow__link'} in={isLeftActive} timeout={timeout}>
+        <div className={styles.left}>
+          <CSSTransition classNames={linkClassNames} in={isLeftActive} timeout={timeout}>
             <a
-              className='arrow__link'
+              className={styles.link}
               onClick={onClickLeftArrow}
               href={prevPathname}
               title={leftTitle}
             />
           </CSSTransition>
-          <div className='arrow__arrow' />
-          <span className='arrow__text'>{leftTitle}</span>
+          <div className={styles.arrow} />
+          <span className={styles.text}>{leftTitle}</span>
         </div>
       </CSSTransition>
     </>

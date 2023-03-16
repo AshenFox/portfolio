@@ -9,7 +9,7 @@ import { ReactNotifications } from 'react-notifications-component';
 import { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 
-const MyApp: FC<AppProps> = (props) => (
+const MyApp: FC<AppProps> = props => (
   <>
     <Head />
     <Provider store={store}>
