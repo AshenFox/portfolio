@@ -1,5 +1,5 @@
 import React, { FC, useEffect, memo, useCallback } from 'react';
-import { HeaderDataInt, HeaderItemType } from '../';
+import { HeaderDataInt, HeaderItemType } from '../TypeWriterText';
 import { useAppSelector } from '../../../store/hooks';
 import FancyLink from '../../../ui/FancyLink';
 import Char from './Char';

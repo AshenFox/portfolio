@@ -58,7 +58,7 @@
   &__footer-links {
     display: flex;
 
-    .interactive-element {
+    & > a {
       margin-right: 1.5rem;
     }
   }

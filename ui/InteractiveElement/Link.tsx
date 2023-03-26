@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import NextLink from 'next/link';
 import InteractiveElementInner from './InteractiveElementInner';
-import { ColorType, TIcon } from '../../components/types';
+import { ColorType, TIcon } from './types';
 import styles from './styles.module.scss';
 
 type LinkProps = {

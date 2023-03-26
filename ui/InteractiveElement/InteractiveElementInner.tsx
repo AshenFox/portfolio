@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import Icons from '@ui/Icons';
-import { TIcon } from '../../components/types';
+import { TIcon } from './types';
 import styles from './styles.module.scss';
 
 type InteractiveElementInnerProps = {

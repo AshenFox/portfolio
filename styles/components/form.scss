@@ -195,7 +195,7 @@
   }
 
   &__controls {
-    .interactive-element {
+    & > button {
       margin-right: 1.5rem;
     }
   }

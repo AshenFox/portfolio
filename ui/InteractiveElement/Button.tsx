@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import InteractiveElementInner from './InteractiveElementInner';
-import { ColorType, TIcon } from '../../components/types';
+import { ColorType, TIcon } from './types';
 import styles from './styles.module.scss';
 
 interface OwnProps {
