@@ -1,6 +1,6 @@
 import React, { FC, memo, useCallback, useEffect, useState } from 'react';
-import Projects from './Projects';
-import Tag from './Tag';
+import Projects from './components/Projects';
+import Tag from './components/Tag';
 
 export type TagType =
   | 'show all'

@@ -1,9 +1,9 @@
 import React, { FC, memo } from 'react';
-import Section, { SectionProps } from '../components/SectionSlider/Section';
-import Button from '../components/Button';
-import FancyLink from '../components/FancyLink';
+import Section, { SectionProps } from '../modules/SectionSlider/components/Section';
+import { Button } from '@ui/InteractiveElement';
+import FancyLink from '../ui/FancyLink';
 import ContactForm from '../components/ContactForm';
-import Link from '../components/Link';
+import { Link } from '@ui/InteractiveElement';
 
 const ContactPage: FC<SectionProps> = props => {
   return (

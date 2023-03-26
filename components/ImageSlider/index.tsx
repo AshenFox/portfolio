@@ -1,9 +1,9 @@
 import React, { FC, Touch, TouchEventHandler, useEffect, useRef, useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useStateWithRef } from '../../helpers/hooks';
-import Arrows from './Arrows';
-import Controls from './Controls';
-import SliderItem from './SliderItem';
+import Arrows from './components/Arrows';
+import Controls from './components/Controls';
+import SliderItem from './components/SliderItem';
 
 export interface Image {
   path: string;
@@ -118,7 +118,7 @@ const ImageSlider: FC<Props> = () => {
 
   const [touchActive, setTouchActive] = useState<Touch>(null);
 
-  const onTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
+  const onTouchStart: TouchEventHandler<HTMLDivElement> = e => {
     if (!touchActive) {
       const touchArr = Array.from(e.changedTouches);
 
@@ -126,10 +126,10 @@ const ImageSlider: FC<Props> = () => {
     }
   };
 
-  const onTouchEnd: TouchEventHandler<HTMLDivElement> = (e) => {
+  const onTouchEnd: TouchEventHandler<HTMLDivElement> = e => {
     if (touchActive) {
       const touchArr = Array.from(e.changedTouches);
-      const touch = touchArr.find((touch) => touch.identifier === touchActive.identifier);
+      const touch = touchArr.find(touch => touch.identifier === touchActive.identifier);
 
       if (touch) {
         const dif = touchActive.clientX - touch.clientX;

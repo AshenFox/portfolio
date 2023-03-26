@@ -1,8 +1,8 @@
 import React, { FC, FormEventHandler, useCallback } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import Controls from './Controls';
-import Textarea from './Textarea';
-import Info from './Info';
+import Controls from './components/Controls';
+import Textarea from './components/Textarea';
+import Info from './components/Info';
 import { useActions, useAppSelector } from '../../store/hooks';
 
 interface OwnProps {}

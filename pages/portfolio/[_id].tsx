@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import React, { FC, memo, useEffect, useRef } from 'react';
-import Button from '../../components/Button';
+import { Button } from '@ui/InteractiveElement';
 import ContactFooter from '../../components/ContactFooter';
 import ImageSlider from '../../components/ImageSlider';
-import Link from '../../components/Link';
-import Section, { SectionProps } from '../../components/SectionSlider/Section';
+import { Link } from '@ui/InteractiveElement';
+import Section, { SectionProps } from '../../modules/SectionSlider/components/Section';
 
 const Project: FC<SectionProps> = props => {
   const { query, isReady } = useRouter();

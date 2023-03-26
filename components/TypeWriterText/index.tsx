@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useAppSelector } from '../../store/hooks';
-import Cursor from './Cursor';
-import Header from './Header';
+import Cursor from './components/Cursor';
+import Header from './components/Header';
 
 // type HeaderTextType = 'text' | 'link';
 

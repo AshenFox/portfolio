@@ -1,0 +1,256 @@
+@import '@styles/miscellaneous/variables.scss';
+
+@mixin interactive-element-colors($main, $dark, $background) {
+  .content {
+    background-color: $main;
+  }
+
+  .left,
+  .middle,
+  .right {
+    @media (hover: hover) {
+      &:hover {
+        & ~ .content {
+          background-color: $dark;
+        }
+      }
+    }
+  }
+
+  .background {
+    background-color: $background;
+  }
+
+  &.click {
+    .content {
+      background-color: $dark;
+    }
+  }
+}
+
+.interactiveElement {
+  height: 47px;
+  position: relative;
+  display: inline-flex;
+  background-color: transparent;
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.click {
+  .content {
+    transform: translateY(1px) !important;
+  }
+
+  .shadow {
+    transform: translateY(-3.5px) !important;
+  }
+}
+
+.big {
+  .content {
+    padding: 0 4rem;
+  }
+}
+
+.onlyicon {
+  width: 5.6rem;
+
+  .content {
+    padding: 0;
+  }
+}
+
+.inactive {
+  .left,
+  .middle,
+  .right {
+    cursor: auto !important;
+  }
+
+  .content {
+    transform: none !important;
+  }
+
+  .shadow {
+    transform: none !important;
+  }
+
+  .content {
+    background-color: $interactive-element-inactive !important;
+  }
+
+  .background {
+    background-color: $interactive-element-inactive-background !important;
+  }
+
+  .text {
+    color: #c4c4bc;
+  }
+}
+
+.icon {
+  transition: all 0.12s ease-out 0s;
+}
+
+.text {
+  color: white;
+
+  line-height: 0;
+  font-weight: 700;
+  font-size: 1.2rem;
+
+  text-transform: uppercase;
+
+  &:nth-child(2) {
+    margin-left: 1rem;
+  }
+}
+
+.background {
+  top: 3px;
+  z-index: 2;
+}
+
+.shadow {
+  top: 7px;
+  z-index: 1;
+
+  background-color: black;
+  opacity: 0.25;
+}
+
+.content,
+.background,
+.shadow {
+  height: 40px;
+
+  border-radius: 3px;
+
+  transition: transform 0.12s ease-out 0s, background-color 0.12s ease-out 0s;
+}
+
+.background,
+.shadow {
+  position: absolute;
+  width: 100%;
+}
+
+// colors
+
+.red {
+  @include interactive-element-colors(
+    $interactive-element-red,
+    $interactive-element-red-dark,
+    $interactive-element-red-background
+  );
+}
+
+.green {
+  @include interactive-element-colors(
+    $interactive-element-green,
+    $interactive-element-green-dark,
+    $interactive-element-green-background
+  );
+}
+
+.skyblue {
+  @include interactive-element-colors(
+    $interactive-element-skyblue,
+    $interactive-element-skyblue-dark,
+    $interactive-element-skyblue-background
+  );
+}
+
+.blue {
+  @include interactive-element-colors(
+    $interactive-element-blue,
+    $interactive-element-blue-dark,
+    $interactive-element-blue-background
+  );
+}
+
+.grey {
+  @include interactive-element-colors(
+    $interactive-element-grey,
+    $interactive-element-grey-dark,
+    $interactive-element-grey-background
+  );
+}
+
+.left,
+.middle,
+.right {
+  cursor: pointer;
+  position: absolute;
+
+  display: inline-block;
+  height: 100%;
+  width: 33.33333%;
+  z-index: 4;
+}
+
+.left {
+  left: 0;
+
+  @media (hover: hover) {
+    &:hover {
+      & ~ .content {
+        transform: skewY(-1deg) translate3d(0px, -0.5px, 0px);
+      }
+
+      & ~ .shadow {
+        transform: skewY(1deg) translate3d(0px, -0.5px, 0px);
+      }
+    }
+  }
+}
+
+.middle {
+  left: 33.3333%;
+
+  @media (hover: hover) {
+    &:hover {
+      & ~ .content {
+        transform: translateY(0.75px);
+      }
+
+      & ~ .shadow {
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+.right {
+  left: 66.6666%;
+
+  @media (hover: hover) {
+    &:hover {
+      & ~ .content {
+        transform: skewY(1deg) translate3d(0px, -0.5px, 0px);
+      }
+
+      & ~ .shadow {
+        transform: skewY(-1deg) translate3d(0px, -0.5px, 0px);
+      }
+    }
+  }
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  z-index: 3;
+  padding: 0 1.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    height: 20px;
+    fill: #fff;
+  }
+}

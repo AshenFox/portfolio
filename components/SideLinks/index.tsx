@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { useAppSelector } from '../../store/hooks';
-import SideLink, { ILink } from './SideLink';
+import SideLink, { ILink } from './components/SideLink';
 
 interface OwnProps {}
 
@@ -27,7 +27,7 @@ const SideLinksArr: TLinkArr = [
   },
 ];
 
-const SideLinks: FC<Props> = (props) => {
+const SideLinks: FC<Props> = props => {
   const {
     content_loader: { is_exited },
     show_navigation,
