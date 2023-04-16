@@ -1,19 +1,18 @@
+import Spinner from '@ui/Spinner';
 import React, { FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import { EnterHandler, ExitHandler } from 'react-transition-group/Transition';
-import { useAppSelector } from '../../../store/hooks/index';
-import { useActions } from '../../../store/hooks/index';
+import { useAppSelector } from '../../../../store/hooks/index';
+import { useActions } from '../../../../store/hooks/index';
+import styles from './styles.module.scss';
 
-interface OwnProps {
-  // isLoaded: boolean;
-  // isAppearing: boolean;
-  // onEntered: EnterHandler<HTMLDivElement>;
-  // onExited: ExitHandler<HTMLDivElement>;
-}
+const classNames: CSSTransitionClassNames = {
+  exitActive: styles.out_active,
+  exitDone: styles.out_done,
+};
 
-type Props = OwnProps;
-
-const ContentLoader: FC<Props> = () => {
+const ContentLoader: FC = () => {
   const { set_content_loader_isappearing, set_content_loader_isexited } = useActions();
 
   const {
@@ -37,17 +36,15 @@ const ContentLoader: FC<Props> = () => {
 
   return (
     <CSSTransition
-      classNames={'content-loader'}
+      classNames={classNames}
       timeout={timeouts}
       in={is_appearing ? true : !content_loaded}
       appear
       onEntered={onEntered}
       onExited={onExited}
     >
-      <div className='content-loader'>
-        <div className='spinner'>
-          <div className='spinner__inner'></div>
-        </div>
+      <div className={styles.content_loader}>
+        <Spinner />
       </div>
     </CSSTransition>
   );

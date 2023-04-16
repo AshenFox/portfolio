@@ -1,4 +1,4 @@
-.fancy-link {
+.fancy_link {
   display: inline-block;
   position: relative;
   cursor: pointer;
@@ -48,18 +48,18 @@
   }
 
   &:hover {
-    .fancy-link__text {
+    .text {
       color: #b6b6b6;
     }
   }
+}
 
-  &__text {
-    transition: color 0.325s cubic-bezier(0.65, 0.2, 0, 1);
-    position: relative;
-    line-height: inherit;
-    font-size: inherit;
-    font-weight: bold;
-    color: #9a9a9a;
-    z-index: 2;
-  }
+.text {
+  transition: color 0.325s cubic-bezier(0.65, 0.2, 0, 1);
+  position: relative;
+  line-height: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  color: #9a9a9a;
+  z-index: 2;
 }

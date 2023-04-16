@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { FC, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import Icons from '@ui/Icons';
+import Spinner from '@ui/Spinner';
 
 interface OwnProps {
   data: {
@@ -37,13 +38,7 @@ const SliderItem: FC<Props> = ({ data, dir }) => {
         timeout={250}
       >
         <div className='image-slider__item-loader'>
-          {isError ? (
-            <Icon />
-          ) : (
-            <div className='spinner small'>
-              <div className='spinner__inner'></div>
-            </div>
-          )}
+          {isError ? <Icon /> : <Spinner small />}
         </div>
       </CSSTransition>
       <img src={path} alt={alt} draggable={false} onLoad={onLoad} onError={onError} />

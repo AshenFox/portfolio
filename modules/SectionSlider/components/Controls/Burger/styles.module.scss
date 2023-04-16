@@ -1,0 +1,243 @@
+@import '@styles/miscellaneous/variables.scss';
+@import '@styles/miscellaneous/mixins';
+@import '@styles/miscellaneous/animations';
+
+.burger {
+  cursor: pointer;
+  padding: 3rem;
+
+  @media (max-width: $tablet), (max-height: $tablet-s) {
+    padding: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      height: 6rem;
+      width: 6rem;
+      background-color: $menu-button-color;
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      .bar {
+        &:nth-child(1) {
+          transform: translateY(-4px);
+        }
+
+        &:nth-child(3) {
+          transform: translateY(4px);
+        }
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      &.toggle_in_done {
+        .bar {
+          &:nth-child(1) {
+            transform: translateY(10px) rotate(50deg) scale(1.5) !important;
+          }
+
+          &:nth-child(3) {
+            transform: translateY(-10px) rotate(-50deg) scale(1.5) !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.container {
+  position: fixed;
+  top: 2rem;
+  right: 5rem;
+  z-index: 1100;
+
+  @media (max-width: $laptop-l) {
+    top: 2rem;
+    right: 2.5rem;
+  }
+
+  @media (max-width: $laptop-l) {
+    right: 1.5rem;
+  }
+
+  @media (max-width: $tablet), (max-height: $tablet-s) {
+    top: auto;
+    right: 2rem;
+    bottom: 3.5rem;
+    padding: 1rem;
+    transform: translateX(100px) rotate(270deg);
+  }
+}
+
+.click {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.bar {
+  height: 2px;
+  width: 42px;
+  background-color: #7a7a7a;
+  margin: 8px;
+  transition: transform 0.45s cubic-bezier(0.43, 0.77, 0.15, 1.5),
+    background-color 0.3s ease; // background-color?
+  transform: translateX(150px);
+
+  @media (max-width: $tablet), (max-height: $tablet-s) {
+    width: 24px;
+    transform: translateX(0);
+  }
+}
+
+.out,
+.in,
+.out_done {
+  cursor: auto;
+
+  .bar {
+    transition: transform 0.35s cubic-bezier(0.69, 0.03, 0.03, 0.93);
+  }
+}
+
+.out,
+.in {
+  .bar {
+    &:nth-child(1) {
+      transition-delay: 0.52s;
+    }
+
+    &:nth-child(2) {
+      transition-delay: 0.555s;
+    }
+
+    &:nth-child(3) {
+      transition-delay: 0.59s;
+    }
+  }
+}
+
+.in_active,
+.in_done {
+  .bar {
+    transform: translateX(0px);
+  }
+
+  @media (max-width: $tablet), (max-height: $tablet-s) {
+    animation: burger-rotate-in 0.7s cubic-bezier(0.2, 0.86, 0.35, 1) forwards !important;
+  }
+}
+
+.in_active {
+  @media (hover: hover) {
+    &:hover {
+      .bar {
+        transform: translateX(0px) !important;
+      }
+    }
+  }
+}
+
+.out_active,
+.out_done {
+  .bar {
+    transform: translateX(150px) !important;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      .bar {
+        transform: translateX(150px) !important;
+      }
+    }
+  }
+
+  @media (max-width: $tablet), (max-height: $tablet-s) {
+    animation: burger-rotate-out 0.7s cubic-bezier(0.2, 0.86, 0.35, 1) forwards !important;
+
+    .bar {
+      transform: translateX(0px) !important;
+    }
+  }
+}
+
+// =====================================================
+
+.toggle_out,
+.toggle_in {
+  cursor: auto;
+  pointer-events: none !important;
+
+  & > .click {
+    display: block;
+  }
+}
+
+// =====================================================
+// Animation enter behaviour
+// =====================================================
+
+.toggle_in_active,
+.toggle_in_done {
+  animation: burger-in 0.95s cubic-bezier(0.52, 0, 0.52, 1) forwards;
+
+  .bar {
+    &:nth-child(1) {
+      animation: top-bar-in 0.95s cubic-bezier(0.37, 0.09, 0.16, 1.44);
+      transform: translateY(10px) rotate(45deg) scale(1.5);
+    }
+
+    &:nth-child(2) {
+      animation: middle-bar-in 0.95s cubic-bezier(0.37, 0.09, 0.16, 1.44);
+      opacity: 0;
+    }
+
+    &:nth-child(3) {
+      animation: bottom-bar-in 0.95s cubic-bezier(0.37, 0.09, 0.16, 1.44);
+      transform: translateY(-10px) rotate(-45deg) scale(1.5);
+    }
+  }
+}
+
+// =====================================================
+// =====================================================
+// =====================================================
+
+// =====================================================
+// Animation exit behaviour
+// =====================================================
+
+.toggle_out_active,
+.toggle_out_done {
+  animation: burger-out 0.7s cubic-bezier(0.2, 0.86, 0.35, 1) forwards;
+
+  .bar {
+    &:nth-child(1) {
+      animation: top-bar-out 0.7s cubic-bezier(0.37, 0.09, 0.16, 1.44);
+    }
+
+    &:nth-child(2) {
+      animation: middle-bar-out 0.7s cubic-bezier(0.37, 0.09, 0.16, 1.44);
+    }
+
+    &:nth-child(3) {
+      animation: bottom-bar-out 0.7s cubic-bezier(0.37, 0.09, 0.16, 1.44);
+    }
+  }
+}
+
+// =====================================================
+// =====================================================
+// =====================================================

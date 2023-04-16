@@ -5,8 +5,9 @@ import { CSSTransition } from 'react-transition-group';
 import { ExitHandler } from 'react-transition-group/Transition';
 import { useAppSelector } from '../../../../../store/hooks';
 import styles from './styles.module.scss';
+import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 
-const rightArrowClassNames = {
+const rightArrowClassNames: CSSTransitionClassNames = {
   exitActive: styles.right_out_active,
   exitDone: styles.right_out_done,
   enterActive: styles.right_in_active,
@@ -15,7 +16,7 @@ const rightArrowClassNames = {
   appearDone: styles.right_in_done,
 };
 
-const leftArrowClassNames = {
+const leftArrowClassNames: CSSTransitionClassNames = {
   exitActive: styles.left_out_active,
   exitDone: styles.left_out_done,
   enterActive: styles.left_in_active,
@@ -24,7 +25,7 @@ const leftArrowClassNames = {
   appearDone: styles.left_in_done,
 };
 
-const linkClassNames = {
+const linkClassNames: CSSTransitionClassNames = {
   exitActive: styles.link_out_active,
   exitDone: styles.link_out_done,
 };
