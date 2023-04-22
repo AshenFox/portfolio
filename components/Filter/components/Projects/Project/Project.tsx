@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
-import { ProjectInt, TagType } from '../..';
+import { ProjectInt } from '../../../Filter';
 import Img from 'next/image';
+import styles from '../styles.module.scss';
 
 interface OwnProps {
   data: ProjectInt;
@@ -43,12 +44,15 @@ const Project: FC<Props> = ({ data, order }) => {
     const el = projectEl.current;
 
     const observer = new ResizeObserver(entries => {
+      console.log({ entries });
       if (entries.length) {
         const [
           {
             contentRect: { width, height },
           },
         ] = entries;
+
+        console.log({ id, width, height });
 
         const el = projectEl.current;
 
@@ -97,36 +101,36 @@ const Project: FC<Props> = ({ data, order }) => {
   }, [id]);
 
   return (
-    <li className={`filter__project color${id}`} ref={projectEl}>
-      <div className='filter__project-container' ref={containerEl} style={styleContainer}>
+    <li className={`${styles.project} color${id}`} ref={projectEl}>
+      <div className={styles.project_container} ref={containerEl} style={styleContainer}>
         {isVisible && (
           <Link href={'/portfolio/flashcards'}>
-            <a className='filter__project-link' title='/portfolio/flashcards'>
-              <div className='filter__project-bar'>
+            <a className={styles.link} title='/portfolio/flashcards'>
+              <div className={styles.bar}>
                 <h2>{name}</h2>
               </div>
-              <div className='filter__project-main'>
+              <div className={styles.main}>
                 <Img
                   src={thumbnails.main}
                   alt=''
-                  className='filter__project-img-main'
+                  className={styles.img_main}
                   layout='fill'
                 />
-                <div className='filter__project-shadow'></div>
-                <div className='filter__project-hover'>
-                  <div className='filter__project-img-hover'>
+                <div className={styles.shadow}></div>
+                <div className={styles.hover}>
+                  <div className={styles.img_hover}>
                     <Img src={thumbnails.hover} alt='' layout='fill' />
                   </div>
 
-                  <ul className='filter__project-tags'>
+                  <ul className={styles.tags}>
                     {[...tags].splice(0, 4).map((tag, i) => (
-                      <li className='filter__project-tag' key={i}>
+                      <li className={styles.tag} key={i}>
                         {tag}
                       </li>
                     ))}
                   </ul>
 
-                  <span className='filter__project-more'>more...</span>
+                  <span className={styles.more}>more...</span>
                 </div>
               </div>
             </a>
