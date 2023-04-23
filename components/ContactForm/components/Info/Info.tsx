@@ -1,11 +1,12 @@
 import React, { FC, MouseEventHandler } from 'react';
-import { useActions, useAppSelector } from '../../../store/hooks';
+import { useActions, useAppSelector } from '../../../../store/hooks';
 import {
   Field,
   FieldName,
   Fields,
-} from '../../../store/reducers/form/contactFormInitState';
-import InfoItem from './InfoItem';
+} from '../../../../store/reducers/form/contactFormInitState';
+import InfoItem from './components/InfoItem';
+import styles from './styles.module.scss';
 
 interface OwnProps {}
 
@@ -19,7 +20,7 @@ const Info: FC<Props> = () => {
   const onItemClickCreator = (field: FieldName) => () => change_active_field(field);
 
   return (
-    <ul className='form__info'>
+    <ul className={styles.info}>
       {Object.entries(fields).map(
         ([field, { placeholder, value, icon_name, transitioned, is_error }]: [
           FieldName,

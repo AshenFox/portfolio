@@ -28,7 +28,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       onClickAction = null,
       isBig = false,
       isActive = true,
-      color = styles.red,
+      color = '',
       icon = '',
       classStr = '',
     },
@@ -39,7 +39,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     const className = [
       styles.interactiveElement,
       isClicked && isActive ? styles.interactiveElement : '',
-      color,
+      styles[color] ? styles[color] : styles.red,
       isBig ? styles.big : '',
       !children && icon ? styles.onlyicon : '',
       isActive ? '' : styles.inactive,

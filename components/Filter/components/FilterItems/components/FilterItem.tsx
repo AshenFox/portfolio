@@ -1,27 +1,27 @@
 import Link from 'next/link';
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
-import { ProjectInt } from '../../../Filter';
+import { FilterItemInt } from '../../../Filter';
 import Img from 'next/image';
 import styles from '../styles.module.scss';
 
 interface OwnProps {
-  data: ProjectInt;
+  data: FilterItemInt;
   order: string[];
 }
 
 type Props = OwnProps;
 
-const Project: FC<Props> = ({ data, order }) => {
+const FilterItem: FC<Props> = ({ data, order }) => {
   const { name, id, tags, thumbnails } = data;
 
-  const projectEl = useRef<HTMLLIElement>(null);
+  const filterItemEl = useRef<HTMLLIElement>(null);
   const containerEl = useRef<HTMLDivElement>(null);
 
   const [isVisible, setIsVisible] = useState(false);
   const [styleContainer, setStyleContainer] = useState<CSSProperties>({});
 
   const setProjectCoord = () => {
-    const el = projectEl.current;
+    const el = filterItemEl.current;
 
     const { offsetLeft, offsetTop } = el || {};
 
@@ -41,10 +41,9 @@ const Project: FC<Props> = ({ data, order }) => {
   }, [order]);
 
   useEffect(() => {
-    const el = projectEl.current;
+    const el = filterItemEl.current;
 
     const observer = new ResizeObserver(entries => {
-      console.log({ entries });
       if (entries.length) {
         const [
           {
@@ -52,9 +51,7 @@ const Project: FC<Props> = ({ data, order }) => {
           },
         ] = entries;
 
-        console.log({ id, width, height });
-
-        const el = projectEl.current;
+        const el = filterItemEl.current;
 
         const { offsetLeft, offsetTop } = el || {};
 
@@ -101,8 +98,12 @@ const Project: FC<Props> = ({ data, order }) => {
   }, [id]);
 
   return (
-    <li className={`${styles.project} color${id}`} ref={projectEl}>
-      <div className={styles.project_container} ref={containerEl} style={styleContainer}>
+    <li className={`${styles.filter_item} color${id}`} ref={filterItemEl}>
+      <div
+        className={styles.filter_item_container}
+        ref={containerEl}
+        style={styleContainer}
+      >
         {isVisible && (
           <Link href={'/portfolio/flashcards'}>
             <a className={styles.link} title='/portfolio/flashcards'>
@@ -141,4 +142,4 @@ const Project: FC<Props> = ({ data, order }) => {
   );
 };
 
-export default memo(Project);
+export default memo(FilterItem);

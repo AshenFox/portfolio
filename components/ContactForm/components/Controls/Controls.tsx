@@ -1,7 +1,8 @@
 import React, { FC, MouseEventHandler } from 'react';
-import { addCustomNotification } from '../../../helpers/functions';
-import { useActions, useAppSelector } from '../../../store/hooks';
+import { addCustomNotification } from '../../../../helpers/functions';
+import { useActions, useAppSelector } from '../../../../store/hooks';
 import { Button } from '@ui/InteractiveElement';
+import styles from './styles.module.scss';
 
 interface OwnProps {}
 
@@ -27,7 +28,7 @@ const Controls: FC<Props> = () => {
   };
 
   return (
-    <div className='form__controls'>
+    <div className={styles.controls}>
       <Button color='green' isActive={isNextActive} onClickAction={onNextClick}>
         next
       </Button>

@@ -1,5 +1,6 @@
 import React, { FC, MouseEventHandler, ReactNode, useCallback } from 'react';
-import { TagType } from '..';
+import { TagType } from '../../../Filter';
+import styles from '../styles.module.scss';
 
 interface OwnProps {
   children: ReactNode;
@@ -16,10 +17,7 @@ const Tag: FC<Props> = ({ children, value, active = false, onClickAction }) => {
   }, [value, onClickAction]);
 
   return (
-    <li
-      className={`filter__tag ${active ? 'filter__tag--active' : ''}`}
-      onClick={onClick}
-    >
+    <li className={`${styles.tag} ${active ? styles.tag_active : ''}`} onClick={onClick}>
       <span>{children}</span>
     </li>
   );

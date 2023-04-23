@@ -1,0 +1,61 @@
+@import '@styles/miscellaneous/mixins.scss';
+@import '@styles/miscellaneous/variables.scss';
+
+.tags {
+  list-style: none;
+  margin-left: -4px; // -4px
+  margin-right: -4px;
+  user-select: none;
+}
+
+.tag {
+  @include tag;
+
+  span {
+    position: relative;
+    z-index: 2;
+  }
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+
+    left: 0;
+    height: 50%;
+    display: block;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    transition: transform 0.3s cubic-bezier(0.65, 0.05, 0.1, 1);
+  }
+
+  &::before {
+    top: 0;
+    background-color: #515151;
+    transform: translateX(-105%);
+  }
+
+  &::after {
+    bottom: 0;
+    background-color: #3f3f3f;
+    transition-delay: 75ms;
+    transform: translateX(105%);
+  }
+
+  &_active {
+    &::after,
+    &::before {
+      transform: translateX(0);
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      &::after,
+      &::before {
+        transform: translateX(0);
+      }
+    }
+  }
+}

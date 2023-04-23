@@ -1,6 +1,7 @@
 import React, { FC, memo, useCallback, useEffect, useState } from 'react';
-import Projects from './components/Projects';
-import Tag from './components/Tag';
+import FilterItems from './components/FilterItems';
+import Tags from './components/Tags';
+import styles from './styles.module.scss';
 
 export type TagType =
   | 'show all'
@@ -22,7 +23,9 @@ export type TagType =
   | 'animations'
   | 'game design';
 
-const tagList: TagType[] = [
+export type TagListType = TagType[];
+
+const tagList: TagListType = [
   'show all',
   'front-end',
   'back-end',
@@ -43,7 +46,7 @@ const tagList: TagType[] = [
   'game design',
 ];
 
-export interface ProjectInt {
+export interface FilterItemInt {
   id: string;
   name: string;
   tags: TagType[];
@@ -54,15 +57,15 @@ export interface ProjectInt {
   };
 }
 
-export interface ProjectsInt {
-  [key: string]: ProjectInt;
+export interface FilterItemsInt {
+  [key: string]: FilterItemInt;
 }
 
 interface OwnProps {}
 
 type Props = OwnProps;
 
-const value: ProjectsInt = {
+const value: FilterItemsInt = {
   '1': {
     id: '1',
     name: 'test1',
@@ -238,9 +241,9 @@ const value: ProjectsInt = {
 const Filter: FC<Props> = props => {
   const [by, setBy] = useState<TagType>('show all');
 
-  const [projects, setProjects] = useState<ProjectsInt>(value);
+  const [filterItems, setFilterItems] = useState<FilterItemsInt>(value);
 
-  const [order, setOrder] = useState<string[]>(Object.keys(projects));
+  const [order, setOrder] = useState<string[]>(Object.keys(filterItems));
 
   const isAll = by === 'show all';
 
@@ -251,18 +254,18 @@ const Filter: FC<Props> = props => {
       const res: {
         filtered: string[];
         inArr: string[];
-        projects: ProjectsInt;
-      } = Object.entries(projects).reduce(
-        (res, [id, project], i, arr) => {
-          const prevIn = project.in;
-          const newIn = isAll || project.tags.includes(by);
+        projects: FilterItemsInt;
+      } = Object.entries(filterItems).reduce(
+        (res, [id, data], i, arr) => {
+          const prevIn = data.in;
+          const newIn = isAll || data.tags.includes(by);
 
-          const newProject = {
-            ...project,
+          const newFilterItem = {
+            ...data,
             in: newIn,
           };
 
-          res.projects[id] = newProject;
+          res.projects[id] = newFilterItem;
 
           if (newIn) {
             res.inArr.push(id);
@@ -279,9 +282,9 @@ const Filter: FC<Props> = props => {
       );
 
       setOrder(res.filtered);
-      setProjects(res.projects);
+      setFilterItems(res.projects);
     },
-    [projects]
+    [filterItems]
   );
 
   const onTagClickAction = useCallback(
@@ -297,24 +300,13 @@ const Filter: FC<Props> = props => {
   }, []);
 
   return (
-    <div className='filter'>
-      <ul className='filter__tags'>
-        {tagList.map(value => (
-          <Tag
-            key={value}
-            value={value}
-            active={value === by}
-            onClickAction={onTagClickAction}
-          >
-            {value}
-          </Tag>
-        ))}
-      </ul>
-      <small className='filter__info'>
+    <div className={styles.filter}>
+      <Tags tagList={tagList} by={by} onTagClickAction={onTagClickAction} />
+      <small className={styles.info}>
         Showing {isAll ? 'all' : by} projects. Use the filter to list them by skill or
         technology.
       </small>
-      <Projects order={order} projects={projects} />
+      <FilterItems order={order} filterItems={filterItems} />
     </div>
   );
 };

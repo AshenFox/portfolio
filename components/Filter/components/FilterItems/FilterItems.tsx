@@ -1,32 +1,32 @@
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
-import { ProjectsInt } from '../../Filter';
-import Project from './Project/Project';
+import { FilterItemsInt } from '../../Filter';
+import FilterItem from './components/FilterItem';
 import styles from './styles.module.scss';
 
+const timeout = 500; // 400
+
 const classNames: CSSTransitionClassNames = {
-  enter: styles.project_in,
-  enterActive: styles.project_in_active,
-  exitActive: styles.project_out_active,
+  enter: styles.filter_item_in,
+  enterActive: styles.filter_item_in_active,
+  exitActive: styles.filter_item_out_active,
 };
 
 interface OwnProps {
   order: string[];
-  projects: ProjectsInt;
+  filterItems: FilterItemsInt;
 }
 
 type Props = OwnProps;
 
-const Projects: FC<Props> = ({ order, projects }) => {
-  const timeout = 500; // 400
-
-  const projectsEl = useRef<HTMLUListElement>(null);
+const FilterItems: FC<Props> = ({ order, filterItems }) => {
+  const filterItemsInt = useRef<HTMLUListElement>(null);
 
   const [containerStyle, setContainerStyle] = useState<CSSProperties>({});
 
   useEffect(() => {
-    const el = projectsEl.current;
+    const el = filterItemsInt.current;
 
     const observer = new ResizeObserver(entries => {
       if (entries.length) {
@@ -54,16 +54,16 @@ const Projects: FC<Props> = ({ order, projects }) => {
 
   return (
     <div className={styles.container} style={containerStyle}>
-      <ul className={styles.projects} ref={projectsEl}>
+      <ul className={styles.filter_items} ref={filterItemsInt}>
         {order.map(id => (
           <CSSTransition
             key={id}
-            in={projects[id].in}
+            in={filterItems[id].in}
             classNames={classNames}
             timeout={timeout}
             unmountOnExit={true}
           >
-            <Project data={projects[id]} order={order} />
+            <FilterItem data={filterItems[id]} order={order} />
           </CSSTransition>
         ))}
       </ul>
@@ -71,4 +71,4 @@ const Projects: FC<Props> = ({ order, projects }) => {
   );
 };
 
-export default memo(Projects);
+export default memo(FilterItems);

@@ -1,5 +1,6 @@
 import React, { FC, MouseEventHandler } from 'react';
-import Icons from '../../../ui/Icons';
+import Icons from '../../../../../ui/Icons';
+import styles from '../styles.module.scss';
 
 interface OwnProps {
   field: string;
@@ -33,9 +34,11 @@ const InfoItem: FC<Props> = ({
 
   return (
     <li
-      className={`form__info-item ${field} ${isNotPlaceholder ? '' : 'placeholder'} ${
-        value ? 'transitioned' : ''
-      } ${isActive ? 'active' : ''} ${isErrorNull ? '' : isError ? 'error' : 'valid'}`}
+      className={`${styles.info_item} ${styles[field]} ${
+        isNotPlaceholder ? '' : styles.placeholder
+      } ${value ? styles.transitioned : ''} ${isActive ? styles.active : ''} ${
+        isErrorNull ? '' : isError ? styles.error : styles.valid
+      }`}
       key={field}
       onClick={onClick}
     >

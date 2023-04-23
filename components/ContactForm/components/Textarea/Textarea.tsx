@@ -5,10 +5,11 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import { addCustomNotification, removeNotification } from '../../../helpers/functions';
-import { useActions, useAppSelector } from '../../../store/hooks';
-import { Error } from '../../../store/reducers/form/contactFormInitState';
-import Icons from '../../../ui/Icons';
+import { addCustomNotification, removeNotification } from '../../../../helpers/functions';
+import { useActions, useAppSelector } from '../../../../store/hooks';
+import { Error } from '../../../../store/reducers/form/contactFormInitState';
+import Icons from '../../../../ui/Icons';
+import styles from './styles.module.scss';
 
 interface Timer {
   timer: ReturnType<typeof setTimeout>;
@@ -98,9 +99,9 @@ const Textarea: FC<Props> = () => {
 
   return (
     <div
-      className={`form__textarea ${isErrorNull ? '' : is_error ? 'error' : 'valid'} ${
-        transitioned ? '' : 'placeholder'
-      }`}
+      className={`${styles.textarea} ${
+        isErrorNull ? '' : is_error ? styles.error : styles.valid
+      } ${transitioned ? '' : styles.placeholder}`}
     >
       <IconEl />
       <textarea

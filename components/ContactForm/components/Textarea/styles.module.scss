@@ -1,0 +1,49 @@
+.textarea {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 15px 12px;
+  border-bottom: 1px solid #797979;
+  margin-bottom: 1.5rem;
+  max-width: 70rem;
+  transition: all 0.3s ease-in-out;
+
+  textarea {
+    flex-grow: 1;
+    background-color: transparent;
+    font-weight: 700;
+    line-height: 3.1rem;
+    font-size: 1.8rem;
+    color: #afafaf;
+    border: none;
+    outline: none;
+    resize: none;
+    // overflow: hidden; ???????????????????????
+  }
+
+  svg {
+    fill: #7a7a7a;
+    height: 20px;
+    margin-right: 9px;
+    opacity: 1;
+    transition: fill 0.3s ease-in-out;
+  }
+
+  &.placeholder {
+    svg {
+      opacity: 0;
+    }
+  }
+
+  &.error {
+    svg {
+      fill: #dc3545;
+    }
+  }
+
+  &.valid {
+    svg {
+      fill: #009688;
+    }
+  }
+}

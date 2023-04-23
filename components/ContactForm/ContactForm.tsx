@@ -1,9 +1,10 @@
 import React, { FC, FormEventHandler, useCallback } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import Controls from './components/Controls';
+import Controls from './components/Controls/Controls';
 import Textarea from './components/Textarea';
 import Info from './components/Info';
 import { useActions, useAppSelector } from '../../store/hooks';
+import styles from './styles.module.scss';
 
 interface OwnProps {}
 
@@ -27,7 +28,7 @@ const ContactForm: FC<Props> = () => {
   }, []);
 
   return (
-    <form action='' className='form' onSubmit={onSubmit}>
+    <form action='' className={styles.form} onSubmit={onSubmit}>
       <Info />
       <Textarea />
       <Controls />

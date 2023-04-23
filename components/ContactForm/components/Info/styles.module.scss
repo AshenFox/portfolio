@@ -1,0 +1,139 @@
+.info {
+  list-style: none;
+  display: flex;
+  margin-bottom: 1.5rem;
+  gap: 7px;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    height: auto;
+    // margin-top: -3.2rem;
+  }
+}
+
+.info_item {
+  position: relative;
+  cursor: pointer;
+
+  width: 200px;
+  height: 3.2rem;
+
+  white-space: nowrap;
+
+  padding: 7px 5px;
+  background-color: #3a3a3a;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+
+  transition: all 0.3s ease-in-out;
+
+  @media (max-width: 900px) {
+    width: 250px;
+  }
+
+  svg {
+    fill: #7a7a7a;
+    height: 14px;
+    margin-right: 5px;
+    flex-shrink: 0;
+
+    transition: all 0.3s ease-in-out;
+  }
+
+  &.placeholder {
+    background-color: transparent;
+    line-height: 3.1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #727272;
+    opacity: 0;
+    pointer-events: none;
+    width: auto;
+    overflow: visible;
+    transition: transform 0.3s ease-in-out;
+
+    svg {
+      margin-right: 9px;
+      height: 20px;
+    }
+
+    &.active {
+      @media (max-width: 900px) {
+        margin-top: -3.2rem;
+      }
+    }
+
+    &:not(.active) {
+      height: 0rem;
+      padding: 0;
+    }
+
+    &.name {
+      transform: translate(0.7rem, 6.2rem);
+
+      @media (max-width: 900px) {
+        transform: translate(0.7rem, 7.7rem);
+      }
+    }
+
+    &.email {
+      transform: translate(-20rem, 6.2rem);
+
+      @media (max-width: 900px) {
+        transform: translate(0.7rem, 7rem);
+      }
+    }
+
+    &.message {
+      transform: translate(-40.7rem, 6.2rem);
+
+      @media (max-width: 900px) {
+        transform: translate(0.7rem, 6.3rem);
+      }
+    }
+  }
+
+  &.active {
+    opacity: 1 !important;
+
+    &:not(.placeholder) {
+      background-color: #464646;
+
+      &.transitioned {
+        &::after {
+          box-shadow: 0 0 30px 25px #464646;
+        }
+      }
+    }
+  }
+
+  &.error {
+    svg {
+      fill: #dc3545;
+    }
+  }
+
+  &.valid {
+    svg {
+      fill: #009688;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    right: 0 - 1px;
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &.transitioned {
+    &::after {
+      box-shadow: 0 0 30px 25px #3a3a3a;
+    }
+  }
+}
