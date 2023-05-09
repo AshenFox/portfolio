@@ -1,5 +1,6 @@
 import React, { FC, MouseEventHandler } from 'react';
-import { Image } from '.';
+import { Image } from '../../ImageSlider';
+import styles from './styles.module.scss';
 
 interface OwnProps {
   data: Image;
@@ -14,7 +15,7 @@ const ControlsItem: FC<Props> = ({ data, ownID, activeID, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className={`image-slider__controls-item ${ownID === activeID ? 'active' : ''}`}
+      className={`${styles.controls_item} ${ownID === activeID ? styles.active : ''}`}
     />
   );
 };

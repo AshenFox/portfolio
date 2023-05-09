@@ -1,0 +1,43 @@
+@import '@styles/miscellaneous/variables.scss';
+
+.image_slider {
+  display: flex;
+  flex-direction: column;
+
+  aspect-ratio: 9.3/5.5;
+
+  background-color: grey;
+
+  box-shadow: 8px 8px 0 rgb(black, 15%);
+
+  @media (max-width: $tablet) {
+    aspect-ratio: 9.3/5.9;
+  }
+}
+
+.bar {
+  height: 24px;
+  background-color: #d9d9d9;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: $tablet) {
+    height: 20px;
+  }
+
+  h2 {
+    color: $text-color;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 10px;
+  }
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+}

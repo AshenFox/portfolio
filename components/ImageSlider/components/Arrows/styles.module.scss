@@ -1,0 +1,391 @@
+@import '@styles/miscellaneous/variables.scss';
+@import '@styles/miscellaneous/mixins.scss';
+
+.arrow {
+  position: absolute;
+  height: 100%;
+  width: 15rem;
+  top: 0;
+
+  @media (max-width: $laptop) {
+    width: 10rem;
+  }
+
+  @media (max-width: $tablet) {
+    width: 7.5rem;
+  }
+}
+
+.left {
+  left: 0;
+
+  .container {
+    justify-content: flex-start;
+    padding-left: 3rem;
+
+    @media (max-width: $tablet) {
+      padding-left: 2rem;
+    }
+  }
+}
+
+.right {
+  right: 0;
+
+  .container {
+    justify-content: flex-end;
+    padding-right: 3rem;
+
+    @media (max-width: $tablet) {
+      padding-right: 2rem;
+    }
+  }
+}
+
+.button {
+  @include btn;
+
+  display: block;
+  height: 100%;
+  width: 100%;
+
+  position: absolute;
+  top: 0;
+
+  cursor: pointer;
+
+  z-index: 2;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  transition: transform 0.7s cubic-bezier(0.7, 0, 0.25, 1) 0.25s,
+    opacity 0.2s ease-out 0.5s;
+}
+
+.icon {
+  position: relative;
+
+  width: 20px;
+  height: 20px;
+  position: relative;
+
+  z-index: 1;
+
+  transition: transform 0.2s ease-out 0.2s;
+
+  @media (max-width: $tablet) {
+    width: 15px;
+    height: 15px;
+  }
+
+  &::after,
+  &::before {
+    position: absolute;
+    content: '';
+    width: 2px;
+    height: 20px;
+    background-color: rgb(106, 106, 106);
+    opacity: 0.75;
+
+    transition: all 0.16s ease-out;
+
+    @media (max-width: $tablet) {
+      height: 15px;
+    }
+  }
+
+  &::after {
+    transform-origin: calc(50%) calc(100% - 1px);
+    top: calc(50% + 1px);
+  }
+
+  &::before {
+    transform-origin: calc(50%) calc(1px);
+    top: calc(50% - 1px);
+  }
+}
+
+.shadow {
+  position: absolute;
+  top: -50%;
+  height: 200%;
+  width: 1px;
+  box-shadow: 0px 0px 100px 0px black;
+
+  transition: all 0.3s ease-out;
+}
+
+// ==============================
+// ===== Left Arrow Styles ======
+// ==============================
+
+.left {
+  .icon {
+    &::after {
+      left: 0;
+
+      transform: translateY(-100%) rotate(45deg);
+    }
+
+    &::before {
+      left: 0;
+
+      transform: rotate(-45deg);
+    }
+  }
+
+  .button {
+    left: 0;
+  }
+
+  .shadow {
+    left: -1px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      .container {
+        .icon {
+          &::after {
+            transform: translateY(-100%) rotate(30deg);
+            opacity: 1;
+          }
+
+          &::before {
+            transform: rotate(-30deg);
+            opacity: 1;
+          }
+        }
+      }
+
+      .shadow {
+        box-shadow: 0px 0px 100px 30px black;
+      }
+    }
+
+    &:hover {
+      .container {
+        &_out_active,
+        &_out_done {
+          .icon {
+            &::after {
+              transform: translateY(-100%) rotate(90deg);
+            }
+
+            &::before {
+              transform: rotate(-90deg);
+            }
+          }
+        }
+
+        &_in_active {
+          .icon {
+            &::after {
+              transform: translateY(-100%) rotate(45deg);
+            }
+
+            &::before {
+              transform: rotate(-45deg);
+            }
+          }
+        }
+
+        &_out_active,
+        &_out_done,
+        &_in_active {
+          & ~ .shadow {
+            box-shadow: 0px 0px 100px 0px black;
+          }
+        }
+      }
+    }
+  }
+
+  .container {
+    &_out_active,
+    &_out_done,
+    &_in_active {
+      .button {
+        left: -100%;
+      }
+    }
+  }
+
+  .container {
+    &_out_active,
+    &_out_done {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+
+  .button {
+    &_out_active,
+    &_out_done {
+      & ~ .icon {
+        transform: translateX(-12rem);
+
+        &::after,
+        &::before {
+          height: 20px;
+
+          @media (max-width: $tablet) {
+            height: 15px;
+          }
+        }
+
+        &::after {
+          transform: translateY(-100%) rotate(90deg);
+        }
+
+        &::before {
+          transform: rotate(-90deg);
+        }
+      }
+    }
+  }
+}
+
+// ==============================
+// ==============================
+// ==============================
+
+// ==============================
+// ===== Right Arrow Styles =====
+// ==============================
+
+.right {
+  .icon {
+    &::after {
+      right: 0;
+
+      transform: translateY(-100%) rotate(-45deg);
+    }
+
+    &::before {
+      right: 0;
+
+      transform: rotate(45deg);
+    }
+  }
+
+  .button {
+    right: 0;
+  }
+
+  .shadow {
+    right: -1px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      .container {
+        .icon {
+          &::after {
+            transform: translateY(-100%) rotate(-30deg);
+            opacity: 1;
+          }
+
+          &::before {
+            transform: rotate(30deg);
+            opacity: 1;
+          }
+        }
+      }
+
+      .shadow {
+        box-shadow: 0px 0px 100px 30px black;
+      }
+    }
+
+    &:hover {
+      .container {
+        &_out_active,
+        &_out_done {
+          .icon {
+            &::after {
+              transform: translateY(-100%) rotate(-90deg);
+            }
+
+            &::before {
+              transform: rotate(90deg);
+            }
+          }
+        }
+
+        &_in_active {
+          .icon {
+            &::after {
+              transform: translateY(-100%) rotate(-45deg);
+            }
+
+            &::before {
+              transform: rotate(45deg);
+            }
+          }
+        }
+
+        &_out_active,
+        &_out_done,
+        &_in_active {
+          & ~ .shadow {
+            box-shadow: 0px 0px 100px 0px black;
+          }
+        }
+      }
+    }
+  }
+
+  .container {
+    &_out_active,
+    &_out_done,
+    &_in_active {
+      .button {
+        right: -100%;
+      }
+    }
+  }
+
+  .container {
+    &_out_active,
+    &_out_done {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  .button {
+    &_out_active,
+    &_out_done {
+      & ~ .icon {
+        transform: translateX(12rem);
+
+        &::after,
+        &::before {
+          height: 20px;
+
+          @media (max-width: $tablet) {
+            height: 15px;
+          }
+        }
+
+        &::after {
+          transform: translateY(-100%) rotate(-90deg);
+        }
+
+        &::before {
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+}
+
+// ==============================
+// ==============================
+// ==============================

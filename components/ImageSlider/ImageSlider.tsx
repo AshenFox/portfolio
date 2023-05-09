@@ -3,7 +3,8 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useStateWithRef } from '../../helpers/hooks';
 import Arrows from './components/Arrows';
 import Controls from './components/Controls';
-import SliderItem from './components/SliderItem';
+import SliderItem, { SliderItemClassNames } from './components/SliderItem';
+import styles from './styles.module.scss';
 
 export interface Image {
   path: string;
@@ -17,24 +18,20 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const ImageSlider: FC<Props> = () => {
-  const [images, setImages] = useState<Images>([]);
-
-  useEffect(() => {
-    setImages([
-      {
-        path: '/6.jpg',
-        alt: 'image',
-      },
-      {
-        path: '/5.jpg',
-        alt: 'image',
-      },
-      {
-        path: '/4.jpg',
-        alt: 'image',
-      },
-    ]);
-  }, []);
+  const [images, setImages] = useState<Images>([
+    {
+      path: '/6.jpg',
+      alt: 'image',
+    },
+    {
+      path: '/5.jpg',
+      alt: 'image',
+    },
+    {
+      path: '/4.jpg',
+      alt: 'image',
+    },
+  ]);
 
   const [activeID, setActiveID] = useState({ id: 0 });
   const [nextIDArr, setNextIDArr, nextIDArrRef] = useStateWithRef<
@@ -150,12 +147,12 @@ const ImageSlider: FC<Props> = () => {
 
   return (
     <>
-      <div className='image-slider'>
-        <div className='image-slider__bar'>
+      <div className={styles.image_slider}>
+        <div className={styles.bar}>
           <h2>flashcards</h2>
         </div>
         <div
-          className='image-slider__frame'
+          className={styles.frame}
           ref={frameEl}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
@@ -163,7 +160,7 @@ const ImageSlider: FC<Props> = () => {
           <TransitionGroup component={null}>
             <CSSTransition
               key={activeID.id}
-              classNames='image-slider__item'
+              classNames={SliderItemClassNames}
               timeout={timeout}
               onExited={onImageExited}
             >
