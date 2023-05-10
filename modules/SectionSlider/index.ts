@@ -1,2 +1,2 @@
 export { default } from './SectionSlider';
-export { default as Section } from './components/Section';
+export { default as Section, type SectionProps } from './components/Section';

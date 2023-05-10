@@ -1,9 +1,15 @@
 import React, { FC, useCallback, useState } from 'react';
-import { useRouter } from 'next/router';
 import { CSSTransition } from 'react-transition-group';
 import MenuItem from './MenuItem';
 import { routesOrderList } from '../../../../../helpers/values';
 import { useActions, useAppSelector } from '../../../../../store/hooks';
+import styles from './styles.module.scss';
+import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
+
+const classNames: CSSTransitionClassNames = {
+  enterActive: styles.menu_in_active,
+  enterDone: styles.menu_in_done,
+};
 
 interface OwnProps {}
 
@@ -27,14 +33,14 @@ const Menu: FC<Props> = () => {
   return (
     <>
       <CSSTransition
-        classNames={'menu'}
+        classNames={classNames}
         in={show_menu}
         timeout={timeout}
         onEntered={onEntered}
         onExited={onExited}
       >
-        <div className={`menu ${show_menu ? 'menu__active' : ''}`}>
-          <div className='menu__list'>
+        <div className={`${styles.menu} ${show_menu ? styles.menu_active : ''}`}>
+          <div className={styles.list}>
             {routesOrderList.map(({ path, title }) => (
               <MenuItem href={path} title={title} key={path} />
             ))}
@@ -44,7 +50,7 @@ const Menu: FC<Props> = () => {
               key={'project flashcards'}
             />
           </div>
-          {/* <span className='menu__tip'>for a quick seach just start typing ...</span> */}
+          {/* <span className={styles.tip}>for a quick seach just start typing ...</span> */}
         </div>
       </CSSTransition>
     </>

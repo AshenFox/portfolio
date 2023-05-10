@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import styles from './styles.module.scss';
 
 interface OwnProps {
   href: string;
@@ -16,7 +17,7 @@ const MenuItem: FC<Props> = ({ href, title }) => {
   return (
     <Link href={href}>
       <a
-        className={`menu__link ${pathname === href ? 'menu__link--active' : ''}`}
+        className={`${styles.link} ${pathname === href ? styles.link_active : ''}`}
         title={title}
       >
         <span>{title}</span>

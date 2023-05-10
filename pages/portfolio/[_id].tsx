@@ -4,7 +4,7 @@ import { Button } from '@ui/InteractiveElement';
 import ContactFooter from '../../components/ContactFooter';
 import ImageSlider from '../../components/ImageSlider';
 import { Link } from '@ui/InteractiveElement';
-import Section, { SectionProps } from '../../modules/SectionSlider/components/Section';
+import { Section, SectionProps } from '../../modules/SectionSlider';
 
 const Project: FC<SectionProps> = props => {
   const { query, isReady } = useRouter();

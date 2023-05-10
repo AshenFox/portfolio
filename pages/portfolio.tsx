@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import ContactFooter from '../components/ContactFooter';
-import Section, { SectionProps } from '../modules/SectionSlider/components/Section';
+import { Section, SectionProps } from '../modules/SectionSlider';
 import Filter from '../components/Filter';
 
 const Portfolio: FC<SectionProps> = props => {

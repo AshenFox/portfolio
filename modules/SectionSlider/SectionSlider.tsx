@@ -9,7 +9,9 @@ import { useActions, useAppSelector } from '../../store/hooks';
 import ContentLoader from './components/ContentLoader';
 
 import Controls from './components/Controls';
-import PageLoader from './components/SectionLoader';
+import { SectionClassNames } from './components/Section';
+import SectionLoader from './components/SectionLoader';
+import styles from './styles.module.scss';
 
 interface ComponentWithPathname {
   Component: NextComponentType<NextPageContext, any, {}>;
@@ -39,8 +41,8 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
   const router = useRouter();
   const { asPath: path, isReady } = router;
 
-  const isReadyRef = useRef(router.isReady); //?????????
-  isReadyRef.current = router.isReady; //?????????
+  const isReadyRef = useRef(router.isReady);
+  isReadyRef.current = router.isReady;
 
   const loadingPath = useRef(path);
 
@@ -172,7 +174,7 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
     if (Received) {
       setRendered({ ...Received });
     }
-  }, [is_exited]); // ???????????
+  }, [is_exited]);
 
   // ===================
   // ===================
@@ -182,11 +184,11 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
     <>
       <Controls onBurgerExited={onBurgerExited} onArrowExited={onArrowExited} />
 
-      <div className='section-slider'>
+      <div className={styles.section_slider}>
         <TransitionGroup component={null}>
           <CSSTransition
             key={Rendered.id}
-            classNames='section-slider__section'
+            classNames={SectionClassNames}
             timeout={timeout}
             onExited={onSectionExited}
           >
@@ -195,7 +197,7 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
         </TransitionGroup>
       </div>
 
-      <PageLoader onAnimationIteration={onLoaderAnimationIteration} />
+      <SectionLoader onAnimationIteration={onLoaderAnimationIteration} />
 
       <ContentLoader />
     </>

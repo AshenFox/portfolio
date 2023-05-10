@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useRef, memo } from 'react';
 import { Button } from '@ui/InteractiveElement';
 import FallingParticles from '../components/FallingParticles';
 import { Link } from '@ui/InteractiveElement';
-import Section, { SectionProps } from '../modules/SectionSlider/components/Section';
+import { Section, SectionProps } from '../modules/SectionSlider';
 import SideLinks from '../components/SideLinks';
 import TypeWriterText from '../components/TypeWriterText';
 import { useOrientationChange } from '../helpers/hooks';

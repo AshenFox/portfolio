@@ -1,5 +1,5 @@
-import React, { FC, memo } from 'react';
-import Section, { SectionProps } from '../modules/SectionSlider/components/Section';
+import React, { FC, memo, ReactNode } from 'react';
+import { Section, SectionProps } from '../modules/SectionSlider';
 import { Button } from '@ui/InteractiveElement';
 import FancyLink from '../ui/FancyLink';
 import ContactForm from '../components/ContactForm';
@@ -7,7 +7,7 @@ import { Link } from '@ui/InteractiveElement';
 
 const ContactPage: FC<SectionProps> = props => {
   return (
-    <Section classNameStr={'contact-page'} {...props}>
+    <Section classNameStr={'contact_page'} {...props}>
       <div className='page__container'>
         <header className='contact-page__header'>
           <h1 className='contact-page__title'>Get In Touch</h1>
