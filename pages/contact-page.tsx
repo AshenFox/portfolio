@@ -4,11 +4,12 @@ import { Button } from '@ui/InteractiveElement';
 import FancyLink from '../ui/FancyLink';
 import ContactForm from '../components/ContactForm';
 import { Link } from '@ui/InteractiveElement';
+import PageContainer from '@ui/PageContainer';
 
 const ContactPage: FC<SectionProps> = props => {
   return (
     <Section classNameStr={'contact_page'} {...props}>
-      <div className='page__container'>
+      <PageContainer>
         <header className='contact-page__header'>
           <h1 className='contact-page__title'>Get In Touch</h1>
           <h2 className='contact-page__description'>
@@ -42,7 +43,7 @@ const ContactPage: FC<SectionProps> = props => {
             </Link>
           </div>
         </footer>
-      </div>
+      </PageContainer>
     </Section>
   );
 };

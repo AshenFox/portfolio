@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { FC } from 'react';
-import Icons, { TIconName } from '../../../ui/Icons';
+import Icons, { TIconName } from '../../../../ui/Icons';
+import styles from './styles.module.scss';
 
 export interface ILink {
   href: string;
@@ -18,8 +19,8 @@ const SideLink: FC<Props> = ({ href, title, iconName }) => {
   return (
     <Link href={href}>
       <li>
-        <a title={title} className={`side-links__link-container ${iconName}`}>
-          <div className={'side-links__link'}>
+        <a title={title} className={`${styles.link_container} ${styles[iconName]}`}>
+          <div className={styles.link}>
             <Icon />
           </div>
         </a>

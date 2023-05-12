@@ -2,11 +2,12 @@ import React, { FC, memo } from 'react';
 import ContactFooter from '../components/ContactFooter';
 import { Section, SectionProps } from '../modules/SectionSlider';
 import Filter from '../components/Filter';
+import PageContainer from '@ui/PageContainer';
 
 const Portfolio: FC<SectionProps> = props => {
   return (
     <Section classNameStr={'portfolio'} {...props}>
-      <div className='page__container'>
+      <PageContainer>
         <header className='portfolio__header'>
           <h1 className='portfolio__title'>web developer portfolio</h1>
           <h3 className='portfolio__description'>
@@ -20,7 +21,7 @@ const Portfolio: FC<SectionProps> = props => {
         </main>
 
         <ContactFooter />
-      </div>
+      </PageContainer>
     </Section>
   );
 };

@@ -1,11 +1,29 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { MouseEventHandler, useCallback, useMemo, useState } from 'react';
+import React, { FC, MouseEventHandler, useCallback, useMemo, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { getUpperLevelPath } from '../../../../helpers/functions';
-import { useAppSelector } from '../../../../store/hooks';
+import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
+import { getUpperLevelPath } from '../../../../../helpers/functions';
+import { useAppSelector } from '../../../../../store/hooks';
+import styles from './styles.module.scss';
 
-const UpperLevelLink = () => {
+const classNamesLink: CSSTransitionClassNames = {
+  exitActive: styles.upper_level_link_out_active,
+  exitDone: styles.upper_level_link_out_done,
+  enterActive: styles.upper_level_link_in_active,
+  enterDone: styles.upper_level_link_in_done,
+  appearActive: styles.upper_level_link_in_active,
+  appearDone: styles.upper_level_link_in_done,
+};
+
+const classNamesLinkClicked: CSSTransitionClassNames = {
+  enterActive: styles.upper_level_link_clicked_in_active,
+  enterDone: styles.upper_level_link_clicked_in_done,
+};
+
+type Props = {};
+
+const UpperLevelLink: FC<Props> = () => {
   const router = useRouter();
   const { asPath } = router;
 
@@ -39,20 +57,24 @@ const UpperLevelLink = () => {
 
   return (
     <CSSTransition
-      classNames={'uppper-level-link'}
+      classNames={classNamesLink}
       in={showLink}
       timeout={timeout}
       onEnter={onEnter}
       appear
     >
       <CSSTransition
-        classNames={'uppper-level-link-clicked'}
+        classNames={classNamesLinkClicked}
         in={isClicked}
         timeout={timeout}
         appear
       >
         <Link href={upper_level_path}>
-          <a className='uppper-level-link' onClick={onClick} title={`Back to ${title}`}>
+          <a
+            className={styles.upper_level_link}
+            onClick={onClick}
+            title={`Back to ${title}`}
+          >
             <div />
             <div />
             <div />

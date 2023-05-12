@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { routesOrderList, TRoutesArr } from './values';
 import { Direction } from '../store/reducers/sslider/sectionSliderInitState';
 import { iNotification, Store } from 'react-notifications-component';
+import styles from './styles.module.scss';
 
 export const getUpperLevelPath = (pathname: string) => {
   let upper_level_path = '';
@@ -65,7 +66,6 @@ export const getPath = (
       if (length < new_route_i + 1) new_route_i = length - 1;
       else if (new_route_i < 0) new_route_i = 0;
 
-      // console.log({ 'routes_list[new_route_i]': routes_list[new_route_i] });
       res.path += routes_list[new_route_i].path;
       res.title = routes_list[new_route_i].title;
 
@@ -87,8 +87,8 @@ export const addCustomNotification = (custom_options: Partial<iNotification>) =>
   Store.addNotification({
     ...custom_options,
     insert: 'top',
-    animationIn: ['notification__fadeIn'],
-    animationOut: ['notification__fadeOut'],
+    animationIn: [styles.fadeIn],
+    animationOut: [styles.fadeOut],
     dismiss: {
       duration: 5000,
       waitForAnimation: true,

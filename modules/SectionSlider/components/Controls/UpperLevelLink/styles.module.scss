@@ -1,4 +1,6 @@
-.uppper-level-link {
+@import '@styles/miscellaneous/variables.scss';
+
+.upper_level_link {
   cursor: pointer;
   position: fixed;
   top: 4rem;
@@ -29,17 +31,15 @@
     display: none;
   }
 
-  &-exit-active,
-  &-exit-done {
+  &_out_active,
+  &_out_done {
     pointer-events: none;
     transition-delay: 0.38s;
     transform: translateX(-500px);
   }
 
-  &-appear-active,
-  &-appear-done,
-  &-enter-active,
-  &-enter-done {
+  &_in_active,
+  &_in_done {
     transform: translateX(0);
   }
 
@@ -87,8 +87,8 @@
     }
   }
 
-  &-clicked-enter-active,
-  &-clicked-enter-done {
+  &_clicked_in_active,
+  &_clicked_in_done {
     div:nth-child(1) {
       transform: translate(0.3rem, 0.3rem);
     }

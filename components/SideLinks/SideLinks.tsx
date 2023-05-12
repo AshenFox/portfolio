@@ -1,7 +1,16 @@
 import React, { FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import { useAppSelector } from '../../store/hooks';
 import SideLink, { ILink } from './components/SideLink';
+import styles from './styles.module.scss';
+
+const classNames: CSSTransitionClassNames = {
+  enter: styles.side_links_in,
+  enterDone: styles.side_links_in_done,
+  exit: styles.side_links_out,
+  exitDone: styles.side_links_out_done,
+};
 
 interface OwnProps {}
 
@@ -36,8 +45,8 @@ const SideLinks: FC<Props> = props => {
   const showNavigation = is_exited && show_navigation;
 
   return (
-    <CSSTransition in={showNavigation} classNames='side-links' timeout={1000}>
-      <ul className='side-links'>
+    <CSSTransition in={showNavigation} classNames={classNames} timeout={1000}>
+      <ul className={styles.side_links}>
         {SideLinksArr.map(({ href, title, iconName }, i) => (
           <SideLink key={i} href={href} title={title} iconName={iconName} />
         ))}

@@ -3,7 +3,7 @@ import Menu from './Menu';
 import Arrows from './Arrows';
 import Burger from './Burger';
 import { ExitHandler } from 'react-transition-group/Transition';
-import UpperLevelLink from './UpperLevelLink';
+import UpperLevelLink from './UpperLevelLink/UpperLevelLink';
 
 interface OwnProps {
   onBurgerExited: ExitHandler<HTMLDivElement>;

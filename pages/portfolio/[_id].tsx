@@ -5,6 +5,7 @@ import ContactFooter from '../../components/ContactFooter';
 import ImageSlider from '../../components/ImageSlider';
 import { Link } from '@ui/InteractiveElement';
 import { Section, SectionProps } from '../../modules/SectionSlider';
+import PageContainer from '@ui/PageContainer';
 
 const Project: FC<SectionProps> = props => {
   const { query, isReady } = useRouter();
@@ -16,7 +17,7 @@ const Project: FC<SectionProps> = props => {
 
   return (
     <Section classNameStr={'project'} {...props}>
-      <div className='page__container'>
+      <PageContainer>
         <header className='project__header'>
           <h1 className='project__title'>{_idRef.current}</h1>
           <h3 className='project__description'>
@@ -129,7 +130,7 @@ const Project: FC<SectionProps> = props => {
         </main>
 
         <ContactFooter />
-      </div>
+      </PageContainer>
     </Section>
   );
 };

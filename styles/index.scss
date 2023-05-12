@@ -15,11 +15,6 @@
 @import './pages/contact-page.scss';
 @import './pages/project.scss';
 
-@import './components/page.scss';
-@import './components/notification.scss';
-@import './components/side-links.scss';
-@import './components/upper-level-link.scss';
-
 // =================
 // =================
 // =================
@@ -100,4 +95,8 @@ input {
   &:focus {
     outline: none;
   }
+}
+
+.rnc__notification > div {
+  opacity: 0;
 }
