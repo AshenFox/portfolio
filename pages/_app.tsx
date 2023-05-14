@@ -4,7 +4,7 @@ import 'react-notifications-component/dist/theme.css';
 import Head from '../modules/Head';
 import store from '../store/store';
 import React, { FC } from 'react';
-import SectionSlider from '../modules/SectionSlider';
+import SectionSlider from '../components/SectionSlider';
 import { ReactNotifications } from 'react-notifications-component';
 import { AppProps } from 'next/app';
 import { Provider } from 'react-redux';

@@ -4,7 +4,7 @@ import { Button } from '@ui/InteractiveElement';
 import ContactFooter from '../../components/ContactFooter';
 import ImageSlider from '../../components/ImageSlider';
 import { Link } from '@ui/InteractiveElement';
-import { Section, SectionProps } from '../../modules/SectionSlider';
+import { Section, SectionProps } from '../../components/SectionSlider';
 import PageContainer from '@ui/PageContainer';
 
 const Project: FC<SectionProps> = props => {

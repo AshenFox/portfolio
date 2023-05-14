@@ -38,7 +38,7 @@ const Section: FC<AppProps & OwnProps> = memo(
       <section className={`${styles.section} ${styles[dir]} ${styles[classNameStr]}`}>
         <div className={styles.frame} ref={frameRef}>
           <div
-            className={`${styles.frame_inner} ${containerClassNameStr}`}
+            className={`${styles.frame_inner} ${containerClassNameStr} ${classNameStr}`}
             ref={frameInnerRef}
           >
             {children}
@@ -48,6 +48,7 @@ const Section: FC<AppProps & OwnProps> = memo(
     );
   }
 );
+// ${styles[dir]} ${styles[classNameStr]}
 
 Section.displayName = 'Section';
 

@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import ContactFooter from '../components/ContactFooter';
-import { Section, SectionProps } from '../modules/SectionSlider';
+import { Section, SectionProps } from '../components/SectionSlider';
 import Filter from '../components/Filter';
 import PageContainer from '@ui/PageContainer';
 

@@ -1,5 +1,5 @@
 import React, { FC, memo, ReactNode } from 'react';
-import { Section, SectionProps } from '../modules/SectionSlider';
+import { Section, SectionProps } from '../components/SectionSlider';
 import { Button } from '@ui/InteractiveElement';
 import FancyLink from '../ui/FancyLink';
 import ContactForm from '../components/ContactForm';
