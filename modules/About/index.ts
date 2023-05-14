@@ -1,2 +1,2 @@
-export { default } from './AboutModule';
+export { default } from './About';
 export { default as AboutSection } from './components/AboutSection';

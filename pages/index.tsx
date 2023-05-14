@@ -1,14 +1,13 @@
 import React, { FC, memo } from 'react';
 import { SectionProps } from '../components/SectionSlider';
-import { AboutSection } from 'modules/AboutModule';
-import AboutModule from 'modules/AboutModule';
+import About, { AboutSection } from 'modules/About';
 
-const About: FC<SectionProps> = props => {
+const AboutPage: FC<SectionProps> = props => {
   return (
     <AboutSection {...props}>
-      <AboutModule />
+      <About />
     </AboutSection>
   );
 };
 
-export default memo(About);
+export default memo(AboutPage);
