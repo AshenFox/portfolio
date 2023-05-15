@@ -1,21 +1,32 @@
-import React, { FC, useEffect, memo, useCallback } from 'react';
-import { HeaderDataInt, HeaderItemType } from '../TypeWriterText';
-import { useAppSelector } from '../../../store/hooks';
-import FancyLink from '../../../ui/FancyLink';
-import Char from './Char';
+import React, { FC, memo, useCallback, useMemo } from 'react';
+import { HeaderDataInt, HeaderItemType } from '../../TypeWriterText';
+import { useAppSelector } from '../../../../store/hooks';
+import FancyLink from '../../../../ui/FancyLink';
+import Char from '../Char';
+import styles from './styles.module.scss';
 
 interface OwnProps {
   data: HeaderDataInt;
   rangeStart: number;
   rangeEnd: number; // ?????
   show: number;
-  TagName: keyof JSX.IntrinsicElements;
-  classStr: string;
+  type: string;
 }
 
 type Props = OwnProps;
 
-const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, TagName, classStr }) => {
+const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, type }) => {
+  const TagName = useMemo<keyof JSX.IntrinsicElements>(() => {
+    if (type === 'greeting') {
+      return 'h1';
+    }
+    if (type === 'description') {
+      return 'h4';
+    }
+
+    return null;
+  }, [type]);
+
   const scrollTop = useAppSelector(
     ({ game }) => game.game_container_dimensions.scrollTop
   );
@@ -41,7 +52,7 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, TagName, classStr
 
       if (type === 'link')
         return [
-          <FancyLink key={wrapperIndex + type} {...props}>
+          <FancyLink key={wrapperIndex + type} classStr={styles.link} {...props}>
             {charArr}
           </FancyLink>,
         ];
@@ -74,7 +85,7 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, TagName, classStr
   });
 
   return (
-    <TagName className={classStr + ' ' + (linksActive ? 'active' : '')}>
+    <TagName className={styles[type] + ' ' + (linksActive ? styles.active : '')}>
       {charElArr}
     </TagName>
   );

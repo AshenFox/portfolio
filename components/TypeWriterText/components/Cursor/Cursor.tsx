@@ -1,5 +1,6 @@
 import React, { CSSProperties, FC } from 'react';
-import { useAppSelector } from '../../../store/hooks';
+import { useAppSelector } from '../../../../store/hooks';
+import styles from './styles.module.scss';
 
 interface OwnProps {
   isSmall?: boolean;
@@ -21,7 +22,9 @@ const Cursor: FC<Props> = ({ isActive = false, isSmall = false }) => {
 
   return (
     <span
-      className={`about__cursor ${isActive ? 'active' : ''} ${isSmall ? 'small' : ''}`}
+      className={`${styles.cursor} ${isActive ? styles.active : ''} ${
+        isSmall ? styles.small : ''
+      }`}
       style={cursorStyle}
     >
       _

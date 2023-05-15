@@ -3,8 +3,6 @@ import { useAppSelector } from '../../store/hooks';
 import Cursor from './components/Cursor';
 import Header from './components/Header';
 
-// type HeaderTextType = 'text' | 'link';
-
 interface HeaderItemTextInt {
   content: string;
   type: 'text';
@@ -16,7 +14,6 @@ interface HeaderItemLinkInt {
   type: 'link';
   props?: {
     href?: string;
-    classStr?: string;
     title?: string;
   };
 }
@@ -56,7 +53,7 @@ const TypeWriterText: FC<Props> = () => {
         {
           content: 'award-winning',
           type: 'link',
-          props: { href: '/portfolio', classStr: 'about__link', title: 'Portfolio' },
+          props: { href: '/portfolio', title: 'Portfolio' },
         },
         {
           content: ' full-stack web developer and UI/UX javascript specialist.',
@@ -74,7 +71,7 @@ const TypeWriterText: FC<Props> = () => {
         {
           content: 'code laboratory',
           type: 'link',
-          props: { href: '/portfolio', classStr: 'about__link', title: 'Portfolio' },
+          props: { href: '/portfolio', title: 'Portfolio' },
         },
         { content: '.', type: 'text' },
       ],
@@ -89,7 +86,7 @@ const TypeWriterText: FC<Props> = () => {
         {
           content: 'web portfolio page',
           type: 'link',
-          props: { href: '/portfolio', classStr: 'about__link', title: 'Portfolio' },
+          props: { href: '/portfolio', title: 'Portfolio' },
         },
         { content: '.', type: 'text' },
       ],
@@ -104,7 +101,7 @@ const TypeWriterText: FC<Props> = () => {
         {
           content: 'rafael@caferati.me',
           type: 'link',
-          props: { href: '/portfolio', classStr: 'about__link', title: 'Portfolio' },
+          props: { href: '/portfolio', title: 'Portfolio' },
         },
       ],
       type: 'description',
@@ -132,7 +129,6 @@ const TypeWriterText: FC<Props> = () => {
   const [show, setShow] = useState(0); // 326
 
   useEffect(() => {
-    // console.log(show < allChar, content_loaded, is_exited, show_navigation);
     if (show < allChar && content_loaded && is_exited && show_navigation)
       setTimeout(() => {
         setShow(prev => prev + 1);
@@ -148,18 +144,6 @@ const TypeWriterText: FC<Props> = () => {
     const range = countCharInElement(content);
     const rangeEnd = rangeStart + range;
 
-    let TagName = null as keyof JSX.IntrinsicElements;
-    let classStr: string = null;
-
-    if (type === 'greeting') {
-      TagName = 'h1';
-      classStr = 'about__greeting';
-    }
-    if (type === 'description') {
-      TagName = 'h4';
-      classStr = 'about__description';
-    }
-
     const containsCursor = show >= rangeStart && show <= rangeEnd;
     if (type === 'description' && containsCursor) isCursorSmall = true;
 
@@ -168,8 +152,6 @@ const TypeWriterText: FC<Props> = () => {
     if (show >= rangeStart) headerShow = show;
     if (show >= rangeEnd) headerShow = rangeEnd;
 
-    // console.log({ headerShow, show });
-
     const HeaderEl = (
       <Header
         key={i}
@@ -177,8 +159,7 @@ const TypeWriterText: FC<Props> = () => {
         rangeStart={rangeStart}
         rangeEnd={rangeEnd}
         show={headerShow}
-        TagName={TagName}
-        classStr={classStr}
+        type={type}
       />
     );
 

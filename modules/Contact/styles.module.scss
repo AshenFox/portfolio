@@ -1,0 +1,49 @@
+@import '@styles/miscellaneous/variables.scss';
+
+.header {
+  margin-bottom: 4rem;
+}
+
+.title {
+  line-height: 1;
+  font-size: 4.2rem;
+  color: $header-color;
+  margin-bottom: 1.9rem;
+}
+
+.description {
+  line-height: 3.1rem;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #afafaf;
+}
+
+.main {
+  margin-bottom: 10rem;
+}
+
+.footer {
+}
+
+.footer_header {
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 1.4rem;
+  margin-bottom: 2.2rem;
+  color: $header-color;
+}
+
+.footer_paragraph {
+  font-size: 1.8rem;
+  line-height: 3.1rem;
+  color: #afafaf;
+  margin-bottom: 2.2rem;
+}
+
+.footer_links {
+  display: flex;
+
+  & > a {
+    margin-right: 1.5rem;
+  }
+}

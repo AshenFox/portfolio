@@ -1,0 +1,22 @@
+@import '@styles/miscellaneous/animations';
+
+.cursor {
+  position: absolute;
+  top: 0;
+  animation: cursor-animation 0.5s forwards infinite;
+  font-weight: 700;
+  font-size: 2.9rem;
+  letter-spacing: -1.5px;
+  display: none;
+  transform: translate(1px, 1px);
+
+  &.active {
+    display: inline-block;
+    opacity: 1;
+  }
+
+  &.small {
+    font-size: 1.7rem;
+    font-family: Lato;
+  }
+}

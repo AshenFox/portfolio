@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useRef, useState, memo, useCallback } from 'react';
-import { useOrientationChange } from '../../../helpers/hooks';
+import { useOrientationChange } from '../../../../helpers/hooks';
 
-import { useActions } from '../../../store/hooks';
-import { createDots } from '../../FallingParticles';
+import { useActions } from '../../../../store/hooks';
+import { createDots } from '../../../FallingParticles';
+import styles from './styles.module.scss';
 
 interface OwnProps {
   active: boolean;
@@ -79,7 +80,7 @@ const Char: FC<Props> = ({ active, children, isCursor, scrollTop = 0 }) => {
   }, []);
 
   return (
-    <span className={`about__char ${active ? 'active' : ''}`} ref={charElRef}>
+    <span className={`${styles.char} ${active ? styles.active : ''}`} ref={charElRef}>
       {children}
     </span>
   );

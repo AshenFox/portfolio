@@ -1,6 +1,7 @@
 import { FC, useCallback, useEffect, useRef, memo } from 'react';
 import { shallowEqual } from 'react-redux';
 import { useAppSelector } from '../../store/hooks';
+import styles from './styles.module.scss';
 
 interface IPos {
   x: number;
@@ -231,7 +232,7 @@ const FallingParticles: FC<Props> = () => {
     };
   }, [animate]);
 
-  return <canvas ref={canvasRef} className='about__game-canvas'></canvas>;
+  return <canvas ref={canvasRef} className={styles.canvas}></canvas>;
 };
 
 export default memo(FallingParticles);

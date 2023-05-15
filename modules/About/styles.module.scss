@@ -1,0 +1,29 @@
+@import '@styles/miscellaneous/variables.scss';
+
+.main {
+  grid-row-start: 2;
+  padding: 0 9rem;
+
+  @media (max-width: $tablet), (max-height: 625px) {
+    padding: 0 2.5rem;
+    grid-row-start: 1;
+  }
+}
+
+.footer {
+  margin-top: auto;
+
+  grid-row-start: 3;
+
+  width: 100%;
+  height: 14.2rem;
+
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: $tablet), (max-height: 625px) {
+    grid-row-start: 2;
+    margin-top: 7rem;
+    height: auto;
+  }
+}

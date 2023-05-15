@@ -1,0 +1,53 @@
+@import '@styles/miscellaneous/variables.scss';
+
+.greeting {
+  line-height: 4.9rem;
+  font-weight: 700;
+  font-size: 2.9rem;
+  letter-spacing: -1.5px;
+  color: #cacaca;
+
+  span {
+    min-height: 4.9rem;
+  }
+
+  @media (max-width: $tablet-s) {
+    font-size: 2.6rem;
+  }
+}
+
+.description {
+  font-size: 1.7rem;
+  line-height: 3.3rem;
+  font-weight: 400;
+  font-family: Lato;
+
+  span {
+    min-height: 3.3rem;
+  }
+}
+
+.greeting,
+.description {
+  text-align: center;
+  white-space: pre-wrap;
+
+  a {
+    pointer-events: none;
+  }
+
+  span {
+    vertical-align: bottom;
+  }
+
+  &.active {
+    a {
+      pointer-events: all;
+    }
+  }
+}
+
+.link {
+  line-height: 3.3rem;
+  font-size: 1.9rem;
+}

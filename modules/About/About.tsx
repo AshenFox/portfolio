@@ -1,66 +1,22 @@
-import React, { FC, useCallback, useEffect, useRef } from 'react';
-import FallingParticles from '@components/FallingParticles';
-import { Link } from '@ui/InteractiveElement';
+import React, { FC, memo } from 'react';
 import SideLinks from '@components/SideLinks';
 import TypeWriterText from '@components/TypeWriterText';
-import { useOrientationChange } from '../../helpers/hooks';
-import { useActions, useAppSelector } from '../../store/hooks';
+import styles from './styles.module.scss';
+import Barrier from './components/Barrier';
 
 const About: FC = () => {
-  const { set_barrier_dimensions } = useActions();
-
-  const show_navigation = useAppSelector(({ sslider }) => sslider.show_navigation);
-  const scrollTop = useAppSelector(
-    ({ game }) => game.game_container_dimensions.scrollTop
-  );
-  const buttonRef = useRef<HTMLAnchorElement>(null);
-
-  const updateBarrierDimen = useCallback(() => {
-    const rect = buttonRef.current.getBoundingClientRect();
-
-    const { x, y, height, width } = rect;
-
-    set_barrier_dimensions(x, y + scrollTop, height, width);
-  }, [set_barrier_dimensions, scrollTop]);
-
-  useEffect(() => {
-    updateBarrierDimen();
-
-    window.addEventListener('resize', updateBarrierDimen);
-
-    return () => {
-      window.removeEventListener('resize', updateBarrierDimen);
-    };
-  }, [updateBarrierDimen]);
-
-  useOrientationChange(updateBarrierDimen);
-
-  useEffect(() => {
-    updateBarrierDimen();
-  }, [show_navigation, updateBarrierDimen]);
-
   return (
     <>
-      <main className='about__main'>
+      <main className={styles.main}>
         <TypeWriterText />
       </main>
-      <footer className='about__footer'>
-        <Link
-          color='red'
-          isBig={true}
-          href={'/portfolio'}
-          title={'Portfolio'}
-          ref={buttonRef}
-          isLoading={!show_navigation}
-        >
-          see the portfolio
-        </Link>
+      <footer className={styles.footer}>
+        <Barrier />
       </footer>
-      <SideLinks />
 
-      <FallingParticles />
+      <SideLinks />
     </>
   );
 };
 
-export default About;
+export default memo(About);
