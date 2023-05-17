@@ -5,6 +5,7 @@ import { routesOrderList } from '../../../../../helpers/values';
 import { useActions, useAppSelector } from '../../../../../store/hooks';
 import styles from './styles.module.scss';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
+import LangueageChange from './components/LanguageChange/LangueageChange';
 
 const classNames: CSSTransitionClassNames = {
   enterActive: styles.menu_in_active,
@@ -40,7 +41,10 @@ const Menu: FC<Props> = () => {
         onExited={onExited}
       >
         <div className={`${styles.menu} ${show_menu ? styles.menu_active : ''}`}>
-          <div className={styles.list}>
+          <header className={styles.header}>
+            <LangueageChange />
+          </header>
+          <main className={styles.list}>
             {routesOrderList.map(({ path, title }) => (
               <MenuItem href={path} title={title} key={path} />
             ))}
@@ -49,8 +53,10 @@ const Menu: FC<Props> = () => {
               title={'portfolio flashcards'}
               key={'project flashcards'}
             />
-          </div>
-          {/* <span className={styles.tip}>for a quick seach just start typing ...</span> */}
+          </main>
+          <footer>
+            {/* <span className={styles.tip}>for a quick seach just start typing ...</span> */}
+          </footer>
         </div>
       </CSSTransition>
     </>

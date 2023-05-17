@@ -1,0 +1,24 @@
+.language_change {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.option {
+  button {
+    cursor: pointer;
+    color: inherit;
+    border: none;
+    outline: none;
+    opacity: 0.5;
+    background-color: transparent;
+    font-size: 2rem;
+    transition: opacity 0.1s ease-in-out;
+  }
+
+  &.active {
+    button {
+      opacity: 1;
+    }
+  }
+}

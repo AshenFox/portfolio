@@ -29,6 +29,10 @@
 
   &_in_active,
   &_in_done {
+    .header {
+      opacity: 1;
+    }
+
     .link {
       transform: translateY(0px);
     }
@@ -40,20 +44,28 @@
   }
 }
 
+.header {
+  display: flex;
+  width: 90%;
+  padding-top: 2.5rem;
+  opacity: 0;
+  transition: opacity ease-out 0.75s;
+}
+
 .list {
   width: 90%;
-  // min-height: 100%;
   margin: auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 1;
-  padding: 5rem 0;
+  padding: 2.5rem 0 5rem;
 }
 
 .link {
   transform: translateY(-120px);
+  text-align: center;
 
   @include link;
 
@@ -73,6 +85,7 @@
   color: #5a5a5a;
 
   font-size: 3.2rem;
+  line-height: 4.5rem;
   font-weight: 700;
   background-color: rgba(0, 0, 0, 0.02);
 

@@ -1,3 +1,4 @@
+import { Language } from 'store/reducers/language/languageInitState';
 import { FieldName } from '../reducers/form/contactFormInitState';
 import { Direction } from '../reducers/sslider/sectionSliderInitState';
 
@@ -190,4 +191,21 @@ export type GameActions =
 
 // ===========
 
-export type AppActions = SectionSliderActions | ContactFormActions | GameActions;
+// game
+export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';
+
+export interface ChangeLanguageAction {
+  type: typeof CHANGE_LANGUAGE;
+  payload: {
+    value: Language;
+  };
+}
+
+export type LanguageActions = ChangeLanguageAction;
+
+// ===========
+export type AppActions =
+  | SectionSliderActions
+  | ContactFormActions
+  | GameActions
+  | LanguageActions;
