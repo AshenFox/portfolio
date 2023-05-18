@@ -44,6 +44,7 @@ const Arrows: FC<Props> = ({ onExited }) => {
     content_loader: { is_exited },
     show_navigation,
   } = useAppSelector(({ sslider }) => sslider);
+  const language = useAppSelector(({ language }) => language.language);
 
   const showNavigation = is_exited && show_navigation;
   const timeout: number = 950;
@@ -94,6 +95,8 @@ const Arrows: FC<Props> = ({ onExited }) => {
     router.push(prevPathname);
   };
 
+  leftTitle?.[language] ?? leftTitle;
+
   return (
     <>
       <CSSTransition
@@ -109,10 +112,10 @@ const Arrows: FC<Props> = ({ onExited }) => {
               className={styles.link}
               onClick={onClickRightArrow}
               href={nextPathname}
-              title={rightTitle}
+              title={rightTitle?.[language] ?? rightTitle}
             />
           </CSSTransition>
-          <span className={styles.text}>{rightTitle}</span>
+          <span className={styles.text}>{rightTitle?.[language] ?? rightTitle}</span>
           <div className={styles.arrow} />
         </div>
       </CSSTransition>
@@ -129,11 +132,11 @@ const Arrows: FC<Props> = ({ onExited }) => {
               className={styles.link}
               onClick={onClickLeftArrow}
               href={prevPathname}
-              title={leftTitle}
+              title={leftTitle?.[language] ?? leftTitle}
             />
           </CSSTransition>
           <div className={styles.arrow} />
-          <span className={styles.text}>{leftTitle}</span>
+          <span className={styles.text}>{leftTitle?.[language] ?? leftTitle}</span>
         </div>
       </CSSTransition>
     </>

@@ -1,18 +1,16 @@
-import { lazy } from 'react';
-import { routesOrderList, TRoutesArr } from './values';
-import { Direction } from '../store/reducers/sslider/sectionSliderInitState';
+import { routesOrderList, TRoutesArr, TTitle } from './values';
 import { iNotification, Store } from 'react-notifications-component';
 import styles from './styles.module.scss';
 
 export const getUpperLevelPath = (pathname: string) => {
   let upper_level_path = '';
   let level = 0;
-  let title = '';
+  let title: TTitle = '';
 
   const search = (
     routesOrder: TRoutesArr,
     parent_path: string = '/',
-    parent_title: string = '',
+    parent_title: TTitle = '',
     i: number = 0
   ): boolean => {
     return !!routesOrder.find(el => {
@@ -41,11 +39,11 @@ export const getUpperLevelPath = (pathname: string) => {
 export const getPath = (
   pathname: string,
   dir: 1 | -1
-): { path: string; title: string } => {
+): { path: string; title: TTitle } => {
   const pathname_arr = pathname.split(/(?=\/)/g);
 
   let routes_list = routesOrderList;
-  let res = { path: '', title: '' };
+  let res: { path: string; title: TTitle } = { path: '', title: '' };
 
   for (let i in pathname_arr) {
     if (!routes_list) break;

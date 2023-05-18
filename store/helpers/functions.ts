@@ -41,10 +41,8 @@ export const getDir = (pathname_to: string, pathname_from: string): Direction =>
     const pathname_to_part = pathname_to_arr[i];
     const pathname_from_part = pathname_from_arr[i];
 
-    const route_to_i = routes_list_to.findIndex((el) => el.path === pathname_to_part);
-    const route_from_i = routes_list_from.findIndex(
-      (el) => el.path === pathname_from_part
-    );
+    const route_to_i = routes_list_to.findIndex(el => el.path === pathname_to_part);
+    const route_from_i = routes_list_from.findIndex(el => el.path === pathname_from_part);
 
     const found_to = route_to_i >= 0;
     const found_from = route_from_i >= 0;
@@ -74,5 +72,3 @@ export const getDir = (pathname_to: string, pathname_from: string): Direction =>
 
   return dir;
 };
-
-// console.log(newGetDir('/portfolio/portfolio', '/project'));
