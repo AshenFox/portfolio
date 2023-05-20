@@ -38,7 +38,7 @@ const Char: FC<Props> = ({ active, children, isCursor, scrollTop = 0 }) => {
 
       const { x, y, width, height } = rect;
 
-      const color = computedStyleRef.current.getPropertyValue('color');
+      const color = computedStyleRef.current?.getPropertyValue('color');
 
       createDots(
         Math.round(x + width / 2),

@@ -2,6 +2,7 @@ import { useOrientationChange } from 'helpers/hooks';
 import { Link } from '@ui/InteractiveElement';
 import React, { FC, memo, useCallback, useEffect, useRef } from 'react';
 import { useActions, useAppSelector } from 'store/hooks';
+import contact from '../../content.json';
 
 const Barrier: FC = () => {
   const { set_barrier_dimensions } = useActions();
@@ -10,6 +11,8 @@ const Barrier: FC = () => {
   const scrollTop = useAppSelector(
     ({ game }) => game.game_container_dimensions.scrollTop
   );
+  const language = useAppSelector(({ language }) => language.language);
+
   const buttonRef = useRef<HTMLAnchorElement>(null);
 
   const updateBarrierDimen = useCallback(() => {
@@ -45,7 +48,7 @@ const Barrier: FC = () => {
       ref={buttonRef}
       isLoading={!show_navigation}
     >
-      see the portfolio
+      {contact.barrier[language]}
     </Link>
   );
 };

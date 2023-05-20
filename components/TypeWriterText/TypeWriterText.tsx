@@ -1,15 +1,15 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useCallback } from 'react';
 import { useAppSelector } from '../../store/hooks';
 import Cursor from './components/Cursor';
 import Header from './components/Header';
 
-interface HeaderItemTextInt {
+interface IHeaderItemText {
   content: string;
   type: 'text';
   props?: {};
 }
 
-interface HeaderItemLinkInt {
+interface IHeaderItemLink {
   content: string;
   type: 'link';
   props?: {
@@ -18,115 +18,55 @@ interface HeaderItemLinkInt {
   };
 }
 
-export type HeaderItemType = HeaderItemTextInt | HeaderItemLinkInt;
+export type THeaderItem = IHeaderItemText | IHeaderItemLink;
 
-type HeaderItemArrType = HeaderItemType[];
+type THeaderItemArr = THeaderItem[];
 
-type HeaderType = 'greeting' | 'description';
+type THeader = 'greeting' | 'description';
 
-export interface HeaderDataInt {
-  content: HeaderItemArrType;
-  type: HeaderType;
+export interface IHeaderData {
+  content: THeaderItemArr;
+  type: THeader;
 }
 
-type HeaderDataArrType = HeaderDataInt[];
+export type THeaderDataArr = IHeaderData[];
 
-interface OwnProps {}
+const countCharInElement = (data: THeaderItemArr) =>
+  data.reduce((sum, el) => {
+    const { content } = el;
+    sum += content.length;
+    return sum;
+  }, 0);
 
-type Props = OwnProps;
+const countAllChar = (text: THeaderDataArr) =>
+  text.reduce((sum, el, i) => {
+    const { content } = el;
 
-const TypeWriterText: FC<Props> = () => {
+    sum += countCharInElement(content);
+    if (i !== text.length - 1) sum += 1;
+
+    return sum;
+  }, 0);
+
+type Props = {
+  text: THeaderDataArr;
+};
+
+const TypeWriterText: FC<Props> = ({ text }) => {
   const {
     content_loaded,
     content_loader: { is_exited },
     show_navigation,
   } = useAppSelector(({ sslider }) => sslider);
 
-  const [text, setText] = useState<HeaderDataArrType>([
-    {
-      content: [{ content: 'Hello, my name is Rafael Caferati.', type: 'text' }],
-      type: 'greeting',
-    },
-    {
-      content: [
-        { content: 'I am an ', type: 'text' },
-        {
-          content: 'award-winning',
-          type: 'link',
-          props: { href: '/portfolio', title: 'Portfolio' },
-        },
-        {
-          content: ' full-stack web developer and UI/UX javascript specialist.',
-          type: 'text',
-        },
-      ],
-      type: 'description',
-    },
-    {
-      content: [
-        {
-          content: 'Check out my articles, React and React Native UI components at the ',
-          type: 'text',
-        },
-        {
-          content: 'code laboratory',
-          type: 'link',
-          props: { href: '/portfolio', title: 'Portfolio' },
-        },
-        { content: '.', type: 'text' },
-      ],
-      type: 'description',
-    },
-    {
-      content: [
-        {
-          content: 'Feel free to take a look at my latest projects on the ',
-          type: 'text',
-        },
-        {
-          content: 'web portfolio page',
-          type: 'link',
-          props: { href: '/portfolio', title: 'Portfolio' },
-        },
-        { content: '.', type: 'text' },
-      ],
-      type: 'description',
-    },
-    {
-      content: [
-        {
-          content: 'Remotely available UTC-1 to UTC+8. ',
-          type: 'text',
-        },
-        {
-          content: 'rafael@caferati.me',
-          type: 'link',
-          props: { href: '/portfolio', title: 'Portfolio' },
-        },
-      ],
-      type: 'description',
-    },
-  ]);
-
-  const countCharInElement = (data: HeaderItemArrType) =>
-    data.reduce((sum, el) => {
-      const { content } = el;
-      sum += content.length;
-      return sum;
-    }, 0);
-
-  const [allChar, setAllChar] = useState(
-    text.reduce((sum, el, i) => {
-      const { content } = el;
-
-      sum += countCharInElement(content);
-      if (i !== text.length - 1) sum += 1;
-
-      return sum;
-    }, 0)
-  );
+  const [allChar, setAllChar] = useState(countAllChar(text));
 
   const [show, setShow] = useState(0); // 326
+
+  useEffect(() => {
+    setShow(0);
+    setAllChar(countAllChar(text));
+  }, [text]);
 
   useEffect(() => {
     if (show < allChar && content_loaded && is_exited && show_navigation)

@@ -1,1 +1,1 @@
-export { default } from './TypeWriterText';
+export { default, type THeaderDataArr } from './TypeWriterText';

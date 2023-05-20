@@ -1,23 +1,7 @@
 import { routesOrderList } from './../../helpers/values';
 import { Direction } from '../reducers/sslider/sectionSliderInitState';
 
-/* export const getDir = (pathname_to: string, pathname_from: string) => {
-  // console.log({ pathname_to, pathname_from });
-  const pathname_to_i = routesOrderList.findIndex((el) => el.path === pathname_to); // Find both routes and both arrays and determine dir based on that
-  const pathname_from_i = routesOrderList.findIndex((el) => el.path === pathname_from);
-
-  const diff = pathname_to_i - pathname_from_i;
-
-  let dir: Direction = null;
-
-  if (diff < 0) dir = 'left';
-  if (diff > 0) dir = 'right';
-
-  return dir;
-}; */
-
 export const getDir = (pathname_to: string, pathname_from: string): Direction => {
-  // Invalid links????
   const pathname_to_arr = pathname_to.split(/(?=\/)/g);
   const pathname_from_arr = pathname_from.split(/(?=\/)/g);
 
