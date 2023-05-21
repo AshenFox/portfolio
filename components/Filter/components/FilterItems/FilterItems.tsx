@@ -1,7 +1,7 @@
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
-import { FilterItemsInt } from '../../Filter';
+import { IFilterItems } from '../../Filter';
 import FilterItem from './components/FilterItem';
 import styles from './styles.module.scss';
 
@@ -15,7 +15,7 @@ const classNames: CSSTransitionClassNames = {
 
 interface OwnProps {
   order: string[];
-  filterItems: FilterItemsInt;
+  filterItems: IFilterItems;
 }
 
 type Props = OwnProps;

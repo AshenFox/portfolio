@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
-import { FilterItemInt } from '../../../Filter';
+import { IFilterItem } from '../../../Filter';
 import Img from 'next/image';
 import styles from '../styles.module.scss';
 
 interface OwnProps {
-  data: FilterItemInt;
+  data: IFilterItem;
   order: string[];
 }
 

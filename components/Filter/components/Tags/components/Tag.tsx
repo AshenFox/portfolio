@@ -1,12 +1,12 @@
 import React, { FC, MouseEventHandler, ReactNode, useCallback } from 'react';
-import { TagType } from '../../../Filter';
+import { TTag } from '../../../Filter';
 import styles from '../styles.module.scss';
 
 interface OwnProps {
   children: ReactNode;
-  value: TagType;
+  value: TTag;
   active?: boolean;
-  onClickAction?: (value: TagType) => void;
+  onClickAction?: (value: TTag) => void;
 }
 
 type Props = OwnProps;

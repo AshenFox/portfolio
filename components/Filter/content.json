@@ -1,0 +1,16 @@
+{
+  "ENG": {
+    "info": {
+      "start": "Showing",
+      "end": "projects. Use the filter to list them by skill or technology."
+    },
+    "all": "all"
+  },
+  "RU": {
+    "info": {
+      "start": "Тест",
+      "end": "тест тест тест."
+    },
+    "all": "все"
+  }
+}

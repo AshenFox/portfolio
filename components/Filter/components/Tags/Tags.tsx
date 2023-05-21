@@ -1,12 +1,12 @@
-import { TagListType, TagType } from '@components/Filter/Filter';
+import { TTagList, TTag } from '@components/Filter/Filter';
 import React, { FC } from 'react';
 import Tag from './components/Tag';
 import styles from './styles.module.scss';
 
 type TagsProps = {
-  tagList: TagListType;
-  by: TagType;
-  onTagClickAction: (value: TagType) => void;
+  tagList: TTagList;
+  by: TTag;
+  onTagClickAction: (value: TTag) => void;
 };
 
 const Tags: FC<TagsProps> = ({ tagList, by, onTagClickAction }) => {

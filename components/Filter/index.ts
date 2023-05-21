@@ -1,1 +1,1 @@
-export { default } from './Filter';
+export { default, type IFilterItems } from './Filter';

@@ -2,8 +2,10 @@ import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 import FilterItems from './components/FilterItems';
 import Tags from './components/Tags';
 import styles from './styles.module.scss';
+import content from './content.json';
+import { useAppSelector } from 'store/hooks';
 
-export type TagType =
+export type TTag =
   | 'show all'
   | 'front-end'
   | 'back-end'
@@ -23,9 +25,9 @@ export type TagType =
   | 'animations'
   | 'game design';
 
-export type TagListType = TagType[];
+export type TTagList = TTag[];
 
-const tagList: TagListType = [
+const tagList: TTagList = [
   'show all',
   'front-end',
   'back-end',
@@ -46,10 +48,10 @@ const tagList: TagListType = [
   'game design',
 ];
 
-export interface FilterItemInt {
+export interface IFilterItem {
   id: string;
   name: string;
-  tags: TagType[];
+  tags: TTagList;
   in: boolean;
   thumbnails: {
     main: string;
@@ -57,204 +59,33 @@ export interface FilterItemInt {
   };
 }
 
-export interface FilterItemsInt {
-  [key: string]: FilterItemInt;
+export interface IFilterItems {
+  [key: string]: IFilterItem;
 }
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const value: FilterItemsInt = {
-  '1': {
-    id: '1',
-    name: 'test1',
-    tags: ['back-end', 'coffeescript'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '2': {
-    id: '2',
-    name: 'test2',
-    tags: ['backbonejs', 'electron', 'front-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '3': {
-    id: '3',
-    name: 'test3',
-    tags: ['game design', 'electron', 'front-end'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '4': {
-    id: '4',
-    name: 'test4',
-    tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '5': {
-    id: '5',
-    name: 'test5',
-    tags: ['mongodb', 'mongodb', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '6': {
-    id: '6',
-    name: 'test6',
-    tags: ['backbonejs', 'sass', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '7': {
-    id: '7',
-    name: 'test7',
-    tags: ['back-end', 'coffeescript'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '8': {
-    id: '8',
-    name: 'test8',
-    tags: ['backbonejs', 'electron', 'front-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '9': {
-    id: '9',
-    name: 'test9',
-    tags: ['game design', 'electron', 'front-end'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '10': {
-    id: '10',
-    name: 'test10',
-    tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '11': {
-    id: '11',
-    name: 'test11',
-    tags: ['mongodb', 'mongodb', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '12': {
-    id: '12',
-    name: 'test12',
-    tags: ['backbonejs', 'sass', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '13': {
-    id: '13',
-    name: 'test13',
-    tags: ['backbonejs', 'sass', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '14': {
-    id: '14',
-    name: 'test14',
-    tags: ['game design', 'electron', 'front-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '15': {
-    id: '15',
-    name: 'test15',
-    tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '16': {
-    id: '16',
-    name: 'test16',
-    tags: ['backbonejs', 'electron', 'front-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '17': {
-    id: '17',
-    name: 'test17',
-    tags: ['game design', 'electron', 'front-end'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
+type Props = {
+  initFilterItems: IFilterItems;
 };
 
-const Filter: FC<Props> = props => {
-  const [by, setBy] = useState<TagType>('show all');
+const Filter: FC<Props> = ({ initFilterItems }) => {
+  const language = useAppSelector(({ language }) => language.language);
 
-  const [filterItems, setFilterItems] = useState<FilterItemsInt>(value);
+  const [by, setBy] = useState<TTag>('show all');
+
+  const [filterItems, setFilterItems] = useState<IFilterItems>(initFilterItems);
 
   const [order, setOrder] = useState<string[]>(Object.keys(filterItems));
 
   const isAll = by === 'show all';
 
   const filterProjects = useCallback(
-    (by: TagType) => {
+    (by: TTag) => {
       const isAll = by === 'show all';
 
       const res: {
         filtered: string[];
         inArr: string[];
-        projects: FilterItemsInt;
+        projects: IFilterItems;
       } = Object.entries(filterItems).reduce(
         (res, [id, data], i, arr) => {
           const prevIn = data.in;
@@ -288,7 +119,7 @@ const Filter: FC<Props> = props => {
   );
 
   const onTagClickAction = useCallback(
-    (value: TagType) => {
+    (value: TTag) => {
       setBy(value);
       filterProjects(value);
     },
@@ -303,8 +134,8 @@ const Filter: FC<Props> = props => {
     <div className={styles.filter}>
       <Tags tagList={tagList} by={by} onTagClickAction={onTagClickAction} />
       <small className={styles.info}>
-        Showing {isAll ? 'all' : by} projects. Use the filter to list them by skill or
-        technology.
+        {content[language].info.start} {isAll ? content[language].all : by}{' '}
+        {content[language].info.end}
       </small>
       <FilterItems order={order} filterItems={filterItems} />
     </div>
