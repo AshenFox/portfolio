@@ -3,25 +3,18 @@ import { useAppSelector } from '../../store/hooks';
 import Cursor from './components/Cursor';
 import Header from './components/Header';
 
-interface IHeaderItemText {
+export type THeaderItem = {
+  type: 'link' | 'text' | (string & {});
   content: string;
-  type: 'text';
-}
-
-interface IHeaderItemLink {
-  content: string;
-  type: 'link';
   props?: {
     href?: string;
     title?: string;
   };
-}
+};
 
-export type THeaderItem = IHeaderItemText | IHeaderItemLink;
+export type THeaderItemArr = THeaderItem[];
 
-type THeaderItemArr = THeaderItem[];
-
-type THeader = 'greeting' | 'description';
+export type THeader = 'greeting' | 'description' | (string & {});
 
 export interface IHeaderData {
   content: THeaderItemArr;

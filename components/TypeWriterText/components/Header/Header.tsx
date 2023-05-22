@@ -1,5 +1,5 @@
 import React, { FC, memo, useCallback, useMemo } from 'react';
-import { IHeaderData, THeaderItem } from '../../TypeWriterText';
+import { IHeaderData, THeader, THeaderItem } from '../../TypeWriterText';
 import { useAppSelector } from '../../../../store/hooks';
 import FancyLink from '../../../../ui/FancyLink';
 import Char from '../Char';
@@ -52,7 +52,11 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, type }) => {
 
       if (type === 'link')
         return [
-          <FancyLink key={wrapperIndex + type} classStr={styles.link} {...data.props}>
+          <FancyLink
+            key={wrapperIndex + type}
+            classStr={styles.link}
+            {...(data.props ?? {})}
+          >
             {charArr}
           </FancyLink>,
         ];

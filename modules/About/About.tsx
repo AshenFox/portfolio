@@ -9,10 +9,7 @@ import { useAppSelector } from 'store/hooks';
 const About: FC = () => {
   const language = useAppSelector(({ language }) => language.language);
 
-  const typewriterText = useMemo(
-    () => content.typewriter_text[language] as THeaderDataArr, // fix the type
-    [language]
-  );
+  const typewriterText = useMemo(() => content.typewriter_text[language], [language]);
 
   return (
     <>
