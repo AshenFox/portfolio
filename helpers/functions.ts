@@ -96,3 +96,6 @@ export const addCustomNotification = (custom_options: Partial<iNotification>) =>
 };
 
 export const removeNotification = (id: string) => Store.removeNotification(id);
+
+export const replaceRegExp = (str: string, flags?: string) =>
+  new RegExp(`#${str}#`, flags);

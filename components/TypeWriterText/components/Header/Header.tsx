@@ -48,11 +48,11 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, type }) => {
 
   const wrapArrOfChar = useCallback(
     (charArr: JSX.Element[], data: THeaderItem, wrapperIndex: number) => {
-      const { type, props } = data;
+      const { type } = data;
 
       if (type === 'link')
         return [
-          <FancyLink key={wrapperIndex + type} classStr={styles.link} {...props}>
+          <FancyLink key={wrapperIndex + type} classStr={styles.link} {...data.props}>
             {charArr}
           </FancyLink>,
         ];

@@ -4,6 +4,7 @@ import Tags from './components/Tags';
 import styles from './styles.module.scss';
 import content from './content.json';
 import { useAppSelector } from 'store/hooks';
+import { replaceRegExp } from 'helpers/functions';
 
 export type TTag =
   | 'show all'
@@ -130,12 +131,16 @@ const Filter: FC<Props> = ({ initFilterItems }) => {
     filterProjects('show all');
   }, []);
 
+  console.log(replaceRegExp('all'));
+
   return (
     <div className={styles.filter}>
       <Tags tagList={tagList} by={by} onTagClickAction={onTagClickAction} />
       <small className={styles.info}>
-        {content[language].info.start} {isAll ? content[language].all : by}{' '}
-        {content[language].info.end}
+        {content[language].info.replace(
+          replaceRegExp('all'),
+          isAll ? content[language].all : by
+        )}
       </small>
       <FilterItems order={order} filterItems={filterItems} />
     </div>

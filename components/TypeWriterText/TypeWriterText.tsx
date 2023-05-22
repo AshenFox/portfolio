@@ -6,7 +6,6 @@ import Header from './components/Header';
 interface IHeaderItemText {
   content: string;
   type: 'text';
-  props?: {};
 }
 
 interface IHeaderItemLink {
