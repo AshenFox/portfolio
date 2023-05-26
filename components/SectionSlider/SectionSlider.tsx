@@ -164,7 +164,6 @@ const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
 
   useEffect(() => {
     if (Received && immediateTransition && !show_section_loader) {
-      console.log('fire!');
       setRendered({ ...Received });
       setImmediateTransition(false);
     }

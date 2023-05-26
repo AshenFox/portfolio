@@ -48,7 +48,7 @@ const Barrier: FC = () => {
       ref={buttonRef}
       isLoading={!show_navigation}
     >
-      {contact.barrier[language]}
+      {contact[language].barrier}
     </Link>
   );
 };

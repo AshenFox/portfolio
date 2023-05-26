@@ -1,0 +1,18 @@
+{
+  "ENG": {
+    "next": "next",
+    "submit": "submit your message",
+    "submitNotification": {
+      "title": "Successful sumbit",
+      "message": "Your message has been sent"
+    }
+  },
+  "RU": {
+    "next": "далее",
+    "submit": "отправить ваше сообщение",
+    "submitNotification": {
+      "title": "Успешно отправлено",
+      "message": "Ваше сообщение было отправлено"
+    }
+  }
+}

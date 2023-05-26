@@ -3,16 +3,24 @@ import FancyLink from '@ui/FancyLink';
 import { Link } from '@ui/InteractiveElement';
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
+import content from './content.json';
+import { useAppSelector } from 'store/hooks';
 
 const Contact: FC = () => {
+  const language = useAppSelector(({ language }) => language.language);
+
   return (
     <>
       <header className={styles.header}>
-        <h1 className={styles.title}>Get In Touch</h1>
+        <h1 className={styles.title}>{content[language].header.title}</h1>
         <h2 className={styles.description}>
-          If you wanna get in touch, talk to me about a project collaboration or just say
-          hi, fill up the awesome form below or send an email to{' '}
-          <FancyLink>rafael@caferati.me</FancyLink> and ~let&apos;s talk.
+          {content[language].header.description.map(el => {
+            if (el.type === 'link') {
+              return <FancyLink>{el.text}</FancyLink>;
+            }
+
+            return el.text;
+          })}
         </h2>
       </header>
 
@@ -21,11 +29,8 @@ const Contact: FC = () => {
       </main>
 
       <footer>
-        <h3 className={styles.footer_header}>Let&apos;s get social</h3>
-        <p className={styles.footer_paragraph}>
-          Follow my online fan page on Facebook and profiles on Twitter, GitHub and
-          Linkedin.
-        </p>
+        <h3 className={styles.footer_header}>{content[language].footer.header}</h3>
+        <p className={styles.footer_paragraph}>{content[language].footer.paragraph}</p>
         <div className={styles.footer_links}>
           <Link color='grey' icon='github' href='https://github.com/' title='Github'>
             github

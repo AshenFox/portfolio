@@ -1,0 +1,12 @@
+{
+  "ENG": {
+    "name": "Fill with your name",
+    "email": "Your email address",
+    "message": "Write your message :)"
+  },
+  "RU": {
+    "name": "Ваше имя",
+    "email": "Ваш email",
+    "message": "Ваше сообщение :)"
+  }
+}

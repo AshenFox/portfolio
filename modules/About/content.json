@@ -1,6 +1,6 @@
 {
-  "typewriter_text": {
-    "ENG": [
+  "ENG": {
+    "typewriter_text": [
       {
         "content": [{ "content": "Hello, my name is Rafael Caferati.", "type": "text" }],
         "type": "greeting"
@@ -65,7 +65,10 @@
         "type": "description"
       }
     ],
-    "RU": [
+    "barrier": "my portfolio"
+  },
+  "RU": {
+    "typewriter_text": [
       {
         "content": [
           { "content": "Тест тесттест тесттесттест тесттесттест.", "type": "text" }
@@ -131,10 +134,7 @@
         ],
         "type": "description"
       }
-    ]
-  },
-  "barrier": {
-    "ENG": "my portfolio",
-    "RU": "мое портфолио"
+    ],
+    "barrier": "мое портфолио"
   }
 }

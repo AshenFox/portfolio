@@ -131,8 +131,6 @@ const Filter: FC<Props> = ({ initFilterItems }) => {
     filterProjects('show all');
   }, []);
 
-  console.log(replaceRegExp('all'));
-
   return (
     <div className={styles.filter}>
       <Tags tagList={tagList} by={by} onTagClickAction={onTagClickAction} />

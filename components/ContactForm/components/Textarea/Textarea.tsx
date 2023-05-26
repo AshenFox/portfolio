@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
+import { Language } from 'store/reducers/language/languageInitState';
 import { addCustomNotification, removeNotification } from '../../../../helpers/functions';
 import { useActions, useAppSelector } from '../../../../store/hooks';
 import { Error } from '../../../../store/reducers/form/contactFormInitState';
@@ -33,6 +34,8 @@ const Textarea: FC<Props> = () => {
 
   const { fields, textarea_value, active_field } = useAppSelector(({ form }) => form);
 
+  const language = useAppSelector(({ language }) => language.language);
+
   const { icon_name, next, transitioned, is_error, errors, errorID } =
     fields[active_field];
   const IconEl: FC = Icons[icon_name];
@@ -59,10 +62,10 @@ const Textarea: FC<Props> = () => {
   const checkErrors = (value: string) => {
     clearTimeout(timersRef.current[active_field].timer);
     timersRef.current[active_field].timer = setTimeout(() => {
-      const error: Error = errors.find((error: Error) => error.test(value));
+      const error: Error = errors.find(error => error.test(value));
 
       if (error) {
-        createErrorNotification(errorID, error);
+        createErrorNotification(errorID, error, language);
       } else {
         removeNotification(errorID);
       }
@@ -118,12 +121,12 @@ const Textarea: FC<Props> = () => {
 
 export default Textarea;
 
-const createErrorNotification = (id: string, error: Error) => {
-  const { title, message } = error;
+const createErrorNotification = (id: string, error: Error, language: Language) => {
+  const { content } = error;
 
   addCustomNotification({
-    title: title,
-    message: message,
+    title: content[language].title,
+    message: content[language].message,
     type: 'danger',
     id,
   });

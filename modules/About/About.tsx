@@ -9,7 +9,7 @@ import { useAppSelector } from 'store/hooks';
 const About: FC = () => {
   const language = useAppSelector(({ language }) => language.language);
 
-  const typewriterText = useMemo(() => content.typewriter_text[language], [language]);
+  const typewriterText = useMemo(() => content[language].typewriter_text, [language]);
 
   return (
     <>

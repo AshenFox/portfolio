@@ -3,6 +3,8 @@ import { addCustomNotification } from '../../../../helpers/functions';
 import { useActions, useAppSelector } from '../../../../store/hooks';
 import { Button } from '@ui/InteractiveElement';
 import styles from './styles.module.scss';
+import { Language } from 'store/reducers/language/languageInitState';
+import content from './content.json';
 
 interface OwnProps {}
 
@@ -12,6 +14,8 @@ const Controls: FC<Props> = () => {
   const { go_to_next } = useActions();
 
   const { fields, active_field } = useAppSelector(({ form }) => form);
+
+  const language = useAppSelector(({ language }) => language.language);
 
   const { next, is_error } = fields[active_field];
 
@@ -24,16 +28,16 @@ const Controls: FC<Props> = () => {
   const onNextClick: MouseEventHandler<HTMLButtonElement> = () => go_to_next();
 
   const onSubmitClick: MouseEventHandler<HTMLButtonElement> = () => {
-    createSubmitNotification();
+    createSubmitNotification(language);
   };
 
   return (
     <div className={styles.controls}>
       <Button color='green' isActive={isNextActive} onClickAction={onNextClick}>
-        next
+        {content[language].next}
       </Button>
       <Button color='green' isActive={isSubmitActive} onClickAction={onSubmitClick}>
-        submit your message
+        {content[language].submit}
       </Button>
     </div>
   );
@@ -41,10 +45,10 @@ const Controls: FC<Props> = () => {
 
 export default Controls;
 
-const createSubmitNotification = () => {
+// add error notification?
+const createSubmitNotification = (language: Language) => {
   addCustomNotification({
-    title: 'Successful sumbit',
-    message: 'Your message has been sent.',
+    ...content[language].submitNotification,
     type: 'success',
     id: '4',
   });

@@ -21,7 +21,7 @@ const ContactForm: FC<Props> = () => {
     if (textarea_value && !transitioned) {
       set_active_field_transitioned(true);
     }
-  }, [textarea_value]);
+  }, [textarea_value, set_active_field_transitioned, transitioned]);
 
   const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(e => {
     e.preventDefault();

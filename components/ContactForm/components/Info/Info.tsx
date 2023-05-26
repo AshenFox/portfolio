@@ -1,18 +1,17 @@
 import React, { FC, MouseEventHandler } from 'react';
 import { useActions, useAppSelector } from '../../../../store/hooks';
-import {
-  Field,
-  FieldName,
-  Fields,
-} from '../../../../store/reducers/form/contactFormInitState';
+import { Field, FieldName } from '../../../../store/reducers/form/contactFormInitState';
 import InfoItem from './components/InfoItem';
 import styles from './styles.module.scss';
+import content from './content.json';
 
 interface OwnProps {}
 
 type Props = OwnProps;
 
 const Info: FC<Props> = () => {
+  const language = useAppSelector(({ language }) => language.language);
+
   const { change_active_field } = useActions();
 
   const { fields, textarea_value, active_field } = useAppSelector(({ form }) => form);
@@ -22,11 +21,9 @@ const Info: FC<Props> = () => {
   return (
     <ul className={styles.info}>
       {Object.entries(fields).map(
-        ([field, { placeholder, value, icon_name, transitioned, is_error }]: [
-          FieldName,
-          Field
-        ]) => {
+        ([field, { value, icon_name, transitioned, is_error }]: [FieldName, Field]) => {
           const onClick = onItemClickCreator(field);
+          const placeholder = content[language][field];
 
           return (
             <InfoItem
