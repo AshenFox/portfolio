@@ -6,6 +6,7 @@ import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import { getUpperLevelPath } from '../../../../../helpers/functions';
 import { useAppSelector } from '../../../../../store/hooks';
 import styles from './styles.module.scss';
+import content from './content.json';
 
 const classNamesLink: CSSTransitionClassNames = {
   exitActive: styles.upper_level_link_out_active,
@@ -32,6 +33,7 @@ const UpperLevelLink: FC<Props> = () => {
     menu: { is_exited: menu_is_exited },
     show_navigation,
   } = useAppSelector(({ sslider }) => sslider);
+  const language = useAppSelector(({ language }) => language.language);
 
   const [isClicked, setIsClicked] = useState(false);
 
@@ -73,7 +75,9 @@ const UpperLevelLink: FC<Props> = () => {
           <a
             className={styles.upper_level_link}
             onClick={onClick}
-            title={`Back to ${title}`}
+            title={`${content[language].title} ${
+              typeof title === 'string' ? title : title[language]
+            }`}
           >
             <div />
             <div />

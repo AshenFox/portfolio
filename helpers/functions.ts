@@ -5,12 +5,12 @@ import styles from './styles.module.scss';
 export const getUpperLevelPath = (pathname: string) => {
   let upper_level_path = '';
   let level = 0;
-  let title: TTitle = '';
+  let title: TTitle = null;
 
   const search = (
     routesOrder: TRoutesArr,
     parent_path: string = '/',
-    parent_title: TTitle = '',
+    parent_title: TTitle = null,
     i: number = 0
   ): boolean => {
     return !!routesOrder.find(el => {
