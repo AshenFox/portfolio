@@ -1,0 +1,60 @@
+@import '@styles/miscellaneous/variables.scss';
+
+.header {
+  line-height: 3.3rem;
+  font-size: 3.2rem;
+  color: $header-color;
+}
+
+.description {
+  margin-top: 1.5rem;
+  font-weight: 400;
+}
+
+.paragraph {
+  white-space: pre-wrap;
+}
+
+.description,
+.paragraph,
+.list_item {
+  line-height: 3.4rem;
+  font-size: 2.1rem;
+
+  @media (max-width: $laptop) {
+    line-height: 2.9rem;
+    font-size: 1.8rem;
+  }
+}
+
+.devider {
+  height: 1px;
+  width: 38rem;
+  background-color: #838383;
+  margin-top: 2rem;
+  margin-bottom: 2.6rem;
+}
+
+.list {
+  list-style: none;
+}
+
+.list_item {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 9px;
+    width: 9px;
+    margin-right: 2.2rem;
+    border-radius: 100%;
+    border: 1px solid #afafaf;
+  }
+}
+
+.section + .section {
+  margin-top: 5rem;
+}

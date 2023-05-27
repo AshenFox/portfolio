@@ -76,7 +76,7 @@ const UpperLevelLink: FC<Props> = () => {
             className={styles.upper_level_link}
             onClick={onClick}
             title={`${content[language].title} ${
-              typeof title === 'string' ? title : title[language]
+              typeof title === 'string' ? title : title?.[language]
             }`}
           >
             <div />

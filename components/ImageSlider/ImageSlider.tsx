@@ -13,26 +13,11 @@ export interface Image {
 
 export type Images = Image[];
 
-interface OwnProps {}
+type Props = {
+  images: Images;
+};
 
-type Props = OwnProps;
-
-const ImageSlider: FC<Props> = () => {
-  const [images, setImages] = useState<Images>([
-    {
-      path: '/6.jpg',
-      alt: 'image',
-    },
-    {
-      path: '/5.jpg',
-      alt: 'image',
-    },
-    {
-      path: '/4.jpg',
-      alt: 'image',
-    },
-  ]);
-
+const ImageSlider: FC<Props> = ({ images }) => {
   const [activeID, setActiveID] = useState({ id: 0 });
   const [nextIDArr, setNextIDArr, nextIDArrRef] = useStateWithRef<
     { dir: 'right' | 'left'; id: number; isArrows?: boolean }[]
