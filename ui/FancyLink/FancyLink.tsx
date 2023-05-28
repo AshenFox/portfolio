@@ -7,16 +7,23 @@ interface OwnProps {
   href?: string;
   classStr?: string;
   title?: string;
+  thin?: boolean;
 }
 
 type Props = OwnProps;
 
-const FancyLink: FC<Props> = ({ children, href = '', classStr = '', title = '' }) => {
+const FancyLink: FC<Props> = ({
+  children,
+  href = '',
+  classStr = '',
+  title = '',
+  thin,
+}) => {
   return (
     <Link href={href}>
       <a title={title}>
         <span className={`${styles.fancy_link} ${classStr}`}>
-          <span className={styles.text}>{children}</span>
+          <span className={`${styles.text} ${thin ? styles.thin : ''}`}>{children}</span>
         </span>
       </a>
     </Link>

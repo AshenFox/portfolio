@@ -8,7 +8,6 @@ import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 
 interface OwnProps {
   data: {
-    id: number;
     path: string;
     alt: string;
   };
@@ -31,7 +30,7 @@ const LoaderClassNames: CSSTransitionClassNames = {
 type Props = OwnProps;
 
 const SliderItem: FC<Props> = ({ data, dir }) => {
-  const { id, path, alt } = data;
+  const { path, alt } = data;
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(false);

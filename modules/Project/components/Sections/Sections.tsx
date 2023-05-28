@@ -1,13 +1,10 @@
+import FancyLink from '@ui/FancyLink';
+import { Project } from 'modules/Project/types';
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
 
 type Props = {
-  sections: {
-    header: string;
-    paragraph?: string;
-    description?: string;
-    list?: string[];
-  }[];
+  sections: Project[keyof Project]['sections'];
 };
 
 const Sections: FC<Props> = ({ sections }) => {
@@ -24,13 +21,30 @@ const Sections: FC<Props> = ({ sections }) => {
             {paragraph && <p className={styles.paragraph}>{paragraph}</p>}
             {list && (
               <ul className={styles.list}>
-                {section.list.map((element, i) => {
-                  return (
-                    <li key={i} className={styles.list_item}>
-                      <span>{element}</span>
-                    </li>
-                  );
-                })}
+                {section.list.map((item, i) => (
+                  <li key={i} className={styles.list_item}>
+                    <span>
+                      {item.map((element, i) => {
+                        const { type, content, href, title } = element;
+
+                        if (type === 'text') {
+                          return <span key={i}>{content}</span>;
+                        }
+
+                        if (type === 'link') {
+                          console.log(type);
+                          return (
+                            <FancyLink key={i} href={href} title={title} thin>
+                              {content}
+                            </FancyLink>
+                          );
+                        }
+
+                        return null;
+                      })}
+                    </span>
+                  </li>
+                ))}
               </ul>
             )}
           </section>

@@ -143,14 +143,16 @@ const ImageSlider: FC<Props> = ({ images }) => {
           onTouchEnd={onTouchEnd}
         >
           <TransitionGroup component={null}>
-            <CSSTransition
-              key={activeID.id}
-              classNames={SliderItemClassNames}
-              timeout={timeout}
-              onExited={onImageExited}
-            >
-              <SliderItem data={{ id: activeID.id, ...data }} dir={dir.dir} />
-            </CSSTransition>
+            {!!data && (
+              <CSSTransition
+                key={activeID.id}
+                classNames={SliderItemClassNames}
+                timeout={timeout}
+                onExited={onImageExited}
+              >
+                <SliderItem data={data} dir={dir.dir} />
+              </CSSTransition>
+            )}
           </TransitionGroup>
           <Arrows
             showArrows={showArrows}
