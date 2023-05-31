@@ -17,9 +17,13 @@
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "baseUrl": "./",
     "paths": {
-      "@styles/*": ["styles/*"],
       "@ui/*": ["ui/*"],
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@modules/*": ["modules/*"],
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"],
+      "@helpers/*": ["helpers/*"],
+      "@store/*": ["store/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

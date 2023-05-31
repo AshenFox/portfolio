@@ -1,10 +1,10 @@
+import { Project } from '../../types';
 import FancyLink from '@ui/FancyLink';
-import { Project } from 'modules/Project/types';
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
 
 type Props = {
-  sections: Project[keyof Project]['sections'];
+  sections: Project['sections'];
 };
 
 const Sections: FC<Props> = ({ sections }) => {

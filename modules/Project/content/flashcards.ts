@@ -1,6 +1,6 @@
-import { Project } from '../types';
+import { Content } from '../types';
 
-const flashcards: Project = {
+const flashcards: Content = {
   ENG: {
     title: 'flashcards',
     description:

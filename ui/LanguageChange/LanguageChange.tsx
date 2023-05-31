@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useEffect, memo } from 'react';
-import { useActions, useAppSelector } from 'store/hooks';
+import { useActions, useAppSelector } from '@store/hooks';
 import styles from './styles.module.scss';
-import content from './content.json';
+import content from './content';
 
 const LanguageChange: FC = () => {
   const language = useAppSelector(({ language }) => language.language);

@@ -1,8 +1,8 @@
 import React, { FC, memo } from 'react';
-import { useAppSelector } from 'store/hooks';
-import FancyLink from '../../ui/FancyLink';
+import { useAppSelector } from '@store/hooks';
+import FancyLink from '@ui/FancyLink';
 import styles from './styles.module.scss';
-import content from './content.json';
+import content from './content';
 
 interface OwnProps {}
 

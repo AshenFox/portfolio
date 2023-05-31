@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { FC, useMemo, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import content from './content';
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from '@store/hooks';
 import Sections from './components/Sections';
 
 const Project: FC = () => {
