@@ -5,14 +5,12 @@ import { useActions } from '../../../../store/hooks';
 import { createDots } from '../../../FallingParticles';
 import styles from './styles.module.scss';
 
-interface OwnProps {
+type Props = {
   active: boolean;
   scrollTop?: number;
   children?: string;
   isCursor?: boolean;
-}
-
-type Props = OwnProps;
+};
 
 const Char: FC<Props> = ({ active, children, isCursor, scrollTop = 0 }) => {
   const { set_cursor_position } = useActions();

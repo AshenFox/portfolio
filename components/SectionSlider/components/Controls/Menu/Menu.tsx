@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import MenuItem from './MenuItem';
+import MenuItem from './components/MenuItem';
 import { routesOrderList } from '../../../../../helpers/values';
 import { useActions, useAppSelector } from '../../../../../store/hooks';
 import styles from './styles.module.scss';

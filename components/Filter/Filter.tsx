@@ -1,12 +1,11 @@
 import React, { FC, memo, useCallback, useEffect, useState } from 'react';
-import FilterItems from './components/FilterItems';
-import Tags from './components/Tags';
+import FilterItemList from './components/FilterItemList';
+import TagList from './components/TagList';
 import styles from './styles.module.scss';
-import content from './content.json';
+import content from './content';
 import { useAppSelector } from 'store/hooks';
-import { replaceRegExp } from 'helpers/functions';
 
-export type TTag =
+export type TagName =
   | 'show all'
   | 'front-end'
   | 'back-end'
@@ -26,68 +25,50 @@ export type TTag =
   | 'animations'
   | 'game design';
 
-export type TTagList = TTag[];
+export type TagNameList = TagName[];
 
-const tagList: TTagList = [
-  'show all',
-  'front-end',
-  'back-end',
-  'html5',
-  'sass',
-  'less',
-  'javascript',
-  'nodejs',
-  'electron',
-  'reactjs',
-  'meteor',
-  'coffeescript',
-  'mongodb',
-  'mysql',
-  'backbonejs',
-  'ui/ux design',
-  'animations',
-  'game design',
-];
-
-export interface IFilterItem {
+export type FilterItemData = {
   id: string;
   name: string;
-  tags: TTagList;
+  tags: TagNameList;
   in: boolean;
   thumbnails: {
     main: string;
     hover: string;
   };
-}
-
-export interface IFilterItems {
-  [key: string]: IFilterItem;
-}
-
-type Props = {
-  initFilterItems: IFilterItems;
 };
 
-const Filter: FC<Props> = ({ initFilterItems }) => {
+export type FilterItemListData = {
+  [key: string]: FilterItemData;
+};
+
+type Props = {
+  filterItemList: FilterItemListData;
+  tagList: TagNameList;
+};
+
+const Filter: FC<Props> = ({ filterItemList, tagList }) => {
   const language = useAppSelector(({ language }) => language.language);
 
-  const [by, setBy] = useState<TTag>('show all');
+  const [innerTagList] = useState<TagNameList>(['show all', ...tagList]);
+  const [by, setBy] = useState<TagName>('show all');
 
-  const [filterItems, setFilterItems] = useState<IFilterItems>(initFilterItems);
+  const [innerFilterItemList, setInnerFilterItemList] =
+    useState<FilterItemListData>(filterItemList);
 
-  const [order, setOrder] = useState<string[]>(Object.keys(filterItems));
+  const [order, setOrder] = useState<string[]>(Object.keys(innerFilterItemList));
 
   const isAll = by === 'show all';
 
   const filterProjects = useCallback(
-    (by: TTag) => {
+    (by: TagName) => {
       const isAll = by === 'show all';
 
       const res: {
         filtered: string[];
         inArr: string[];
-        projects: IFilterItems;
-      } = Object.entries(filterItems).reduce(
+        projects: FilterItemListData;
+      } = Object.entries(innerFilterItemList).reduce(
         (res, [id, data], i, arr) => {
           const prevIn = data.in;
           const newIn = isAll || data.tags.includes(by);
@@ -114,13 +95,13 @@ const Filter: FC<Props> = ({ initFilterItems }) => {
       );
 
       setOrder(res.filtered);
-      setFilterItems(res.projects);
+      setInnerFilterItemList(res.projects);
     },
-    [filterItems]
+    [innerFilterItemList]
   );
 
   const onTagClickAction = useCallback(
-    (value: TTag) => {
+    (value: TagName) => {
       setBy(value);
       filterProjects(value);
     },
@@ -133,14 +114,11 @@ const Filter: FC<Props> = ({ initFilterItems }) => {
 
   return (
     <div className={styles.filter}>
-      <Tags tagList={tagList} by={by} onTagClickAction={onTagClickAction} />
+      <TagList tagList={innerTagList} by={by} onTagClickAction={onTagClickAction} />
       <small className={styles.info}>
-        {content[language].info.replace(
-          replaceRegExp('all'),
-          isAll ? content[language].all : by
-        )}
+        {content[language].info(isAll ? content[language].all : by)}
       </small>
-      <FilterItems order={order} filterItems={filterItems} />
+      <FilterItemList order={order} filterItemList={innerFilterItemList} />
     </div>
   );
 };

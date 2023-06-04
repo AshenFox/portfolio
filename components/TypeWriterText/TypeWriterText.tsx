@@ -3,7 +3,7 @@ import { useAppSelector } from '../../store/hooks';
 import Cursor from './components/Cursor';
 import Header from './components/Header';
 
-export type THeaderItem = {
+export type HeaderContentItem = {
   type: 'link' | 'text' | (string & {});
   content: string;
   props?: {
@@ -12,25 +12,25 @@ export type THeaderItem = {
   };
 };
 
-export type THeaderItemArr = THeaderItem[];
+export type HeaderContent = HeaderContentItem[];
 
-export type THeader = 'greeting' | 'description' | (string & {});
+export type HeaderType = 'greeting' | 'description' | (string & {});
 
-export interface IHeaderData {
-  content: THeaderItemArr;
-  type: THeader;
+export interface HeaderData {
+  content: HeaderContent;
+  type: HeaderType;
 }
 
-export type THeaderDataArr = IHeaderData[];
+export type HeaderListData = HeaderData[];
 
-const countCharInElement = (data: THeaderItemArr) =>
+const countCharInElement = (data: HeaderContent) =>
   data.reduce((sum, el) => {
     const { content } = el;
     sum += content.length;
     return sum;
   }, 0);
 
-const countAllChar = (text: THeaderDataArr) =>
+const countAllChar = (text: HeaderListData) =>
   text.reduce((sum, el, i) => {
     const { content } = el;
 
@@ -41,7 +41,7 @@ const countAllChar = (text: THeaderDataArr) =>
   }, 0);
 
 type Props = {
-  text: THeaderDataArr;
+  text: HeaderListData;
 };
 
 const TypeWriterText: FC<Props> = ({ text }) => {

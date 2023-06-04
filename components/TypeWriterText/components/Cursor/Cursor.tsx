@@ -2,12 +2,10 @@ import React, { CSSProperties, FC } from 'react';
 import { useAppSelector } from '../../../../store/hooks';
 import styles from './styles.module.scss';
 
-interface OwnProps {
+type Props = {
   isSmall?: boolean;
   isActive?: boolean;
-}
-
-type Props = OwnProps;
+};
 
 const Cursor: FC<Props> = ({ isActive = false, isSmall = false }) => {
   const { x, y } = useAppSelector(({ game }) => game.cursor_position);

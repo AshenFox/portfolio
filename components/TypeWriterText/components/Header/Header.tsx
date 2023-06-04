@@ -1,19 +1,17 @@
 import React, { FC, memo, useCallback, useMemo } from 'react';
-import { IHeaderData, THeader, THeaderItem } from '../../TypeWriterText';
+import { HeaderData, HeaderContentItem } from '../../TypeWriterText';
 import { useAppSelector } from '../../../../store/hooks';
 import FancyLink from '../../../../ui/FancyLink';
 import Char from '../Char';
 import styles from './styles.module.scss';
 
-interface OwnProps {
-  data: IHeaderData;
+type Props = {
+  data: HeaderData;
   rangeStart: number;
   rangeEnd: number;
   show: number;
   type: string;
-}
-
-type Props = OwnProps;
+};
 
 const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, type }) => {
   const TagName = useMemo<keyof JSX.IntrinsicElements>(() => {
@@ -47,7 +45,7 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, type }) => {
   let charNumber = rangeStart + 1;
 
   const wrapArrOfChar = useCallback(
-    (charArr: JSX.Element[], data: THeaderItem, wrapperIndex: number) => {
+    (charArr: JSX.Element[], data: HeaderContentItem, wrapperIndex: number) => {
       const { type } = data;
 
       if (type === 'link')

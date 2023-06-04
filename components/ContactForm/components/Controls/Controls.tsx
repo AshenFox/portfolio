@@ -4,7 +4,7 @@ import { useActions, useAppSelector } from '../../../../store/hooks';
 import { Button } from '@ui/InteractiveElement';
 import styles from './styles.module.scss';
 import { Language } from 'store/reducers/language/languageInitState';
-import content from './content.json';
+import content from './content';
 
 interface OwnProps {}
 

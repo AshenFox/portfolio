@@ -1,10 +1,10 @@
-import Filter, { IFilterItems } from '@components/Filter';
+import Filter, { FilterItemListData, TagNameList } from '@components/Filter';
 import React, { FC } from 'react';
 import { useAppSelector } from 'store/hooks';
 import styles from './styles.module.scss';
 import content from './content.json';
 
-const value: IFilterItems = {
+const value: FilterItemListData = {
   '1': {
     id: '1',
     name: 'test1',
@@ -177,6 +177,26 @@ const value: IFilterItems = {
   },
 };
 
+const tagList: TagNameList = [
+  'front-end',
+  'back-end',
+  'html5',
+  'sass',
+  'less',
+  'javascript',
+  'nodejs',
+  'electron',
+  'reactjs',
+  'meteor',
+  'coffeescript',
+  'mongodb',
+  'mysql',
+  'backbonejs',
+  'ui/ux design',
+  'animations',
+  'game design',
+];
+
 const Portfolio: FC = () => {
   const language = useAppSelector(({ language }) => language.language);
 
@@ -188,7 +208,7 @@ const Portfolio: FC = () => {
       </header>
 
       <main className={styles.main}>
-        <Filter initFilterItems={value} />
+        <Filter filterItemList={value} tagList={tagList} />
       </main>
     </>
   );

@@ -1,7 +1,7 @@
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
-import { IFilterItems } from '../../Filter';
+import { FilterItemListData } from '../../Filter';
 import FilterItem from './components/FilterItem';
 import styles from './styles.module.scss';
 
@@ -13,14 +13,12 @@ const classNames: CSSTransitionClassNames = {
   exitActive: styles.filter_item_out_active,
 };
 
-interface OwnProps {
+type Props = {
   order: string[];
-  filterItems: IFilterItems;
-}
+  filterItemList: FilterItemListData;
+};
 
-type Props = OwnProps;
-
-const FilterItems: FC<Props> = ({ order, filterItems }) => {
+const FilterItems: FC<Props> = ({ order, filterItemList }) => {
   const filterItemsInt = useRef<HTMLUListElement>(null);
 
   const [containerStyle, setContainerStyle] = useState<CSSProperties>({});
@@ -58,12 +56,12 @@ const FilterItems: FC<Props> = ({ order, filterItems }) => {
         {order.map(id => (
           <CSSTransition
             key={id}
-            in={filterItems[id].in}
+            in={filterItemList[id].in}
             classNames={classNames}
             timeout={timeout}
             unmountOnExit={true}
           >
-            <FilterItem data={filterItems[id]} order={order} />
+            <FilterItem data={filterItemList[id]} order={order} />
           </CSSTransition>
         ))}
       </ul>

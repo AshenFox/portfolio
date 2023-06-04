@@ -1,15 +1,13 @@
 import React, { FC, MouseEventHandler, ReactNode, useCallback } from 'react';
-import { TTag } from '../../../Filter';
+import { TagName } from '../../../Filter';
 import styles from '../styles.module.scss';
 
-interface OwnProps {
+type Props = {
   children: ReactNode;
-  value: TTag;
+  value: TagName;
   active?: boolean;
-  onClickAction?: (value: TTag) => void;
-}
-
-type Props = OwnProps;
+  onClickAction?: (value: TagName) => void;
+};
 
 const Tag: FC<Props> = ({ children, value, active = false, onClickAction }) => {
   const onClick: MouseEventHandler<HTMLLIElement> = useCallback(() => {

@@ -1,6 +1,6 @@
 import React, { FC, memo, useMemo } from 'react';
 import SideLinks from '@components/SideLinks';
-import TypeWriterText, { THeaderDataArr } from '@components/TypeWriterText';
+import TypeWriterText from '@components/TypeWriterText';
 import styles from './styles.module.scss';
 import Barrier from './components/Barrier';
 import content from './content.json';

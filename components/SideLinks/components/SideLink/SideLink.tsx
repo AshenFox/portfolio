@@ -3,15 +3,13 @@ import React, { FC } from 'react';
 import Icons, { TIconName } from '../../../../ui/Icons';
 import styles from './styles.module.scss';
 
-export interface ILink {
+export interface LinkData {
   href: string;
   title: string;
   iconName: TIconName;
 }
 
-interface OwnProps extends ILink {}
-
-type Props = OwnProps;
+interface Props extends LinkData {}
 
 const SideLink: FC<Props> = ({ href, title, iconName }) => {
   const Icon = Icons[iconName];

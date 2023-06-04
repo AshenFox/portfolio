@@ -3,7 +3,7 @@ import { useActions, useAppSelector } from '../../../../store/hooks';
 import { Field, FieldName } from '../../../../store/reducers/form/contactFormInitState';
 import InfoItem from './components/InfoItem';
 import styles from './styles.module.scss';
-import content from './content.json';
+import content from './content';
 
 interface OwnProps {}
 

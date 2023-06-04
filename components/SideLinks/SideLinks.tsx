@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import { useAppSelector } from '../../store/hooks';
-import SideLink, { ILink } from './components/SideLink';
+import SideLink, { LinkData } from './components/SideLink';
 import styles from './styles.module.scss';
 
 const classNames: CSSTransitionClassNames = {
@@ -16,9 +16,9 @@ interface OwnProps {}
 
 type Props = OwnProps;
 
-type TLinkArr = ILink[];
+type LinkDataList = LinkData[];
 
-const SideLinksArr: TLinkArr = [
+const SideLinksArr: LinkDataList = [
   {
     href: 'https://github.com/AshenFox',
     title: 'Github',

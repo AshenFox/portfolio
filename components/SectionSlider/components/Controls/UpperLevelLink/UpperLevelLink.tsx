@@ -6,7 +6,7 @@ import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import { getUpperLevelPath } from '../../../../../helpers/functions';
 import { useAppSelector } from '../../../../../store/hooks';
 import styles from './styles.module.scss';
-import content from './content.json';
+import content from './content';
 
 const classNamesLink: CSSTransitionClassNames = {
   exitActive: styles.upper_level_link_out_active,
@@ -75,9 +75,9 @@ const UpperLevelLink: FC<Props> = () => {
           <a
             className={styles.upper_level_link}
             onClick={onClick}
-            title={`${content[language].title} ${
+            title={content[language].title(
               typeof title === 'string' ? title : title?.[language]
-            }`}
+            )}
           >
             <div />
             <div />

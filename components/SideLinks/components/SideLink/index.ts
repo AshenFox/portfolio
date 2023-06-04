@@ -1,1 +1,1 @@
-export { default, type ILink } from './SideLink';
+export { default, type LinkData } from './SideLink';
