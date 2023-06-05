@@ -6,20 +6,18 @@ import React, {
   useState,
 } from 'react';
 import InteractiveElementInner from './InteractiveElementInner';
-import { ColorType, TIcon } from './types';
+import { ColorType, IconName } from './types';
 import styles from './styles.module.scss';
 
-interface OwnProps {
+type Props = {
   children?: ReactNode;
   onClickAction?: MouseEventHandler<HTMLButtonElement>;
   isBig?: boolean;
   isActive?: boolean;
   color?: ColorType;
-  icon?: TIcon;
+  icon?: IconName;
   classStr?: string;
-}
-
-type Props = OwnProps;
+};
 
 const Button = forwardRef<HTMLButtonElement, Props>(
   (

@@ -2,7 +2,7 @@ import React, { FC, MouseEventHandler, useCallback, useMemo, useState } from 're
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import { ExitHandler } from 'react-transition-group/Transition';
-import { useActions, useAppSelector } from '../../../../../store/hooks';
+import { useActions, useAppSelector } from '@store/hooks';
 import styles from './styles.module.scss';
 
 const burgerClassNames: CSSTransitionClassNames = {
@@ -29,11 +29,9 @@ const burgerToggleClassNames: CSSTransitionClassNames = {
   appearDone: styles.toggle_in_done,
 };
 
-interface OwnProps {
+type Props = {
   onExited: ExitHandler<HTMLDivElement>;
-}
-
-type Props = OwnProps;
+};
 
 const Burger: FC<Props> = ({ onExited }) => {
   const { set_show_menu } = useActions();

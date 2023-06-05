@@ -1,9 +1,9 @@
 import React, { FC, MouseEventHandler, useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { getPath, getUpperLevelPath } from '../../../../../helpers/functions';
+import { getPath, getUpperLevelPath } from '@helpers/functions';
 import { CSSTransition } from 'react-transition-group';
 import { ExitHandler } from 'react-transition-group/Transition';
-import { useAppSelector } from '../../../../../store/hooks';
+import { useAppSelector } from '@store/hooks';
 import styles from './styles.module.scss';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 
@@ -30,11 +30,9 @@ const linkClassNames: CSSTransitionClassNames = {
   exitDone: styles.link_out_done,
 };
 
-interface OwnProps {
+type Props = {
   onExited: ExitHandler<HTMLDivElement>;
-}
-
-type Props = OwnProps;
+};
 
 const Arrows: FC<Props> = ({ onExited }) => {
   const router = useRouter();

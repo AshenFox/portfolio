@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState, useCallback } from 'react';
-import { useAppSelector } from '../../store/hooks';
+import { useAppSelector } from '@store/hooks';
 import Cursor from './components/Cursor';
 import Header from './components/Header';
 

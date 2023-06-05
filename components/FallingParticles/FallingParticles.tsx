@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect, useRef, memo } from 'react';
 import { shallowEqual } from 'react-redux';
-import { useAppSelector } from '../../store/hooks';
+import { useAppSelector } from '@store/hooks';
 import styles from './styles.module.scss';
 
 interface IPos {

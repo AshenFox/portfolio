@@ -5,12 +5,10 @@ import Burger from './Burger';
 import { ExitHandler } from 'react-transition-group/Transition';
 import UpperLevelLink from './UpperLevelLink/UpperLevelLink';
 
-interface OwnProps {
+type Props = {
   onBurgerExited: ExitHandler<HTMLDivElement>;
   onArrowExited: ExitHandler<HTMLDivElement>;
-}
-
-type Props = OwnProps;
+};
 
 const Controls: FC<Props> = ({ onBurgerExited, onArrowExited }) => {
   return (

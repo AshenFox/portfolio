@@ -1,4 +1,4 @@
-import { routesOrderList } from './../../helpers/values';
+import { routesOrderList } from '@helpers/values';
 import { Direction } from '../reducers/sslider/sectionSliderInitState';
 
 export const getDir = (pathname_to: string, pathname_from: string): Direction => {

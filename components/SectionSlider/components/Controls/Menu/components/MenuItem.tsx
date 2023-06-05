@@ -3,12 +3,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '../styles.module.scss';
 
-interface OwnProps {
+type Props = {
   href: string;
   title: string;
-}
-
-type Props = OwnProps;
+};
 
 const MenuItem: FC<Props> = ({ href, title }) => {
   const router = useRouter();

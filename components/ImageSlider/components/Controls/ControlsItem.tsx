@@ -2,14 +2,12 @@ import React, { FC, MouseEventHandler } from 'react';
 import { Image } from '../../ImageSlider';
 import styles from './styles.module.scss';
 
-interface OwnProps {
+type Props = {
   data: Image;
   ownID: number;
   activeID: number;
   onClick: MouseEventHandler<HTMLDivElement>;
-}
-
-type Props = OwnProps;
+};
 
 const ControlsItem: FC<Props> = ({ data, ownID, activeID, onClick }) => {
   return (

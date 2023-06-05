@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import React, { FC, MouseEventHandler, useCallback, useMemo, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
-import { getUpperLevelPath } from '../../../../../helpers/functions';
-import { useAppSelector } from '../../../../../store/hooks';
+import { getUpperLevelPath } from '@helpers/functions';
+import { useAppSelector } from '@store/hooks';
 import styles from './styles.module.scss';
 import content from './content';
 
@@ -22,9 +22,7 @@ const classNamesLinkClicked: CSSTransitionClassNames = {
   enterDone: styles.upper_level_link_clicked_in_done,
 };
 
-type Props = {};
-
-const UpperLevelLink: FC<Props> = () => {
+const UpperLevelLink: FC = () => {
   const router = useRouter();
   const { asPath } = router;
 

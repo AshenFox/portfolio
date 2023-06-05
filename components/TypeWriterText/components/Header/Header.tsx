@@ -1,7 +1,7 @@
 import React, { FC, memo, useCallback, useMemo } from 'react';
 import { HeaderData, HeaderContentItem } from '../../TypeWriterText';
-import { useAppSelector } from '../../../../store/hooks';
-import FancyLink from '../../../../ui/FancyLink';
+import { useAppSelector } from '@store/hooks';
+import FancyLink from '@ui/FancyLink';
 import Char from '../Char';
 import styles from './styles.module.scss';
 

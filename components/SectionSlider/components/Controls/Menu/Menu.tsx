@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import MenuItem from './components/MenuItem';
-import { routesOrderList } from '../../../../../helpers/values';
-import { useActions, useAppSelector } from '../../../../../store/hooks';
+import { routesOrderList } from '@helpers/values';
+import { useActions, useAppSelector } from '@store/hooks';
 import styles from './styles.module.scss';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import LangueageChange from '@ui/LanguageChange';
@@ -12,11 +12,7 @@ const classNames: CSSTransitionClassNames = {
   enterDone: styles.menu_in_done,
 };
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Menu: FC<Props> = () => {
+const Menu: FC = () => {
   const { set_menu_is_exited } = useActions();
 
   const { show_menu } = useAppSelector(({ sslider }) => sslider.menu);

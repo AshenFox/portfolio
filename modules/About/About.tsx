@@ -3,8 +3,8 @@ import SideLinks from '@components/SideLinks';
 import TypeWriterText from '@components/TypeWriterText';
 import styles from './styles.module.scss';
 import Barrier from './components/Barrier';
-import content from './content.json';
-import { useAppSelector } from 'store/hooks';
+import content from './content';
+import { useAppSelector } from '@store/hooks';
 
 const About: FC = () => {
   const language = useAppSelector(({ language }) => language.language);

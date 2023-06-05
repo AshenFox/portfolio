@@ -1,4 +1,4 @@
-import { Language } from 'store/reducers/language/languageInitState';
+import { Language } from '@store/reducers/language/languageInitState';
 import { FieldName } from '../reducers/form/contactFormInitState';
 import { Direction } from '../reducers/sslider/sectionSliderInitState';
 

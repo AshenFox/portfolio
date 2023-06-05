@@ -9,22 +9,22 @@ import React, {
 } from 'react';
 import NextLink from 'next/link';
 import InteractiveElementInner from './InteractiveElementInner';
-import { ColorType, TIcon } from './types';
+import { ColorType, IconName } from './types';
 import styles from './styles.module.scss';
 
-type LinkProps = {
+type Props = {
   children?: ReactNode;
   isBig?: boolean;
   isActive?: boolean;
   isLoading?: boolean;
   color?: ColorType;
-  icon?: TIcon;
+  icon?: IconName;
   href?: string;
   title?: string;
   classStr?: string;
 };
 
-const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+const Link = forwardRef<HTMLAnchorElement, Props>(
   (
     {
       children,

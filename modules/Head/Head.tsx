@@ -1,11 +1,7 @@
 import React, { FC } from 'react';
 import NextHead from 'next/head';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Head: FC<Props> = () => {
+const Head: FC = () => {
   return (
     <NextHead>
       <title>Next App</title>

@@ -3,8 +3,8 @@ import FancyLink from '@ui/FancyLink';
 import { Link } from '@ui/InteractiveElement';
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
-import content from './content.json';
-import { useAppSelector } from 'store/hooks';
+import content from './content';
+import { useAppSelector } from '@store/hooks';
 
 const Contact: FC = () => {
   const language = useAppSelector(({ language }) => language.language);

@@ -11,7 +11,7 @@ import PersonIcon from './PersonIcon';
 import TelegramIcon from './TelegramIcon';
 import TwitterIcon from './TwitterIcon';
 
-export type TIconName =
+export type IconName =
   | 'externallink'
   | 'facebook'
   | 'github'
@@ -24,9 +24,9 @@ export type TIconName =
   | 'telegram'
   | 'linkedin';
 
-type IIcons = Record<TIconName, FC>;
+type IconsReference = Record<IconName, FC>;
 
-const Icons: IIcons = {
+const Icons: IconsReference = {
   externallink: ExternallinkIcon,
   facebook: FacebookIcon,
   github: GithubIcon,

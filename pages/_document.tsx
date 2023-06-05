@@ -1,11 +1,7 @@
 import React, { FC } from 'react';
 import { Html, Head, Main, NextScript } from 'next/document';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Document: FC<Props> = () => {
+const Document: FC = () => {
   return (
     <Html>
       <Head>

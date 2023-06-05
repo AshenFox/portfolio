@@ -1,16 +1,12 @@
 import React, { FC, MouseEventHandler } from 'react';
-import { addCustomNotification } from '../../../../helpers/functions';
-import { useActions, useAppSelector } from '../../../../store/hooks';
+import { addCustomNotification } from '@helpers/functions';
+import { useActions, useAppSelector } from '@store/hooks';
 import { Button } from '@ui/InteractiveElement';
 import styles from './styles.module.scss';
-import { Language } from 'store/reducers/language/languageInitState';
+import { Language } from '@store/reducers/language/languageInitState';
 import content from './content';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Controls: FC<Props> = () => {
+const Controls: FC = () => {
   const { go_to_next } = useActions();
 
   const { fields, active_field } = useAppSelector(({ form }) => form);

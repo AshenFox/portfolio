@@ -1,16 +1,12 @@
 import React, { FC, FormEventHandler, useCallback } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import Controls from './components/Controls/Controls';
 import Textarea from './components/Textarea';
 import Info from './components/Info';
-import { useActions, useAppSelector } from '../../store/hooks';
+import { useActions, useAppSelector } from '@store/hooks';
 import styles from './styles.module.scss';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const ContactForm: FC<Props> = () => {
+const ContactForm: FC = () => {
   const { set_active_field_transitioned } = useActions();
 
   const { fields, textarea_value, active_field } = useAppSelector(({ form }) => form);

@@ -1,5 +1,5 @@
 import React, { CSSProperties, FC } from 'react';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppSelector } from '@store/hooks';
 import styles from './styles.module.scss';
 
 type Props = {

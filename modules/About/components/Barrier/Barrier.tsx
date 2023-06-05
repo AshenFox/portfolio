@@ -1,8 +1,8 @@
 import { useOrientationChange } from 'helpers/hooks';
 import { Link } from '@ui/InteractiveElement';
 import React, { FC, memo, useCallback, useEffect, useRef } from 'react';
-import { useActions, useAppSelector } from 'store/hooks';
-import contact from '../../content.json';
+import { useActions, useAppSelector } from '@store/hooks';
+import contact from '../../content';
 
 const Barrier: FC = () => {
   const { set_barrier_dimensions } = useActions();

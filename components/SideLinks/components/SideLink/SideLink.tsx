@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import React, { FC } from 'react';
-import Icons, { TIconName } from '../../../../ui/Icons';
+import Icons, { IconName } from '@ui/Icons';
 import styles from './styles.module.scss';
 
 export interface LinkData {
   href: string;
   title: string;
-  iconName: TIconName;
+  iconName: IconName;
 }
 
 interface Props extends LinkData {}

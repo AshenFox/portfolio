@@ -1,10 +1,6 @@
 import React, { FC } from 'react';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const LinkedInIcon: FC<Props> = () => {
+const LinkedInIcon: FC = () => {
   return (
     <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
       <path d='M4.98292 7.19701C6.19132 7.19701 7.17092 6.21741 7.17092 5.00901C7.17092 3.80062 6.19132 2.82101 4.98292 2.82101C3.77452 2.82101 2.79492 3.80062 2.79492 5.00901C2.79492 6.21741 3.77452 7.19701 4.98292 7.19701Z' />

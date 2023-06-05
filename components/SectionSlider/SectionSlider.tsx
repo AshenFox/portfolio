@@ -20,15 +20,11 @@ interface ComponentWithPathname {
   isFirstRender?: boolean;
 }
 
-interface OwnProps {}
-
-type Props = OwnProps & AppProps;
-
 let unique = {
   id: 0,
 };
 
-const SectionSlider: FC<Props> = ({ Component, pageProps }) => {
+const SectionSlider: FC<AppProps> = ({ Component, pageProps }) => {
   const { set_show_section_loader, set_show_navigation, set_show_menu, set_direction } =
     useActions();
 

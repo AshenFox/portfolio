@@ -1,17 +1,14 @@
 import React, { FC, ReactNode } from 'react';
 import Icons from '@ui/Icons';
-import { TIcon } from './types';
+import { IconName } from './types';
 import styles from './styles.module.scss';
 
-type InteractiveElementInnerProps = {
-  icon?: TIcon;
+type Props = {
+  icon?: IconName;
   children?: ReactNode;
 };
 
-const InteractiveElementInner: FC<InteractiveElementInnerProps> = ({
-  icon,
-  children,
-}) => {
+const InteractiveElementInner: FC<Props> = ({ icon, children }) => {
   const Icon = Icons[icon];
 
   return (

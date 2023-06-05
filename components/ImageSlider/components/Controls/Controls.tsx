@@ -3,13 +3,11 @@ import { Images } from '../../ImageSlider';
 import ControlsItem from './ControlsItem';
 import styles from './styles.module.scss';
 
-interface OwnProps {
+type Props = {
   images: Images;
   activeID: number;
   onClickCreator: (i: number) => MouseEventHandler<HTMLDivElement>;
-}
-
-type Props = OwnProps;
+};
 
 const Controls: FC<Props> = ({ images, activeID, onClickCreator }) => {
   return (

@@ -1,15 +1,11 @@
 import React, { FC, MouseEventHandler } from 'react';
-import { useActions, useAppSelector } from '../../../../store/hooks';
-import { Field, FieldName } from '../../../../store/reducers/form/contactFormInitState';
+import { useActions, useAppSelector } from '@store/hooks';
+import { Field, FieldName } from '@store/reducers/form/contactFormInitState';
 import InfoItem from './components/InfoItem';
 import styles from './styles.module.scss';
 import content from './content';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Info: FC<Props> = () => {
+const Info: FC = () => {
   const language = useAppSelector(({ language }) => language.language);
 
   const { change_active_field } = useActions();

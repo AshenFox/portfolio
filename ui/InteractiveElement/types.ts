@@ -1,6 +1,6 @@
 export type ColorType = 'red' | 'green' | 'skyblue' | 'blue' | 'green' | 'grey';
 
-export type TIcon =
+export type IconName =
   | 'googleplus'
   | 'facebook'
   | 'twitter'

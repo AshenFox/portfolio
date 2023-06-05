@@ -2,15 +2,13 @@ import React, { FC, ReactNode } from 'react';
 import Link from 'next/link';
 import styles from './styles.module.scss';
 
-interface OwnProps {
+type Props = {
   children: ReactNode;
   href?: string;
   classStr?: string;
   title?: string;
   thin?: boolean;
-}
-
-type Props = OwnProps;
+};
 
 const FancyLink: FC<Props> = ({
   children,

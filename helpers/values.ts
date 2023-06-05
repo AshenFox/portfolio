@@ -1,4 +1,4 @@
-import { Language } from 'store/reducers/language/languageInitState';
+import { Language } from '@store/reducers/language/languageInitState';
 
 export type TTitle =
   | {

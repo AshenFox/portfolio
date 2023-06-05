@@ -5,11 +5,11 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import { Language } from 'store/reducers/language/languageInitState';
-import { addCustomNotification, removeNotification } from '../../../../helpers/functions';
-import { useActions, useAppSelector } from '../../../../store/hooks';
-import { Error } from '../../../../store/reducers/form/contactFormInitState';
-import Icons from '../../../../ui/Icons';
+import { Language } from '@store/reducers/language/languageInitState';
+import { addCustomNotification, removeNotification } from '@helpers/functions';
+import { useActions, useAppSelector } from '@store/hooks';
+import { Error } from '@store/reducers/form/contactFormInitState';
+import Icons from '@ui/Icons';
 import styles from './styles.module.scss';
 
 interface Timer {
@@ -20,11 +20,7 @@ interface Timers {
   [key: string]: Timer;
 }
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Textarea: FC<Props> = () => {
+const Textarea: FC = () => {
   const {
     set_textarea_value,
     set_active_field_value,

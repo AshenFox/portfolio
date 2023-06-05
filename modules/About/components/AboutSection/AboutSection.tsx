@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useCallback, useEffect, useRef } from 'react';
 import styles from './styles.module.scss';
 import { Section, SectionProps } from '@components/SectionSlider';
-import { useActions, useAppSelector } from 'store/hooks';
+import { useActions, useAppSelector } from '@store/hooks';
 import { useOrientationChange } from 'helpers/hooks';
 
 const AboutSection: FC<SectionProps> = props => {

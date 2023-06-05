@@ -1,4 +1,4 @@
-import { CreateContent } from './../../helpers/types';
+import { CreateContent } from '@helpers/types';
 
 export type Project = {
   title: string;

@@ -4,12 +4,10 @@ import { FilterItemData } from '../../../Filter';
 import Img from 'next/image';
 import styles from '../styles.module.scss';
 
-interface OwnProps {
+type Props = {
   data: FilterItemData;
   order: string[];
-}
-
-type Props = OwnProps;
+};
 
 const FilterItem: FC<Props> = ({ data, order }) => {
   const { name, id, tags, thumbnails } = data;

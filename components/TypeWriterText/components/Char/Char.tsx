@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef, useState, memo, useCallback } from 'react';
-import { useOrientationChange } from '../../../../helpers/hooks';
+import { useOrientationChange } from '@helpers/hooks';
 
-import { useActions } from '../../../../store/hooks';
+import { useActions } from '@store/hooks';
 import { createDots } from '../../../FallingParticles';
 import styles from './styles.module.scss';
 

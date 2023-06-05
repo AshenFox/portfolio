@@ -1,8 +1,8 @@
 import React, { FC, MouseEventHandler } from 'react';
-import Icons from '../../../../../ui/Icons';
+import Icons from '@ui/Icons';
 import styles from '../styles.module.scss';
 
-interface OwnProps {
+type Props = {
   field: string;
   activeField: string;
   textareaValue: string;
@@ -12,9 +12,7 @@ interface OwnProps {
   isError: boolean;
   onClick: MouseEventHandler<HTMLElement>;
   placeholder: string;
-}
-
-type Props = OwnProps;
+};
 
 const InfoItem: FC<Props> = ({
   field,

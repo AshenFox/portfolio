@@ -6,14 +6,6 @@ import Spinner from '@ui/Spinner';
 import styles from './styles.module.scss';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 
-interface OwnProps {
-  data: {
-    path: string;
-    alt: string;
-  };
-  dir: 'right' | 'left';
-}
-
 export const SliderItemClassNames: CSSTransitionClassNames = {
   enter: styles.item_in,
   enterActive: styles.item_in_active,
@@ -27,7 +19,13 @@ const LoaderClassNames: CSSTransitionClassNames = {
   exitDone: styles.loader_out_done,
 };
 
-type Props = OwnProps;
+type Props = {
+  data: {
+    path: string;
+    alt: string;
+  };
+  dir: 'right' | 'left';
+};
 
 const SliderItem: FC<Props> = ({ data, dir }) => {
   const { path, alt } = data;

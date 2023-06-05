@@ -4,11 +4,7 @@ import FancyLink from '@ui/FancyLink';
 import styles from './styles.module.scss';
 import content from './content';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const ContactFooter: FC<Props> = () => {
+const ContactFooter: FC = () => {
   const language = useAppSelector(({ language }) => language.language);
 
   return (

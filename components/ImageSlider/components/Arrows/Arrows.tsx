@@ -22,15 +22,13 @@ const ContainerClassNames: CSSTransitionClassNames = {
   exitDone: styles.container_out_done,
 };
 
-interface OwnProps {
+type Props = {
   showArrows: boolean;
   setShowArrows: React.Dispatch<React.SetStateAction<boolean>>;
   transition: boolean;
   setTransition: React.Dispatch<React.SetStateAction<boolean>>;
   goToNext: (dir: 'left' | 'right') => void;
-}
-
-type Props = OwnProps;
+};
 
 const Arrows: FC<Props> = ({ showArrows, setShowArrows, transition, goToNext }) => {
   const timeout: number = 950;

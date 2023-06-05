@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
-import { useAppSelector } from '../../store/hooks';
+import { useAppSelector } from '@store/hooks';
 import SideLink, { LinkData } from './components/SideLink';
 import styles from './styles.module.scss';
 
@@ -11,10 +11,6 @@ const classNames: CSSTransitionClassNames = {
   exit: styles.side_links_out,
   exitDone: styles.side_links_out_done,
 };
-
-interface OwnProps {}
-
-type Props = OwnProps;
 
 type LinkDataList = LinkData[];
 
@@ -36,7 +32,7 @@ const SideLinksArr: LinkDataList = [
   },
 ];
 
-const SideLinks: FC<Props> = props => {
+const SideLinks: FC = () => {
   const {
     content_loader: { is_exited },
     show_navigation,

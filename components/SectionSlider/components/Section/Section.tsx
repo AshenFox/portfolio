@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, useEffect, memo, ComponentProps } from 'react';
 import { AppProps } from 'next/app';
-import { useActions, useAppSelector } from '../../../../store/hooks';
+import { useActions, useAppSelector } from '@store/hooks';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import styles from './styles.module.scss';
 
@@ -10,15 +10,15 @@ export const SectionClassNames: CSSTransitionClassNames = {
   enterDone: styles.section_in_done,
 };
 
-type OwnProps = {
+type Props = {
   classNameStr?: string;
   containerClassNameStr?: string;
   children: ReactNode;
   frameRef?: React.ForwardedRef<HTMLDivElement>;
   frameInnerRef?: React.ForwardedRef<HTMLDivElement>;
-};
+} & AppProps;
 
-const Section: FC<AppProps & OwnProps> = memo(
+const Section: FC<Props> = memo(
   ({
     children,
     classNameStr = '',
@@ -48,7 +48,6 @@ const Section: FC<AppProps & OwnProps> = memo(
     );
   }
 );
-// ${styles[dir]} ${styles[classNameStr]}
 
 Section.displayName = 'Section';
 
