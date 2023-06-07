@@ -14,9 +14,9 @@ const Contact: FC = () => {
       <header className={styles.header}>
         <h1 className={styles.title}>{content[language].header.title}</h1>
         <h2 className={styles.description}>
-          {content[language].header.description.map(el => {
+          {content[language].header.description.map((el, i) => {
             if (el.type === 'link') {
-              return <FancyLink>{el.text}</FancyLink>;
+              return <FancyLink key={i}>{el.text}</FancyLink>;
             }
 
             return el.text;
