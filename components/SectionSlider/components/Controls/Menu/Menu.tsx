@@ -1,3 +1,4 @@
+//intermediate changes
 import React, { FC, useCallback, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import MenuItem from './components/MenuItem';
@@ -53,6 +54,11 @@ const Menu: FC = () => {
               href={'/portfolio/flashcards'}
               title={'portfolio flashcards'}
               key={'project flashcards'}
+            />
+            <MenuItem
+              href={'/portfolio/fasdfasf'}
+              title={'faulty project'}
+              key={'faulty project'}
             />
           </main>
           <footer>

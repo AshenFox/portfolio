@@ -1,3 +1,4 @@
+//intermediate changes
 import ImageSlider from '@components/ImageSlider';
 import { Link } from '@ui/InteractiveElement';
 import { useRouter } from 'next/router';
@@ -8,7 +9,8 @@ import { useAppSelector } from '@store/hooks';
 import Sections from './components/Sections';
 
 const Project: FC = () => {
-  const { query } = useRouter();
+  const router = useRouter();
+  const { query } = router;
   const { _id } = query;
 
   const [staticID, setStaticID] = useState<string>(null);
@@ -25,6 +27,16 @@ const Project: FC = () => {
     () => Object.entries(content).find(([id]) => id === staticID)?.[1][language],
     [language, staticID]
   );
+
+  const projectNotFound = useMemo(() => !!(!project && staticID), [project, staticID]);
+
+  if (projectNotFound)
+    return (
+      <>
+        <h1>404</h1>
+        <h2>Project not found</h2>
+      </>
+    );
 
   return (
     <>

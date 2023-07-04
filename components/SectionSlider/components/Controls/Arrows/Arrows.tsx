@@ -1,3 +1,4 @@
+//intermediate changes
 import React, { FC, MouseEventHandler, useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { getPath, getUpperLevelPath } from '@helpers/functions';
@@ -47,14 +48,20 @@ const Arrows: FC<Props> = ({ onExited }) => {
   const showNavigation = is_exited && show_navigation;
   const timeout: number = 950;
 
-  const { path: nextPathname, title: nextTitle } = useMemo(
-    () => getPath(asPath, 1),
-    [asPath]
-  );
-  const { path: prevPathname, title: prevTitle } = useMemo(
-    () => getPath(asPath, -1),
-    [asPath]
-  );
+  const {
+    path: nextPathname,
+    title: nextTitle,
+    deadend: nextDeadend,
+  } = useMemo(() => getPath(asPath, 1), [asPath]);
+
+  // console.log({ nextPathname, nextTitle, nextDeadend });
+  const {
+    path: prevPathname,
+    title: prevTitle,
+    deadend: prevDeadend,
+  } = useMemo(() => getPath(asPath, -1), [asPath]);
+
+  // console.log({ prevPathname, prevTitle, prevDeadend });
 
   const [isRightActive, setIsRightActive] = useState(true);
   const [isLeftActive, setIsLeftActive] = useState(true);
@@ -70,8 +77,8 @@ const Arrows: FC<Props> = ({ onExited }) => {
       setIsRightActive(true);
       setIsLeftActive(true);
 
-      setIsRightEnd(nextPathname === asPath);
-      setIsLeftEnd(prevPathname === asPath);
+      setIsRightEnd(nextPathname === asPath || nextDeadend);
+      setIsLeftEnd(prevPathname === asPath || prevDeadend);
 
       setRightTitle(nextTitle);
       setLeftTitle(prevTitle);
