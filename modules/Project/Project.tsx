@@ -24,11 +24,21 @@ const Project: FC = () => {
   }, [_id, staticID]);
 
   const project = useMemo(
-    () => Object.entries(content).find(([id]) => id === staticID)?.[1][language],
+    () =>
+      Object.entries(content).find(([id]) => id === staticID)?.[1][language],
     [language, staticID]
   );
 
-  const projectNotFound = useMemo(() => !!(!project && staticID), [project, staticID]);
+  console.log({
+    project,
+    staticID,
+    test: Object.entries(content).find(([id]) => id === staticID),
+  });
+
+  const projectNotFound = useMemo(
+    () => !!(!project && staticID),
+    [project, staticID]
+  );
 
   if (projectNotFound)
     return (
@@ -46,10 +56,10 @@ const Project: FC = () => {
         <div className={styles.links}>
           <div>
             <Link
-              color='green'
-              icon='externallink'
+              color="green"
+              icon="externallink"
               href={project?.link.href}
-              title='Flashcards'
+              title="Flashcards"
             >
               {project?.link.content}
             </Link>
@@ -57,26 +67,26 @@ const Project: FC = () => {
           <div className={styles.links_right}>
             <div className={styles.links_hide}>
               <Link
-                color='blue'
-                icon='facebook'
-                href='https://facebook.com'
-                title='Facebook'
-                classStr='hide'
+                color="blue"
+                icon="facebook"
+                href="https://facebook.com"
+                title="Facebook"
+                classStr="hide"
               />
               <Link
-                color='skyblue'
-                icon='twitter'
-                href='https://twitter.com'
-                title='Twitter'
-                classStr='hide'
+                color="skyblue"
+                icon="twitter"
+                href="https://twitter.com"
+                title="Twitter"
+                classStr="hide"
               />
             </div>
 
             <Link
-              color='red'
-              icon='googleplus'
-              href='https://google.com'
-              title='Google Plus'
+              color="red"
+              icon="googleplus"
+              href="https://google.com"
+              title="Google Plus"
             />
           </div>
         </div>

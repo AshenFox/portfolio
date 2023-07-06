@@ -1,3 +1,4 @@
+//intermediate changes
 import { Project } from '../../types';
 import FancyLink from '@ui/FancyLink';
 import React, { FC } from 'react';
@@ -16,7 +17,9 @@ const Sections: FC<Props> = ({ sections }) => {
         return (
           <section key={i} className={styles.section}>
             <h2 className={styles.header}>{header}</h2>
-            {description && <h3 className={styles.description}>{description}</h3>}
+            {description && (
+              <h3 className={styles.description}>{description}</h3>
+            )}
             {(paragraph || list) && <div className={styles.devider}></div>}
             {paragraph && <p className={styles.paragraph}>{paragraph}</p>}
             {list && (
@@ -32,7 +35,6 @@ const Sections: FC<Props> = ({ sections }) => {
                         }
 
                         if (type === 'link') {
-                          console.log(type);
                           return (
                             <FancyLink key={i} href={href} title={title} thin>
                               {content}

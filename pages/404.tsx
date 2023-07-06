@@ -4,8 +4,7 @@ import { useRouter } from 'next/router';
 import { Section } from '@components/SectionSlider';
 import PageContainer from '@ui/PageContainer';
 
-const Custom404 = props => {
-  console.log('render');
+const Custom404 = (props) => {
   return (
     <Section {...props}>
       <PageContainer>

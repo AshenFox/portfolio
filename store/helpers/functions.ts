@@ -1,9 +1,12 @@
 //intermediate changes
-import { routesOrderList } from '@helpers/values';
+import { TRoutesArr, TTitle, routesOrderList } from '@helpers/values';
 import { Direction } from '../reducers/sslider/sectionSliderInitState';
 
-export const getDir = (pathname_to: string, pathname_from: string): Direction => {
-  console.log({ pathname_to, pathname_from });
+/* export const getDir2 = (
+  pathname_to: string,
+  pathname_from: string
+): Direction => {
+  // console.log({ pathname_to, pathname_from });
   const pathname_to_arr = pathname_to.split(/(?=\/)/g);
   const pathname_from_arr = pathname_from.split(/(?=\/)/g);
 
@@ -18,30 +21,36 @@ export const getDir = (pathname_to: string, pathname_from: string): Direction =>
   // determine which is deeper and get direction based on that
   // if both are valid get according to the routes order
 
+  console.log(getDir2(pathname_to, pathname_from));
+
   for (let i = 0; i <= max_lendth - 1; i++) {
     if (!routes_list_to && !routes_list_from) {
       if (pathname_to_arr.length >= pathname_from_arr.length) {
-        dir = 'right';
+        dir = "right";
       } else {
-        dir = 'left';
+        dir = "left";
       }
 
       break;
     }
     if (!routes_list_to) {
-      dir = 'left';
+      dir = "left";
       break;
     }
     if (!routes_list_from) {
-      dir = 'right';
+      dir = "right";
       break;
     }
 
     const pathname_to_part = pathname_to_arr[i];
     const pathname_from_part = pathname_from_arr[i];
 
-    const route_to_i = routes_list_to.findIndex(el => el.path === pathname_to_part);
-    const route_from_i = routes_list_from.findIndex(el => el.path === pathname_from_part);
+    const route_to_i = routes_list_to.findIndex(
+      (el) => el.path === pathname_to_part
+    );
+    const route_from_i = routes_list_from.findIndex(
+      (el) => el.path === pathname_from_part
+    );
 
     const found_to = route_to_i >= 0;
     const found_from = route_from_i >= 0;
@@ -50,9 +59,9 @@ export const getDir = (pathname_to: string, pathname_from: string): Direction =>
 
     if (!found_to && !found_from) {
       if (pathname_to_part) {
-        dir = 'right';
+        dir = "right";
       } else if (pathname_from_part) {
-        dir = 'left';
+        dir = "left";
       }
 
       break;
@@ -61,13 +70,13 @@ export const getDir = (pathname_to: string, pathname_from: string): Direction =>
     // debugger;
 
     if (!found_to) {
-      dir = 'left';
+      dir = "left";
       break;
     }
 
     // debugger;
     if (!found_from) {
-      dir = 'right';
+      dir = "right";
       break;
     }
 
@@ -79,8 +88,8 @@ export const getDir = (pathname_to: string, pathname_from: string): Direction =>
     if (route_to_i !== route_from_i) {
       const diff = route_to_i - route_from_i;
 
-      if (diff < 0) dir = 'left';
-      if (diff > 0) dir = 'right';
+      if (diff < 0) dir = "left";
+      if (diff > 0) dir = "right";
 
       // debugger;
 
@@ -89,4 +98,62 @@ export const getDir = (pathname_to: string, pathname_from: string): Direction =>
   }
 
   return dir;
+}; */
+
+const getIndex = (pathname_arr: string[]): number | null => {
+  let index: number = 0;
+  let routes_list: TRoutesArr | undefined = routesOrderList;
+
+  const exists = pathname_arr.every((part) => {
+    const newIndex = routes_list?.findIndex((route) => route.path === part);
+
+    if (newIndex >= 0) {
+      index = newIndex;
+      routes_list = routes_list[newIndex].inbed;
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  if (exists) return index;
+
+  return null;
+};
+
+export const getDir = (
+  pathname_from: string,
+  pathname_to: string
+): Direction => {
+  const pathname_to_arr = pathname_to.split(/(?=\/)/g);
+  const pathname_from_arr = pathname_from.split(/(?=\/)/g);
+  const length_to = pathname_to_arr.length;
+  const length_from = pathname_from_arr.length;
+
+  // determine if both path are valid
+  const index_to = getIndex(pathname_to_arr);
+  const index_from = getIndex(pathname_from_arr);
+  // if both or one are invalid
+  // determine which is deeper and get direction based on that
+
+  if (length_from > length_to) {
+    return 'right';
+  } else if (length_from < length_to) {
+    return 'left';
+  }
+
+  if (index_to === null || index_from === null) {
+    return 'right';
+  }
+
+  // if both are valid get according to the routes order
+  if (index_from === index_to) {
+    return 'right';
+  }
+
+  if (index_from > index_to) {
+    return 'left';
+  }
+
+  return 'right';
 };

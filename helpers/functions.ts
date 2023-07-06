@@ -56,7 +56,7 @@ export const getUpperLevelPath = (pathname: string) => {
 
     const pathname_part = upper_level_pathname_arr[i];
 
-    const route = routes_list.find(el => el.path === pathname_part);
+    const route = routes_list.find((el) => el.path === pathname_part);
 
     if (!route) break;
 
@@ -69,7 +69,7 @@ export const getUpperLevelPath = (pathname: string) => {
   return { upper_level_path, title, level };
 };
 
-export const getPath = (pathname: string, dir: 1 | -1) => {
+export const getPath2 = (pathname: string, dir: 1 | -1) => {
   const pathname_arr = pathname.split(/(?=\/)/g);
 
   let prev_routes_list: TRoutesArr = null;
@@ -81,7 +81,6 @@ export const getPath = (pathname: string, dir: 1 | -1) => {
   };
 
   for (let i in pathname_arr) {
-    console.log({ routes_list, pathname_arr });
     if (!routes_list) {
       if (prev_routes_list) {
         res.path = prev_routes_list[0].path;
@@ -97,7 +96,7 @@ export const getPath = (pathname: string, dir: 1 | -1) => {
     const { length } = pathname_arr; // 3
     const is_last = length === +i + 1; // 3 === 1
 
-    const route_i = routes_list.findIndex(el => el.path === pathname_part); // 1
+    const route_i = routes_list.findIndex((el) => el.path === pathname_part); // 1
 
     if (route_i < 0) break;
 
@@ -122,8 +121,6 @@ export const getPath = (pathname: string, dir: 1 | -1) => {
     }
   }
 
-  console.log({ res });
-
   /* if (!res.path) {
     res = { ...routesOrderList[0], deadend: dir === -1 };
   } */
@@ -131,61 +128,79 @@ export const getPath = (pathname: string, dir: 1 | -1) => {
   return res;
 };
 
-export const getPath2 = (pathname: string, dir: 1 | -1) => {
+const isFullyValid = (pathname_arr: string[]) => {
+  let level: TRoutesArr | undefined = routesOrderList;
+  let index: number = 0;
+
+  const valid = pathname_arr.every((part) => {
+    const newIndex = level?.findIndex((route) => route.path === part);
+
+    if (newIndex >= 0) {
+      index = newIndex;
+      if (level[newIndex].inbed) level = level[newIndex].inbed;
+
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  return {
+    valid,
+    level,
+    index,
+  };
+};
+
+export const getPath = (pathname: string, dir: 1 | -1) => {
   const pathname_arr = pathname.split(/(?=\/)/g);
 
-  let prev_routes_list: TRoutesArr = null;
-  let routes_list = routesOrderList;
+  let path: string = '';
+  let title: TTitle = '';
+  let deadend: boolean = false;
 
-  let res: { path: string; title: TTitle; deadend?: boolean } = {
-    path: '',
-    title: '',
-    deadend: false,
-  };
+  const { valid, level, index } = isFullyValid(pathname_arr);
+
+  console.log({ valid, level, index });
 
   // determine the validity of the pathname
   // if some part of it is invalid the left arrow leads to the first item of the closest valid level
   // the right arrow leads to the first item of the current level if it exists
   // if the pathname is valid then determine the values for left and right arrows as usual
 
-  return res;
+  if (valid) {
+    const route = level[index + dir];
+    console.log({ route });
+
+    if (route) {
+      path = route.path;
+      title = route.title;
+    } else {
+      deadend = true;
+    }
+  } else {
+    if (dir === -1) {
+      deadend = true;
+    } else {
+      const route = level[0];
+
+      path = route.path;
+      title = route.title;
+    }
+  }
+
+  return {
+    path,
+    title,
+    deadend,
+  };
 };
 
-/* export const pathExists = (pathname: string) => {
-  let upper_level_path = '';
-  let level = 0;
-  let title: TTitle = null;
+console.log(getPath2('/', 1), getPath2('/', -1));
 
-  const search = (
-    routesOrder: TRoutesArr,
-    parent_path: string = '/',
-    parent_title: TTitle = null,
-    i: number = 0
-  ): boolean => {
-    return !!routesOrder.find(el => {
-      let found_path = (parent_path + el.path).replace('//', '/');
-
-      if (found_path === pathname) {
-        level = i;
-        upper_level_path = parent_path;
-        title = parent_title;
-        return true;
-      } else {
-        if (el.inbed) {
-          return search(el.inbed, found_path, el.title, i + 1);
-        }
-      }
-
-      return false;
-    });
-  };
-
-  search(routesOrderList);
-
-  return { upper_level_path, title, level };
-}; */
-
-export const addCustomNotification = (custom_options: Partial<iNotification>) => {
+export const addCustomNotification = (
+  custom_options: Partial<iNotification>
+) => {
   Store.addNotification({
     ...custom_options,
     insert: 'top',
