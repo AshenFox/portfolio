@@ -1,11 +1,17 @@
 @import '@styles/miscellaneous/variables.scss';
 
 .page_container {
+  display: flex;
+  flex-direction: column;
   max-width: 1010px;
-  min-height: 100%;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 8rem 2rem 6rem;
   overflow: hidden; // to include children margin into height
+
+  @supports (min-height: 100dvh) {
+    min-height: 100dvh;
+  }
 
   @media (max-width: $laptop-xl) {
     max-width: 880px;
@@ -31,4 +37,8 @@
     max-width: 500px;
     padding: 4.2rem 2rem;
   }
+}
+
+.centered {
+  justify-content: center;
 }

@@ -4,9 +4,11 @@ import { Link } from '@ui/InteractiveElement';
 import { useRouter } from 'next/router';
 import React, { FC, useMemo, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
+import projectsContent from './projectsContent';
 import content from './content';
 import { useAppSelector } from '@store/hooks';
 import Sections from './components/Sections';
+import NotFound from '@modules/NotFound';
 
 const Project: FC = () => {
   const router = useRouter();
@@ -23,30 +25,15 @@ const Project: FC = () => {
     }
   }, [_id, staticID]);
 
+  const not_found_message = content[language].not_found_message;
   const project = useMemo(
-    () =>
-      Object.entries(content).find(([id]) => id === staticID)?.[1][language],
+    () => Object.entries(projectsContent).find(([id]) => id === staticID)?.[1][language],
     [language, staticID]
   );
 
-  console.log({
-    project,
-    staticID,
-    test: Object.entries(content).find(([id]) => id === staticID),
-  });
+  const projectNotFound = useMemo(() => !!(!project && staticID), [project, staticID]);
 
-  const projectNotFound = useMemo(
-    () => !!(!project && staticID),
-    [project, staticID]
-  );
-
-  if (projectNotFound)
-    return (
-      <>
-        <h1>404</h1>
-        <h2>Project not found</h2>
-      </>
-    );
+  if (projectNotFound) return <NotFound message={not_found_message} />;
 
   return (
     <>
@@ -56,10 +43,10 @@ const Project: FC = () => {
         <div className={styles.links}>
           <div>
             <Link
-              color="green"
-              icon="externallink"
+              color='green'
+              icon='externallink'
               href={project?.link.href}
-              title="Flashcards"
+              title='Flashcards'
             >
               {project?.link.content}
             </Link>
@@ -67,26 +54,26 @@ const Project: FC = () => {
           <div className={styles.links_right}>
             <div className={styles.links_hide}>
               <Link
-                color="blue"
-                icon="facebook"
-                href="https://facebook.com"
-                title="Facebook"
-                classStr="hide"
+                color='blue'
+                icon='facebook'
+                href='https://facebook.com'
+                title='Facebook'
+                classStr='hide'
               />
               <Link
-                color="skyblue"
-                icon="twitter"
-                href="https://twitter.com"
-                title="Twitter"
-                classStr="hide"
+                color='skyblue'
+                icon='twitter'
+                href='https://twitter.com'
+                title='Twitter'
+                classStr='hide'
               />
             </div>
 
             <Link
-              color="red"
-              icon="googleplus"
-              href="https://google.com"
-              title="Google Plus"
+              color='red'
+              icon='googleplus'
+              href='https://google.com'
+              title='Google Plus'
             />
           </div>
         </div>

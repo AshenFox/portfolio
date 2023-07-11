@@ -42,6 +42,10 @@ const UpperLevelLink: FC = () => {
     [asPath]
   );
 
+  const linkTitle = content[language].title(
+    typeof title === 'string' ? title : title?.[language]
+  );
+
   const isUpperLevel = level > 0;
 
   const showLink =
@@ -70,13 +74,7 @@ const UpperLevelLink: FC = () => {
         appear
       >
         <Link href={upper_level_path}>
-          <a
-            className={styles.upper_level_link}
-            onClick={onClick}
-            title={content[language].title(
-              typeof title === 'string' ? title : title?.[language]
-            )}
-          >
+          <a className={styles.upper_level_link} onClick={onClick} title={linkTitle}>
             <div />
             <div />
             <div />

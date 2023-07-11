@@ -1,4 +1,3 @@
-//intermediate changes
 import { Language } from '@store/reducers/language/languageInitState';
 
 export type TTitle =
@@ -14,17 +13,10 @@ export interface IRoute {
   main?: boolean;
 }
 
-export interface Route404 {
-  // ???????
-  left?: string;
-  right?: string;
-  top?: string;
-}
-
 export type TRoutesArr = IRoute[];
 
 export const routesOrderList: TRoutesArr = [
-  { path: '/', title: { RU: 'главная', ENG: 'about' }, main: true }, // what main is for?
+  { path: '/', title: { RU: 'главная', ENG: 'about' } },
   {
     path: '/portfolio',
     title: { RU: 'портфолио', ENG: 'portfolio' },

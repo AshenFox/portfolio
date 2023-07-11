@@ -1,0 +1,11 @@
+@import '@styles/miscellaneous/variables.scss';
+
+.not_found {
+  h1 {
+    font-size: 4.2rem;
+    line-height: 6.1rem;
+    color: $header-color;
+    text-transform: lowercase;
+    letter-spacing: -2px;
+  }
+}

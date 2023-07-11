@@ -1,7 +1,6 @@
-//intermediate changes
 import React, { FC, MouseEventHandler, useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { getPath, getUpperLevelPath } from '@helpers/functions';
+import { getPath } from '@helpers/functions';
 import { CSSTransition } from 'react-transition-group';
 import { ExitHandler } from 'react-transition-group/Transition';
 import { useAppSelector } from '@store/hooks';
@@ -54,14 +53,11 @@ const Arrows: FC<Props> = ({ onExited }) => {
     deadend: nextDeadend,
   } = useMemo(() => getPath(asPath, 1), [asPath]);
 
-  // console.log({ nextPathname, nextTitle, nextDeadend });
   const {
     path: prevPathname,
     title: prevTitle,
     deadend: prevDeadend,
   } = useMemo(() => getPath(asPath, -1), [asPath]);
-
-  // console.log({ prevPathname, prevTitle, prevDeadend });
 
   const [isRightActive, setIsRightActive] = useState(true);
   const [isLeftActive, setIsLeftActive] = useState(true);
@@ -100,30 +96,8 @@ const Arrows: FC<Props> = ({ onExited }) => {
     router.push(prevPathname);
   };
 
-  leftTitle?.[language] ?? leftTitle;
-
   return (
     <>
-      <CSSTransition
-        classNames={rightArrowClassNames}
-        in={inRight}
-        timeout={timeout}
-        onExited={onExited}
-        appear
-      >
-        <div className={styles.right}>
-          <CSSTransition classNames={linkClassNames} in={isRightActive} timeout={timeout}>
-            <a
-              className={styles.link}
-              onClick={onClickRightArrow}
-              href={nextPathname}
-              title={rightTitle?.[language] ?? rightTitle}
-            />
-          </CSSTransition>
-          <span className={styles.text}>{rightTitle?.[language] ?? rightTitle}</span>
-          <div className={styles.arrow} />
-        </div>
-      </CSSTransition>
       <CSSTransition
         classNames={leftArrowClassNames}
         in={inLeft}
@@ -141,7 +115,31 @@ const Arrows: FC<Props> = ({ onExited }) => {
             />
           </CSSTransition>
           <div className={styles.arrow} />
-          <span className={styles.text}>{leftTitle?.[language] ?? leftTitle}</span>
+          <span className={styles.text} suppressHydrationWarning>
+            {leftTitle?.[language] ?? leftTitle}
+          </span>
+        </div>
+      </CSSTransition>
+      <CSSTransition
+        classNames={rightArrowClassNames}
+        in={inRight}
+        timeout={timeout}
+        onExited={onExited}
+        appear
+      >
+        <div className={styles.right}>
+          <CSSTransition classNames={linkClassNames} in={isRightActive} timeout={timeout}>
+            <a
+              className={styles.link}
+              onClick={onClickRightArrow}
+              href={nextPathname}
+              title={rightTitle?.[language] ?? rightTitle}
+            />
+          </CSSTransition>
+          <span className={styles.text} suppressHydrationWarning>
+            {rightTitle?.[language] ?? rightTitle}
+          </span>
+          <div className={styles.arrow} />
         </div>
       </CSSTransition>
     </>

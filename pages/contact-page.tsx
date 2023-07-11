@@ -6,7 +6,7 @@ import Contact, { ContactSection } from '@modules/Contact';
 const ContactPage: FC<SectionProps> = props => {
   return (
     <ContactSection {...props}>
-      <PageContainer>
+      <PageContainer centered>
         <Contact />
       </PageContainer>
     </ContactSection>
