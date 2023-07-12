@@ -28,12 +28,10 @@ type TDotArr = IDot[];
 
 type TDir = 'top' | 'left' | 'right' | 'bottom';
 
-const framesPerSecond = 60;
-const oneFrameTime = 1000 / framesPerSecond;
 let prevTime = 0;
 
 const accelX = 0;
-const accelY = 0.2;
+const accelY = 0.0015;
 
 const maxSpeedX = 20;
 const maxSpeedY = 20;
@@ -41,8 +39,8 @@ const maxSpeedY = 20;
 const minSpeedX = 1.5;
 const minSpeedY = 1.5;
 
-const minBounceSpeedX = 1.5;
-const minBounceSpeedY = 1.5;
+const minBounceSpeedX = 0.15;
+const minBounceSpeedY = 0.15;
 
 const bounceX = 0.45;
 const bounceY = 0.45;
@@ -61,8 +59,8 @@ export const createDots = (
 ) => {
   const res: TDotArr = [];
 
-  const spreadX = num * 2.2;
-  const spreadY = 1.75;
+  const spreadX = num * 0.22;
+  const spreadY = 0.175;
 
   for (let i = 0; i < num; i++) {
     const dotSeed = seed + i;
@@ -161,12 +159,12 @@ const FallingParticles: FC<Props> = () => {
     const moveDot = (dot: IDot) => {
       if (canvas.height > dot.y && canvas.width > dot.x) {
         ctx.fillStyle = dot.color;
-        const accelK = diff / oneFrameTime;
-        dot.speedX = Math.min(dot.speedX + accelX * accelK, maxSpeedX);
-        dot.speedY = Math.min(dot.speedY + accelY * accelK, maxSpeedY);
 
-        let newX = dot.x + dot.speedX;
-        let newY = dot.y + dot.speedY;
+        let newX = dot.x + dot.speedX * diff + 0.5 * accelX * (diff ^ 2);
+        let newY = dot.y + dot.speedY * diff + 0.5 * accelY * (diff ^ 2);
+
+        dot.speedX = dot.speedX + accelX * diff;
+        dot.speedY = dot.speedY + accelY * diff;
 
         const line: ILine = { a: { x: dot.x, y: dot.y }, b: { x: newX, y: newY } };
 

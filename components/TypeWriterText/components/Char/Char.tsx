@@ -42,8 +42,8 @@ const Char: FC<Props> = ({ active, children, isCursor, scrollTop = 0 }) => {
         Math.round(x + width / 2),
         Math.round(y + scrollTopRef.current + height / 2),
         1,
-        2,
-        5,
+        0.02,
+        0.05,
         2,
         color,
         children.charCodeAt(0)

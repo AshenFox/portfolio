@@ -28,7 +28,6 @@ const UpperLevelLink: FC = () => {
 
   const {
     content_loader: { is_exited: content_loader_is_exited },
-    menu: { is_exited: menu_is_exited },
     show_navigation,
   } = useAppSelector(({ sslider }) => sslider);
   const language = useAppSelector(({ language }) => language.language);
@@ -48,8 +47,7 @@ const UpperLevelLink: FC = () => {
 
   const isUpperLevel = level > 0;
 
-  const showLink =
-    content_loader_is_exited && menu_is_exited && show_navigation && isUpperLevel;
+  const showLink = content_loader_is_exited && show_navigation && isUpperLevel;
 
   const onEnter = useCallback(() => {
     setIsClicked(false);
