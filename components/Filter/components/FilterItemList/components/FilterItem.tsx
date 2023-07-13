@@ -77,7 +77,7 @@ const FilterItem: FC<Props> = ({ data, order }) => {
       entry => {
         clearTimeout(intersectionObserverTimer.current);
 
-        if (entry[0].isIntersecting) {
+        if (entry[entry.length - 1].isIntersecting) {
           setIsVisible(true);
         } else {
           intersectionObserverTimer.current = setTimeout(() => {

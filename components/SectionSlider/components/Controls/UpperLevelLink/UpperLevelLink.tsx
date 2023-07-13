@@ -1,6 +1,14 @@
+import React, {
+  FC,
+  MouseEventHandler,
+  useCallback,
+  useMemo,
+  useState,
+  useRef,
+  useEffect,
+} from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { FC, MouseEventHandler, useCallback, useMemo, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import { getUpperLevelPath } from '@helpers/functions';
@@ -29,6 +37,7 @@ const UpperLevelLink: FC = () => {
   const {
     content_loader: { is_exited: content_loader_is_exited },
     show_navigation,
+    menu: { is_exited },
   } = useAppSelector(({ sslider }) => sslider);
   const language = useAppSelector(({ language }) => language.language);
 
@@ -40,6 +49,8 @@ const UpperLevelLink: FC = () => {
     () => getUpperLevelPath(asPath),
     [asPath]
   );
+  const prevLevel = useRef(level);
+  const isPrevLevelZero = prevLevel.current === 0;
 
   const linkTitle = content[language].title(
     typeof title === 'string' ? title : title?.[language]
@@ -47,7 +58,8 @@ const UpperLevelLink: FC = () => {
 
   const isUpperLevel = level > 0;
 
-  const showLink = content_loader_is_exited && show_navigation && isUpperLevel;
+  const showLink =
+    content_loader_is_exited && show_navigation && isUpperLevel && !isPrevLevelZero;
 
   const onEnter = useCallback(() => {
     setIsClicked(false);
@@ -56,6 +68,12 @@ const UpperLevelLink: FC = () => {
   const onClick: MouseEventHandler = useCallback(() => {
     setIsClicked(true);
   }, []);
+
+  useEffect(() => {
+    return () => {
+      prevLevel.current = level;
+    };
+  }, [level, show_navigation]);
 
   return (
     <CSSTransition
