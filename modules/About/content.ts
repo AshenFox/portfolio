@@ -10,63 +10,66 @@ const content: Content = {
   ENG: {
     typewriter_text: [
       {
-        content: [{ content: 'Hello, my name is Rafael Caferati.', type: 'text' }],
+        content: [{ content: 'Hello, my name is Kavokin Maxim.', type: 'text' }],
         type: 'greeting',
-      },
-      {
-        content: [
-          { content: 'I am an ', type: 'text' },
-          {
-            content: 'award-winning',
-            type: 'link',
-            props: { href: '/portfolio', title: 'Portfolio' },
-          },
-          {
-            content: ' full-stack web developer and UI/UX javascript specialist.',
-            type: 'text',
-          },
-        ],
-        type: 'description',
       },
       {
         content: [
           {
             content:
-              'Check out my articles, React and React Native UI components at the ',
+              'I am a highly skilled frontend react developer with more than 3 years of experiece.',
             type: 'text',
           },
-          {
-            content: 'code laboratory',
-            type: 'link',
-            props: { href: '/portfolio', title: 'Portfolio' },
-          },
-          { content: '.', type: 'text' },
         ],
         type: 'description',
       },
       {
         content: [
           {
-            content: 'Feel free to take a look at my latest projects on the ',
+            content: 'My passion is creating of modern ',
             type: 'text',
           },
           {
-            content: 'web portfolio page',
+            content: 'SPA и SSR',
             type: 'link',
             props: { href: '/portfolio', title: 'Portfolio' },
           },
-          { content: '.', type: 'text' },
+          { content: ' applications and ', type: 'text' },
+          {
+            content: 'websites',
+            type: 'link',
+            props: { href: '/portfolio', title: 'Portfolio' },
+          },
+          { content: ' using React and TypeScript.', type: 'text' },
         ],
         type: 'description',
       },
       {
         content: [
           {
-            content: 'Remotely available UTC-1 to UTC+8. ',
+            content: 'Feel free to take a look at the ',
             type: 'text',
           },
           {
-            content: 'rafael@caferati.me',
+            content: 'portfolio page',
+            type: 'link',
+            props: { href: '/portfolio', title: 'Portfolio' },
+          },
+          {
+            content: ' that showcases a diverse range of my latest projects.',
+            type: 'text',
+          },
+        ],
+        type: 'description',
+      },
+      {
+        content: [
+          {
+            content: 'If you have any questions, you can reach me through ',
+            type: 'text',
+          },
+          {
+            content: 'kavokinm@gmail.com',
             type: 'link',
             props: { href: '/portfolio', title: 'Portfolio' },
           },
@@ -79,19 +82,15 @@ const content: Content = {
   RU: {
     typewriter_text: [
       {
-        content: [{ content: 'Тест тесттест тесттесттест тесттесттест.', type: 'text' }],
+        content: [{ content: 'Привет, меня зовут Кавокин Максим.', type: 'text' }],
         type: 'greeting',
       },
+
       {
         content: [
-          { content: 'тесттесттест ', type: 'text' },
           {
-            content: 'тесттесттест',
-            type: 'link',
-            props: { href: '/portfolio', title: 'Portfolio' },
-          },
-          {
-            content: ' тесттесттест тесттест тест.',
+            content:
+              'Я frontend react developer с более чем 3 годами профессионального опыта в сфере разработки.',
             type: 'text',
           },
         ],
@@ -100,41 +99,53 @@ const content: Content = {
       {
         content: [
           {
-            content: 'Тесттесттесттесттесттест ',
+            content: 'Моей страстью является создание современных ',
             type: 'text',
           },
           {
-            content: 'тесттесттест',
+            content: 'SPA и SSR',
             type: 'link',
             props: { href: '/portfolio', title: 'Portfolio' },
           },
-          { content: ' тест.', type: 'text' },
+          {
+            content: ' приложений и ',
+            type: 'text',
+          },
+          {
+            content: 'сайтов',
+            type: 'link',
+            props: { href: '/portfolio', title: 'Portfolio' },
+          },
+          {
+            content: ' используя React и TypeScript.',
+            type: 'text',
+          },
         ],
         type: 'description',
       },
       {
         content: [
           {
-            content: 'тесттесттесттест ',
+            content: 'Посмотрите мое ',
             type: 'text',
           },
           {
-            content: 'тесттест',
+            content: 'портфолио',
             type: 'link',
             props: { href: '/portfolio', title: 'Portfolio' },
           },
-          { content: ' тесттесттест.', type: 'text' },
+          { content: ', чтобы увидеть примеры моих последних проектов.', type: 'text' },
         ],
         type: 'description',
       },
       {
         content: [
           {
-            content: 'Тесттесттесттест тесттест. ',
+            content: 'Если у вас есть вопросы, пишите мне на ',
             type: 'text',
           },
           {
-            content: 'rafael@caferati.me',
+            content: 'kavokinm@gmail.com',
             type: 'link',
             props: { href: '/portfolio', title: 'Portfolio' },
           },
