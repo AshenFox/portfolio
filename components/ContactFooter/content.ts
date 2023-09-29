@@ -1,3 +1,4 @@
+//workinprogress
 import { CreateContent } from '@helpers/types';
 
 type Content = CreateContent<{
@@ -22,7 +23,7 @@ const content: Content = {
       {
         text: 'Feel free to contact me via email at\u00A0',
         link: {
-          text: 'rafael@caferati.me',
+          text: 'kavokinm@gmail.com',
           href: '/contact-page',
         },
       },
@@ -37,24 +38,24 @@ const content: Content = {
     ],
   },
   RU: {
-    header: 'test',
+    header: 'Давайте поговорим',
     paragraphs: [
       {
-        text: 'test',
+        text: 'Хотите связаться со мной или поговорить о проекте?',
       },
       {
-        text: 'test',
+        text: 'Напишите мне на ',
         link: {
-          text: 'rafael@caferati.me',
+          text: 'kavokinm@gmail.com',
           href: '/contact-page',
         },
       },
       {
-        text: 'test',
+        text: 'Или отправте сообщение через форму на странице ',
         link: {
-          text: 'contact page',
+          text: 'контакты',
           href: '/contact-page',
-          title: 'Contact page',
+          title: 'контакты',
         },
       },
     ],

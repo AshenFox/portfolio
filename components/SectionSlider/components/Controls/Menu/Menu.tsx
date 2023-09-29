@@ -1,3 +1,4 @@
+//workinprogress
 import React, { FC, useCallback, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import MenuItem from './components/MenuItem';
@@ -50,7 +51,7 @@ const Menu: FC = () => {
               />
             ))}
             {/* TEMPORARY MENU ITEMS */}
-            <MenuItem
+            {/* <MenuItem
               href={'/portfolio/flashcards'}
               title={'portfolio flashcards'}
               key={'project flashcards'}
@@ -64,7 +65,7 @@ const Menu: FC = () => {
               href={'/portfolio/flashcards/asdfasdf'}
               title={'nonexistent inbed'}
               key={'faulty project2'}
-            />
+            /> */}
           </main>
           <footer>
             {/* <span className={styles.tip}>for a quick seach just start typing ...</span> */}

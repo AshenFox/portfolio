@@ -1,3 +1,4 @@
+//workinprogress
 import { CreateContent } from '@helpers/types';
 
 type Content = CreateContent<{
@@ -32,7 +33,7 @@ const content: Content = {
   },
   RU: {
     next: 'далее',
-    submit: 'отправить ваше сообщение',
+    submit: 'отправить сообщение',
     submitNotification: {
       success: {
         title: 'Успешно отправлено',

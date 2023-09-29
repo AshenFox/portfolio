@@ -1,3 +1,4 @@
+//workinprogress
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
@@ -18,7 +19,7 @@ type Props = {
   filterItemList: FilterItemListData;
 };
 
-const FilterItems: FC<Props> = ({ order, filterItemList }) => {
+const FilterItemsList: FC<Props> = ({ order, filterItemList }) => {
   const filterItemsInt = useRef<HTMLUListElement>(null);
 
   const [containerStyle, setContainerStyle] = useState<CSSProperties>({});
@@ -69,4 +70,4 @@ const FilterItems: FC<Props> = ({ order, filterItemList }) => {
   );
 };
 
-export default memo(FilterItems);
+export default memo(FilterItemsList);

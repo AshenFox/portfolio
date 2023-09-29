@@ -1,3 +1,4 @@
+//workinprogress
 import { FilterItemListData, TagNameList } from '@components/Filter';
 import { CreateContent } from '@helpers/types';
 
@@ -210,8 +211,9 @@ const content: Content = {
     tagList,
   },
   RU: {
-    title: 'Тест',
-    description: 'Тест',
+    title: 'портфолио',
+    description:
+      'Начиная от Web Components и UI/UX анимаций, заканчивая React.JS, Redux, Vue.JS, и Node.JS. Посмотрите на мои последние проекты лендинг страниц, SPA и SSR приложений.',
     filterItems,
     tagList,
   },

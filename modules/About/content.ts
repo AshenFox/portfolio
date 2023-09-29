@@ -1,3 +1,4 @@
+//workinprogress
 import { HeaderListData } from '@components/TypeWriterText/TypeWriterText';
 import { CreateContent } from '@helpers/types';
 
@@ -153,7 +154,7 @@ const content: Content = {
         type: 'description',
       },
     ],
-    barrier: 'мое портфолио',
+    barrier: 'портфолио',
   },
 };
 

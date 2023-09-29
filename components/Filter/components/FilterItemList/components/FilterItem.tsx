@@ -1,3 +1,4 @@
+//workinprogress
 import Link from 'next/link';
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
 import { FilterItemData } from '../../../Filter';
@@ -109,16 +110,16 @@ const FilterItem: FC<Props> = ({ data, order }) => {
                 <h2>{name}</h2>
               </div>
               <div className={styles.main}>
-                <Img
+                {/* <Img
                   src={thumbnails.main}
                   alt=''
                   className={styles.img_main}
                   layout='fill'
-                />
+                /> */}
                 <div className={styles.shadow}></div>
                 <div className={styles.hover}>
                   <div className={styles.img_hover}>
-                    <Img src={thumbnails.hover} alt='' layout='fill' />
+                    {/* <Img src={thumbnails.hover} alt='' layout='fill' /> */}
                   </div>
 
                   <ul className={styles.tags}>

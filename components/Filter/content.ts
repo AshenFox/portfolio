@@ -1,3 +1,4 @@
+//workinprogress
 import { CreateContent } from '@helpers/types';
 
 type Content = CreateContent<{
@@ -12,8 +13,8 @@ const content: Content = {
     all: 'all',
   },
   RU: {
-    info: all => `Тест ${all} тест тест.`,
-    all: 'все',
+    info: all => `${all} проекты. Список можно отфильтровать по технологии или навыку.`,
+    all: 'Все',
   },
 };
 

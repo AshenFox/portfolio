@@ -1,3 +1,4 @@
+//workinprogress
 @import '@styles/miscellaneous/variables.scss';
 
 .header {
@@ -12,6 +13,7 @@
 }
 
 .paragraph {
+  margin-top: 2rem;
   white-space: pre-wrap;
 }
 
@@ -32,26 +34,28 @@
   width: 38rem;
   background-color: #838383;
   margin-top: 2rem;
-  margin-bottom: 2.6rem;
 }
 
 .list {
+  margin-top: 2.6rem;
   list-style: none;
 }
 
 .list_item {
   display: flex;
   justify-content: left;
-  align-items: center;
 
   &:before {
     content: '';
     display: inline-block;
     height: 9px;
     width: 9px;
+    margin-top: 1.5rem;
     margin-right: 2.2rem;
+    transform: translateY(-50%);
     border-radius: 100%;
     border: 1px solid #afafaf;
+    aspect-ratio: 1/1;
   }
 }
 

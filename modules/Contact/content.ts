@@ -1,3 +1,4 @@
+//workinprogress
 import { CreateContent } from '@helpers/types';
 
 type Content = CreateContent<{
@@ -45,22 +46,18 @@ const content: Content = {
       description: [
         {
           type: 'text',
-          text: 'test testtest test test testtest test test testtest test test testtest test ',
+          text: 'Если хотите мне написать, поговорить о проекте или у вас есть предложение о сотрудничестве, заполните форму внизу или напишете мне на ',
         },
         {
           type: 'link',
-          text: 'rafael@caferati.me',
-        },
-        {
-          type: 'text',
-          text: ' test testtest test.',
+          text: 'kavokinm@gmail.com',
         },
       ],
     },
     footer: {
-      header: 'Test testtest test',
+      header: 'Соцсети',
       paragraph:
-        'test testtest test test testtest test test testtest test test testtest test',
+        'Подпишетесь на меня на моей странице в Facebook или на мои профили в Twitter, GitHub и Linkedin.',
     },
   },
 };
