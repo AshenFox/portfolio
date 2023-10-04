@@ -1,4 +1,3 @@
-//workinprogress
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';

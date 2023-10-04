@@ -1,4 +1,3 @@
-//workinprogress
 import { CreateContent } from '@helpers/types';
 
 type Content = CreateContent<{
@@ -30,7 +29,7 @@ const content: Content = {
         },
         {
           type: 'text',
-          text: ' and ~let\u0027s talk.',
+          text: ' and let\u0027s talk.',
         },
       ],
     },

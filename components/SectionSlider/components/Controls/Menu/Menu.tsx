@@ -1,4 +1,3 @@
-//workinprogress
 import React, { FC, useCallback, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import MenuItem from './components/MenuItem';

@@ -33,6 +33,8 @@ const Project: FC = () => {
 
   const projectNotFound = useMemo(() => !!(!project && staticID), [project, staticID]);
 
+  console.log({ test: project?.link.href, language, staticID });
+
   if (projectNotFound) return <NotFound message={not_found_message} />;
 
   return (
@@ -46,7 +48,7 @@ const Project: FC = () => {
               color='green'
               icon='externallink'
               href={project?.link.href}
-              title='Flashcards'
+              title={project?.link.title}
             >
               {project?.link.content}
             </Link>

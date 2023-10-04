@@ -1,4 +1,3 @@
-//workinprogress
 import { HeaderListData } from '@components/TypeWriterText/TypeWriterText';
 import { CreateContent } from '@helpers/types';
 

@@ -1,14 +1,243 @@
-//workinprogress
 import { Content } from '../types';
 
 const flashcards: Content = {
   ENG: {
     title: 'flashcards',
+    description: `SSR application application for memorizing information via spaced repetition and interactive and engaging games.`,
+    link: {
+      href: 'https://flashcards.ashen-fox.online/',
+      content: 'application',
+      title: 'flashcards',
+    },
+    images: [
+      {
+        path: '/6.jpg',
+        alt: 'image',
+      },
+      {
+        path: '/5.jpg',
+        alt: 'image',
+      },
+      {
+        path: '/4.jpg',
+        alt: 'image',
+      },
+    ],
+    sections: [
+      [
+        {
+          type: 'header',
+          content: 'About this project',
+        },
+        {
+          type: 'devider',
+        },
+        {
+          type: 'paragraph',
+          content: '\u2002The app allows you to:',
+        },
+        {
+          type: 'list',
+          content: [
+            [
+              {
+                type: 'text',
+                content: 'save your own flash-cards sets',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: `add to english words definitions from the most popular dictionaries on the internet`,
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content:
+                  'attach images to flash-cards allowing you to engage your visual memory in the process of learning',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content:
+                  'listen what words and sentences sound like in english and russian languages',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'search through the created flash-cards and sets',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: `use the application as a notebook that you can use to write down and save new words and sentences`,
+              },
+            ],
+          ],
+        },
+        {
+          type: 'paragraph',
+          content: `\u2002Created flash-cards can be added to a special "study regime", that enables the app to send notifications in increasing time intervals to remind that it's time to study the flash-cards. That makes commiting information to memory highly effective.`,
+        },
+        {
+          type: 'paragraph',
+          content:
+            'Learning process is conducted in an interactive format via one of the two available game regimes.',
+        },
+      ],
+      [
+        {
+          type: 'header',
+          content: 'Technical sheet',
+        },
+        {
+          type: 'description',
+          content:
+            '\u2002Code technologies I got involved with while working on this project.',
+        },
+        {
+          type: 'devider',
+        },
+        {
+          type: 'list',
+          content: [
+            [
+              {
+                type: 'text',
+                content: 'HTML',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'SCSS',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'TypeScript',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'React',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'Next.js',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'Express',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'Mongo DB',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'Mongoose',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'ServiceWorkers',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'LocalStorage',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'JSON Web Tokens',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'Google Custom Search API',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'Docker',
+              },
+            ],
+          ],
+        },
+      ],
+      [
+        {
+          type: 'header',
+          content: 'Resources',
+        },
+        {
+          type: 'devider',
+        },
+        {
+          type: 'list',
+          content: [
+            [
+              {
+                type: 'text',
+                content: 'The project is online at ',
+              },
+              {
+                type: 'link',
+                content: 'https://flashcards.ashen-fox.online',
+                href: 'https://flashcards.ashen-fox.online',
+                title: 'flashcards',
+              },
+            ],
+            [
+              {
+                type: 'text',
+                content: 'Access the source code at my ',
+              },
+              {
+                type: 'link',
+                content: 'github',
+                href: 'https://flashcards.ashen-fox.online',
+                title: 'github flashcards',
+              },
+              {
+                type: 'text',
+                content: ' page',
+              },
+            ],
+          ],
+        },
+      ],
+    ],
+  },
+  RU: {
+    title: 'flashcards',
     description: `SSR приложение для эффективного запоминания информации 
     через интервальное повторение и интерактивные и увлекательные игры.`,
     link: {
       href: 'https://flashcards.ashen-fox.online/',
-      content: 'flashcards',
+      content: 'приложение',
+      title: 'flashcards',
     },
     images: [
       {
@@ -35,7 +264,7 @@ const flashcards: Content = {
         },
         {
           type: 'paragraph',
-          content: 'Данное приложение дает возможность:',
+          content: '\u2002Данное приложение дает возможность:',
         },
         {
           type: 'list',
@@ -85,7 +314,7 @@ const flashcards: Content = {
         {
           type: 'paragraph',
           content:
-            'Созданные карточки можно добавлять в специальный “режим изучения”, после чего приложение будет присылать уведомления через увеличивающиеся временные интервалы, напоминая, что нужно повторить добавленные карточки, для максимально эффективного запоминания информации.',
+            '\u0009Созданные карточки можно добавлять в специальный “режим изучения”, после чего приложение будет присылать уведомления через увеличивающиеся временные интервалы, напоминая, что нужно повторить добавленные карточки, для максимально эффективного запоминания информации.',
         },
         {
           type: 'paragraph',
@@ -100,7 +329,7 @@ const flashcards: Content = {
         },
         {
           type: 'description',
-          content: 'Технологии которые я использовал работая над этим проектом.',
+          content: '\u2002Технологии которые я использовал работая над этим проектом.',
         },
         {
           type: 'devider',
@@ -197,221 +426,6 @@ const flashcards: Content = {
         {
           type: 'devider',
         },
-        {
-          type: 'list',
-          content: [
-            [
-              {
-                type: 'text',
-                content: 'Проект размещен на ',
-              },
-              {
-                type: 'link',
-                content: 'https://flashcards.ashen-fox.online',
-                href: 'https://flashcards.ashen-fox.online',
-                title: 'flashcards',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'Исходный код можно посмотреть на ',
-              },
-              {
-                type: 'link',
-                content: 'github',
-                href: 'https://flashcards.ashen-fox.online',
-                title: 'github flashcards',
-              },
-            ],
-          ],
-        },
-      ],
-    ],
-  },
-  RU: {
-    title: 'flashcards',
-    description: `SSR приложение для эффективного запоминания информации 
-  через интервальное повторение и интерактивные и увлекательные игры.`,
-    link: {
-      href: 'https://flashcards.ashen-fox.online/',
-      content: 'flashcards',
-    },
-    images: [
-      {
-        path: '/6.jpg',
-        alt: 'image',
-      },
-      {
-        path: '/5.jpg',
-        alt: 'image',
-      },
-      {
-        path: '/4.jpg',
-        alt: 'image',
-      },
-    ],
-    sections: [
-      [
-        {
-          type: 'header',
-          content: 'О проекте',
-        },
-        {
-          type: 'devider',
-        },
-        {
-          type: 'paragraph',
-          content: 'Данное приложение дает возможность:',
-        },
-        {
-          type: 'list',
-          content: [
-            [
-              {
-                type: 'text',
-                content: 'сохранять свои наборы flash карточек',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: `добавлять к английским словам определения и примеры использования 
-                из самых известных английских словарей в интернете`,
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content:
-                  'прикреплять к карточкам картинки для задействования зрительной памяти',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content:
-                  'прослушать как звучат слова и предложения на русском и английском языках',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'осуществлять поиск по сохранённым наборам и карточкам',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: `использовать приложение как блокнот в который можно оперативно записать 
-                и сохранить заинтересовавшие слова и предложения`,
-              },
-            ],
-          ],
-        },
-      ],
-      [
-        {
-          type: 'header',
-          content: 'Список технологий',
-        },
-        {
-          type: 'description',
-          content: 'Технологии которые я использовал работая над этим проектом.',
-        },
-        {
-          type: 'devider',
-        },
-        {
-          type: 'list',
-          content: [
-            [
-              {
-                type: 'text',
-                content: 'HTML',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'SCSS',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'TypeScript',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'React',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'Next.js',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'Express',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'Mongo DB',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'Mongoose',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'ServiceWorkers',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'LocalStorage',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'JSON Web Tokens',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'Google Custom Search API',
-              },
-            ],
-            [
-              {
-                type: 'text',
-                content: 'Docker',
-              },
-            ],
-          ],
-        },
-      ],
-      [
-        {
-          type: 'header',
-          content: 'Ресурсы',
-        },
-
         {
           type: 'list',
           content: [
@@ -447,298 +461,3 @@ const flashcards: Content = {
 };
 
 export default flashcards;
-
-/* const flashcards: Content = {
-  ENG: {
-    title: 'flashcards',
-    description:
-      'Built with custom VanillaJS Web Components and written entirely on Javascript, this website is a showcase of my recent projects as a Full-Stack Web Developer.',
-    link: {
-      href: 'https://fox-flash-cards.herokuapp.com',
-      content: 'visit the webpage',
-    },
-    images: [
-      {
-        path: '/6.jpg',
-        alt: 'image',
-      },
-      {
-        path: '/5.jpg',
-        alt: 'image',
-      },
-      {
-        path: '/4.jpg',
-        alt: 'image',
-      },
-    ],
-    sections: [
-      {
-        header: 'About this project',
-        paragraph:
-          'Project developed as a contractor with the SKY GO (UK) Desktop team. The Sky Go Desktop app is a React web application build on top of the Electron framework.\n\nAt this project I acted as the lead UI/UX developer specialist being the bridge between UI/UX Design, PO and the UI development team. The main challenge was to reorganize the UI structure from a react-virtualized grid into a pure CSS one. Which improved drastically the scalability and maintainability of the project.',
-      },
-      {
-        header: 'Technical Sheet',
-        description:
-          'Code technologies I got involved with while working on this project.',
-        list: [
-          [
-            {
-              type: 'text',
-              content: 'UI/UX Design',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'UI/UX Architecture',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'UI/UX Animations',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'HTML5 – semantic, audio, video, canvas',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'CSS3 – preprocessed with LESS + LESSHAT',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'Meteor.js',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'Blaze',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'MongoDB',
-            },
-          ],
-        ],
-      },
-      {
-        header: 'Resources',
-        list: [
-          [
-            {
-              type: 'text',
-              content: 'The project is online at ',
-            },
-            {
-              type: 'link',
-              content: 'HTTPS://ROCKET.CHAT',
-              href: 'https://rocket.chat',
-              title: 'test',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'Access the project\u0024s source on GITHUB',
-            },
-          ],
-        ],
-      },
-    ],
-  },
-  RU: {
-    title: 'flashcards',
-    description: `SSR приложение для эффективного запоминания информации 
-    через интервальное повторение и интерактивные и увлекательные игры.`,
-    link: {
-      href: 'https://flashcards.ashen-fox.online/',
-      content: 'flashcards',
-    },
-    images: [
-      {
-        path: '/6.jpg',
-        alt: 'image',
-      },
-      {
-        path: '/5.jpg',
-        alt: 'image',
-      },
-      {
-        path: '/4.jpg',
-        alt: 'image',
-      },
-    ],
-    sections: [
-      {
-        header: 'О проекте',
-        paragraph: 'Данное приложение дает возможность:',
-        list: [
-          [
-            {
-              type: 'text',
-              content: 'сохранять свои наборы flash карточек',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: `добавлять к английским словам определения и примеры использования 
-                из самых известных английских словарей в интернете`,
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content:
-                'прикреплять к карточкам картинки для задействования зрительной памяти',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content:
-                'прослушать как звучат слова и предложения на русском и английском языках',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'осуществлять поиск по сохранённым наборам и карточкам',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: `использовать приложение как блокнот в который можно оперативно записать 
-                и сохранить заинтересовавшие слова и предложения`,
-            },
-          ],
-        ],
-      },
-      {
-        header: 'Список технологий',
-        description: 'Технологии которые я использовал работая над этим проектом.',
-        list: [
-          [
-            {
-              type: 'text',
-              content: 'HTML',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'SCSS',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'TypeScript',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'React',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'Next.js',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'Express',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'Mongo DB',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'Mongoose',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'ServiceWorkers',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'LocalStorage',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'JSON Web Tokens',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'Google Custom Search API',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'Docker',
-            },
-          ],
-        ],
-      },
-      {
-        header: 'Ресурсы',
-        list: [
-          [
-            {
-              type: 'text',
-              content: 'Проект размещен на ',
-            },
-            {
-              type: 'link',
-              content: 'https://flashcards.ashen-fox.online',
-              href: 'https://flashcards.ashen-fox.online',
-              title: 'flashcards',
-            },
-          ],
-          [
-            {
-              type: 'text',
-              content: 'Исходный код можно посмотреть на ',
-            },
-            {
-              type: 'link',
-              content: 'github',
-              href: 'https://flashcards.ashen-fox.online',
-              title: 'github flashcards',
-            },
-          ],
-        ],
-      },
-    ],
-  },
-}; */

@@ -1,4 +1,3 @@
-//workinprogress
 import { CreateContent } from '@helpers/types';
 
 type Content = CreateContent<{

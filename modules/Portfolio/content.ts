@@ -1,4 +1,3 @@
-//workinprogress
 import { FilterItemListData, TagNameList } from '@components/Filter';
 import { CreateContent } from '@helpers/types';
 
@@ -204,16 +203,16 @@ const tagList: TagNameList = [
 
 const content: Content = {
   ENG: {
-    title: 'web developer portfolio',
+    title: 'portfolio',
     description:
-      'From Web Components and UI/UX animations to React.JS, Redux, Vue.JS, and Node.JS. Check out my latest web software development portfolio projects.',
+      'From UI/UX animations to React.JS, Redux, and Node.JS. Check out my latest projects of landing pages and SPA and SSR applications.',
     filterItems,
     tagList,
   },
   RU: {
     title: 'портфолио',
     description:
-      'Начиная от Web Components и UI/UX анимаций, заканчивая React.JS, Redux, Vue.JS, и Node.JS. Посмотрите на мои последние проекты лендинг страниц, SPA и SSR приложений.',
+      'Начиная UI/UX анимациями, заканчивая React.JS, Redux, и Node.JS. Посмотрите на мои последние проекты лендинг страниц, SPA и SSR приложений.',
     filterItems,
     tagList,
   },
