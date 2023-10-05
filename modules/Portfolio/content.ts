@@ -11,9 +11,10 @@ type Content = CreateContent<{
 const filterItems: FilterItemListData = {
   '1': {
     id: '1',
-    name: 'test1',
+    name: 'flashcards',
     tags: ['back-end', 'coffeescript'],
     in: true,
+    href: '/portfolio/flashcards',
     thumbnails: {
       main: '/3.jpg',
       hover: '/4.jpg',
@@ -21,9 +22,10 @@ const filterItems: FilterItemListData = {
   },
   '2': {
     id: '2',
-    name: 'test2',
+    name: 'gosurf',
     tags: ['backbonejs', 'electron', 'front-end'],
     in: true,
+    href: '/portfolio/gosurf',
     thumbnails: {
       main: '/6.jpg',
       hover: '/7.jpg',
@@ -31,9 +33,10 @@ const filterItems: FilterItemListData = {
   },
   '3': {
     id: '3',
-    name: 'test3',
+    name: 'tuner',
     tags: ['game design', 'electron', 'front-end'],
     in: true,
+    href: '/portfolio/tuner',
     thumbnails: {
       main: '/3.jpg',
       hover: '/4.jpg',
@@ -41,9 +44,10 @@ const filterItems: FilterItemListData = {
   },
   '4': {
     id: '4',
-    name: 'test4',
+    name: 'natours',
     tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
     in: true,
+    href: '/portfolio/natours',
     thumbnails: {
       main: '/6.jpg',
       hover: '/7.jpg',
@@ -51,9 +55,10 @@ const filterItems: FilterItemListData = {
   },
   '5': {
     id: '5',
-    name: 'test5',
+    name: 'portfolio',
     tags: ['mongodb', 'mongodb', 'back-end'],
     in: true,
+    href: '/portfolio/portfolio',
     thumbnails: {
       main: '/3.jpg',
       hover: '/4.jpg',
@@ -61,9 +66,10 @@ const filterItems: FilterItemListData = {
   },
   '6': {
     id: '6',
-    name: 'test6',
+    name: 'nexter',
     tags: ['backbonejs', 'sass', 'back-end'],
     in: true,
+    href: '/portfolio/nexter',
     thumbnails: {
       main: '/6.jpg',
       hover: '/7.jpg',
@@ -71,109 +77,10 @@ const filterItems: FilterItemListData = {
   },
   '7': {
     id: '7',
-    name: 'test7',
+    name: 'glozzom',
     tags: ['back-end', 'coffeescript'],
     in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '8': {
-    id: '8',
-    name: 'test8',
-    tags: ['backbonejs', 'electron', 'front-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '9': {
-    id: '9',
-    name: 'test9',
-    tags: ['game design', 'electron', 'front-end'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '10': {
-    id: '10',
-    name: 'test10',
-    tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '11': {
-    id: '11',
-    name: 'test11',
-    tags: ['mongodb', 'mongodb', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '12': {
-    id: '12',
-    name: 'test12',
-    tags: ['backbonejs', 'sass', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '13': {
-    id: '13',
-    name: 'test13',
-    tags: ['backbonejs', 'sass', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '14': {
-    id: '14',
-    name: 'test14',
-    tags: ['game design', 'electron', 'front-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '15': {
-    id: '15',
-    name: 'test15',
-    tags: ['ui/ux design', 'sass', 'front-end', 'back-end'],
-    in: true,
-    thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
-    },
-  },
-  '16': {
-    id: '16',
-    name: 'test16',
-    tags: ['backbonejs', 'electron', 'front-end'],
-    in: true,
-    thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
-    },
-  },
-  '17': {
-    id: '17',
-    name: 'test17',
-    tags: ['game design', 'electron', 'front-end'],
-    in: true,
+    href: '/portfolio/glozzom',
     thumbnails: {
       main: '/3.jpg',
       hover: '/4.jpg',

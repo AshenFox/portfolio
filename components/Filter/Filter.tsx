@@ -32,6 +32,7 @@ export type FilterItemData = {
   name: string;
   tags: TagNameList;
   in: boolean;
+  href: string;
   thumbnails: {
     main: string;
     hover: string;

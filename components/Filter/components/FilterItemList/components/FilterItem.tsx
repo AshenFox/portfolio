@@ -104,8 +104,8 @@ const FilterItem: FC<Props> = ({ data, order }) => {
         style={styleContainer}
       >
         {isVisible && (
-          <Link href={'/portfolio/flashcards'}>
-            <a className={styles.link} title='/portfolio/flashcards'>
+          <Link href={data.href}>
+            <a className={styles.link} title={data.name}>
               <div className={styles.bar}>
                 <h2>{name}</h2>
               </div>

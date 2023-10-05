@@ -22,8 +22,12 @@ export const routesOrderList: TRoutesArr = [
     title: { RU: 'портфолио', ENG: 'portfolio' },
     inbed: [
       { path: '/flashcards', title: 'flashcards' },
+      { path: '/gosurf', title: 'gosurf' },
       { path: '/tuner', title: 'tuner' },
+      { path: '/natours', title: 'natours' },
       { path: '/portfolio', title: 'portfolio' },
+      { path: '/nexter', title: 'nexter' },
+      { path: '/glozzom', title: 'glozzom' },
     ],
   },
   { path: '/contact-page', title: { RU: 'контакты', ENG: 'contact page' } },

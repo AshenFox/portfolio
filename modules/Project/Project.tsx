@@ -1,4 +1,3 @@
-//intermediate changes
 import ImageSlider from '@components/ImageSlider';
 import { Link } from '@ui/InteractiveElement';
 import { useRouter } from 'next/router';
