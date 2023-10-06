@@ -11,15 +11,15 @@ const tuner: Content = {
     },
     images: [
       {
-        path: '/6.jpg',
+        path: '/projects/gosurf/screenshots/1.jpg',
         alt: 'image',
       },
       {
-        path: '/5.jpg',
+        path: '/projects/gosurf/screenshots/2.jpg',
         alt: 'image',
       },
       {
-        path: '/4.jpg',
+        path: '/projects/gosurf/screenshots/3.jpg',
         alt: 'image',
       },
     ],

@@ -119,10 +119,12 @@ const FilterItem: FC<Props> = ({ data, order }) => {
                   className={styles.img_main}
                   layout='fill'
                 /> */}
+                <img src={thumbnails.main} alt='' className={styles.img_main} />
                 <div className={styles.shadow}></div>
                 <div className={styles.hover}>
                   <div className={styles.img_hover}>
                     {/* <Img src={thumbnails.hover} alt='' layout='fill' /> */}
+                    <img src={thumbnails.hover} alt='' />
                   </div>
 
                   <ul className={styles.tags}>

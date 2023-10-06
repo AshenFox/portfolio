@@ -39,8 +39,8 @@ const filterItems: FilterItemListData = {
     in: true,
     href: '/portfolio/flashcards',
     thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
+      main: '/projects/flashcards/thumbnails/1.png',
+      hover: '/projects/flashcards/thumbnails/2.jpg',
     },
   },
   '2': {
@@ -84,8 +84,8 @@ const filterItems: FilterItemListData = {
     in: true,
     href: '/portfolio/gosurf',
     thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
+      main: '/projects/gosurf/thumbnails/1.jpg',
+      hover: '/projects/gosurf/thumbnails/2.jpg',
     },
   },
   '3': {
@@ -129,8 +129,8 @@ const filterItems: FilterItemListData = {
     in: true,
     href: '/portfolio/tuner',
     thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
+      main: '/projects/tuner/thumbnails/1.jpg',
+      hover: '/projects/tuner/thumbnails/2.jpg',
     },
   },
   '4': {
@@ -185,8 +185,8 @@ const filterItems: FilterItemListData = {
     in: true,
     href: '/portfolio/natours',
     thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
+      main: '/projects/natours/thumbnails/1.jpg',
+      hover: '/projects/natours/thumbnails/2.jpg',
     },
   },
   '5': {
@@ -230,8 +230,8 @@ const filterItems: FilterItemListData = {
     in: true,
     href: '/portfolio/portfolio',
     thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
+      main: '/projects/portfolio/thumbnails/1.jpg',
+      hover: '/projects/portfolio/thumbnails/2.jpg',
     },
   },
   '6': {
@@ -275,8 +275,8 @@ const filterItems: FilterItemListData = {
     in: true,
     href: '/portfolio/nexter',
     thumbnails: {
-      main: '/6.jpg',
-      hover: '/7.jpg',
+      main: '/projects/nexter/thumbnails/1.jpg',
+      hover: '/projects/nexter/thumbnails/2.jpg',
     },
   },
   '7': {
@@ -309,8 +309,8 @@ const filterItems: FilterItemListData = {
     in: true,
     href: '/portfolio/glozzom',
     thumbnails: {
-      main: '/3.jpg',
-      hover: '/4.jpg',
+      main: '/projects/glozzom/thumbnails/1.jpg',
+      hover: '/projects/glozzom/thumbnails/2.jpg',
     },
   },
 };

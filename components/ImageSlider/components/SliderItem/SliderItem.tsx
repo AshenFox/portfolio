@@ -51,13 +51,21 @@ const SliderItem: FC<Props> = ({ data, dir }) => {
       >
         <div className={styles.loader}>{isError ? <Icon /> : <Spinner small />}</div>
       </CSSTransition>
-      <Image
+      {/* <Image
         src={path ?? ''}
         alt={alt}
         draggable={false}
         onLoad={onLoad}
         onError={onError}
         layout={'fill'}
+      /> */}
+      <img
+        src={path ?? ''}
+        alt={alt}
+        draggable={false}
+        onLoad={onLoad}
+        onError={onError}
+        // layout={'fill'}
       />
     </div>
   );
