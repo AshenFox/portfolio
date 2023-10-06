@@ -1,4 +1,4 @@
-import Filter, { FilterItemListData, TagNameList } from '@components/Filter';
+import Filter, { FilterItemListData, TagValueList } from '@components/Filter';
 import React, { FC } from 'react';
 import { useAppSelector } from '@store/hooks';
 import styles from './styles.module.scss';

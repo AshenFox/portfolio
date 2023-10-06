@@ -2,57 +2,20 @@ import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 import FilterItemList from './components/FilterItemList';
 import TagList from './components/TagList';
 import styles from './styles.module.scss';
-import content from './content';
+import content, { allTag, FilterItemListData, TagID, TagValueList } from './content';
 import { useAppSelector } from 'store/hooks';
-
-export type TagName =
-  | 'show all'
-  | 'front-end'
-  | 'back-end'
-  | 'html5'
-  | 'sass'
-  | 'less'
-  | 'javascript'
-  | 'nodejs'
-  | 'electron'
-  | 'reactjs'
-  | 'meteor'
-  | 'coffeescript'
-  | 'mongodb'
-  | 'mysql'
-  | 'backbonejs'
-  | 'ui/ux design'
-  | 'animations'
-  | 'game design';
-
-export type TagNameList = TagName[];
-
-export type FilterItemData = {
-  id: string;
-  name: string;
-  tags: TagNameList;
-  in: boolean;
-  href: string;
-  thumbnails: {
-    main: string;
-    hover: string;
-  };
-};
-
-export type FilterItemListData = {
-  [key: string]: FilterItemData;
-};
+import { CreateContent } from '@helpers/types';
 
 type Props = {
   filterItemList: FilterItemListData;
-  tagList: TagNameList;
+  tagList: TagValueList;
 };
 
 const Filter: FC<Props> = ({ filterItemList, tagList }) => {
   const language = useAppSelector(({ language }) => language.language);
 
-  const [innerTagList] = useState<TagNameList>(['show all', ...tagList]);
-  const [by, setBy] = useState<TagName>('show all');
+  const [innerTagList] = useState<TagValueList>([allTag, ...tagList]);
+  const [by, setBy] = useState<TagID>(allTag.id);
 
   const [innerFilterItemList, setInnerFilterItemList] =
     useState<FilterItemListData>(filterItemList);
@@ -62,7 +25,7 @@ const Filter: FC<Props> = ({ filterItemList, tagList }) => {
   const isAll = by === 'show all';
 
   const filterProjects = useCallback(
-    (by: TagName) => {
+    (by: TagID) => {
       const isAll = by === 'show all';
 
       const res: {
@@ -72,7 +35,7 @@ const Filter: FC<Props> = ({ filterItemList, tagList }) => {
       } = Object.entries(innerFilterItemList).reduce(
         (res, [id, data], i, arr) => {
           const prevIn = data.in;
-          const newIn = isAll || data.tags.includes(by);
+          const newIn = isAll || data.tags.some(tag => tag.id === by);
 
           const newFilterItem = {
             ...data,
@@ -102,7 +65,7 @@ const Filter: FC<Props> = ({ filterItemList, tagList }) => {
   );
 
   const onTagClickAction = useCallback(
-    (value: TagName) => {
+    (value: TagID) => {
       setBy(value);
       filterProjects(value);
     },

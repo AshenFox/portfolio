@@ -1,12 +1,12 @@
 import React, { FC, MouseEventHandler, ReactNode, useCallback } from 'react';
-import { TagName } from '../../../Filter';
+import { TagValue, TagID } from '../../../content';
 import styles from '../styles.module.scss';
 
 type Props = {
   children: ReactNode;
-  value: TagName;
+  value: TagID;
   active?: boolean;
-  onClickAction?: (value: TagName) => void;
+  onClickAction?: (value: TagID) => void;
 };
 
 const Tag: FC<Props> = ({ children, value, active = false, onClickAction }) => {

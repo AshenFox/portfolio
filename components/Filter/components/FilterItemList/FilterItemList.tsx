@@ -1,7 +1,7 @@
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
-import { FilterItemListData } from '../../Filter';
+import { FilterItemListData } from '../../content';
 import FilterItem from './components/FilterItem';
 import styles from './styles.module.scss';
 

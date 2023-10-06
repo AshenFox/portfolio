@@ -1,29 +1,32 @@
-import { TagNameList, TagName } from '@components/Filter/Filter';
-import React, { FC } from 'react';
+import { TagValueList, TagValue, TagID } from '../../content';
+import React, { FC, memo } from 'react';
 import TagComponent from './components/Tag';
 import styles from './styles.module.scss';
+import { useAppSelector } from '@store/hooks';
 
 type Props = {
-  tagList: TagNameList;
-  by: TagName;
-  onTagClickAction: (value: TagName) => void;
+  tagList: TagValueList;
+  by: TagID;
+  onTagClickAction: (value: TagID) => void;
 };
 
 const TagList: FC<Props> = ({ tagList, by, onTagClickAction }) => {
+  const language = useAppSelector(({ language }) => language.language);
+
   return (
     <ul className={styles.tags}>
-      {tagList.map(value => (
+      {tagList.map(tag => (
         <TagComponent
-          key={value}
-          value={value}
-          active={value === by}
+          key={tag.id}
+          value={tag.id}
+          active={tag.id === by}
           onClickAction={onTagClickAction}
         >
-          {value}
+          {tag.content[language].label}
         </TagComponent>
       ))}
     </ul>
   );
 };
 
-export default TagList;
+export default memo(TagList);

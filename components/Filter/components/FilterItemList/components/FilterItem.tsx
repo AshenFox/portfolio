@@ -1,9 +1,10 @@
 //workinprogress
 import Link from 'next/link';
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
-import { FilterItemData } from '../../../Filter';
+import { FilterItemData } from '../../../content';
 import Img from 'next/image';
 import styles from '../styles.module.scss';
+import { useAppSelector } from '@store/hooks';
 
 type Props = {
   data: FilterItemData;
@@ -12,6 +13,8 @@ type Props = {
 
 const FilterItem: FC<Props> = ({ data, order }) => {
   const { name, id, tags, thumbnails } = data;
+
+  const language = useAppSelector(({ language }) => language.language);
 
   const filterItemEl = useRef<HTMLLIElement>(null);
   const containerEl = useRef<HTMLDivElement>(null);
@@ -125,7 +128,7 @@ const FilterItem: FC<Props> = ({ data, order }) => {
                   <ul className={styles.tags}>
                     {[...tags].splice(0, 4).map((tag, i) => (
                       <li className={styles.tag} key={i}>
-                        {tag}
+                        {tag.content[language].label}
                       </li>
                     ))}
                   </ul>
