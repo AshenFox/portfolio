@@ -25,7 +25,7 @@ const content: Content = {
         },
         {
           type: 'link',
-          text: 'rafael@caferati.me',
+          text: 'kavokinm@gmail.com',
         },
         {
           type: 'text',

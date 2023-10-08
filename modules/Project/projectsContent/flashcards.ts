@@ -11,7 +11,7 @@ const flashcards: Content = {
     },
     images: [
       {
-        path: '/projects/flashcards/screenshots/1.png',
+        path: '/projects/flashcards/screenshots/1.jpg',
         alt: 'image',
       },
       {

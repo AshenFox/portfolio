@@ -11,15 +11,11 @@ const portfolio: Content = {
     },
     images: [
       {
-        path: '/6.jpg',
+        path: '/projects/portfolio/screenshots/1.jpg',
         alt: 'image',
       },
       {
-        path: '/5.jpg',
-        alt: 'image',
-      },
-      {
-        path: '/4.jpg',
+        path: '/projects/portfolio/screenshots/2.jpg',
         alt: 'image',
       },
     ],

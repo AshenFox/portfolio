@@ -22,6 +22,10 @@ const tuner: Content = {
         path: '/projects/gosurf/screenshots/3.jpg',
         alt: 'image',
       },
+      {
+        path: '/projects/gosurf/screenshots/4.jpg',
+        alt: 'image',
+      },
     ],
     sections: [
       [

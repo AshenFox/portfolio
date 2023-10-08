@@ -11,15 +11,19 @@ const tuner: Content = {
     },
     images: [
       {
-        path: '/6.jpg',
+        path: '/projects/tuner/screenshots/1.jpg',
         alt: 'image',
       },
       {
-        path: '/5.jpg',
+        path: '/projects/tuner/screenshots/2.jpg',
         alt: 'image',
       },
       {
-        path: '/4.jpg',
+        path: '/projects/tuner/screenshots/3.jpg',
+        alt: 'image',
+      },
+      {
+        path: '/projects/tuner/screenshots/4.jpg',
         alt: 'image',
       },
     ],

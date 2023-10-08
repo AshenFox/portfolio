@@ -39,7 +39,7 @@ const filterItems: FilterItemListData = {
     in: true,
     href: '/portfolio/flashcards',
     thumbnails: {
-      main: '/projects/flashcards/thumbnails/1.png',
+      main: '/projects/flashcards/thumbnails/1.jpg',
       hover: '/projects/flashcards/thumbnails/2.jpg',
     },
   },
