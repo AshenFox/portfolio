@@ -1,4 +1,4 @@
-import React, { AnimationEventHandler, FC } from 'react';
+import React, { AnimationEventHandler, FC, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import { useAppSelector } from '@store/hooks';
@@ -30,4 +30,4 @@ const SectionLoader: FC<Props> = ({ onAnimationIteration }) => {
   );
 };
 
-export default SectionLoader;
+export default memo(SectionLoader);

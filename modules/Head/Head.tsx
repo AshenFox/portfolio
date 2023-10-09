@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import NextHead from 'next/head';
 
 const Head: FC = () => {
@@ -13,4 +13,4 @@ const Head: FC = () => {
   );
 };
 
-export default Head;
+export default memo(Head);

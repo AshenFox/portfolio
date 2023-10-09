@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, memo, ReactNode } from 'react';
 import Icons from '@ui/Icons';
 import { IconName } from './types';
 import styles from './styles.module.scss';
@@ -26,4 +26,4 @@ const InteractiveElementInner: FC<Props> = ({ icon, children }) => {
   );
 };
 
-export default InteractiveElementInner;
+export default memo(InteractiveElementInner);

@@ -1,7 +1,7 @@
 import ImageSlider from '@components/ImageSlider';
 import { Link } from '@ui/InteractiveElement';
 import { useRouter } from 'next/router';
-import React, { FC, useMemo, useEffect, useState } from 'react';
+import React, { FC, useMemo, useEffect, useState, memo } from 'react';
 import styles from './styles.module.scss';
 import projectsContent from './projectsContent';
 import content from './content';
@@ -86,4 +86,4 @@ const Project: FC = () => {
   );
 };
 
-export default Project;
+export default memo(Project);

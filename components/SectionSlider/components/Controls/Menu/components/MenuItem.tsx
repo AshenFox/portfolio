@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '../styles.module.scss';
@@ -24,4 +24,4 @@ const MenuItem: FC<Props> = ({ href, title }) => {
   );
 };
 
-export default MenuItem;
+export default memo(MenuItem);

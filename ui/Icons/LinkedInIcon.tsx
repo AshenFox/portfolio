@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const LinkedInIcon: FC = () => {
   return (
@@ -9,4 +9,4 @@ const LinkedInIcon: FC = () => {
   );
 };
 
-export default LinkedInIcon;
+export default memo(LinkedInIcon);

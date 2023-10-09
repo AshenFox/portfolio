@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const GoogleplusIcon: FC = () => {
   return (
@@ -8,4 +8,4 @@ const GoogleplusIcon: FC = () => {
   );
 };
 
-export default GoogleplusIcon;
+export default memo(GoogleplusIcon);

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useCallback } from 'react';
+import React, { FC, useEffect, useState, useCallback, memo } from 'react';
 import { useAppSelector } from '@store/hooks';
 import Cursor from './components/Cursor';
 import Header from './components/Header';
@@ -108,4 +108,4 @@ const TypeWriterText: FC<Props> = ({ text }) => {
   );
 };
 
-export default TypeWriterText;
+export default memo(TypeWriterText);

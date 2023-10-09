@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler } from 'react';
+import React, { FC, memo } from 'react';
 import Menu from './Menu';
 import Arrows from './Arrows';
 import Burger from './Burger';
@@ -21,4 +21,4 @@ const Controls: FC<Props> = ({ onBurgerExited, onArrowExited }) => {
   );
 };
 
-export default Controls;
+export default memo(Controls);

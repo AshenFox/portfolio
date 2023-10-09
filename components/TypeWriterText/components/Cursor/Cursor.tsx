@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react';
+import React, { CSSProperties, FC, memo } from 'react';
 import { useAppSelector } from '@store/hooks';
 import styles from './styles.module.scss';
 
@@ -30,4 +30,4 @@ const Cursor: FC<Props> = ({ isActive = false, isSmall = false }) => {
   );
 };
 
-export default Cursor;
+export default memo(Cursor);

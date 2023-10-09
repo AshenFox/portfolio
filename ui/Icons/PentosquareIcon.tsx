@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const PentosquareIcon: FC = () => {
   return (
@@ -8,4 +8,4 @@ const PentosquareIcon: FC = () => {
   );
 };
 
-export default PentosquareIcon;
+export default memo(PentosquareIcon);

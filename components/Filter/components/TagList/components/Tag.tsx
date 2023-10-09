@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, ReactNode, useCallback } from 'react';
+import React, { FC, MouseEventHandler, ReactNode, useCallback, memo } from 'react';
 import { TagValue, TagID } from '../../../content';
 import styles from '../styles.module.scss';
 
@@ -21,4 +21,4 @@ const Tag: FC<Props> = ({ children, value, active = false, onClickAction }) => {
   );
 };
 
-export default Tag;
+export default memo(Tag);

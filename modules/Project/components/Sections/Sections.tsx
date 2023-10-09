@@ -1,6 +1,6 @@
 import { Project } from '../../types';
 import FancyLink from '@ui/FancyLink';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -63,4 +63,4 @@ const Sections: FC<Props> = ({ sections }) => {
   );
 };
 
-export default Sections;
+export default memo(Sections);

@@ -1,4 +1,12 @@
-import React, { FC, Touch, TouchEventHandler, useEffect, useRef, useState } from 'react';
+import React, {
+  FC,
+  Touch,
+  TouchEventHandler,
+  useEffect,
+  useRef,
+  useState,
+  memo,
+} from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useStateWithRef } from '../../helpers/hooks';
 import Arrows from './components/Arrows';
@@ -173,4 +181,4 @@ const ImageSlider: FC<Props> = ({ images, title = '' }) => {
   );
 };
 
-export default ImageSlider;
+export default memo(ImageSlider);

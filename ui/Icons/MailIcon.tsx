@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const MailIcon: FC = () => {
   return (
@@ -8,4 +8,4 @@ const MailIcon: FC = () => {
   );
 };
 
-export default MailIcon;
+export default memo(MailIcon);

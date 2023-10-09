@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const TelegramIcon: FC = () => {
   return (
@@ -8,4 +8,4 @@ const TelegramIcon: FC = () => {
   );
 };
 
-export default TelegramIcon;
+export default memo(TelegramIcon);

@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useEffect, useState, useMemo } from 'react';
+import React, { FC, MouseEventHandler, useEffect, useState, useMemo, memo } from 'react';
 import { useRouter } from 'next/router';
 import { getPath } from '@helpers/functions';
 import { CSSTransition } from 'react-transition-group';
@@ -146,4 +146,4 @@ const Arrows: FC<Props> = ({ onExited }) => {
   );
 };
 
-export default Arrows;
+export default memo(Arrows);

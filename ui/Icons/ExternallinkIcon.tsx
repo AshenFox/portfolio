@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const ExternallinkIcon: FC = () => {
   return (
@@ -9,4 +9,4 @@ const ExternallinkIcon: FC = () => {
   );
 };
 
-export default ExternallinkIcon;
+export default memo(ExternallinkIcon);

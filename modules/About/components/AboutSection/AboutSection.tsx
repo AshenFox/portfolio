@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useCallback, useEffect, useRef } from 'react';
+import React, { FC, memo, ReactNode, useCallback, useEffect, useRef } from 'react';
 import styles from './styles.module.scss';
 import { Section, SectionProps } from '@components/SectionSlider';
 import { useActions, useAppSelector } from '@store/hooks';
@@ -62,4 +62,4 @@ const AboutSection: FC<SectionProps> = props => {
   );
 };
 
-export default AboutSection;
+export default memo(AboutSection);

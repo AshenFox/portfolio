@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import { useAppSelector } from '@store/hooks';
@@ -51,4 +51,4 @@ const SideLinks: FC = () => {
   );
 };
 
-export default SideLinks;
+export default memo(SideLinks);

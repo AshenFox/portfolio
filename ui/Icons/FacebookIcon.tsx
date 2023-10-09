@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const FacebookIcon: FC = () => {
   return (
@@ -8,4 +8,4 @@ const FacebookIcon: FC = () => {
   );
 };
 
-export default FacebookIcon;
+export default memo(FacebookIcon);

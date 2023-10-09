@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler } from 'react';
+import React, { FC, MouseEventHandler, memo } from 'react';
 import { Image } from '../../ImageSlider';
 import styles from './styles.module.scss';
 
@@ -18,4 +18,4 @@ const ControlsItem: FC<Props> = ({ data, ownID, activeID, onClick }) => {
   );
 };
 
-export default ControlsItem;
+export default memo(ControlsItem);

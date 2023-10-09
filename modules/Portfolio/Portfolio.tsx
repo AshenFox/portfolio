@@ -1,5 +1,5 @@
 import Filter, { FilterItemListData, TagValueList } from '@components/Filter';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { useAppSelector } from '@store/hooks';
 import styles from './styles.module.scss';
 import content from './content';
@@ -24,4 +24,4 @@ const Portfolio: FC = () => {
   );
 };
 
-export default Portfolio;
+export default memo(Portfolio);

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, memo, ReactNode } from 'react';
 import Link from 'next/link';
 import styles from './styles.module.scss';
 
@@ -28,4 +28,4 @@ const FancyLink: FC<Props> = ({
   );
 };
 
-export default FancyLink;
+export default memo(FancyLink);

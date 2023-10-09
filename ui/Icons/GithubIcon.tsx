@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const GithubIcon: FC = () => {
   return (
@@ -8,4 +8,4 @@ const GithubIcon: FC = () => {
   );
 };
 
-export default GithubIcon;
+export default memo(GithubIcon);

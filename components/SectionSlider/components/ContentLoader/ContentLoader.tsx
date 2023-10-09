@@ -1,5 +1,5 @@
 import Spinner from '@ui/Spinner';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import { EnterHandler, ExitHandler } from 'react-transition-group/Transition';
@@ -50,4 +50,4 @@ const ContentLoader: FC = () => {
   );
 };
 
-export default ContentLoader;
+export default memo(ContentLoader);

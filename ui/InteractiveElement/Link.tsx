@@ -6,6 +6,7 @@ import React, {
   useRef,
   useState,
   useEffect,
+  memo,
 } from 'react';
 import NextLink from 'next/link';
 import InteractiveElementInner from './InteractiveElementInner';
@@ -84,4 +85,4 @@ const Link = forwardRef<HTMLAnchorElement, Props>(
 
 Link.displayName = 'Link';
 
-export default Link;
+export default memo(Link);

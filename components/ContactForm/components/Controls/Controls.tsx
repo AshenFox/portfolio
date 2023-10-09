@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useCallback, useRef, useState } from 'react';
+import React, { FC, MouseEventHandler, useCallback, useRef, useState, memo } from 'react';
 import { addCustomNotification } from '@helpers/functions';
 import { useActions, useAppSelector } from '@store/hooks';
 import { Button } from '@ui/InteractiveElement';
@@ -76,7 +76,7 @@ const Controls: FC = () => {
   );
 };
 
-export default Controls;
+export default memo(Controls);
 
 const createSuccessNotification = (language: Language) => {
   addCustomNotification({

@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler } from 'react';
+import React, { FC, MouseEventHandler, memo } from 'react';
 import { useActions, useAppSelector } from '@store/hooks';
 import { Field, FieldName } from '@store/reducers/form/contactFormInitState';
 import InfoItem from './components/InfoItem';
@@ -41,4 +41,4 @@ const Info: FC = () => {
   );
 };
 
-export default Info;
+export default memo(Info);

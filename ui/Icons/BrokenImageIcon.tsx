@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const BrokenImageIcon: FC = () => {
   return (
@@ -8,4 +8,4 @@ const BrokenImageIcon: FC = () => {
   );
 };
 
-export default BrokenImageIcon;
+export default memo(BrokenImageIcon);

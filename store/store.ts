@@ -3,7 +3,6 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 import thunk, { ThunkDispatch, ThunkMiddleware, ThunkAction } from 'redux-thunk';
 import rootReducer from './reducers/index';
 import { AppActions } from './types/types';
-import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux';
 
 const initialState = {};
 

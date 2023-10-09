@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import MenuItem from './components/MenuItem';
 import { routesOrderList } from '@helpers/values';
@@ -75,4 +75,4 @@ const Menu: FC = () => {
   );
 };
 
-export default Menu;
+export default memo(Menu);

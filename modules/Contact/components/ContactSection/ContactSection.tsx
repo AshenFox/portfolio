@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import styles from './styles.module.scss';
 import { Section, SectionProps } from '@components/SectionSlider';
 
@@ -12,4 +12,4 @@ const ContactSection: FC<SectionProps> = props => {
   );
 };
 
-export default ContactSection;
+export default memo(ContactSection);

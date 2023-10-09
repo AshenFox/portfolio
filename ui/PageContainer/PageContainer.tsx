@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, memo, ReactNode } from 'react';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -14,4 +14,4 @@ const PageContainer: FC<Props> = ({ children, centered = false }) => {
   );
 };
 
-export default PageContainer;
+export default memo(PageContainer);

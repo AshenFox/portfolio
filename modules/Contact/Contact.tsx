@@ -1,7 +1,7 @@
 import ContactForm from '@components/ContactForm';
 import FancyLink from '@ui/FancyLink';
 import { Link } from '@ui/InteractiveElement';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import styles from './styles.module.scss';
 import content from './content';
 import { useAppSelector } from '@store/hooks';
@@ -49,4 +49,4 @@ const Contact: FC = () => {
   );
 };
 
-export default Contact;
+export default memo(Contact);

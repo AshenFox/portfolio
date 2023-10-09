@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler } from 'react';
+import React, { FC, MouseEventHandler, memo } from 'react';
 import Icons from '@ui/Icons';
 import styles from '../styles.module.scss';
 
@@ -46,4 +46,4 @@ const InfoItem: FC<Props> = ({
   );
 };
 
-export default InfoItem;
+export default memo(InfoItem);

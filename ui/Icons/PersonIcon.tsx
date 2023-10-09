@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const PersonIcon: FC = () => {
   return (
@@ -8,4 +8,4 @@ const PersonIcon: FC = () => {
   );
 };
 
-export default PersonIcon;
+export default memo(PersonIcon);

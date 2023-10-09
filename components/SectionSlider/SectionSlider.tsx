@@ -1,7 +1,7 @@
 import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import React, { AnimationEventHandler, FC } from 'react';
+import React, { AnimationEventHandler, FC, memo } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { useStateWithRef, useUpdatedRef } from '../../helpers/hooks';
@@ -199,4 +199,4 @@ const SectionSlider: FC<AppProps> = ({ Component, pageProps }) => {
   );
 };
 
-export default SectionSlider;
+export default memo(SectionSlider);

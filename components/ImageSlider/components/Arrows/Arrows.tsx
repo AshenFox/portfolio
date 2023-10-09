@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  memo,
 } from 'react';
 import styles from './styles.module.scss';
 import { CSSTransition } from 'react-transition-group';
@@ -138,4 +139,4 @@ const Arrows: FC<Props> = ({ showArrows, setShowArrows, transition, goToNext }) 
   );
 };
 
-export default Arrows;
+export default memo(Arrows);

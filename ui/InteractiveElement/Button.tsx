@@ -1,5 +1,6 @@
 import React, {
   forwardRef,
+  memo,
   MouseEventHandler,
   ReactNode,
   useCallback,
@@ -68,4 +69,4 @@ const Button = forwardRef<HTMLButtonElement, Props>(
 
 Button.displayName = 'Button';
 
-export default Button;
+export default memo(Button);

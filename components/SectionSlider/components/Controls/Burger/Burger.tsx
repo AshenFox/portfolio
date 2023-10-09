@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useCallback, useMemo, useState } from 'react';
+import React, { FC, MouseEventHandler, useCallback, useMemo, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import { ExitHandler } from 'react-transition-group/Transition';
@@ -94,4 +94,4 @@ const Burger: FC<Props> = ({ onExited }) => {
   );
 };
 
-export default Burger;
+export default memo(Burger);

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { FC, useState } from 'react';
+import React, { FC, useState, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import Icons from '@ui/Icons';
 import Spinner from '@ui/Spinner';
@@ -51,24 +51,15 @@ const SliderItem: FC<Props> = ({ data, dir }) => {
       >
         <div className={styles.loader}>{isError ? <Icon /> : <Spinner small />}</div>
       </CSSTransition>
-      {/* <Image
-        src={path ?? ''}
-        alt={alt}
-        draggable={false}
-        onLoad={onLoad}
-        onError={onError}
-        layout={'fill'}
-      /> */}
       <img
         src={path ?? ''}
         alt={alt}
         draggable={false}
         onLoad={onLoad}
         onError={onError}
-        // layout={'fill'}
       />
     </div>
   );
 };
 
-export default SliderItem;
+export default memo(SliderItem);

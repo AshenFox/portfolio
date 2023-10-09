@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import Icons, { IconName } from '@ui/Icons';
 import styles from './styles.module.scss';
 
@@ -27,4 +27,4 @@ const SideLink: FC<Props> = ({ href, title, iconName }) => {
   );
 };
 
-export default SideLink;
+export default memo(SideLink);

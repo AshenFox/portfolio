@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { Html, Head, Main, NextScript } from 'next/document';
 
 const Document: FC = () => {
@@ -77,4 +77,4 @@ const Document: FC = () => {
   );
 };
 
-export default Document;
+export default memo(Document);

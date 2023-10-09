@@ -4,6 +4,7 @@ import React, {
   KeyboardEventHandler,
   useEffect,
   useRef,
+  memo,
 } from 'react';
 import { Language } from '@store/reducers/language/languageInitState';
 import { addCustomNotification, removeNotification } from '@helpers/functions';
@@ -115,7 +116,7 @@ const Textarea: FC = () => {
   );
 };
 
-export default Textarea;
+export default memo(Textarea);
 
 const createErrorNotification = (id: string, error: Error, language: Language) => {
   const { content } = error;
