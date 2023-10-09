@@ -15,9 +15,10 @@ export type Images = Image[];
 
 type Props = {
   images: Images;
+  title?: string;
 };
 
-const ImageSlider: FC<Props> = ({ images }) => {
+const ImageSlider: FC<Props> = ({ images, title = '' }) => {
   const [activeID, setActiveID] = useState({ id: 0 });
   const [nextIDArr, setNextIDArr, nextIDArrRef] = useStateWithRef<
     { dir: 'right' | 'left'; id: number; isArrows?: boolean }[]
@@ -134,7 +135,7 @@ const ImageSlider: FC<Props> = ({ images }) => {
     <>
       <div className={styles.image_slider}>
         <div className={styles.bar}>
-          <h2>flashcards</h2>
+          <h2>{title}</h2>
         </div>
         <div
           className={styles.frame}

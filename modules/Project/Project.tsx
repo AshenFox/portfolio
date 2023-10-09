@@ -32,8 +32,6 @@ const Project: FC = () => {
 
   const projectNotFound = useMemo(() => !!(!project && staticID), [project, staticID]);
 
-  console.log({ test: project?.link.href, language, staticID });
-
   if (projectNotFound) return <NotFound message={not_found_message} />;
 
   return (
@@ -81,7 +79,7 @@ const Project: FC = () => {
       </header>
 
       <main className={styles.main}>
-        <ImageSlider images={project?.images ?? []} />
+        <ImageSlider images={project?.images ?? []} title={project?.title} />
         <Sections sections={project?.sections ?? []} />
       </main>
     </>

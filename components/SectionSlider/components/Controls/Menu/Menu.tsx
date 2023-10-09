@@ -15,7 +15,7 @@ const classNames: CSSTransitionClassNames = {
 const Menu: FC = () => {
   const { set_menu_is_exited } = useActions();
 
-  const { show_menu } = useAppSelector(({ sslider }) => sslider.menu);
+  const show_menu = useAppSelector(({ sslider }) => sslider.menu.show_menu);
   const language = useAppSelector(({ language }) => language.language);
 
   const timeout = 450;

@@ -6,6 +6,7 @@ import React, {
   useState,
   useRef,
   useEffect,
+  memo,
 } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -34,11 +35,13 @@ const UpperLevelLink: FC = () => {
   const router = useRouter();
   const { asPath } = router;
 
-  const {
-    content_loader: { is_exited: content_loader_is_exited },
-    show_navigation,
-    menu: { is_exited },
-  } = useAppSelector(({ sslider }) => sslider);
+  const content_loader_is_exited = useAppSelector(
+    ({ sslider }) => sslider.content_loader.is_exited
+  );
+  const show_navigation = useAppSelector(({ sslider }) => sslider.show_navigation);
+  const is_exited = useAppSelector(({ sslider }) => sslider.menu.is_exited);
+  const show_menu = useAppSelector(({ sslider }) => sslider.menu.show_menu);
+
   const language = useAppSelector(({ language }) => language.language);
 
   const [isClicked, setIsClicked] = useState(false);
@@ -50,16 +53,27 @@ const UpperLevelLink: FC = () => {
     [asPath]
   );
   const prevLevel = useRef(level);
-  const isPrevLevelZero = prevLevel.current === 0;
-
   const linkTitle = content[language].title(
     typeof title === 'string' ? title : title?.[language]
   );
 
   const isUpperLevel = level > 0;
 
+  const [savedIsUpperLevel, setSavedIsUpperLevel] = useState(isUpperLevel);
+
+  // when the menu starts to open record isUpperLink value
+  useEffect(() => {
+    if (show_menu) {
+      console.log({ isUpperLevel });
+      setSavedIsUpperLevel(isUpperLevel);
+    }
+  }, [isUpperLevel, show_menu]);
+
   const showLink =
-    content_loader_is_exited && show_navigation && isUpperLevel && !isPrevLevelZero;
+    content_loader_is_exited &&
+    show_navigation &&
+    // while the menu is visible use saved isUpperLevel value
+    (!show_menu && is_exited ? isUpperLevel : savedIsUpperLevel);
 
   const onEnter = useCallback(() => {
     setIsClicked(false);
@@ -107,4 +121,4 @@ const UpperLevelLink: FC = () => {
   );
 };
 
-export default UpperLevelLink;
+export default memo(UpperLevelLink);

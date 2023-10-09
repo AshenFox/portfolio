@@ -54,7 +54,7 @@ export interface SetShowMenuAction {
   };
 }
 
-export interface SetMenuIsEntering {
+export interface SetMenuIsExited {
   type: typeof SET_MENU_IS_EXITED;
   payload: {
     value: boolean;
@@ -76,7 +76,7 @@ export type SectionSliderActions =
   | SetShowNavigationAction
   | SetShowMenuAction
   | SetDirectionAction
-  | SetMenuIsEntering;
+  | SetMenuIsExited;
 
 // form
 export const SET_TEXTAREA_VALUE = 'SET_TEXTAREA_VALUE';

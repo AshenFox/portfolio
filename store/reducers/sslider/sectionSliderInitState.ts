@@ -12,7 +12,6 @@ export interface SectionSliderState {
     show_menu: boolean;
     is_exited: boolean;
   };
-  // immediate_transition: boolean;
   dir: Direction;
 }
 
@@ -30,7 +29,6 @@ const sectionSliderInitState: SectionSliderState = {
     show_menu: false,
     is_exited: true,
   },
-  // immediate_transition: false,
   dir: null,
 };
 

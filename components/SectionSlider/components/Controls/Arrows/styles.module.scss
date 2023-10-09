@@ -51,7 +51,7 @@
     padding-right: 4.5rem;
   }
 
-  @media (max-width: $laptop) {
+  @media (max-width: $laptop-s) {
     .text {
       display: none;
     }
@@ -176,7 +176,7 @@
     padding-left: 4.5rem;
   }
 
-  @media (max-width: $laptop) {
+  @media (max-width: $laptop-s) {
     .text {
       display: none;
     }
