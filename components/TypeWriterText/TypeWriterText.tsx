@@ -53,7 +53,7 @@ const TypeWriterText: FC<Props> = ({ text }) => {
 
   const [allChar, setAllChar] = useState(countAllChar(text));
 
-  const [show, setShow] = useState(0); // 326
+  const [show, setShow] = useState(0);
 
   useEffect(() => {
     setShow(0);

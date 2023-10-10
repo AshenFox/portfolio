@@ -91,7 +91,7 @@ const SectionSlider: FC<AppProps> = ({ Component, pageProps }) => {
   };
 
   const onBurgerExited = () =>
-    loadingPath.current !== Rendered.path && set_show_navigation(false); // ???????!!!!!!!!!!!
+    loadingPath.current !== Rendered.path && set_show_navigation(false);
 
   const onSectionExited = () => {
     if (
@@ -154,7 +154,7 @@ const SectionSlider: FC<AppProps> = ({ Component, pageProps }) => {
 
       // Add a new component
       unique.id += 1;
-      setReceived({ path, Component, id: unique.id }); //
+      setReceived({ path, Component, id: unique.id });
     }
   }, [Component, Received, path]);
 

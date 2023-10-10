@@ -7,7 +7,7 @@ import { useAppSelector } from '@store/hooks';
 type Props = {
   tagList: TagValueList;
   by: TagID;
-  onTagClickAction: (value: TagID) => void;
+  onTagClickAction: (value: TagValue) => void;
 };
 
 const TagList: FC<Props> = ({ tagList, by, onTagClickAction }) => {
@@ -18,7 +18,7 @@ const TagList: FC<Props> = ({ tagList, by, onTagClickAction }) => {
       {tagList.map(tag => (
         <TagComponent
           key={tag.id}
-          value={tag.id}
+          value={tag}
           active={tag.id === by}
           onClickAction={onTagClickAction}
         >

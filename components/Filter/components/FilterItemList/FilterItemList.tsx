@@ -5,7 +5,7 @@ import { FilterItemListData } from '../../content';
 import FilterItem from './components/FilterItem';
 import styles from './styles.module.scss';
 
-const timeout = 500; // 400
+const timeout = 500;
 
 const classNames: CSSTransitionClassNames = {
   enter: styles.filter_item_in,

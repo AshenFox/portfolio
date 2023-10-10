@@ -2,9 +2,14 @@ import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 import FilterItemList from './components/FilterItemList';
 import TagList from './components/TagList';
 import styles from './styles.module.scss';
-import content, { allTag, FilterItemListData, TagID, TagValueList } from './content';
+import content, {
+  allTag,
+  FilterItemListData,
+  TagID,
+  TagValue,
+  TagValueList,
+} from './content';
 import { useAppSelector } from 'store/hooks';
-import { CreateContent } from '@helpers/types';
 
 type Props = {
   filterItemList: FilterItemListData;
@@ -15,14 +20,14 @@ const Filter: FC<Props> = ({ filterItemList, tagList }) => {
   const language = useAppSelector(({ language }) => language.language);
 
   const [innerTagList] = useState<TagValueList>([allTag, ...tagList]);
-  const [by, setBy] = useState<TagID>(allTag.id);
+  const [by, setBy] = useState<TagValue>(allTag);
 
   const [innerFilterItemList, setInnerFilterItemList] =
     useState<FilterItemListData>(filterItemList);
 
   const [order, setOrder] = useState<string[]>(Object.keys(innerFilterItemList));
 
-  const isAll = by === 'show all';
+  const isAll = by.id === 'show all';
 
   const filterProjects = useCallback(
     (by: TagID) => {
@@ -65,9 +70,9 @@ const Filter: FC<Props> = ({ filterItemList, tagList }) => {
   );
 
   const onTagClickAction = useCallback(
-    (value: TagID) => {
+    (value: TagValue) => {
       setBy(value);
-      filterProjects(value);
+      filterProjects(value.id);
     },
     [filterProjects]
   );
@@ -78,9 +83,11 @@ const Filter: FC<Props> = ({ filterItemList, tagList }) => {
 
   return (
     <div className={styles.filter}>
-      <TagList tagList={innerTagList} by={by} onTagClickAction={onTagClickAction} />
+      <TagList tagList={innerTagList} by={by.id} onTagClickAction={onTagClickAction} />
       <small className={styles.info}>
-        {content[language].info(isAll ? content[language].all : by)}
+        {content[language].info(
+          isAll ? content[language].all : by.content[language].label
+        )}
       </small>
       <FilterItemList order={order} filterItemList={innerFilterItemList} />
     </div>

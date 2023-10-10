@@ -4,9 +4,9 @@ import styles from '../styles.module.scss';
 
 type Props = {
   children: ReactNode;
-  value: TagID;
+  value: TagValue;
   active?: boolean;
-  onClickAction?: (value: TagID) => void;
+  onClickAction?: (value: TagValue) => void;
 };
 
 const Tag: FC<Props> = ({ children, value, active = false, onClickAction }) => {

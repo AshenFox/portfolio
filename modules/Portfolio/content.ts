@@ -726,30 +726,17 @@ const filterItems: FilterItemListData = {
 };
 
 const tagList: TagValueList = [
-  /* {
-    id: 'front-end',
+  {
+    id: 'JavaScript',
     content: {
       ENG: {
-        label: 'front-end',
+        label: 'JavaScript',
       },
       RU: {
-        label: 'front-end',
+        label: 'JavaScript',
       },
     },
-  }, */
-
-  /* {
-    id: 'HTML',
-    content: {
-      ENG: {
-        label: 'HTML',
-      },
-      RU: {
-        label: 'HTML',
-      },
-    },
-  }, */
-
+  },
   {
     id: 'TypeScript',
     content: {
@@ -882,17 +869,7 @@ const tagList: TagValueList = [
       },
     },
   },
-  {
-    id: 'JavaScript',
-    content: {
-      ENG: {
-        label: 'JavaScript',
-      },
-      RU: {
-        label: 'JavaScript',
-      },
-    },
-  },
+
   {
     id: 'Jquery',
     content: {
