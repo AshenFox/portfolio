@@ -63,7 +63,7 @@ const tuner: Content = {
             [
               {
                 type: 'text',
-                content: 'SCSS',
+                content: 'SASS',
               },
             ],
             [
@@ -192,7 +192,7 @@ const tuner: Content = {
             [
               {
                 type: 'text',
-                content: 'SCSS',
+                content: 'SASS',
               },
             ],
             [

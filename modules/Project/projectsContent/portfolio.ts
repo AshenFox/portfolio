@@ -63,7 +63,7 @@ const portfolio: Content = {
             [
               {
                 type: 'text',
-                content: 'SCSS',
+                content: 'SASS',
               },
             ],
             [
@@ -252,7 +252,7 @@ const portfolio: Content = {
             [
               {
                 type: 'text',
-                content: 'SCSS',
+                content: 'SASS',
               },
             ],
             [

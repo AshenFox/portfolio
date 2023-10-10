@@ -14,6 +14,61 @@ const filterItems: FilterItemListData = {
     name: 'flashcards',
     tags: [
       {
+        id: 'TypeScript',
+        content: {
+          ENG: {
+            label: 'TypeScript',
+          },
+          RU: {
+            label: 'TypeScript',
+          },
+        },
+      },
+      {
+        id: 'Next.js',
+        content: {
+          ENG: {
+            label: 'Next.js',
+          },
+          RU: {
+            label: 'Next.js',
+          },
+        },
+      },
+      {
+        id: 'Express',
+        content: {
+          ENG: {
+            label: 'Express',
+          },
+          RU: {
+            label: 'Express',
+          },
+        },
+      },
+      {
+        id: 'Docker',
+        content: {
+          ENG: {
+            label: 'Docker',
+          },
+          RU: {
+            label: 'Docker',
+          },
+        },
+      },
+      {
+        id: 'front-end',
+        content: {
+          ENG: {
+            label: 'front-end',
+          },
+          RU: {
+            label: 'front-end',
+          },
+        },
+      },
+      {
         id: 'back-end',
         content: {
           ENG: {
@@ -25,13 +80,124 @@ const filterItems: FilterItemListData = {
         },
       },
       {
-        id: 'coffeescript',
+        id: 'HTML',
         content: {
           ENG: {
-            label: 'coffeescript',
+            label: 'HTML',
           },
           RU: {
-            label: 'coffeescript',
+            label: 'HTML',
+          },
+        },
+      },
+      {
+        id: 'SASS',
+        content: {
+          ENG: {
+            label: 'SASS',
+          },
+          RU: {
+            label: 'SASS',
+          },
+        },
+      },
+
+      {
+        id: 'Mongo DB',
+        content: {
+          ENG: {
+            label: 'Mongo DB',
+          },
+          RU: {
+            label: 'Mongo DB',
+          },
+        },
+      },
+      {
+        id: 'Mongoose',
+        content: {
+          ENG: {
+            label: 'Mongoose',
+          },
+          RU: {
+            label: 'Mongoose',
+          },
+        },
+      },
+      {
+        id: 'Service Workers',
+        content: {
+          ENG: {
+            label: 'Service Workers',
+          },
+          RU: {
+            label: 'Service Workers',
+          },
+        },
+      },
+      {
+        id: 'LocalStorage',
+        content: {
+          ENG: {
+            label: 'LocalStorage',
+          },
+          RU: {
+            label: 'LocalStorage',
+          },
+        },
+      },
+      {
+        id: 'JSON Web Tokens',
+        content: {
+          ENG: {
+            label: 'JSON Web Tokens',
+          },
+          RU: {
+            label: 'JSON Web Tokens',
+          },
+        },
+      },
+      {
+        id: 'Google Custom Search API',
+        content: {
+          ENG: {
+            label: 'Google Custom Search API',
+          },
+          RU: {
+            label: 'Google Custom Search API',
+          },
+        },
+      },
+      {
+        id: 'React',
+        content: {
+          ENG: {
+            label: 'React',
+          },
+          RU: {
+            label: 'React',
+          },
+        },
+      },
+      {
+        id: 'Redux',
+        content: {
+          ENG: {
+            label: 'Redux',
+          },
+          RU: {
+            label: 'Redux',
+          },
+        },
+      },
+      {
+        id: 'Node.js',
+        content: {
+          ENG: {
+            label: 'Node.js',
+          },
+          RU: {
+            label: 'Node.js',
           },
         },
       },
@@ -48,24 +214,46 @@ const filterItems: FilterItemListData = {
     name: 'gosurf',
     tags: [
       {
-        id: 'backbonejs',
+        id: 'SASS',
         content: {
           ENG: {
-            label: 'backbonejs',
+            label: 'SASS',
           },
           RU: {
-            label: 'backbonejs',
+            label: 'SASS',
           },
         },
       },
       {
-        id: 'electron',
+        id: 'Animations',
         content: {
           ENG: {
-            label: 'electron',
+            label: 'Animations',
           },
           RU: {
-            label: 'electron',
+            label: 'Анимации',
+          },
+        },
+      },
+      {
+        id: 'Jquery',
+        content: {
+          ENG: {
+            label: 'Jquery',
+          },
+          RU: {
+            label: 'Jquery',
+          },
+        },
+      },
+      {
+        id: 'Webpack',
+        content: {
+          ENG: {
+            label: 'Webpack',
+          },
+          RU: {
+            label: 'Webpack',
           },
         },
       },
@@ -77,6 +265,28 @@ const filterItems: FilterItemListData = {
           },
           RU: {
             label: 'front-end',
+          },
+        },
+      },
+      {
+        id: 'HTML',
+        content: {
+          ENG: {
+            label: 'HTML',
+          },
+          RU: {
+            label: 'HTML',
+          },
+        },
+      },
+      {
+        id: 'JavaScript',
+        content: {
+          ENG: {
+            label: 'JavaScript',
+          },
+          RU: {
+            label: 'JavaScript',
           },
         },
       },
@@ -93,27 +303,95 @@ const filterItems: FilterItemListData = {
     name: 'tuner',
     tags: [
       {
-        id: 'game design',
+        id: 'React',
         content: {
           ENG: {
-            label: 'game design',
+            label: 'React',
           },
           RU: {
-            label: 'game design',
+            label: 'React',
           },
         },
       },
       {
-        id: 'electron',
+        id: 'Redux',
         content: {
           ENG: {
-            label: 'electron',
+            label: 'Redux',
           },
           RU: {
-            label: 'electron',
+            label: 'Redux',
           },
         },
       },
+      {
+        id: 'TypeScript',
+        content: {
+          ENG: {
+            label: 'TypeScript',
+          },
+          RU: {
+            label: 'TypeScript',
+          },
+        },
+      },
+      {
+        id: 'Docker',
+        content: {
+          ENG: {
+            label: 'Docker',
+          },
+          RU: {
+            label: 'Docker',
+          },
+        },
+      },
+      {
+        id: 'HTML',
+        content: {
+          ENG: {
+            label: 'HTML',
+          },
+          RU: {
+            label: 'HTML',
+          },
+        },
+      },
+      {
+        id: 'SASS',
+        content: {
+          ENG: {
+            label: 'SASS',
+          },
+          RU: {
+            label: 'SASS',
+          },
+        },
+      },
+
+      {
+        id: 'Service Workers',
+        content: {
+          ENG: {
+            label: 'Service Workers',
+          },
+          RU: {
+            label: 'Service Workers',
+          },
+        },
+      },
+      {
+        id: 'IndexedDB',
+        content: {
+          ENG: {
+            label: 'IndexedDB',
+          },
+          RU: {
+            label: 'IndexedDB',
+          },
+        },
+      },
+
       {
         id: 'front-end',
         content: {
@@ -138,28 +416,6 @@ const filterItems: FilterItemListData = {
     name: 'natours',
     tags: [
       {
-        id: 'ui/ux design',
-        content: {
-          ENG: {
-            label: 'ui/ux design',
-          },
-          RU: {
-            label: 'ui/ux design',
-          },
-        },
-      },
-      {
-        id: 'sass',
-        content: {
-          ENG: {
-            label: 'sass',
-          },
-          RU: {
-            label: 'sass',
-          },
-        },
-      },
-      {
         id: 'front-end',
         content: {
           ENG: {
@@ -171,13 +427,35 @@ const filterItems: FilterItemListData = {
         },
       },
       {
-        id: 'back-end',
+        id: 'HTML',
         content: {
           ENG: {
-            label: 'back-end',
+            label: 'HTML',
           },
           RU: {
-            label: 'back-end',
+            label: 'HTML',
+          },
+        },
+      },
+      {
+        id: 'SASS',
+        content: {
+          ENG: {
+            label: 'SASS',
+          },
+          RU: {
+            label: 'SASS',
+          },
+        },
+      },
+      {
+        id: 'JavaScript',
+        content: {
+          ENG: {
+            label: 'JavaScript',
+          },
+          RU: {
+            label: 'JavaScript',
           },
         },
       },
@@ -194,35 +472,112 @@ const filterItems: FilterItemListData = {
     name: 'portfolio',
     tags: [
       {
-        id: 'mongodb',
+        id: 'HTML',
         content: {
           ENG: {
-            label: 'mongodb',
+            label: 'HTML',
           },
           RU: {
-            label: 'mongodb',
+            label: 'HTML',
           },
         },
       },
       {
-        id: 'mongodb',
+        id: 'SASS',
         content: {
           ENG: {
-            label: 'mongodb',
+            label: 'SASS',
           },
           RU: {
-            label: 'mongodb',
+            label: 'SASS',
           },
         },
       },
       {
-        id: 'back-end',
+        id: 'React',
         content: {
           ENG: {
-            label: 'back-end',
+            label: 'React',
           },
           RU: {
-            label: 'back-end',
+            label: 'React',
+          },
+        },
+      },
+      {
+        id: 'Redux',
+        content: {
+          ENG: {
+            label: 'Redux',
+          },
+          RU: {
+            label: 'Redux',
+          },
+        },
+      },
+      {
+        id: 'TypeScript',
+        content: {
+          ENG: {
+            label: 'TypeScript',
+          },
+          RU: {
+            label: 'TypeScript',
+          },
+        },
+      },
+      {
+        id: 'Next.js',
+        content: {
+          ENG: {
+            label: 'Next.js',
+          },
+          RU: {
+            label: 'Next.js',
+          },
+        },
+      },
+      {
+        id: 'LocalStorage',
+        content: {
+          ENG: {
+            label: 'LocalStorage',
+          },
+          RU: {
+            label: 'LocalStorage',
+          },
+        },
+      },
+      {
+        id: 'Docker',
+        content: {
+          ENG: {
+            label: 'Docker',
+          },
+          RU: {
+            label: 'Docker',
+          },
+        },
+      },
+      {
+        id: 'Animations',
+        content: {
+          ENG: {
+            label: 'Animations',
+          },
+          RU: {
+            label: 'Анимации',
+          },
+        },
+      },
+      {
+        id: 'front-end',
+        content: {
+          ENG: {
+            label: 'front-end',
+          },
+          RU: {
+            label: 'front-end',
           },
         },
       },
@@ -239,35 +594,46 @@ const filterItems: FilterItemListData = {
     name: 'nexter',
     tags: [
       {
-        id: 'backbonejs',
+        id: 'front-end',
         content: {
           ENG: {
-            label: 'backbonejs',
+            label: 'front-end',
           },
           RU: {
-            label: 'backbonejs',
+            label: 'front-end',
           },
         },
       },
       {
-        id: 'sass',
+        id: 'HTML',
         content: {
           ENG: {
-            label: 'sass',
+            label: 'HTML',
           },
           RU: {
-            label: 'sass',
+            label: 'HTML',
           },
         },
       },
       {
-        id: 'back-end',
+        id: 'SASS',
         content: {
           ENG: {
-            label: 'back-end',
+            label: 'SASS',
           },
           RU: {
-            label: 'back-end',
+            label: 'SASS',
+          },
+        },
+      },
+      {
+        id: 'CSS Grid',
+        content: {
+          ENG: {
+            label: 'CSS Grid',
+          },
+          RU: {
+            label: 'CSS Grid',
           },
         },
       },
@@ -284,24 +650,68 @@ const filterItems: FilterItemListData = {
     name: 'glozzom',
     tags: [
       {
-        id: 'back-end',
+        id: 'SASS',
         content: {
           ENG: {
-            label: 'back-end',
+            label: 'SASS',
           },
           RU: {
-            label: 'back-end',
+            label: 'SASS',
           },
         },
       },
       {
-        id: 'coffeescript',
+        id: 'JavaScript',
         content: {
           ENG: {
-            label: 'coffeescript',
+            label: 'JavaScript',
           },
           RU: {
-            label: 'coffeescript',
+            label: 'JavaScript',
+          },
+        },
+      },
+      {
+        id: 'Bootstrap',
+        content: {
+          ENG: {
+            label: 'Bootstrap',
+          },
+          RU: {
+            label: 'Bootstrap',
+          },
+        },
+      },
+      {
+        id: 'Webpack',
+        content: {
+          ENG: {
+            label: 'Webpack',
+          },
+          RU: {
+            label: 'Webpack',
+          },
+        },
+      },
+      {
+        id: 'front-end',
+        content: {
+          ENG: {
+            label: 'front-end',
+          },
+          RU: {
+            label: 'front-end',
+          },
+        },
+      },
+      {
+        id: 'HTML',
+        content: {
+          ENG: {
+            label: 'HTML',
+          },
+          RU: {
+            label: 'HTML',
           },
         },
       },
@@ -316,7 +726,7 @@ const filterItems: FilterItemListData = {
 };
 
 const tagList: TagValueList = [
-  {
+  /* {
     id: 'front-end',
     content: {
       ENG: {
@@ -324,6 +734,63 @@ const tagList: TagValueList = [
       },
       RU: {
         label: 'front-end',
+      },
+    },
+  }, */
+
+  /* {
+    id: 'HTML',
+    content: {
+      ENG: {
+        label: 'HTML',
+      },
+      RU: {
+        label: 'HTML',
+      },
+    },
+  }, */
+
+  {
+    id: 'TypeScript',
+    content: {
+      ENG: {
+        label: 'TypeScript',
+      },
+      RU: {
+        label: 'TypeScript',
+      },
+    },
+  },
+  {
+    id: 'React',
+    content: {
+      ENG: {
+        label: 'React',
+      },
+      RU: {
+        label: 'React',
+      },
+    },
+  },
+  {
+    id: 'Redux',
+    content: {
+      ENG: {
+        label: 'Redux',
+      },
+      RU: {
+        label: 'Redux',
+      },
+    },
+  },
+  {
+    id: 'Next.js',
+    content: {
+      ENG: {
+        label: 'Next.js',
+      },
+      RU: {
+        label: 'Next.js',
       },
     },
   },
@@ -339,167 +806,179 @@ const tagList: TagValueList = [
     },
   },
   {
-    id: 'html5',
+    id: 'Node.js',
     content: {
       ENG: {
-        label: 'html5',
+        label: 'Node.js',
       },
       RU: {
-        label: 'html5',
+        label: 'Node.js',
       },
     },
   },
   {
-    id: 'sass',
+    id: 'Express',
     content: {
       ENG: {
-        label: 'sass',
+        label: 'Express',
       },
       RU: {
-        label: 'sass',
+        label: 'Express',
       },
     },
   },
   {
-    id: 'less',
+    id: 'Mongo DB',
     content: {
       ENG: {
-        label: 'less',
+        label: 'Mongo DB',
       },
       RU: {
-        label: 'less',
+        label: 'Mongo DB',
       },
     },
   },
   {
-    id: 'javascript',
+    id: 'CSS Grid',
     content: {
       ENG: {
-        label: 'javascript',
+        label: 'CSS Grid',
       },
       RU: {
-        label: 'javascript',
+        label: 'CSS Grid',
       },
     },
   },
   {
-    id: 'nodejs',
+    id: 'SASS',
     content: {
       ENG: {
-        label: 'nodejs',
+        label: 'SASS',
       },
       RU: {
-        label: 'nodejs',
+        label: 'SASS',
       },
     },
   },
   {
-    id: 'electron',
+    id: 'Animations',
     content: {
       ENG: {
-        label: 'electron',
+        label: 'Animations',
       },
       RU: {
-        label: 'electron',
+        label: 'Анимации',
       },
     },
   },
   {
-    id: 'reactjs',
+    id: 'Bootstrap',
     content: {
       ENG: {
-        label: 'reactjs',
+        label: 'Bootstrap',
       },
       RU: {
-        label: 'reactjs',
+        label: 'Bootstrap',
       },
     },
   },
   {
-    id: 'meteor',
+    id: 'JavaScript',
     content: {
       ENG: {
-        label: 'meteor',
+        label: 'JavaScript',
       },
       RU: {
-        label: 'meteor',
+        label: 'JavaScript',
       },
     },
   },
   {
-    id: 'coffeescript',
+    id: 'Jquery',
     content: {
       ENG: {
-        label: 'coffeescript',
+        label: 'Jquery',
       },
       RU: {
-        label: 'coffeescript',
+        label: 'Jquery',
       },
     },
   },
   {
-    id: 'mongodb',
+    id: 'Service Workers',
     content: {
       ENG: {
-        label: 'mongodb',
+        label: 'Service Workers',
       },
       RU: {
-        label: 'mongodb',
+        label: 'Service Workers',
       },
     },
   },
   {
-    id: 'mysql',
+    id: 'LocalStorage',
     content: {
       ENG: {
-        label: 'mysql',
+        label: 'LocalStorage',
       },
       RU: {
-        label: 'mysql',
+        label: 'LocalStorage',
       },
     },
   },
   {
-    id: 'backbonejs',
+    id: 'IndexedDB',
     content: {
       ENG: {
-        label: 'backbonejs',
+        label: 'IndexedDB',
       },
       RU: {
-        label: 'backbonejs',
+        label: 'IndexedDB',
       },
     },
   },
   {
-    id: 'ui/ux design',
+    id: 'JSON Web Tokens',
     content: {
       ENG: {
-        label: 'ui/ux design',
+        label: 'JSON Web Tokens',
       },
       RU: {
-        label: 'ui/ux дизайн',
+        label: 'JSON Web Tokens',
       },
     },
   },
   {
-    id: 'animations',
+    id: 'Google Custom Search API',
     content: {
       ENG: {
-        label: 'animations',
+        label: 'Google Custom Search API',
       },
       RU: {
-        label: 'анимации',
+        label: 'Google Custom Search API',
       },
     },
   },
   {
-    id: 'game design',
+    id: 'Docker',
     content: {
       ENG: {
-        label: 'game design',
+        label: 'Docker',
       },
       RU: {
-        label: 'game дизайн',
+        label: 'Docker',
+      },
+    },
+  },
+
+  {
+    id: 'Webpack',
+    content: {
+      ENG: {
+        label: 'Webpack',
+      },
+      RU: {
+        label: 'Webpack',
       },
     },
   },

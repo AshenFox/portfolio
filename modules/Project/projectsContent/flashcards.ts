@@ -122,7 +122,7 @@ const flashcards: Content = {
             [
               {
                 type: 'text',
-                content: 'SCSS',
+                content: 'SASS',
               },
             ],
             [
@@ -164,7 +164,7 @@ const flashcards: Content = {
             [
               {
                 type: 'text',
-                content: 'ServiceWorkers',
+                content: 'Service Workers',
               },
             ],
             [
@@ -354,7 +354,7 @@ const flashcards: Content = {
             [
               {
                 type: 'text',
-                content: 'SCSS',
+                content: 'SASS',
               },
             ],
             [
@@ -396,7 +396,7 @@ const flashcards: Content = {
             [
               {
                 type: 'text',
-                content: 'ServiceWorkers',
+                content: 'Service Workers',
               },
             ],
             [
