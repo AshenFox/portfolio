@@ -163,6 +163,14 @@
   );
 }
 
+.lightblue {
+  @include interactive-element-colors(
+    $interactive-element-lightblue,
+    $interactive-element-lightblue-dark,
+    $interactive-element-lightblue-background
+  );
+}
+
 .blue {
   @include interactive-element-colors(
     $interactive-element-blue,

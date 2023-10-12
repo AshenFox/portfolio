@@ -6,7 +6,8 @@ type Content = CreateContent<{
     text: string;
     link?: {
       text: string;
-      href: string;
+      href?: string;
+      copy?: string;
       title?: string;
     };
   }[];
@@ -23,7 +24,7 @@ const content: Content = {
         text: 'Feel free to contact me via email at\u00A0',
         link: {
           text: 'kavokinm@gmail.com',
-          href: '/contact-page',
+          copy: 'kavokinm@gmail.com',
         },
       },
       {
@@ -46,7 +47,7 @@ const content: Content = {
         text: 'Напишите мне на ',
         link: {
           text: 'kavokinm@gmail.com',
-          href: '/contact-page',
+          copy: 'kavokinm@gmail.com',
         },
       },
       {

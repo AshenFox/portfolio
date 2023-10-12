@@ -1,12 +1,20 @@
 import { CreateContent } from '@helpers/types';
 
+type Text = {
+  type: 'text';
+  text: string;
+};
+
+type Link = {
+  type: 'link';
+  text: string;
+  href: string;
+};
+
 type Content = CreateContent<{
   header: {
     title: string;
-    description: {
-      type: 'text' | 'link';
-      text: string;
-    }[];
+    description: (Text | Link)[];
   };
   footer: {
     header: string;
@@ -26,6 +34,7 @@ const content: Content = {
         {
           type: 'link',
           text: 'kavokinm@gmail.com',
+          href: 'kavokinm@gmail.com',
         },
         {
           type: 'text',
@@ -35,8 +44,7 @@ const content: Content = {
     },
     footer: {
       header: 'Let\u0027s get social',
-      paragraph:
-        'Follow my online fan page on Facebook and profiles on Twitter, GitHub and Linkedin.',
+      paragraph: 'Follow my page on LinkedIn and profile on GitHub.',
     },
   },
   RU: {
@@ -50,13 +58,17 @@ const content: Content = {
         {
           type: 'link',
           text: 'kavokinm@gmail.com',
+          href: 'kavokinm@gmail.com',
+        },
+        {
+          type: 'text',
+          text: '.',
         },
       ],
     },
     footer: {
       header: 'Соцсети',
-      paragraph:
-        'Подпишетесь на меня на моей странице в Facebook или на мои профили в Twitter, GitHub и Linkedin.',
+      paragraph: 'Подпишетесь на меня на GitHub и Linkedin.',
     },
   },
 };

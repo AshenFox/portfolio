@@ -71,13 +71,13 @@ const content: Content = {
           {
             content: 'kavokinm@gmail.com',
             type: 'link',
-            props: { href: '/portfolio', title: 'Portfolio' },
+            props: { href: '/contact-page', title: 'Contact page' },
           },
         ],
         type: 'description',
       },
     ],
-    barrier: 'my portfolio',
+    barrier: 'portfolio',
   },
   RU: {
     typewriter_text: [
@@ -132,7 +132,7 @@ const content: Content = {
           {
             content: 'портфолио',
             type: 'link',
-            props: { href: '/portfolio', title: 'Portfolio' },
+            props: { href: '/portfolio', title: 'Портфолио' },
           },
           { content: ', чтобы увидеть примеры моих последних проектов.', type: 'text' },
         ],
@@ -147,7 +147,7 @@ const content: Content = {
           {
             content: 'kavokinm@gmail.com',
             type: 'link',
-            props: { href: '/portfolio', title: 'Portfolio' },
+            props: { href: '/contact-page', title: 'Контакты' },
           },
         ],
         type: 'description',

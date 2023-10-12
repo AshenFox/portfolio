@@ -1,4 +1,11 @@
-export type ColorType = 'red' | 'green' | 'skyblue' | 'blue' | 'green' | 'grey';
+export type ColorType =
+  | 'red'
+  | 'green'
+  | 'skyblue'
+  | 'blue'
+  | 'green'
+  | 'grey'
+  | 'lightblue';
 
 export type IconName =
   | 'googleplus'
@@ -6,4 +13,5 @@ export type IconName =
   | 'twitter'
   | 'externallink'
   | 'github'
+  | 'linkedin'
   | '';

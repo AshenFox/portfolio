@@ -51,28 +51,20 @@ const Project: FC = () => {
             </Link>
           </div>
           <div className={styles.links_right}>
-            <div className={styles.links_hide}>
-              <Link
-                color='blue'
-                icon='facebook'
-                href='https://facebook.com'
-                title='Facebook'
-                classStr='hide'
-              />
-              <Link
-                color='skyblue'
-                icon='twitter'
-                href='https://twitter.com'
-                title='Twitter'
-                classStr='hide'
-              />
-            </div>
+            {/* <div className={styles.links_hide}></div> */}
 
             <Link
-              color='red'
-              icon='googleplus'
-              href='https://google.com'
-              title='Google Plus'
+              color='lightblue'
+              icon='linkedin'
+              href='https://www.linkedin.com/in/max-kavokin-46a667254/'
+              title='LinkedIn'
+            />
+            <Link
+              color='grey'
+              icon='github'
+              href='https://github.com/AshenFox'
+              title='Github'
+              /* classStr='hide' */
             />
           </div>
         </div>

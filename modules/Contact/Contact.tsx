@@ -16,7 +16,11 @@ const Contact: FC = () => {
         <h2 className={styles.description}>
           {content[language].header.description.map((el, i) => {
             if (el.type === 'link') {
-              return <FancyLink key={i}>{el.text}</FancyLink>;
+              return (
+                <FancyLink key={i} copy={el.href}>
+                  {el.text}
+                </FancyLink>
+              );
             }
 
             return el.text;
@@ -32,16 +36,21 @@ const Contact: FC = () => {
         <h3 className={styles.footer_header}>{content[language].footer.header}</h3>
         <p className={styles.footer_paragraph}>{content[language].footer.paragraph}</p>
         <div className={styles.footer_links}>
-          <Link color='grey' icon='github' href='https://github.com/' title='Github'>
+          <Link
+            color='grey'
+            icon='github'
+            href='https://github.com/AshenFox'
+            title='Github'
+          >
             github
           </Link>
           <Link
-            color='blue'
-            icon='facebook'
-            href='https://www.facebook.com/'
-            title='Facebook'
+            color='lightblue'
+            icon='linkedin'
+            href='https://www.linkedin.com/in/max-kavokin-46a667254/'
+            title='LinkedIn'
           >
-            facebook
+            linkedin
           </Link>
         </div>
       </footer>

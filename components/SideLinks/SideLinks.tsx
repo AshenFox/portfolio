@@ -21,14 +21,9 @@ const SideLinksArr: LinkDataList = [
     iconName: 'github',
   },
   {
-    href: 'https://t.me/ashenfox',
+    href: 'https://www.linkedin.com/in/max-kavokin-46a667254/',
     title: 'LinkedIn',
     iconName: 'linkedin',
-  },
-  {
-    href: 'https://t.me/ashenfox',
-    title: 'Telegram',
-    iconName: 'telegram',
   },
 ];
 

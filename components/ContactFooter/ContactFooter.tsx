@@ -17,7 +17,7 @@ const ContactFooter: FC = () => {
           <p key={i}>
             {text}
             {link && (
-              <FancyLink href={link.href} title={link.title}>
+              <FancyLink href={link.href} title={link.title} copy={link.copy}>
                 {link.text}
               </FancyLink>
             )}
