@@ -64,7 +64,6 @@ const UpperLevelLink: FC = () => {
   // when the menu starts to open record isUpperLink value
   useEffect(() => {
     if (show_menu) {
-      console.log({ isUpperLevel });
       setSavedIsUpperLevel(isUpperLevel);
     }
   }, [isUpperLevel, show_menu]);
