@@ -1,34 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Посмотреть проект можно по ссылке - [Portfolio](https://fox-flash-cards.herokuapp.com/)
 
-## Getting Started
+# Portfolio
 
-First, run the development server:
+SSR приложение портфолио, созданное с помощью Next.js и TypeScript, демонстрирующее последние проекты над которыми я работал.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## О проекте
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Работая над этим проектом моей целью было создать интерактивный и адаптивный сайт портфолио используя технологии Next.js и Typescript.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Одной из главных идей, которую я воплотил в жизнь, был бесшовный анимированый переход между страницами SSR приложения. Такие плавные переходы, добавляют динамики в работу с сайтом, делая навигагацию между разными секциями и страницами визуально приятным путешествием.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Технологии
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- HTML
+- SASS
+- TypeScript
+- Next.js
+- Redux
+- LocalStorage
+- Docker
+- UI/UX Animations
+- React-Transition-Group
 
-## Learn More
+## Вдохновение
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Хотя исполнение всех элементов сайта, анимаций и структуры было выполнено мной с нуля, источником вдохновения стал сайт портфолио front-end разработчика Rafael Caferati. Его портфолио можно посмотреть по [ссылке](https://caferati.me/).
