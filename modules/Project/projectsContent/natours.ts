@@ -133,15 +133,19 @@ const tuner: Content = {
     },
     images: [
       {
-        path: '/6.jpg',
+        path: '/projects/natours/screenshots/1.jpg',
         alt: 'image',
       },
       {
-        path: '/5.jpg',
+        path: '/projects/natours/screenshots/2.jpg',
         alt: 'image',
       },
       {
-        path: '/4.jpg',
+        path: '/projects/natours/screenshots/3.jpg',
+        alt: 'image',
+      },
+      {
+        path: '/projects/natours/screenshots/4.jpg',
         alt: 'image',
       },
     ],

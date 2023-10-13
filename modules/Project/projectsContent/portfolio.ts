@@ -18,6 +18,14 @@ const portfolio: Content = {
         path: '/projects/portfolio/screenshots/2.jpg',
         alt: 'image',
       },
+      {
+        path: '/projects/portfolio/screenshots/3.jpg',
+        alt: 'image',
+      },
+      {
+        path: '/projects/portfolio/screenshots/4.jpg',
+        alt: 'image',
+      },
     ],
     sections: [
       [
@@ -197,15 +205,19 @@ const portfolio: Content = {
     },
     images: [
       {
-        path: '/6.jpg',
+        path: '/projects/portfolio/screenshots/1.jpg',
         alt: 'image',
       },
       {
-        path: '/5.jpg',
+        path: '/projects/portfolio/screenshots/2.jpg',
         alt: 'image',
       },
       {
-        path: '/4.jpg',
+        path: '/projects/portfolio/screenshots/3.jpg',
+        alt: 'image',
+      },
+      {
+        path: '/projects/portfolio/screenshots/4.jpg',
         alt: 'image',
       },
     ],

@@ -15,15 +15,17 @@ const SideLink: FC<Props> = ({ href, title, iconName }) => {
   const Icon = Icons[iconName];
 
   return (
-    <Link href={href}>
-      <li>
-        <a title={title} className={`${styles.link_container} ${styles[iconName]}`}>
-          <div className={styles.link}>
-            <Icon />
-          </div>
-        </a>
-      </li>
-    </Link>
+    <li>
+      <a
+        href={href}
+        title={title}
+        className={`${styles.link_container} ${styles[iconName]}`}
+      >
+        <div className={styles.link}>
+          <Icon />
+        </div>
+      </a>
+    </li>
   );
 };
 

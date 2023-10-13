@@ -10,8 +10,15 @@ const LanguageChange: FC = () => {
 
   useEffect(() => {
     const { language } = navigator;
-    if (/^ru/.test(language)) change_language('RU');
-    if (/^en/.test(language)) change_language('ENG');
+    const cachedLanguage = localStorage?.getItem('language');
+
+    if (/^ru/.test(language) || cachedLanguage === 'RU') {
+      change_language('RU');
+    } else if (/^en/.test(language) || cachedLanguage === 'ENG') {
+      change_language('ENG');
+    } else {
+      change_language('ENG');
+    }
   }, [change_language]);
 
   const onRUClick = useCallback(() => change_language('RU'), [change_language]);

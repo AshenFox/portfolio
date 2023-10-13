@@ -965,14 +965,14 @@ const content: Content = {
   ENG: {
     title: 'portfolio',
     description:
-      'From UI/UX animations to React.JS, Redux, and Node.JS. Check out my latest projects of landing pages and SPA and SSR applications.',
+      'From UI animations to React.JS, Redux, and Node.JS. Check out my latest projects of landing pages and SPA and SSR applications.',
     filterItems,
     tagList,
   },
   RU: {
     title: 'портфолио',
     description:
-      'Начиная UI/UX анимациями, заканчивая React.JS, Redux, и Node.JS. Посмотрите на мои последние проекты лендинг страниц, SPA и SSR приложений.',
+      'Начиная от UI анимаций, заканчивая React.JS, Redux, и Node.JS. Посмотрите на мои последние проекты лендинг страниц, SPA и SSR приложений.',
     filterItems,
     tagList,
   },

@@ -13,20 +13,32 @@ const Sections: FC<Props> = ({ sections }) => {
       {sections.map((section, i) => {
         return (
           <section key={i} className={styles.section}>
-            {section.map(el => {
+            {section.map((el, i) => {
               const { type } = el;
 
               if (type === 'header') {
-                return <h2 className={styles.header}>{el.content}</h2>;
+                return (
+                  <h2 key={i} className={styles.header}>
+                    {el.content}
+                  </h2>
+                );
               } else if (type === 'description') {
-                return <h3 className={styles.description}>{el.content}</h3>;
+                return (
+                  <h3 key={i} className={styles.description}>
+                    {el.content}
+                  </h3>
+                );
               } else if (type === 'devider') {
-                return <div className={styles.devider} />;
+                return <div key={i} className={styles.devider} />;
               } else if (type === 'paragraph') {
-                return <div className={styles.paragraph}>{el.content}</div>;
+                return (
+                  <div key={i} className={styles.paragraph}>
+                    {el.content}
+                  </div>
+                );
               } else if (type === 'list') {
                 return (
-                  <ul className={styles.list}>
+                  <ul key={i} className={styles.list}>
                     {el.content.map((item, i) => (
                       <li key={i} className={styles.list_item}>
                         <span>
