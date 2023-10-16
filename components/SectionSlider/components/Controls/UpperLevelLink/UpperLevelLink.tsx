@@ -102,7 +102,7 @@ const UpperLevelLink: FC = () => {
         timeout={timeout}
         appear
       >
-        <Link href={upper_level_path}>
+        <Link href={upper_level_path} legacyBehavior>
           <a className={styles.upper_level_link} onClick={onClick} title={linkTitle}>
             <div />
             <div />

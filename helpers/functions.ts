@@ -138,7 +138,7 @@ export const addCustomNotification = (custom_options: Partial<iNotification>) =>
     animationIn: [styles.fadeIn],
     animationOut: [styles.fadeOut],
     dismiss: {
-      duration: 5000,
+      duration: 6000,
       waitForAnimation: true,
     },
     container: 'top-center',

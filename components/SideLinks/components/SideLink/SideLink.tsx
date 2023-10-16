@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { FC, memo } from 'react';
 import Icons, { IconName } from '@ui/Icons';
 import styles from './styles.module.scss';

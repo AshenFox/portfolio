@@ -13,7 +13,7 @@ const MenuItem: FC<Props> = ({ href, title }) => {
   const { pathname } = router;
 
   return (
-    <Link href={href}>
+    <Link href={href} legacyBehavior>
       <a
         className={`${styles.link} ${pathname === href ? styles.link_active : ''}`}
         title={title}

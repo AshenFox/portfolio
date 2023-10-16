@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import React, { CSSProperties, FC, useEffect, useRef, useState, memo } from 'react';
 import { FilterItemData } from '../../../content';
-import Img from 'next/image';
 import styles from '../styles.module.scss';
 import { useAppSelector } from '@store/hooks';
 
@@ -106,7 +105,7 @@ const FilterItem: FC<Props> = ({ data, order }) => {
         style={styleContainer}
       >
         {isVisible && (
-          <Link href={data.href}>
+          <Link href={data.href} legacyBehavior>
             <a className={styles.link} title={data.name}>
               <div className={styles.bar}>
                 <h2>{name}</h2>

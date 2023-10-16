@@ -47,7 +47,7 @@ const FancyLink: FC<Props> = ({
   const isCopy = !!copy;
 
   return (
-    <Link href={isCopy ? '' : href}>
+    <Link href={isCopy ? '' : href} legacyBehavior>
       <a title={title} onClick={isCopy ? copyToClipboard : undefined}>
         <span className={`${styles.fancy_link} ${classStr}`}>
           <span className={`${styles.text} ${thin ? styles.thin : ''}`}>{children}</span>

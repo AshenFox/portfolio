@@ -74,7 +74,7 @@ const Link = forwardRef<HTMLAnchorElement, Props>(
     );
 
     return (
-      <NextLink href={href}>
+      <NextLink href={href} legacyBehavior>
         <a className={className} title={title} ref={ref} onClick={onClick}>
           <InteractiveElementInner icon={icon}>{children}</InteractiveElementInner>
         </a>
