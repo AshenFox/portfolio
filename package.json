@@ -8,7 +8,6 @@
     "start": "next start",
     "prod_start": "node .server/server.js",
     "build": "next build",
-    "export": "next export",
     "build:server": "tsc --p ./server/tsconfig.server.json",
     "dcdev": "docker-compose -f docker-compose.dev.yaml up",
     "dcdev-rebuild": "docker-compose -f docker-compose.dev.yaml up --no-deps --build app",
