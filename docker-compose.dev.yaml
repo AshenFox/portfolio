@@ -19,4 +19,4 @@ services:
       - ./ui:/app/ui
       - /app/node_modules
     ports:
-      - 6000:6000
+      - 5001:5001

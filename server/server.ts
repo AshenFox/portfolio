@@ -4,7 +4,7 @@ import next from 'next';
 import https, { ServerOptions } from 'https';
 import fs from 'fs';
 
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 5001;
 const dev = process.env.NODE_ENV !== 'production';
 
 const serverOptions: ServerOptions = {};
