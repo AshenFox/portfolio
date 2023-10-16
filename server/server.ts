@@ -52,7 +52,9 @@ const start = async () => {
       expressServer.listen(port);
     }
 
-    console.log(`Server is ready on https://localhost:${port}`);
+    console.log(
+      `Server is ready on https://localhost:${port} or http://localhost:${port}`
+    );
   } catch (err) {
     console.log('test');
     console.error(err);
