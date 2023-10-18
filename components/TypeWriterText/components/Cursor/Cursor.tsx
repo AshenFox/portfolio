@@ -9,12 +9,9 @@ type Props = {
 
 const Cursor: FC<Props> = ({ isActive = false, isSmall = false }) => {
   const { x, y } = useAppSelector(({ game }) => game.cursor_position);
-  const scrollTop = useAppSelector(
-    ({ game }) => game.game_container_dimensions.scrollTop
-  );
 
   const cursorStyle: CSSProperties = {
-    top: `${y + scrollTop}px`,
+    top: `${y}px`,
     left: `${x}px`,
   };
 

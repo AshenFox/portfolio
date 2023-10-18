@@ -11,6 +11,8 @@
 
 @mixin tag {
   display: inline-block;
+  text-wrap: nowrap;
+  vertical-align: top;
   padding: 8px 5px;
   background-color: #313131;
   color: #999;

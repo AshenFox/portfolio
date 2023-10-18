@@ -27,8 +27,8 @@ const Char: FC<Props> = ({ active, children, isCursor, scrollTop = 0 }) => {
 
     const { x, y, width } = rect;
 
-    set_cursor_position(x + width, y);
-  }, [set_cursor_position]);
+    set_cursor_position(x + width, y + scrollTop);
+  }, [set_cursor_position, scrollTop]);
 
   useEffect(() => {
     if (active && children && children !== ' ') {

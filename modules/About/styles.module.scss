@@ -4,6 +4,9 @@
   grid-row-start: 2;
   padding: 0 9rem;
 
+  display: flex;
+  flex-direction: column;
+
   @media (max-width: $tablet), (max-height: 625px) {
     padding: 0 2.5rem;
     grid-row-start: 1;

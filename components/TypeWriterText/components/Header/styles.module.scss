@@ -17,7 +17,7 @@
 }
 
 .description {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   line-height: 3.3rem;
   font-weight: 400;
   font-family: Lato, 'Wix Madefor Display';
@@ -33,6 +33,7 @@
   white-space: pre-wrap;
 
   a {
+    display: inline-block;
     pointer-events: none;
   }
 
