@@ -9,6 +9,7 @@ const Head: FC = () => {
         name='description'
         content='Portfolio application that showcases recent projects of Kavokin Maxim'
       />
+      <meta name='viewport' content='width=device-width, initial-scale=1' />
     </NextHead>
   );
 };

@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "nodemon_dev": "nodemon server/server.ts",
+    "default_dev": "next dev",
+    "dev": "nodemon server/server.ts",
     "start": "next start",
     "prod_start": "node .server/server.js",
     "build": "next build",
