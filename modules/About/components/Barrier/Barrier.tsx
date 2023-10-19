@@ -13,6 +13,10 @@ const Barrier: FC = () => {
   );
   const language = useAppSelector(({ language }) => language.language);
 
+  const content_loaded = useAppSelector(
+    ({ sslider }) => sslider.content_loader.is_exited
+  );
+
   const buttonRef = useRef<HTMLAnchorElement>(null);
 
   const updateBarrierDimen = useCallback(() => {
@@ -22,6 +26,18 @@ const Barrier: FC = () => {
 
     set_barrier_dimensions(x, y + scrollTop, height, width);
   }, [set_barrier_dimensions, scrollTop]);
+
+  // set barrier position when content has been loaded
+  useEffect(() => {
+    if (content_loaded) {
+      updateBarrierDimen();
+    }
+  }, [content_loaded, updateBarrierDimen]);
+
+  // set barrier position on language change and navigation change
+  useEffect(() => {
+    updateBarrierDimen();
+  }, [language, show_navigation, updateBarrierDimen]);
 
   useEffect(() => {
     updateBarrierDimen();
@@ -34,10 +50,6 @@ const Barrier: FC = () => {
   }, [updateBarrierDimen]);
 
   useOrientationChange(updateBarrierDimen);
-
-  useEffect(() => {
-    updateBarrierDimen();
-  }, [show_navigation, updateBarrierDimen]);
 
   return (
     <Link

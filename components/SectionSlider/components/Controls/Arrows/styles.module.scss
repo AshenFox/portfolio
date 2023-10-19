@@ -145,10 +145,11 @@
 
       & ~ .text {
         transition: opacity 0.2s ease-out;
-        opacity: 1;
+
         transform: translateX(0px) !important;
 
         @media (hover: hover) {
+          opacity: 1;
           transition: opacity 0.2s ease-out 0.5s;
         }
       }
@@ -270,10 +271,10 @@
 
       & ~ .text {
         transition: opacity 0.2s ease-out;
-        opacity: 1;
         transform: translateX(0px) !important;
 
         @media (hover: hover) {
+          opacity: 1;
           transition: opacity 0.2s ease-out 0.5s;
         }
       }

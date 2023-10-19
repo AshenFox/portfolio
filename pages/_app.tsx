@@ -9,10 +9,13 @@ import { ReactNotifications } from 'react-notifications-component';
 import { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import { useNextCssRemovalPrevention } from '@madeinhaus/nextjs-page-transition';
+import { useCasheThumbnails } from '@modules/Portfolio';
 
 const MyApp: FC<AppProps> = props => {
   // Fix for the stylesheet vanishing during page transition
   useNextCssRemovalPrevention();
+  // Cashe thumbnails
+  useCasheThumbnails();
 
   return (
     <>
