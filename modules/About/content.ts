@@ -6,6 +6,10 @@ type Content = CreateContent<{
   barrier: string;
 }>;
 
+const years = Math.abs(
+  new Date(Date.now() - new Date('01-01-2020').getTime()).getUTCFullYear() - 1970
+);
+
 const content: Content = {
   ENG: {
     typewriter_text: [
@@ -16,8 +20,7 @@ const content: Content = {
       {
         content: [
           {
-            content:
-              'I am a highly skilled frontend react developer with more than 3 years of experiece.',
+            content: `I am a highly skilled frontend react developer with more than ${years} years of experiece.`,
             type: 'text',
           },
         ],
@@ -89,8 +92,7 @@ const content: Content = {
       {
         content: [
           {
-            content:
-              'Я frontend react developer с более чем 3 годами профессионального опыта в сфере разработки.',
+            content: `Я frontend react developer с более чем ${years} годами профессионального опыта в сфере разработки.`,
             type: 'text',
           },
         ],

@@ -1,4 +1,12 @@
-import React, { FC, memo, useCallback, useMemo } from 'react';
+import React, {
+  FC,
+  memo,
+  useCallback,
+  useMemo,
+  useRef,
+  useEffect,
+  useState,
+} from 'react';
 import { HeaderData, HeaderContentItem } from '../../TypeWriterText';
 import { useAppSelector } from '@store/hooks';
 import FancyLink from '@ui/FancyLink';
@@ -28,6 +36,19 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, type }) => {
   const scrollTop = useAppSelector(
     ({ game }) => game.game_container_dimensions.scrollTop
   );
+
+  const show_navigation = useAppSelector(({ sslider }) => sslider.show_navigation);
+  const prev_show_navigation = useRef(show_navigation);
+
+  const [isExit, setIsExit] = useState(false);
+
+  useEffect(() => {
+    if (!isExit && !show_navigation && prev_show_navigation.current) {
+      setIsExit(true);
+    }
+
+    prev_show_navigation.current = show_navigation;
+  }, [isExit, show_navigation]);
 
   const { content } = data;
 
@@ -86,11 +107,13 @@ const Header: FC<Props> = ({ data, rangeStart, rangeEnd, show, type }) => {
     charElArr = [...charElArr, ...wrapArrOfChar(charElEndArr, el, i)];
   });
 
-  return (
-    <TagName className={styles[type] + ' ' + (linksActive ? styles.active : '')}>
-      {charElArr}
-    </TagName>
-  );
+  const className = [
+    styles[type],
+    linksActive ? styles.active : '',
+    isExit ? styles.exit : '',
+  ].join(' ');
+
+  return <TagName className={className}>{charElArr}</TagName>;
 };
 
 export default memo(Header);

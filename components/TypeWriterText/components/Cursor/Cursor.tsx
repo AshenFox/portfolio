@@ -9,11 +9,16 @@ type Props = {
 
 const Cursor: FC<Props> = ({ isActive = false, isSmall = false }) => {
   const { x, y } = useAppSelector(({ game }) => game.cursor_position);
+  const show_navigation = useAppSelector(({ sslider }) => sslider.show_navigation);
 
   const cursorStyle: CSSProperties = {
     top: `${y}px`,
     left: `${x}px`,
   };
+
+  if (!show_navigation) {
+    return null;
+  }
 
   return (
     <span
