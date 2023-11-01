@@ -5,7 +5,7 @@ const portfolio: Content = {
     title: 'portfolio',
     description: `SSR portfolio application, built using Next.js and TypeScript, highlighting my most recent projects that I've been working on.`,
     link: {
-      href: 'https://github.com/AshenFox/portfolio',
+      href: 'https://portfolio-ashenfox.duckdns.org/',
       content: 'application',
       title: 'portfolio',
     },
@@ -157,8 +157,8 @@ const portfolio: Content = {
               },
               {
                 type: 'link',
-                content: 'https://github.com/AshenFox/portfolio',
-                href: 'https://github.com/AshenFox/portfolio',
+                content: 'https://portfolio-ashenfox.duckdns.org/',
+                href: 'https://portfolio-ashenfox.duckdns.org/',
                 title: 'flashcards',
               },
             ],
@@ -170,7 +170,7 @@ const portfolio: Content = {
               {
                 type: 'link',
                 content: 'github',
-                href: 'https://github.com/AshenFox/portfolio',
+                href: 'https://portfolio-ashenfox.duckdns.org/',
                 title: 'github flashcards',
               },
               {
@@ -199,7 +199,7 @@ const portfolio: Content = {
     title: 'portfolio',
     description: `SSR приложение портфолио, созданное с помощью Next.js и TypeScript, демонстрирующее последние проекты над которыми я работал.`,
     link: {
-      href: 'https://github.com/AshenFox/portfolio',
+      href: 'https://portfolio-ashenfox.duckdns.org/',
       content: 'application',
       title: 'portfolio',
     },
@@ -350,8 +350,8 @@ const portfolio: Content = {
               },
               {
                 type: 'link',
-                content: 'https://github.com/AshenFox/portfolio',
-                href: 'https://github.com/AshenFox/portfolio',
+                content: 'https://portfolio-ashenfox.duckdns.org/',
+                href: 'https://portfolio-ashenfox.duckdns.org/',
                 title: 'flashcards',
               },
             ],
@@ -363,7 +363,7 @@ const portfolio: Content = {
               {
                 type: 'link',
                 content: 'github',
-                href: 'https://github.com/AshenFox/portfolio',
+                href: 'https://portfolio-ashenfox.duckdns.org/',
                 title: 'github flashcards',
               },
             ],

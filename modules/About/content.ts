@@ -20,7 +20,7 @@ const content: Content = {
       {
         content: [
           {
-            content: `I am a highly skilled frontend react developer with more than ${years} years of experiece.`,
+            content: `I am a highly skilled frontend react developer with more than ${years} years of experience.`,
             type: 'text',
           },
         ],
@@ -33,7 +33,7 @@ const content: Content = {
             type: 'text',
           },
           {
-            content: 'SPA и SSR',
+            content: 'SPA and SSR',
             type: 'link',
             props: { href: '/portfolio', title: 'Portfolio' },
           },
