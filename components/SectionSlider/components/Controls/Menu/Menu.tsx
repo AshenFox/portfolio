@@ -49,7 +49,7 @@ const Menu: FC = () => {
                 key={path}
               />
             ))}
-            {/* TEMPORARY MENU ITEMS */}
+            {/* TEST MENU ITEMS */}
             {/* <MenuItem
               href={'/portfolio/flashcards'}
               title={'portfolio flashcards'}

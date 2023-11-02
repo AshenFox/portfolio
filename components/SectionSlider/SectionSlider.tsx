@@ -52,6 +52,7 @@ const SectionSlider: FC<AppProps> = ({ Component, pageProps }) => {
   // Received Component
   const [Received, setReceived, ReceivedRef] =
     useStateWithRef<ComponentWithPathname>(null);
+  const hasReceivedBeenChanged = useRef(false);
   // Rendered Component
   const [Rendered, setRendered, RenderedRef] = useStateWithRef<ComponentWithPathname>({
     path,
@@ -85,7 +86,7 @@ const SectionSlider: FC<AppProps> = ({ Component, pageProps }) => {
   const onArrowExited = () => {
     if (visited(loadingPath.current) && Received && !show_section_loader) {
       setRendered({ ...Received });
-    } else if (loadingPath.current !== Rendered.path) {
+    } else if (loadingPath.current !== Rendered.path && hasReceivedBeenChanged.current) {
       set_show_section_loader(true);
     }
   };
@@ -155,6 +156,7 @@ const SectionSlider: FC<AppProps> = ({ Component, pageProps }) => {
       // Add a new component
       unique.id += 1;
       setReceived({ path, Component, id: unique.id });
+      hasReceivedBeenChanged.current = true;
     }
   }, [Component, Received, path]);
 
