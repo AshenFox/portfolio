@@ -5,7 +5,7 @@ const tuner: Content = {
     title: 'tuner',
     description: `SPA tuner application for tuning of different musical instruments right in your browser.`,
     link: {
-      href: 'https://tuner-ashenfox.duckdns.org',
+      href: 'https://tuner.ashenfox.top',
       content: 'application',
       title: 'tuner',
     },
@@ -159,8 +159,8 @@ const tuner: Content = {
               },
               {
                 type: 'link',
-                content: 'https://tuner-ashenfox.duckdns.org',
-                href: 'https://tuner-ashenfox.duckdns.org',
+                content: 'https://tuner.ashenfox.top',
+                href: 'https://tuner.ashenfox.top',
                 title: 'tuner',
               },
             ],
@@ -189,7 +189,7 @@ const tuner: Content = {
     title: 'tuner',
     description: `SPA приложение-тюнер для настройки музыкальных инструментов прямо в браузере.`,
     link: {
-      href: 'https://tuner-ashenfox.duckdns.org',
+      href: 'https://tuner.ashenfox.top',
       content: 'приложение',
       title: 'tuner',
     },
@@ -342,8 +342,8 @@ const tuner: Content = {
               },
               {
                 type: 'link',
-                content: 'https://tuner-ashenfox.duckdns.org',
-                href: 'https://tuner-ashenfox.duckdns.org',
+                content: 'https://tuner.ashenfox.top',
+                href: 'https://tuner.ashenfox.top',
                 title: 'tuner',
               },
             ],

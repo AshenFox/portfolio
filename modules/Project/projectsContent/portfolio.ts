@@ -5,7 +5,7 @@ const portfolio: Content = {
     title: 'portfolio',
     description: `SSR portfolio application, built using Next.js and TypeScript, highlighting my most recent projects that I've been working on.`,
     link: {
-      href: 'https://portfolio-ashenfox.duckdns.org/',
+      href: 'https://portfolio.ashenfox.top/',
       content: 'application',
       title: 'portfolio',
     },
@@ -157,8 +157,8 @@ const portfolio: Content = {
               },
               {
                 type: 'link',
-                content: 'https://portfolio-ashenfox.duckdns.org/',
-                href: 'https://portfolio-ashenfox.duckdns.org/',
+                content: 'https://portfolio.ashenfox.top/',
+                href: 'https://portfolio.ashenfox.top/',
                 title: 'flashcards',
               },
             ],
@@ -170,7 +170,7 @@ const portfolio: Content = {
               {
                 type: 'link',
                 content: 'github',
-                href: 'https://portfolio-ashenfox.duckdns.org/',
+                href: 'https://portfolio.ashenfox.top/',
                 title: 'github flashcards',
               },
               {
@@ -199,7 +199,7 @@ const portfolio: Content = {
     title: 'portfolio',
     description: `SSR приложение портфолио, созданное с помощью Next.js и TypeScript, демонстрирующее последние проекты над которыми я работал.`,
     link: {
-      href: 'https://portfolio-ashenfox.duckdns.org/',
+      href: 'https://portfolio.ashenfox.top/',
       content: 'application',
       title: 'portfolio',
     },
@@ -350,8 +350,8 @@ const portfolio: Content = {
               },
               {
                 type: 'link',
-                content: 'https://portfolio-ashenfox.duckdns.org/',
-                href: 'https://portfolio-ashenfox.duckdns.org/',
+                content: 'https://portfolio.ashenfox.top/',
+                href: 'https://portfolio.ashenfox.top/',
                 title: 'flashcards',
               },
             ],
@@ -363,7 +363,7 @@ const portfolio: Content = {
               {
                 type: 'link',
                 content: 'github',
-                href: 'https://portfolio-ashenfox.duckdns.org/',
+                href: 'https://portfolio.ashenfox.top/',
                 title: 'github flashcards',
               },
             ],

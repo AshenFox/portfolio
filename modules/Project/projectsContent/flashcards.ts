@@ -5,7 +5,7 @@ const flashcards: Content = {
     title: 'flashcards',
     description: `SSR application application for memorizing information via spaced repetition and interactive and engaging games.`,
     link: {
-      href: 'https://flashcards-ashenfox.duckdns.org',
+      href: 'https://flashcards.ashenfox.top',
       content: 'application',
       title: 'flashcards',
     },
@@ -212,8 +212,8 @@ const flashcards: Content = {
               },
               {
                 type: 'link',
-                content: 'https://flashcards-ashenfox.duckdns.org',
-                href: 'https://flashcards-ashenfox.duckdns.org',
+                content: 'https://flashcards.ashenfox.top',
+                href: 'https://flashcards.ashenfox.top',
                 title: 'flashcards',
               },
             ],
@@ -225,7 +225,7 @@ const flashcards: Content = {
               {
                 type: 'link',
                 content: 'github',
-                href: 'https://flashcards-ashenfox.duckdns.org',
+                href: 'https://flashcards.ashenfox.top',
                 title: 'github flashcards',
               },
               {
@@ -243,7 +243,7 @@ const flashcards: Content = {
     description: `SSR приложение для эффективного запоминания информации 
     через интервальное повторение и интерактивные и увлекательные игры.`,
     link: {
-      href: 'https://flashcards-ashenfox.duckdns.org',
+      href: 'https://flashcards.ashenfox.top',
       content: 'приложение',
       title: 'flashcards',
     },
@@ -452,8 +452,8 @@ const flashcards: Content = {
               },
               {
                 type: 'link',
-                content: 'https://flashcards-ashenfox.duckdns.org',
-                href: 'https://flashcards-ashenfox.duckdns.org',
+                content: 'https://flashcards.ashenfox.top',
+                href: 'https://flashcards.ashenfox.top',
                 title: 'flashcards',
               },
             ],
@@ -465,7 +465,7 @@ const flashcards: Content = {
               {
                 type: 'link',
                 content: 'github',
-                href: 'https://flashcards-ashenfox.duckdns.org',
+                href: 'https://flashcards.ashenfox.top',
                 title: 'github flashcards',
               },
             ],
