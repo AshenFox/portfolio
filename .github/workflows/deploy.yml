@@ -1,0 +1,32 @@
+name: Deploy
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push events but only for the main branch
+  push:
+    branches: [main]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "deploy"
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          port: ${{ secrets.PORT }}
+          script: |
+            set -e
+            cd apps/portfolio
+            echo "${{ secrets.PASSWORD }}" | sudo -S git pull origin main
+            echo "${{ secrets.PASSWORD }}" | sudo -S -k docker stop $(echo ${{ secrets.PASSWORD }} | sudo -S -k docker ps -a -q)
+            echo "${{ secrets.PASSWORD }}" | sudo -S npm run dcprod-rebuild
+            echo "${{ secrets.PASSWORD }}" | sudo -S -k docker start $(echo ${{ secrets.PASSWORD }} | sudo -S -k docker ps -a -q)
