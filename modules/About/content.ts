@@ -14,7 +14,7 @@ const content: Content = {
   ENG: {
     typewriter_text: [
       {
-        content: [{ content: 'Hello, my name is Kavokin Maxim.', type: 'text' }],
+        content: [{ content: 'Hello, my name is Max.', type: 'text' }],
         type: 'greeting',
       },
       {
@@ -85,7 +85,7 @@ const content: Content = {
   RU: {
     typewriter_text: [
       {
-        content: [{ content: 'Привет, меня зовут Кавокин Максим.', type: 'text' }],
+        content: [{ content: 'Привет, меня зовут Макс.', type: 'text' }],
         type: 'greeting',
       },
 
